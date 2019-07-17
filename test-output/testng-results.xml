@@ -2,24 +2,24 @@
 <testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="7828" started-at="2019-07-17T08:47:19Z" finished-at="2019-07-17T08:47:26Z">
+  <suite name="Default suite" duration-ms="8987" started-at="2019-07-18T07:12:48Z" finished-at="2019-07-18T07:12:57Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="7828" started-at="2019-07-17T08:47:19Z" finished-at="2019-07-17T08:47:26Z">
-      <class name="examples.more.FluentWaitDemo">
-        <test-method status="PASS" signature="setup()[pri:0, instance:examples.more.FluentWaitDemo@5b275dab]" name="setup" is-config="true" duration-ms="5041" started-at="2019-07-17T08:47:19Z" finished-at="2019-07-17T08:47:24Z">
+    <test name="Default test" duration-ms="8987" started-at="2019-07-18T07:12:48Z" finished-at="2019-07-18T07:12:57Z">
+      <class name="examples.datadriven.dataDrivenDemo">
+        <test-method status="PASS" signature="setup()[pri:0, instance:examples.datadriven.dataDrivenDemo@5b275dab]" name="setup" is-config="true" duration-ms="6223" started-at="2019-07-18T07:12:48Z" finished-at="2019-07-18T07:12:54Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method status="PASS" signature="testFluentWait()[pri:0, instance:examples.more.FluentWaitDemo@5b275dab]" name="testFluentWait" duration-ms="2159" started-at="2019-07-17T08:47:24Z" finished-at="2019-07-17T08:47:26Z">
+        <test-method status="PASS" signature="checkBoxesTest()[pri:0, instance:examples.datadriven.dataDrivenDemo@5b275dab]" name="checkBoxesTest" duration-ms="2101" started-at="2019-07-18T07:12:54Z" finished-at="2019-07-18T07:12:56Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testFluentWait -->
-        <test-method status="PASS" signature="closeBrowser()[pri:0, instance:examples.more.FluentWaitDemo@5b275dab]" name="closeBrowser" is-config="true" duration-ms="611" started-at="2019-07-17T08:47:26Z" finished-at="2019-07-17T08:47:26Z">
+        </test-method> <!-- checkBoxesTest -->
+        <test-method status="PASS" signature="closeBrowser()[pri:0, instance:examples.datadriven.dataDrivenDemo@5b275dab]" name="closeBrowser" is-config="true" duration-ms="645" started-at="2019-07-18T07:12:56Z" finished-at="2019-07-18T07:12:57Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeBrowser -->
-      </class> <!-- examples.more.FluentWaitDemo -->
+      </class> <!-- examples.datadriven.dataDrivenDemo -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

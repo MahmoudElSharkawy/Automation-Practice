@@ -1,5 +1,10 @@
 package base;
 
+import java.io.File;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+
 public class BrowserActions {
 	
 	// Generic url navigation method
@@ -11,5 +16,14 @@ public class BrowserActions {
 	public static void close() {
 		BaseClass.browserDriver.quit();
 	}
-
+	
+	public static void takeScreenShot(String testCaseName){
+			TakesScreenshot ts = (TakesScreenshot)BaseClass.browserDriver; 
+			File source = ts.getScreenshotAs(OutputType.FILE); 
+			try {
+				FileUtils.copyFile(source, new File("src/test/resources/ScreenShots/"+ testCaseName +".png"));
+			} catch (Exception e) {
+		        System.out.println("Exception while taking screenshot " + e.getMessage());
+			}
+		}
 }
