@@ -1,19 +1,17 @@
 package examples.more;
 
-import static org.testng.Assert.assertTrue;
-
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+public class DragAndDropDemo {
 
-public class ImplicitWaitDemo {
 	WebDriver driver;
 
 	@BeforeTest
@@ -23,22 +21,26 @@ public class ImplicitWaitDemo {
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 
-		driver.get("http://cookbook.seleniumacademy.com/AjaxDemo.html");
+		driver.get("http://cookbook.seleniumacademy.com/DragDropDemo.html");
 	}
 
 	@Test
-	public void testImplicitlyWait() 
-	{
-		// set the implicit wait time to 20 Seconds
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS); 
-		driver.findElement(By.linkText("Page 4")).click();
-		WebElement message = driver.findElement(By.id("page4")); 
-		assertTrue(message.getText().contains("Nunc nibh tortor"));
+	public void DragDrop(){
+
+		WebElement source = driver.findElement(By.id("draggable"));
+		WebElement target = driver.findElement(By.id("droppable"));
+
+		Actions dd = new Actions(driver);
+		dd.dragAndDrop(source, target).perform();
+
+		Assert.assertEquals("Dropped!", target.getText());
+
+
 	}
 
 	@AfterTest
-	public void closeBrowser(){
+	public void closeBrowser() {
 		driver.quit();
-	}
+	}	
 
 }
