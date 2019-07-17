@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
 
 
 public class FluentWaitDemo {
-	ChromeDriver driver;
+	WebDriver driver;
 
 	@BeforeTest
 	public void setup() {

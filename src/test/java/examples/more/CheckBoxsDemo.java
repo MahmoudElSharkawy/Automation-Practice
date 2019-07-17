@@ -1,9 +1,5 @@
 package examples.more;
 
-import static org.testng.Assert.assertTrue;
-
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,10 +8,10 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-
-public class ImplicitWaitDemo {
+public class CheckBoxsDemo {
+	
 	WebDriver driver;
-
+	
 	@BeforeTest
 	public void setup() {
 		System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/windows-64/chromedriver.exe");
@@ -23,22 +19,26 @@ public class ImplicitWaitDemo {
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 
-		driver.get("http://cookbook.seleniumacademy.com/AjaxDemo.html");
+		driver.get("https://the-internet.herokuapp.com/checkboxes");
 	}
-
+	
 	@Test
-	public void testImplicitlyWait() 
-	{
-		// set the implicit wait time to 20 Seconds
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS); 
-		driver.findElement(By.linkText("Page 4")).click();
-		WebElement message = driver.findElement(By.id("page4")); 
-		assertTrue(message.getText().contains("Nunc nibh tortor"));
+	public void checkBoxesTest() {
+		
+		WebElement cb = driver.findElement(By.xpath("//input[@type = 'checkbox'][1]"));
+		cb.click();
+		
+		WebElement cb2 = driver.findElement(By.xpath("//input[@type = 'checkbox'][2]"));
+//		cb2.click();
+		
+		if(!(cb2.isSelected())) {
+			cb2.click();
+		}
+		
 	}
-
+	
 	@AfterTest
-	public void closeBrowser(){
+	public void closeBrowser() {
 		driver.quit();
-	}
-
+	}	
 }

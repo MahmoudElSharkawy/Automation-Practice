@@ -1,19 +1,18 @@
 package examples.more;
 
-import static org.testng.Assert.assertTrue;
-
-import java.util.concurrent.TimeUnit;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+public class FindByElementsDemo {
 
-public class ImplicitWaitDemo {
 	WebDriver driver;
 
 	@BeforeTest
@@ -23,22 +22,26 @@ public class ImplicitWaitDemo {
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 
-		driver.get("http://cookbook.seleniumacademy.com/AjaxDemo.html");
+		driver.get("https://the-internet.herokuapp.com");
 	}
 
 	@Test
-	public void testImplicitlyWait() 
+	public void testFindElements() 
 	{
-		// set the implicit wait time to 20 Seconds
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS); 
-		driver.findElement(By.linkText("Page 4")).click();
-		WebElement message = driver.findElement(By.id("page4")); 
-		assertTrue(message.getText().contains("Nunc nibh tortor"));
+		// Get All the links displayed on Page
+		List<WebElement> links = driver.findElements(By.tagName("a"));
+
+		//Verify there are 41 Links displayed on the page
+		Assert.assertEquals(41, links.size());
+
+		// Print each link value
+		for (WebElement link : links) {
+			System.out.println(link.getAttribute("href"));
+		}
 	}
 
 	@AfterTest
-	public void closeBrowser(){
+	public void closeBrowser() {
 		driver.quit();
 	}
-
 }
