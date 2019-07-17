@@ -45,9 +45,9 @@ public class DoubleClickDemo {
 
 	}
 
-//	@AfterTest
-//	public void closeBrowser() {
-//		driver.quit();
-//	}	
+	@AfterTest
+	public void closeBrowser() {
+		driver.quit();
+	}	
 
 }
