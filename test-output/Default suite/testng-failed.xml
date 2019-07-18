@@ -3,12 +3,13 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="examples.more.UploadFileDemo">
+      <class name="examples.testng.AllureReportingDemo">
         <methods>
-          <include name="testFileUpload"/>
-          <include name="setUp"/>
+          <include name="getTextfromBtn"/>
+          <include name="setup"/>
+          <include name="closeBrowser"/>
         </methods>
-      </class> <!-- examples.more.UploadFileDemo -->
+      </class> <!-- examples.testng.AllureReportingDemo -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
