@@ -3,12 +3,12 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="examples.advanced.RelativeXpathDemo">
+      <class name="examples.more.UploadFileDemo">
         <methods>
-          <include name="setup"/>
-          <include name="SearchAndAssertTheFirstResultText"/>
+          <include name="testFileUpload"/>
+          <include name="setUp"/>
         </methods>
-      </class> <!-- examples.advanced.RelativeXpathDemo -->
+      </class> <!-- examples.more.UploadFileDemo -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
