@@ -1,4 +1,4 @@
-package testNG;
+package examples.testng;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -10,13 +10,19 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class TestNGAssertionsDemo {
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 
+@Epic("Allure Reporting Demo -> Test Google home page")
+
+public class AllureReportingDemo {
 	WebDriver driver;
 
 	@BeforeTest
 	public void setup() {
-		System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/windows-64/chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/mac-64/chromedriver");
 
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
@@ -25,21 +31,28 @@ public class TestNGAssertionsDemo {
 	}
 
 	@Test
+	@Description("Validating the Goole home page URL")
+	@Severity(SeverityLevel.BLOCKER)
 	public void getURL() {
 		System.out.println(driver.getCurrentUrl());
 		assertEquals(driver.getCurrentUrl(), "https://www.google.com/?ncr");
 	}
 
 	@Test
+	@Description("Validating the Goole home page title")
+	@Severity(SeverityLevel.CRITICAL)
 	public void getTitle() {
 		System.out.println(driver.getTitle());
 		assertTrue(driver.getTitle().contains("Goo"));
 	}
 
 	@Test
+	@Description("Validating the Goole home page search button text")
+	@Severity(SeverityLevel.NORMAL)
 	public void getTextfromBtn() {
 		String searchBtnText = driver.findElement(By.name("btnK")).getText();
-		assertTrue(searchBtnText.contains("goo"));
+		System.out.println("SEARCH BUTTON TEXT >>>>>>: "+searchBtnText);
+		assertTrue(searchBtnText.contains("Goo"));
 	}
 
 	@AfterClass

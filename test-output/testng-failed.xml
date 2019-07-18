@@ -1,28 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite thread-count="2" guice-stage="DEVELOPMENT" name="Failed suite [CrossBrowser]" parallel="tests">
-  <test thread-count="2" name="Testchrome(failed)" parallel="tests">
-    <parameter name="browserName" value="chrome"/>
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
+  <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="examples.more.CrossBrowserDemo">
+      <class name="examples.testng.AllureReportingDemo">
         <methods>
-          <include name="closeBrowser"/>
+          <include name="getTextfromBtn"/>
           <include name="setup"/>
-          <include name="checkBoxesTest"/>
-        </methods>
-      </class> <!-- examples.more.CrossBrowserDemo -->
-    </classes>
-  </test> <!-- Testchrome(failed) -->
-  <test thread-count="2" name="Testfirefox(failed)" parallel="tests">
-    <parameter name="browserName" value="firefox"/>
-    <classes>
-      <class name="examples.more.CrossBrowserDemo">
-        <methods>
           <include name="closeBrowser"/>
-          <include name="setup"/>
-          <include name="checkBoxesTest"/>
         </methods>
-      </class> <!-- examples.more.CrossBrowserDemo -->
+      </class> <!-- examples.testng.AllureReportingDemo -->
     </classes>
-  </test> <!-- Testfirefox(failed) -->
-</suite> <!-- Failed suite [CrossBrowser] -->
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

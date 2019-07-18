@@ -1,4 +1,4 @@
-package testNG;
+package examples.testng;
 
 import static org.testng.Assert.fail;
 
