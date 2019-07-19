@@ -22,7 +22,7 @@ public class AllureReportingDemo {
 
 	@BeforeTest
 	public void setup() {
-		System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/mac-64/chromedriver");
+		System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/windows-64/chromedriver.exe");
 
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
