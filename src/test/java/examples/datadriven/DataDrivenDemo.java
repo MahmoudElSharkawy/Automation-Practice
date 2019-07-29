@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 
 import base.FileDataReader;
 
-public class dataDrivenDemo {
+public class DataDrivenDemo {
 	
 	WebDriver driver;
 	FileDataReader dataReader;
