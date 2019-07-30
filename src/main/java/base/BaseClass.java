@@ -47,13 +47,13 @@ public class BaseClass {
 					System.out.println("Opening Browser: " + browserName);
 
 					if(System.getProperty("os.name").contains("windows")) {
-						System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/Windows-64/geckodriver.exe");
+						System.setProperty("webdriver.gecko.driver", "src/main/resources/drivers/Windows-64/geckodriver.exe");
 					}
 					else if (System.getProperty("os.name").contains("mac")) {
-						System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/Mac-64/geckodriver.exe");
+						System.setProperty("webdriver.gecko.driver", "src/main/resources/drivers/Mac-64/geckodriver.exe");
 					}
 					else if(System.getProperty("os.name").contains("linux")){
-						System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/Linux-64/geckodriver");
+						System.setProperty("webdriver.gecko.driver", "src/main/resources/drivers/Linux-64/geckodriver");
 					}
 					else {
 						throw new IOException("The selected OS is not valid or Not supported!!");
