@@ -22,7 +22,7 @@ public class LocatorsDemo {
 //		driver.findElement(By.xpath("/html/body/div/div[3]/form/div[2]/div/div[1]/div/div[1]/input")).sendKeys("Selenium", Keys.ENTER);
 		
 		//By relative xpath ( Xpath=//tagname[@attribute='value'] )
-		driver.findElement(By.xpath("//input[@name='q']")).sendKeys("Selenium", Keys.ENTER);
+//		driver.findElement(By.xpath("//input[@name='q']")).sendKeys("Selenium", Keys.ENTER);
 		
 		//Click on I'm Feeling Lucky button
 //		driver.findElement(By.name("btnI")).click();
