@@ -17,7 +17,7 @@ public class NotPOM {
 	
 	@BeforeClass
 	public void setup() {
-		System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/windows-64/chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 
