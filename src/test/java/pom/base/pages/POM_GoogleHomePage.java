@@ -1,4 +1,4 @@
-package examples.pom.base.pages;
+package pom.base.pages;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package examples.pom.base.tests;
+package pom.base.tests;
 
 
 
@@ -13,8 +13,8 @@ import org.testng.annotations.Test;
 import base.BrowserFactory;
 import base.BrowserActions;
 import base.FileDataReader;
-import examples.pom.base.pages.POM_GoogleHomePage;
-import examples.pom.base.pages.POM_GoogleSearchResultsPage;
+import pom.base.pages.POM_GoogleHomePage;
+import pom.base.pages.POM_GoogleSearchResultsPage;
 
 
 public class POM_GoogleSearchTest {
