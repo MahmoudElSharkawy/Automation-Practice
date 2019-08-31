@@ -9,16 +9,16 @@ public class BrowserActions {
 
 	// Generic url navigation method
 	public static void openURL(String url) {
-		BaseClass.browserDriver.get(url);
+		BrowserFactory.browserDriver.get(url);
 	}
 
 	// Close
 	public static void close() {
-		BaseClass.browserDriver.quit();
+		BrowserFactory.browserDriver.quit();
 	}
 
 	public static void takeScreenShot(String testCaseName){
-		TakesScreenshot ts = (TakesScreenshot)BaseClass.browserDriver; 
+		TakesScreenshot ts = (TakesScreenshot)BrowserFactory.browserDriver; 
 		File source = ts.getScreenshotAs(OutputType.FILE); 
 		try {
 			FileUtils.copyFile(source, new File("src/test/resources/ScreenShots/"+ testCaseName +".png"));
