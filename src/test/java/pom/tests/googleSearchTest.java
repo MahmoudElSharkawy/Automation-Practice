@@ -1,35 +1,22 @@
 package pom.tests;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import pom.pages.GoogleHomePage;
+import pom.base.BaseTests;
 import pom.pages.GoogleSearchResultsPage;
 
-public class googleSearchTest {
+public class googleSearchTest extends BaseTests {
 	WebDriver driver;
-	GoogleHomePage googleHomePageObject;
-	GoogleSearchResultsPage googleSearchResultsObject;
-
-	@BeforeClass
-	public void setup() {
-		System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/windows-64/chromedriver.exe");
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
-		
-		googleHomePageObject = new GoogleHomePage();
-		googleSearchResultsObject = new GoogleSearchResultsPage();
-	}
+	GoogleSearchResultsPage googleSearchResults;
 	
 	@Test
-	public void googleSearchOnSeleniumWebDriver() {
+	public void testingGoogleSearch() {
+		String searchIndex = "[1]";
 		String searchData = "Selenium WebDriver";
-		googleHomePageObject.navigateToGoogleHomePageURL(driver);
-		googleHomePageObject.googleSearch(searchData, driver);
-		googleSearchResultsObject.assertOnPageTitle(searchData, driver);
-		googleSearchResultsObject.assertOnSearchResult(searchData, driver);
-		googleSearchResultsObject.clickOnSearchResult(driver);
+		googleSearchResults = homePage.googleSearch(searchData);
+		googleSearchResults.assertOnPageTitle(searchData);
+		googleSearchResults.assertOnSearchResult(searchData, searchIndex);
+		googleSearchResults.clickOnSearchResult(searchIndex);
 	}
 }

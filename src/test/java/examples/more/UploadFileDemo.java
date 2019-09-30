@@ -27,14 +27,12 @@ public class UploadFileDemo
 	@Test
 	public void testFileUpload() throws InterruptedException {
 		String imageName = "counterguardian.jpg";
-		String imagePath = "./src/test/resources/Uploads/"+imageName;	
+		String imagePath = System.getProperty("user.dir") + "/src/test/resources/Uploads/"+imageName;	
 		WebElement fileUploader = driver.findElement(By.id("file-upload")); 
 		fileUploader.sendKeys(imagePath);
 		WebElement fileSubmit = driver.findElement(By.id("file-submit")); 
 		fileSubmit.click();
 		WebElement uploadedFiles = driver.findElement(By.id("uploaded-files")); 
-		System.out.println(uploadedFiles.getText());
-		Thread.sleep(3000);
 		Assert.assertEquals(imageName, uploadedFiles.getText());
 
 	}
@@ -43,6 +41,5 @@ public class UploadFileDemo
 	public void closeBrowser() {
 		driver.quit();
 	}
-
 
 }

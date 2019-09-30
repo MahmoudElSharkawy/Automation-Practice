@@ -1,6 +1,6 @@
 package examples.more;
 
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 
 import java.io.File;
 import org.apache.commons.io.FileUtils;
@@ -36,7 +36,7 @@ public class TakeScreenShotDemo {
 		WebElement searchTxt =driver.findElement(By.id("twotabsearchtextbox"));
 		searchTxt.sendKeys("Selenium WebDriver Book");
 		searchTxt.submit();
-		assertTrue(driver.getTitle().contains("jj"));
+		fail("Failed of purpose to take the screenshot");
 	}
 
 	@AfterMethod
@@ -48,7 +48,7 @@ public class TakeScreenShotDemo {
 			try {
 				FileUtils.copyFile(source, new File("src/test/resources/ScreenShots/"+ result.getName()+".png"));
 			} catch (Exception e) {
-		        System.out.println("Exception while taking screenshot " + e.getMessage());
+		        e.printStackTrace();
 			}
 		}
 	}

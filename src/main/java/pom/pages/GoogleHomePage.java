@@ -5,19 +5,22 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 public class GoogleHomePage {
+	private WebDriver driver;
 
+	//Constructor
+    public GoogleHomePage(WebDriver driver){
+        this.driver = driver;
+    }
+    
 	//variables
-	private String googleHomePageURL = "https://www.google.com/ncr";
 	
 	//Elements
 	private By google_search_bar = By.name("q");
 
-	//Methods
-	public void navigateToGoogleHomePageURL(WebDriver driver) {
-		driver.navigate().to(googleHomePageURL);
-	}
-	public void googleSearch(String searchData, WebDriver driver) {
+	//Method
+    public GoogleSearchResultsPage googleSearch(String searchData){
 		driver.findElement(google_search_bar).sendKeys(searchData, Keys.ENTER);
-	}
+        return new GoogleSearchResultsPage(driver);
+    }
 
 }

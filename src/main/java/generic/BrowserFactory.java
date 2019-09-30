@@ -1,4 +1,4 @@
-package base;
+package generic;
 
 import java.io.IOException;
 
@@ -9,11 +9,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class BrowserFactory {
 
 	public static WebDriver browserDriver;
-
-	//The main driver here
-	public static WebDriver getWebDriver() {
-		return browserDriver;
-	}
 
 	//Choose the Browser
 	public static void browser(String browserName) throws IOException {

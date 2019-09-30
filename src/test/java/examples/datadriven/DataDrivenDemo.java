@@ -12,10 +12,8 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import base.FileDataReader;
-
 public class DataDrivenDemo {
-	
+
 	WebDriver driver;
 	FileDataReader dataReader;
 
@@ -25,22 +23,23 @@ public class DataDrivenDemo {
 
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
-		
+
 		dataReader = new FileDataReader();
-		driver.get(dataReader.read("DataDrivenDemoTestData.xlsx",1 , 2));
+		driver.get(dataReader.read("DataDrivenDemoTestData.xlsx", 1, 2));
 	}
-	
+
 	@Test
-	public void checkBoxesTest() throws IOException {
+	public void dataDrivenTest() throws IOException {
 		dataReader = new FileDataReader();
 
-		driver.findElement(By.xpath(dataReader.read("DataDrivenDemoTestData.xlsx",1 , 0))).sendKeys(dataReader.read("DataDrivenDemoTestData.xlsx",1 , 1), Keys.ENTER);
-		assertTrue(driver.getTitle().contains(dataReader.read("DataDrivenDemoTestData.xlsx",1 , 1)));
-		
+		driver.findElement(By.xpath(dataReader.read("DataDrivenDemoTestData.xlsx", 1, 0)))
+				.sendKeys(dataReader.read("DataDrivenDemoTestData.xlsx", 1, 1), Keys.ENTER);
+		assertTrue(driver.getTitle().contains(dataReader.read("DataDrivenDemoTestData.xlsx", 1, 1)));
+
 	}
-	
+
 	@AfterTest
 	public void closeBrowser() {
 		driver.quit();
-	}	
+	}
 }
