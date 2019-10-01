@@ -1,4 +1,4 @@
-package examples.more;
+package examples.actions;
 
 import static org.testng.Assert.assertEquals;
 

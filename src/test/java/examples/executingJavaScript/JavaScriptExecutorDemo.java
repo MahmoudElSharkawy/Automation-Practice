@@ -1,4 +1,4 @@
-package examples.more;
+package examples.executingJavaScript;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;

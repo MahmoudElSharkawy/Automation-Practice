@@ -1,4 +1,4 @@
-package examples.more;
+package examples.waits;
 
 import static org.testng.Assert.assertTrue;
 

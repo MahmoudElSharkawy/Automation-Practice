@@ -1,4 +1,4 @@
-package examples.more;
+package examples.dropdownList;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
@@ -11,7 +11,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class DropDownListDemo {
+public class DropdownListDemo {
 
 	WebDriver driver;
 

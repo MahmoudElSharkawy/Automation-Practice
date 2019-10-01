@@ -1,16 +1,15 @@
-package examples.more;
+package examples.multipleWindows;
 
 import static org.testng.Assert.assertEquals;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class FramesDemo {
+public class MultipleWindowsDemo {
 	
 	WebDriver driver;
 	
@@ -21,22 +20,22 @@ public class FramesDemo {
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 
-		driver.get("https://the-internet.herokuapp.com/tinymce");
+		driver.get("https://the-internet.herokuapp.com/checkboxes");
 	}
 	
 	@Test
-	public void framesTest() {
-		//switch to the iframe
-		driver.switchTo().frame("mce_0_ifr");
-		//do whatever action needed
-		WebElement textArea = driver.findElement(By.id("tinymce"));
-		textArea.clear();
-		textArea.sendKeys("Hello iFrame!");
-		String text = textArea.getText();
-		//exit the iframe to the main area
-		driver.switchTo().parentFrame();
-		//Assertion
-		assertEquals(text, "Hello iFrame!", "WRONG!");
+	public void testWindowUsingName()
+	{
+		// Store WindowHandle of parent window
+		String currentWindowID = driver.getWindowHandle();
+		driver.findElement(By.id("helpbutton")).click();
+		driver.switchTo().window("HelpWindow");
+		assertEquals("Help", driver.getTitle());
+		System.out.println(driver.getTitle());
+		// code inside Help windows 
+		driver.close();
+		driver.switchTo().window(currentWindowID);
+
 	}
 	
 	@AfterTest

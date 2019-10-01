@@ -1,4 +1,4 @@
-package examples.more;
+package examples.alerts;
 
 import static org.testng.Assert.assertTrue;
 
@@ -11,10 +11,10 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class ConfirmAlertDemo {
-	
+public class PromptAlertDemo {
+
 	WebDriver driver;
-	
+
 	@BeforeTest
 	public void setup() {
 		System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/windows-64/chromedriver.exe");
@@ -24,35 +24,34 @@ public class ConfirmAlertDemo {
 
 		driver.get("http://cookbook.seleniumacademy.com/Alerts.html");
 	}
-	
-	@Test
-	public void confirmAlertAcceptTest() {
+
+	@Test(priority = 1)
+	public void promptDialogAcceptTest() {
 
 		//Confirm Dialog
-		WebElement tryitC = driver.findElement(By.id("confirm"));
-		tryitC.click();		
+		WebElement tryitP = driver.findElement(By.id("prompt"));
+		tryitP.click();
+
+		Alert jsPAlertConfirm = driver.switchTo().alert();
+		//insert your name
+		String name = "Sharkawy";
+		jsPAlertConfirm.sendKeys(name);
 		//Confirm
-		Alert jsCAlertConfirm = driver.switchTo().alert();
-		jsCAlertConfirm.accept();
+		jsPAlertConfirm.accept();
 		//assert
-		WebElement d = driver.findElement(By.id("demo"));
-		assertTrue(d.getText().equals("You Accepted Alert!"));
+		WebElement d = driver.findElement(By.id("prompt_demo"));
+		assertTrue(d.getText().equals("Hello " + name + "! How are you today?"));
 	}
-	
-	@Test
-	public void confirmAlertDismissTest() {
 
-		//Confirm Dialog
-		WebElement tryitC = driver.findElement(By.id("confirm"));
-		tryitC.click();		
+	@Test(priority = 2)
+	public void promptDialogDismissTest() {
+		WebElement tryitP = driver.findElement(By.id("prompt"));
+		tryitP.click();		
 		//Dismiss
-		Alert jsCAlertDismiss = driver.switchTo().alert();
-		jsCAlertDismiss.dismiss();
-		//assert
-		WebElement d = driver.findElement(By.id("demo"));
-		assertTrue(d.getText().equals("You Dismissed Alert!"));
+		Alert jsPAlertDismiss = driver.switchTo().alert();
+		jsPAlertDismiss.dismiss();
 	}
-	
+
 	@AfterTest
 	public void closeBrowser() {
 		driver.quit();
