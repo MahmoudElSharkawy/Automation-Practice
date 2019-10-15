@@ -1,4 +1,4 @@
-package pom.pages;
+package pom.angie.pages;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;

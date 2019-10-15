@@ -1,4 +1,4 @@
-package pom.base;
+package pom.angie.utils;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;

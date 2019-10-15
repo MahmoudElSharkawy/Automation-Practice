@@ -1,4 +1,4 @@
-package pom.pages;
+package pom.angie.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;

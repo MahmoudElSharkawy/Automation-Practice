@@ -1,4 +1,4 @@
-package pom.base;
+package pom.angie.tests;
 
 import java.io.File;
 
@@ -12,8 +12,8 @@ import org.testng.ITestResult;
 import org.testng.annotations.*;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import pom.pages.GoogleHomePage;
-import pom.base.EventReporter;
+import pom.angie.pages.GoogleHomePage;
+import pom.angie.utils.EventReporter;
 
 public class BaseTests {
 
