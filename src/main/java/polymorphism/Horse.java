@@ -7,9 +7,9 @@ public class Horse extends Animal {
 
 		Animal h = new Horse();
 		h.sound();
-		
+
 	}
-	
+
 	@Override
 	public void sound() {
 		System.out.println("Nighhhh");

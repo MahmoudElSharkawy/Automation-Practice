@@ -10,9 +10,7 @@ public class AccessEncap {
 		access.setAge(20);
 		access.setIdNum("3699");
 		
-		
 		System.out.println("Name is: " + access.getName() + " and Age is: " + access.getAge() + " and ID " + access.getIdNum());
-
 		
 	}
 
