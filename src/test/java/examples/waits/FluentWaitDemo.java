@@ -16,7 +16,6 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-
 public class FluentWaitDemo {
 	WebDriver driver;
 
@@ -31,34 +30,27 @@ public class FluentWaitDemo {
 	}
 
 	@Test
-	public void testFluentWait() 
-	{
-		try {
-			driver.findElement(By.linkText("Page 4")).click();
+	public void testFluentWait() {
 
-			Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
-					.withTimeout(Duration.ofSeconds(10))
-					.pollingEvery(Duration.ofSeconds(2))
-					.ignoring(NoSuchElementException.class);
+		driver.findElement(By.linkText("Page 4")).click();
 
-			WebElement message = wait
-					.until(new Function<WebDriver, WebElement>() {
-						public WebElement apply(WebDriver d) {
-							return d.findElement(By.id("page4"));
-						}
-					});
+		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+				.withTimeout(Duration.ofSeconds(10))
+				.pollingEvery(Duration.ofSeconds(2))
+				.ignoring(NoSuchElementException.class);
 
-			assertTrue(message.getText().contains("Nunc nibh tortor"));
+		WebElement message = wait.until(new Function<WebDriver, WebElement>() {
+			public WebElement apply(WebDriver driver) {
+				return driver.findElement(By.id("page4"));
+			}
+		});
 
-		}
+		assertTrue(message.getText().contains("Nunc nibh tortor"));
 
-		finally {
-
-		}
 	}
 
 	@AfterTest
-	public void closeBrowser(){
+	public void closeBrowser() {
 		driver.quit();
 	}
 
