@@ -23,7 +23,7 @@ public class NewTabDemo {
 	}
 
 	@Test
-	public void newTabTest1() {
+	public void newTabTest() {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.open()");
 

@@ -38,8 +38,8 @@ public class CookiesDemo {
 		assertFalse(driver.manage().getCookieNamed(cookie.getName()) != null, "Cookie was not deleted");
 	}
 
-	@AfterTest
-	public void closeBrowser() {
-		driver.quit();
-	}
+//	@AfterTest
+//	public void closeBrowser() {
+//		driver.quit();
+//	}
 }

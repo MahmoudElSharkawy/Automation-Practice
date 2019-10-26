@@ -25,13 +25,13 @@ public class JavaScriptExecutorDemo {
 	public void jsDemo(){
 		JavascriptExecutor js = (JavascriptExecutor) driver;  
 		//Vertical scroll - down by 500  pixels
-		js.executeScript("window.scrollBy(0,1000)");
+//		js.executeScript("window.scrollBy(0,3000)");
 		// for scrolling till the bottom of the page we can use the code like
-//		js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
+		js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
 	}
 	
-	@AfterTest
-	public void closeBrowser() {
-		driver.quit();
-	}	
+//	@AfterTest
+//	public void closeBrowser() {
+//		driver.quit();
+//	}	
 }
