@@ -20,7 +20,7 @@ public class GoogleChromeHeadlessDemo {
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--headless");
 //      options.setHeadless(true);
-//        options.addArguments("disable-infobars");
+//      options.addArguments("disable-infobars");
 		options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"}); 
 		options.addArguments("--window-size=1920,1080");
 		driver = new ChromeDriver(options);
