@@ -18,7 +18,7 @@ public class DoubleClickDemo {
 
 	@BeforeTest
 	public void setup() {
-		System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/mac-64/chromedriver");
+		System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/windows-64/chromedriver.exe");
 
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
@@ -27,21 +27,21 @@ public class DoubleClickDemo {
 	}
 
 	@Test
-	public void DoubleClick(){
+	public void DoubleClick() throws InterruptedException{
 
 		WebElement box = driver.findElement(By.id("message"));
 
-		String backGroundColor = box.getCssValue("background-color");
 		System.out.println(box.getCssValue("background-color"));
-		assertEquals(backGroundColor, "rgba(0, 0, 255, 1)");
+		assertEquals(box.getCssValue("background-color"), "rgba(0, 0, 255, 1)");
 
 		//Double Click
 		Actions a = new Actions(driver);
 		a.doubleClick(box).perform();
 
 		//get the value to asset on it
-		System.out.println(backGroundColor);
-		assertEquals(backGroundColor, "rgba(255, 255, 0, 1)");
+		System.out.println(box.getCssValue("background-color"));
+		Thread.sleep(2000);
+		assertEquals(box.getCssValue("background-color"), "rgba(255, 255, 0, 1)");
 
 	}
 

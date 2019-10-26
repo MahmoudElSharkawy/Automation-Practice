@@ -20,11 +20,11 @@ public class MultipleWindowsDemo {
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 
-		driver.get("https://the-internet.herokuapp.com/checkboxes");
+		driver.get("http://cookbook.seleniumacademy.com/Config.html");
 	}
 	
 	@Test
-	public void testWindowUsingName()
+	public void multipleWindowsTest()
 	{
 		// Store WindowHandle of parent window
 		String currentWindowID = driver.getWindowHandle();

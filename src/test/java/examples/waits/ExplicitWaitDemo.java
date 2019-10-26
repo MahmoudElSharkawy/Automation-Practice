@@ -32,7 +32,7 @@ public class ExplicitWaitDemo {
 	{
 		driver.findElement(By.xpath("//input[@name='q']")).sendKeys("Selenium", Keys.ENTER);
 
-		WebDriverWait wait = new WebDriverWait(driver, 20) ; 
+		WebDriverWait wait = new WebDriverWait(driver, 20); 
 		wait.until(ExpectedConditions.titleContains("Selenium"));
 		assertTrue(driver.getTitle().startsWith("Selenium"));
 	}

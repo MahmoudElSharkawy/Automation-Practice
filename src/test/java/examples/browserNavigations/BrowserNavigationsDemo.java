@@ -2,7 +2,9 @@ package examples.browserNavigations;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -10,7 +12,7 @@ public class BrowserNavigationsDemo {
 
 	WebDriver driver;
 
-	@BeforeTest
+	@BeforeClass
 	public void setup() {
 		System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/windows-64/chromedriver.exe");
 
@@ -43,14 +45,14 @@ public class BrowserNavigationsDemo {
 	}
 
 	@Test(priority = 3)
-	public void checkBoxesTest() throws InterruptedException {
+	public void refreshTest() throws InterruptedException {
 		driver.navigate().refresh();
 		System.out.println("Refresh URL: " + driver.getCurrentUrl());
 		Thread.sleep(2000);
 
 	}
 
-	@AfterTest
+	@AfterClass
 	public void closeBrowser() {
 		driver.quit();
 	}

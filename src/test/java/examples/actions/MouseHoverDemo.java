@@ -1,5 +1,6 @@
 package examples.actions;
 
+import org.apache.poi.util.SystemOutLogger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,9 +28,10 @@ public class MouseHoverDemo {
 	public void mousehover() {
 		 Actions a = new Actions(driver);
 		 WebElement element = driver.findElement(By.linkText("Printed Chiffon Dress"));
-		 a.moveToElement(element).build().perform();
+		 a.moveToElement(element).perform();
 		 driver.findElement(By.xpath("(//a[@data-id-product='7'])[1]//span")).click();
 		 
+		 a.contextClick(element);
 	}
 	
 	@AfterTest

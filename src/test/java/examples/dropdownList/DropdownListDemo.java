@@ -38,7 +38,7 @@ public class DropdownListDemo {
 		assertEquals(s.getOptions().size(), 3);
 
 
-		//Select by visibleTest
+		//Select by visibleText
 		s.selectByVisibleText("Option 1");
 		assertEquals("Option 1", s.getFirstSelectedOption().getText());
 
