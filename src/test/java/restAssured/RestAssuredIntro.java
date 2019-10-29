@@ -3,7 +3,7 @@ package restAssured;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import io.restassured.RestAssured;
@@ -11,11 +11,11 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import static org.hamcrest.Matchers.*;
 
-public class RestAssuredDemo1 {
+public class RestAssuredIntro {
  
     Response response;
 
-    @BeforeTest
+    @BeforeClass
     public void beforeClass() {
 	
 	RestAssured.baseURI = "http://api.zippopotam.us";
@@ -35,7 +35,7 @@ public class RestAssuredDemo1 {
     }
     
     @Test
-    public void restAssuredBDDTest() {
+    public void restAssuredGherkinsSyntaxTest() {
 	RestAssured.
         given().
         when().
