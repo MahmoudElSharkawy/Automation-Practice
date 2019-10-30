@@ -1,45 +1,44 @@
 package examples.datadriven;
 
-import static org.testng.Assert.assertTrue;
-
-import java.io.IOException;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class DataDrivenDemo {
+    WebDriver driver;
 
-	WebDriver driver;
-	FileDataReader dataReader;
+    @BeforeMethod
+    public void setUp() {
+	System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/mac-64/chromedriver");
+	driver = new ChromeDriver();
+	driver.manage().window().maximize();
 
-	@BeforeTest
-	public void setup() throws IOException {
-		System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/windows-64/chromedriver.exe");
+	driver.get("https://opensource-demo.orangehrmlive.com");
+    }
 
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
+    @Test(dataProviderClass = SignInDataProvider.class, dataProvider = "signin-provider")
+    public void signIn(String usename, String password, boolean success) {
 
-		dataReader = new FileDataReader();
-		driver.get(dataReader.read("DataDrivenDemoTestData.xlsx", 1, 2));
-	}
+	driver.findElement(By.id("txtUsername")).sendKeys(usename);
+	driver.findElement(By.id("txtPassword")).sendKeys(password);
+	driver.findElement(By.id("btnLogin")).click();
 
-	@Test
-	public void dataDrivenTest() throws IOException {
-		dataReader = new FileDataReader();
+	System.out.println("Sign In Credentials: " + "\n" + "  Username = " + usename + "\n" + "  Password = "
+		+ password + "\n" + "  Successful Sign In = " + success + "\n");
 
-		driver.findElement(By.xpath(dataReader.read("DataDrivenDemoTestData.xlsx", 1, 0)))
-				.sendKeys(dataReader.read("DataDrivenDemoTestData.xlsx", 1, 1), Keys.ENTER);
-		assertTrue(driver.getTitle().contains(dataReader.read("DataDrivenDemoTestData.xlsx", 1, 1)));
+	String actualResult = driver.findElement(By.id("welcome")).getText();
+	String expectedResult = "Welcome Admin";
+	Assert.assertEquals(actualResult, expectedResult, "The Actual & Expected Results Do Not Match");
 
-	}
+    }
 
-	@AfterTest
-	public void closeBrowser() {
-		driver.quit();
-	}
+    @AfterMethod
+    public void closeBrowser() {
+	driver.quit();
+
+    }
 }
