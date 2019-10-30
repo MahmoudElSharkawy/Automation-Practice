@@ -31,7 +31,7 @@ public class PHPTravelsAssignment {
     public void setUp() {
 	date = new Date();
 	email = "test" + date.getTime() + "@test.com";
-	System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/mac-64/chromedriver");
+	System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/windows-64/chromedriver.exe");
 //	try {
 //	    BrowserFactory.browser("chrome", driver);
 //	} catch (IOException e) {
