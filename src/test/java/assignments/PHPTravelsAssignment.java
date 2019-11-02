@@ -2,20 +2,19 @@ package assignments;
 
 import static org.testng.Assert.assertEquals;
 
-import java.io.IOException;
 import java.util.Date;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import generic.BrowserFactory;
+import pom.simple.generic.BrowserFactory;
+import pom.simple.generic.BrowserFactory.BrowserType;
 
 public class PHPTravelsAssignment {
 
@@ -32,14 +31,8 @@ public class PHPTravelsAssignment {
 	date = new Date();
 	email = "test" + date.getTime() + "@test.com";
 	System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/windows-64/chromedriver.exe");
-//	try {
-//	    BrowserFactory.browser("chrome", driver);
-//	} catch (IOException e) {
-//	    e.getMessage();
-//	}
 
-	driver = new ChromeDriver();
-	driver.manage().window().maximize();
+	driver = BrowserFactory.browser(BrowserType.GOOGLE_CHROME);
 	driver.get("https://www.phptravels.net/");
     }
 

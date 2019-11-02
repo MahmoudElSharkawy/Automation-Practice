@@ -4,12 +4,12 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+import pom.simple.generic.BrowserFactory;
+import pom.simple.generic.BrowserFactory.BrowserType;
 import pom.simple.pages.GoogleHomePage;
 import pom.simple.pages.GoogleSearchResultsPage;
 
@@ -21,10 +21,7 @@ public class GoogleSearchTest {
 
     @BeforeClass
     public void initWebDriver() {
-	WebDriverManager.chromedriver().setup();
-	driver = new ChromeDriver();
-	driver.manage().window().maximize();
-
+	driver = BrowserFactory.browser(BrowserType.GOOGLE_CHROME);
 	homePage = new GoogleHomePage(driver);
 	searchResultsPage = new GoogleSearchResultsPage(driver);
     }
