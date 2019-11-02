@@ -1,0 +1,33 @@
+version: "3"
+services:
+
+  selenium-hub:
+    image: selenium/hub
+    ports:
+      - "4444:4444"
+    environment:
+        GRID_MAX_SESSION: 16
+        GRID_BROWSER_TIMEOUT: 300
+        GRID_TIMEOUT: 300
+
+  chrome:
+    image: selenium/node-chrome
+    depends_on:
+      - selenium-hub
+    environment:
+      HUB_PORT_4444_TCP_ADDR: selenium-hub
+      HUB_PORT_4444_TCP_PORT: 4444
+      NODE_MAX_SESSION: 2
+      NODE_MAX_INSTANCES: 2
+    # volumes:
+    #   - /dev/shm:/dev/shm
+
+  firefox:
+    image: selenium/node-firefox
+    depends_on:
+      - selenium-hub
+    environment:
+      HUB_PORT_4444_TCP_ADDR: selenium-hub
+      HUB_PORT_4444_TCP_PORT: 4444
+      NODE_MAX_SESSION: 4
+      NODE_MAX_INSTANCES: 4
