@@ -13,8 +13,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import pom.simple.generic.BrowserFactory;
-import pom.simple.generic.BrowserFactory.BrowserType;
+import generic.BrowserFactory;
+import generic.BrowserFactory.BrowserType;
 
 public class PHPTravelsAssignment {
 
