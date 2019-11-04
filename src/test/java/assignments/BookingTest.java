@@ -62,7 +62,9 @@ public class BookingTest {
 	homePage.searchDestination(dataReader.read("BookingTestData.xlsx", 4, 2), dataReader.read("BookingTestData.xlsx", 5, 2),
 		dataReader.read("BookingTestData.xlsx", 6, 2), Integer.parseInt(dataReader.read("BookingTestData.xlsx", 7, 2)));
 
-	destinationPage.assertAquaParkListedInTheResultSet();
+	destinationPage.assertHotelIsListedInTheResultSet(dataReader.read("TestData.xlsx", 8, 2));
+	destinationPage.clickOnSeeAvailability(dataReader.read("TestData.xlsx", 8, 2));
+	
     }
 
     @AfterMethod
