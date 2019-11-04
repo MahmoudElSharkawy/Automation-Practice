@@ -9,36 +9,43 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class SeleniumGridDemo {
-	WebDriver driver;
-
-	@BeforeTest
+	RemoteWebDriver driver;
+	public static final String host = "localhost";
+	public static final String port = "4444";
+ 
+	@BeforeClass
 	public void setup() {
-		System.setProperty("webdriver.gecko.driver", "src/main/resources/drivers/windows-64/geckodriver.exe");
-
-		DesiredCapabilities capability = DesiredCapabilities.firefox();
-//		driver = new ChromeDriver();
+		driver = null;
+		DesiredCapabilities capabilities = new DesiredCapabilities();
+		capabilities.setCapability("browserName", "chrome");
+		capabilities.setCapability("version", "78.0");
+		capabilities.setCapability("platform", "win10"); // If this cap isn't specified, it will just get the any
+		capabilities.setCapability("network", true); // To enable network logs
+		capabilities.setCapability("visual", true); // To enable step by step screenshot
+		capabilities.setCapability("video", true); // To enable video recording
+		capabilities.setCapability("console", true); // To capture console logs
 		try {
-			driver = new RemoteWebDriver(new URL("http://localhost:4444/wb/hub"), capability);
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
+			driver = new RemoteWebDriver(new URL("https://" + host + ":" + port + "/wb/hub"), capabilities);
+		} catch (Exception e) {
+			System.out.println("Invalid grid URL" + e.getMessage());
 		}
-		driver.manage().window().maximize();
 
-		driver.get("http://www.google.com/ncr");
 	}
 
 	@Test
 	public void seleniumGridTest() {
-		// set the implicit wait time to 20 Seconds
+		driver.get("http://www.google.com/ncr");
 		driver.findElement(By.name("q")).sendKeys("Selenium Grid", Keys.ENTER);
 	}
 
-	@AfterTest
+	@AfterClass
 	public void closeBrowser() {
 		driver.quit();
 	}
