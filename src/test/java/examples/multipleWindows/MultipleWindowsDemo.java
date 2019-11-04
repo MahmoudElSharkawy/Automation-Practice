@@ -27,14 +27,14 @@ public class MultipleWindowsDemo {
 	public void multipleWindowsTest()
 	{
 		// Store WindowHandle of parent window
-		String currentWindowID = driver.getWindowHandle();
+		String mainWindowHandle = driver.getWindowHandle();
 		driver.findElement(By.id("helpbutton")).click();
 		driver.switchTo().window("HelpWindow");
 		assertEquals("Help", driver.getTitle());
 		System.out.println(driver.getTitle());
 		// code inside Help windows 
 		driver.close();
-		driver.switchTo().window(currentWindowID);
+		driver.switchTo().window(mainWindowHandle);
 
 	}
 	

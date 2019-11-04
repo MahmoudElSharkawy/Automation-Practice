@@ -18,7 +18,7 @@ public class DestinationResultsPage {
 
     public void assertHotelIsListedInTheResultSet(String hotelName) {
 	Utils.getWait(driver).until(ExpectedConditions.visibilityOf(getHotelNameLocator(hotelName)));
-	Utils.getJsExecutor(driver, "arguments[0].scrollIntoView(true);", getHotelNameLocator(hotelName));
+	Utils.jsExecutor(driver, "arguments[0].scrollIntoView(true);", getHotelNameLocator(hotelName));
 	assertTrue(getHotelNameLocator(hotelName).getText().contains("Aqua Park"));
     }
 

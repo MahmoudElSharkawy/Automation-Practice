@@ -13,7 +13,7 @@ public class Utils {
 
     }
 
-    public static void getJsExecutor(WebDriver driver, String script, WebElement element) {
+    public static void jsExecutor(WebDriver driver, String script, WebElement element) {
 	JavascriptExecutor executor = (JavascriptExecutor) driver;
 	executor.executeScript(script, element);
 
