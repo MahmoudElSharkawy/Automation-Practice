@@ -18,23 +18,23 @@ public class DataReaderDemo {
 	FileDataReader dataReader;
 
 	@BeforeTest
-	public void setup() throws IOException {
+	public void setup() {
 		System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/windows-64/chromedriver.exe");
 
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 
 		dataReader = new FileDataReader();
-		driver.get(dataReader.read("DataDrivenDemoTestData.xlsx", 1, 2));
+		driver.get(dataReader.read("DataDrivenDemoTestData.xlsx", 2, 3));
 	}
 
 	@Test
-	public void dataDrivenTest() throws IOException {
+	public void dataDrivenTest() {
 		dataReader = new FileDataReader();
 
-		driver.findElement(By.xpath(dataReader.read("DataDrivenDemoTestData.xlsx", 1, 0)))
-				.sendKeys(dataReader.read("DataDrivenDemoTestData.xlsx", 1, 1), Keys.ENTER);
-		assertTrue(driver.getTitle().contains(dataReader.read("DataDrivenDemoTestData.xlsx", 1, 1)));
+		driver.findElement(By.xpath(dataReader.read("DataDrivenDemoTestData.xlsx", 2, 1)))
+				.sendKeys(dataReader.read("DataDrivenDemoTestData.xlsx", 2, 2), Keys.ENTER);
+		assertTrue(driver.getTitle().contains(dataReader.read("DataDrivenDemoTestData.xlsx", 2, 2)));
 
 	}
 
