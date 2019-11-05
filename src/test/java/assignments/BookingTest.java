@@ -17,6 +17,7 @@ import org.testng.annotations.Test;
 import generic.BrowserFactory;
 import examples.datadriven.FileDataReader;
 import generic.BrowserFactory.BrowserType;
+import assignment.booking.pages.DestinationPage;
 import assignment.booking.pages.DestinationResultsPage;
 import assignment.booking.pages.HomePage;
 import assignment.booking.pages.RegistrationPage;
@@ -33,7 +34,8 @@ public class BookingTest {
 
     HomePage homePage;
     RegistrationPage registrationPage;
-    DestinationResultsPage destinationPage;
+    DestinationResultsPage resultsPage;
+    DestinationPage destinationPage;
 
     @BeforeClass
     public void setUp() {
@@ -44,7 +46,8 @@ public class BookingTest {
 	driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 	homePage = new HomePage(driver);
 	registrationPage = new RegistrationPage(driver);
-	destinationPage = new DestinationResultsPage(driver);
+	resultsPage = new DestinationResultsPage(driver);
+	destinationPage = new DestinationPage(driver);
 
     }
 
@@ -59,14 +62,13 @@ public class BookingTest {
 	registrationPage.Register(email, password);
 
 	homePage.clickOnCloseButton();
-	homePage.searchDestination(dataReader.read("BookingTestData.xlsx", 4, 2), dataReader.read("BookingTestData.xlsx", 5, 2),
-		dataReader.read("BookingTestData.xlsx", 6, 2), Integer.parseInt(dataReader.read("BookingTestData.xlsx", 7, 2)));
+	homePage.searchDestination(dataReader.read("BookingTestData.xlsx", 4, 2),
+		dataReader.read("BookingTestData.xlsx", 5, 2), dataReader.read("BookingTestData.xlsx", 6, 2),
+		Integer.parseInt(dataReader.read("BookingTestData.xlsx", 7, 2)));
 
-	destinationPage.assertHotelIsListedInTheResultSet(dataReader.read("BookingTestData.xlsx", 8, 2));
-	destinationPage.clickOnSeeAvailability(dataReader.read("BookingTestData.xlsx", 8, 2));
+	resultsPage.assertHotelIsListedInTheResultSet(dataReader.read("BookingTestData.xlsx", 8, 2));
+	resultsPage.clickOnSeeAvailabilityAndSwitchToDestinationPage(dataReader.read("BookingTestData.xlsx", 8, 2));
 
-	
-	
     }
 
     @AfterMethod
