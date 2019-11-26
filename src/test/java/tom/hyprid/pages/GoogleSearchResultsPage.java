@@ -1,4 +1,4 @@
-package pom.hyprid.pages;
+package tom.hyprid.pages;
 
 import static org.testng.Assert.assertTrue;
 

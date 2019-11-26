@@ -1,4 +1,4 @@
-package pom.hyprid.tests;
+package tom.hyprid.tests;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
@@ -7,8 +7,8 @@ import org.testng.annotations.Test;
 
 import generic.BrowserFactory;
 import generic.BrowserFactory.BrowserType;
-import pom.hyprid.pages.GoogleHomePage;
-import pom.hyprid.pages.GoogleSearchResultsPage;
+import tom.hyprid.pages.GoogleHomePage;
+import tom.hyprid.pages.GoogleSearchResultsPage;
 
 public class GoogleSearchTest {
     private WebDriver driver;
