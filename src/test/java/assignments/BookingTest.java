@@ -25,7 +25,6 @@ import assignment.booking.pages.RegistrationPage;
 public class BookingTest {
     private WebDriver driver;
     Date date;
-    FileDataReader dataReader;
 
     String email;
     String password;
@@ -40,7 +39,6 @@ public class BookingTest {
     @BeforeClass
     public void setUp() {
 	date = new Date();
-	dataReader = new FileDataReader();
 
 	driver = BrowserFactory.browser(BrowserType.GOOGLE_CHROME);
 	driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
@@ -53,8 +51,8 @@ public class BookingTest {
 
     @Test
     public void TestBooking() {
-	email = dataReader.read("BookingTestData.xlsx", 2, 2) + date.getTime() + "@test.com";
-	password = dataReader.read("BookingTestData.xlsx", 3, 2);
+	email = FileDataReader.readFromExcel("BookingTestData", 2) + date.getTime() + "@test.com";
+	password = FileDataReader.readFromExcel("BookingTestData", 3);
 
 	homePage.openURL();
 	homePage.clickOnTheRegistrationButton();
@@ -62,12 +60,12 @@ public class BookingTest {
 	registrationPage.Register(email, password);
 
 	homePage.clickOnCloseButton();
-	homePage.searchDestination(dataReader.read("BookingTestData.xlsx", 4, 2),
-		dataReader.read("BookingTestData.xlsx", 5, 2), dataReader.read("BookingTestData.xlsx", 6, 2),
-		Integer.parseInt(dataReader.read("BookingTestData.xlsx", 7, 2)));
+	homePage.searchDestination(FileDataReader.readFromExcel("BookingTestData", 4),
+		FileDataReader.readFromExcel("BookingTestData", 5), FileDataReader.readFromExcel("BookingTestData.xlsx", 6),
+		Integer.parseInt(FileDataReader.readFromExcel("BookingTestData", 7)));
 
-	resultsPage.assertHotelIsListedInTheResultSet(dataReader.read("BookingTestData.xlsx", 8, 2));
-	resultsPage.clickOnSeeAvailabilityAndSwitchToDestinationPage(dataReader.read("BookingTestData.xlsx", 8, 2));
+	resultsPage.assertHotelIsListedInTheResultSet(FileDataReader.readFromExcel("BookingTestData", 8));
+	resultsPage.clickOnSeeAvailabilityAndSwitchToDestinationPage(FileDataReader.readFromExcel("BookingTestData", 8));
 
     }
 

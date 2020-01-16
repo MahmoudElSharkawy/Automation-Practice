@@ -14,32 +14,28 @@ import org.testng.annotations.Test;
 
 public class DataReaderDemo {
 
-	WebDriver driver;
-	FileDataReader dataReader;
+    WebDriver driver;
 
-	@BeforeTest
-	public void setup() {
-		System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/windows-64/chromedriver.exe");
+    @BeforeTest
+    public void setup() {
+	System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/windows-64/chromedriver.exe");
 
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
+	driver = new ChromeDriver();
+	driver.manage().window().maximize();
 
-		dataReader = new FileDataReader();
-		driver.get(dataReader.read("DataDrivenDemoTestData.xlsx", 2, 3));
-	}
+	driver.get(FileDataReader.readFromExcel("DataDrivenDemoTestData", 2));
+    }
 
-	@Test
-	public void dataDrivenTest() {
-		dataReader = new FileDataReader();
+    @Test
+    public void dataDrivenTest() {
+	driver.findElement(By.xpath(FileDataReader.readFromExcel("DataDrivenDemoTestData", 3)))
+		.sendKeys(FileDataReader.readFromExcel("DataDrivenDemoTestData", 4), Keys.ENTER);
+	assertTrue(driver.getTitle().contains(FileDataReader.readFromExcel("DataDrivenDemoTestData", 4)));
 
-		driver.findElement(By.xpath(dataReader.read("DataDrivenDemoTestData.xlsx", 2, 1)))
-				.sendKeys(dataReader.read("DataDrivenDemoTestData.xlsx", 2, 2), Keys.ENTER);
-		assertTrue(driver.getTitle().contains(dataReader.read("DataDrivenDemoTestData.xlsx", 2, 2)));
+    }
 
-	}
-
-	@AfterTest
-	public void closeBrowser() {
-		driver.quit();
-	}
+    @AfterTest
+    public void closeBrowser() {
+	driver.quit();
+    }
 }

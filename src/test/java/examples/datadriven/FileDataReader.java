@@ -8,11 +8,11 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class FileDataReader {
 
-    private XSSFWorkbook wb;
+    private static XSSFWorkbook wb;
 
-    public String read(String fileName, int x, int y) {
+    public static String readFromExcel(String fileName, int x) {
 
-	String f = "src/test/resources/TestData/" + fileName;
+	String f = "src/test/resources/TestData/" + fileName + ".xlsx";
 	String testdata = "";
 	try {
 	    FileInputStream fis = new FileInputStream(f);
@@ -20,7 +20,7 @@ public class FileDataReader {
 	    XSSFSheet sht = wb.getSheet("Sheet1");
 
 	    DataFormatter df = new DataFormatter();
-	    testdata = df.formatCellValue(sht.getRow(x - 1).getCell(y - 1));
+	    testdata = df.formatCellValue(sht.getRow(x - 1).getCell(1));
 
 	} catch (Exception e) {
 	    System.out.println(e.getMessage());
