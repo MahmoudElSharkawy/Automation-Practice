@@ -31,24 +31,12 @@ public class OptimizingCodeDemo {
     }
 
     @Test
-    public void requestUsZipCode90210_checkPlaceNameInResponseBody_expectBeverlyHills_withRequestSpec() {
-
-        given().
-            spec(requestSpec).
-        when().
-            get("us/90210").
-        then().
-            assertThat().
-            statusCode(200);
-    }
-
-    @Test
     public void requestUsZipCode90210_checkPlaceNameInResponseBody_expectBeverlyHills_withResponseSpec() {
 
         given().
             spec(requestSpec).
         when().
-            get("http://zippopotam.us/us/90210").
+            get("us/90210").
         then().
             spec(responseSpec).
         and().
@@ -64,7 +52,7 @@ public class OptimizingCodeDemo {
         given().
             spec(requestSpec).
         when().
-            get("http://zippopotam.us/us/90210").
+            get("us/90210").
         then().
             extract().
             path("places[0].'place name'");
