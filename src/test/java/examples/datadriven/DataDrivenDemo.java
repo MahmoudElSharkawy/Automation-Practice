@@ -13,7 +13,7 @@ public class DataDrivenDemo {
 
     @BeforeMethod
     public void setUp() {
-	System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/mac-64/chromedriver");
+	System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/windows-64/chromedriver.exe");
 	driver = new ChromeDriver();
 	driver.manage().window().maximize();
 

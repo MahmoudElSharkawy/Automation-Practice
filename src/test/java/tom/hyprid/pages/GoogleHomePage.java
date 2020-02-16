@@ -1,7 +1,5 @@
 package tom.hyprid.pages;
 
-import static org.testng.Assert.assertTrue;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -20,8 +18,8 @@ public class GoogleHomePage {
 	driver.get(url);
     }
 
-    public void assertPageTitle() {
-	assertTrue(driver.getTitle().equals("Google"));
+    public String getTitleText() {
+	return driver.getTitle();
     }
 
     public GoogleSearchResultsPage googleSearch(String searchData) {

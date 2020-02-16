@@ -1,7 +1,5 @@
 package tom.hyprid.pages;
 
-import static org.testng.Assert.assertTrue;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -14,12 +12,12 @@ public class GoogleSearchResultsPage {
 	this.driver = driver;
     }
 
-    public void assertPageTitle() {
-	assertTrue(driver.getTitle().contains("Selenium WebDriver"));
+    public String getTitleText() {
+	return driver.getTitle();
     }
-
-    public void assertSearchResultText() {
-	assertTrue(driver.findElement(google_search_result).getText().equals("Selenium WebDriver"));
+    
+    public String getSearchResultText() {
+	return driver.findElement(google_search_result).getText();
     }
 
     public void clickOnSearchResult() {
