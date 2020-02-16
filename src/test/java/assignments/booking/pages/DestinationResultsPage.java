@@ -1,4 +1,4 @@
-package assignment.booking.pages;
+package assignments.booking.pages;
 
 import static org.testng.Assert.assertTrue;
 

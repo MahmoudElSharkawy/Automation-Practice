@@ -1,4 +1,4 @@
-package assignment.booking.pages;
+package assignments.booking.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

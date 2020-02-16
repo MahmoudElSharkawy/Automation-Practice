@@ -14,13 +14,13 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import assignments.booking.pages.DestinationPage;
+import assignments.booking.pages.DestinationResultsPage;
+import assignments.booking.pages.HomePage;
+import assignments.booking.pages.RegistrationPage;
 import generic.BrowserFactory;
 import examples.datadriven.FileDataReader;
 import generic.BrowserFactory.BrowserType;
-import assignment.booking.pages.DestinationPage;
-import assignment.booking.pages.DestinationResultsPage;
-import assignment.booking.pages.HomePage;
-import assignment.booking.pages.RegistrationPage;
 
 public class BookingTest {
     private WebDriver driver;
