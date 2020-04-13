@@ -3,8 +3,11 @@
 <suite name="Groups">
 	<test name="Test">
 		<groups>
-			<run>
+			<define name="All">
 				<include name="Regression" />
+				<include name="Smoke" />
+			</define>
+			<run>
 				<include name="Smoke" />
 			</run>
 		</groups>
