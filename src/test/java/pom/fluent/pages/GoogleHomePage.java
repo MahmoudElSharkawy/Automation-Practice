@@ -1,4 +1,4 @@
-package tom.hyprid.pages;
+package pom.fluent.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -14,8 +14,10 @@ public class GoogleHomePage {
 	this.driver = driver;
     }
 
-    public void openURL() {
+    public GoogleHomePage openURL() {
 	driver.get(url);
+
+	return this;
     }
 
     public String getTitleText() {
