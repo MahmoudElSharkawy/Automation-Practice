@@ -8,15 +8,16 @@ import java.util.Date;
 
 public class RestAssuredPostRequestDemo {
     Date date = new Date();
+    String email = "test" + date.getTime() + "@test.com";
     
     @Test
     public void restAssuredGherkinsSyntaxTest1() {
-
+	System.out.println("The mail is: " + email);
 	given().
 	     formParam("firstname", "aw3a").
 	     formParam("lastname", "alAPI").
 	     formParam("phone", "01155150745").
-	     formParam("email", "test" + date.getTime() + "@test.com").
+	     formParam("email", email).
 	     formParam("password", "12345678").
 	     formParam("confirmpassword", "12345678").
 	when().
