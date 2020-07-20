@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import generic.Utils;
 
@@ -12,71 +11,83 @@ public class HomePage {
     private WebDriver driver;
 
     private String url = "https://www.booking.com/";
-    private By registration_button = By.xpath("(//div[@class='sign_in_wrapper']/span)[1]");
-    private By close_button = By.cssSelector("button.modal-mask-closeBtn");
+    
     private By search_bar_destination = By.id("ss");
-    private By sharm_elshekh_result_field = By.cssSelector("[data-label='Sharm El Sheikh, South Sinai, Egypt']");
-//	private By sharm_elshekh_result = By.xpath("//span[text()='Sharm El Sheikh']");
-    private By guests_toggle = By.id("xp__guests__toggle");
-    private By add_child_button = By.xpath("//div[contains(@class, 'sb-group-children')] //span[text()='+']");
-    private By search_button = By.xpath("//span[text()='Search']");
+    private By suggested_destination_list = By.cssSelector("[aria-label='List of suggested destinations ']");
+    private By accommodation = By.xpath("//div[@data-visible='accommodation,flights,rentalcars' and @class ='xp__dates xp__group']");
+    private By dates_window = By.xpath("//div[@class ='bui-calendar__main b-a11y-calendar-contrasts']");
+    private By calender_next = By.cssSelector("[data-bui-ref='calendar-next']");
+    private By search_button = By.xpath("//button[@data-sb-id='main' and @type='submit']");
 
     public HomePage(WebDriver driver) {
 	this.driver = driver;
     }
 
-    public void openURL() {
+    public HomePage navigateToURL() {
 	driver.get(url);
+	return this;
     }
 
-    public void clickOnTheRegistrationButton() {
-	driver.findElement(registration_button).click();
-    }
-
-    public void clickOnCloseButton() {
-	WebDriverWait wait = new WebDriverWait(driver, 20);
-	wait.until(ExpectedConditions.elementToBeClickable(close_button));
-	driver.findElement(close_button).click();
-    }
-
-    public void searchDestination(String destination, String checkInDate, String checkOutDate, int numbersOfchilds) {
+    public HomePage inputDestination(String destination) {
 	Utils.getWait(driver).until(ExpectedConditions.elementToBeClickable(search_bar_destination));
+	driver.findElement(search_bar_destination).clear();
 	driver.findElement(search_bar_destination).sendKeys(destination);
 
-	Utils.getWait(driver).until(ExpectedConditions.visibilityOf(driver.findElement(sharm_elshekh_result_field)));
-	driver.findElement(sharm_elshekh_result_field).click();
+	Utils.getWait(driver).until(ExpectedConditions.visibilityOf(driver.findElement(suggested_destination_list)));
+	getDestinationElementLocatorFromTheList(destination).click();
 
+	System.out.println(" The Destination is: " + destination);
+	return this;
+    }
+
+    public HomePage inputAccommodationDates(String checkInDate, String checkOutDate) {	
 	Utils.getWait(driver)
 		.until(ExpectedConditions.and(ExpectedConditions.visibilityOf(getCheckInElementLocator(checkInDate)),
 			ExpectedConditions.visibilityOf(getCheckOutElementLocator(checkOutDate))));
 	getCheckInElementLocator(checkInDate).click();
 	getCheckOutElementLocator(checkOutDate).click();
 
-	driver.findElement(guests_toggle).click();
-	for (int i = 0; i < numbersOfchilds; i++) {
-	    driver.findElement(add_child_button).click();
-	    try {
-		Thread.sleep(600);
-	    } catch (Exception e) {
-		System.out.println(e.getMessage());
-	    }
-	}
-	driver.findElement(search_button).click();
+	return this;
+    }
 
+    //TODO: This methods needs enhancement to be dynamic based on the target Month needed
+    public HomePage clickOnCalenderNextButton(int numberOfClicks) {
+	driver.findElement(accommodation).click();
+
+	Utils.getWait(driver).until(ExpectedConditions.visibilityOfElementLocated(dates_window));
+
+	for (int i = 0; i < numberOfClicks; i++) {
+	    Utils.getWait(driver).until(ExpectedConditions.elementToBeClickable(calender_next));
+	    driver.findElement(calender_next).click();
+	}
+	return this;
+    }
+//    public HomePage clickOnCalenderNextButton(String targetMonth) {
+//	while (condition) {
+//	    
+//	}
+//	return this;
+//    }	
+
+    public SearchResultsPage clickOnTheSearchButton() {
+	driver.findElement(search_button).click();
+	return new SearchResultsPage(driver);
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////// PRIVATE METHODS
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////
+    /////////////////////////// PRIVATE METHODS ////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private WebElement getDestinationElementLocatorFromTheList(String destination) {
+	return driver.findElement(By.xpath("//span[text()='" + destination + "']"));
+    }
 
     private WebElement getCheckInElementLocator(String checkInDate) {
-//		return driver.findElement(By.cssSelector("[data-date ='2019-11-15']"));
 	return driver.findElement(By.cssSelector("[data-date =" + "'" + checkInDate + "']"));
     }
 
     private WebElement getCheckOutElementLocator(String checkOutDate) {
-//		return driver.findElement(By.cssSelector("[data-date ='2019-11-22']"));
 	return driver.findElement(By.cssSelector("[data-date =" + "'" + checkOutDate + "']"));
     }
 

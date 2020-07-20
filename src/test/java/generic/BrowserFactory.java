@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 public class BrowserFactory {
     static WebDriver driver;
 
@@ -26,44 +28,15 @@ public class BrowserFactory {
 	switch (browserType) {
 	case GOOGLE_CHROME:
 	    System.out.println("Opening Browser: " + browserType.value);
-
-	    try {
-		if (System.getProperty("os.name").contains("Windows")) {
-		    System.setProperty("webdriver.chrome.driver",
-			    "src/main/resources/drivers/Windows-64/chromedriver.exe");
-		} else if (System.getProperty("os.name").contains("Mac")) {
-		    System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/Mac-64/chromedriver");
-		} else if (System.getProperty("os.name").contains("linux")) {
-		    System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/Linux-64/chromedriver");
-		}
-	    } catch (Exception e) {
-		System.out.println(e.getMessage());
-	    }
-
+	    WebDriverManager.chromedriver().setup();
 	    driver = new ChromeDriver();
-	    driver.manage().window().maximize();
 	    break;
-
+	    
 	case MOZILLA_FIREFOX:
 	    System.out.println("Opening Browser: " + browserType.value);
-	    try {
-		if (System.getProperty("os.name").contains("Windows")) {
-		    System.setProperty("webdriver.gecko.driver",
-			    "src/main/resources/drivers/Windows-64/geckodriver.exe");
-		} else if (System.getProperty("os.name").contains("Mac")) {
-		    System.setProperty("webdriver.gecko.driver", "src/main/resources/drivers/Mac-64/geckodriver");
-		} else if (System.getProperty("os.name").contains("Linux")) {
-		    System.setProperty("webdriver.gecko.driver", "src/main/resources/drivers/Linux-64/geckodriver");
-		}
-
-	    } catch (Exception e) {
-		System.out.println(e.getMessage());
-	    }
-
+	    WebDriverManager.firefoxdriver().setup();
 	    driver = new FirefoxDriver();
-	    driver.manage().window().maximize();
 	    break;
-
 	}
 
 	return driver;
