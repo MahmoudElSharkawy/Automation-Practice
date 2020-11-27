@@ -23,7 +23,7 @@ public class BrowserFactory {
 	}
     }
 
-    public static WebDriver browser(BrowserType browserType) {
+    public static WebDriver openBrowser(BrowserType browserType) {
 
 	switch (browserType) {
 	case GOOGLE_CHROME:

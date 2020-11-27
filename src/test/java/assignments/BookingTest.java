@@ -21,11 +21,11 @@ public class BookingTest {
     public void setUp() {
 	if (FileDataReader.readFromExcel(testDataFileName, 2).equalsIgnoreCase("chrome")
 		|| FileDataReader.readFromExcel(testDataFileName, 2).equalsIgnoreCase("google chrome")) {
-	    driver = BrowserFactory.browser(BrowserType.GOOGLE_CHROME);
+	    driver = BrowserFactory.openBrowser(BrowserType.GOOGLE_CHROME);
 
 	} else if (FileDataReader.readFromExcel(testDataFileName, 2).equalsIgnoreCase("firefox")
 		|| FileDataReader.readFromExcel(testDataFileName, 2).equalsIgnoreCase("mozilla firefox")) {
-	    driver = BrowserFactory.browser(BrowserType.MOZILLA_FIREFOX);
+	    driver = BrowserFactory.openBrowser(BrowserType.MOZILLA_FIREFOX);
 	}
 
 	driver.manage().window().maximize();

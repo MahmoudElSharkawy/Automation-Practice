@@ -50,7 +50,7 @@ public class SeamsDemo {
     @Test
     public void Login() {	
 	System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/windows-64/chromedriver.exe");
-	driver = BrowserFactory.browser(BrowserType.GOOGLE_CHROME);
+	driver = BrowserFactory.openBrowser(BrowserType.GOOGLE_CHROME);
 	
 	driver.get("https://www.phptravels.net/login");
 	driver.findElement(By.name("username")).sendKeys(email);

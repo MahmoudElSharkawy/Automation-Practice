@@ -32,7 +32,7 @@ public class PHPTravelsAssignment {
 	email = "test" + date.getTime() + "@test.com";
 	System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/windows-64/chromedriver.exe");
 
-	driver = BrowserFactory.browser(BrowserType.GOOGLE_CHROME);
+	driver = BrowserFactory.openBrowser(BrowserType.GOOGLE_CHROME);
 	driver.get("https://www.phptravels.net/");
     }
 
