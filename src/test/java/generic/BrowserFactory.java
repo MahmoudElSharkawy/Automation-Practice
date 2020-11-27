@@ -30,6 +30,7 @@ public class BrowserFactory {
 	    System.out.println("Opening Browser: " + browserType.value);
 	    WebDriverManager.chromedriver().setup();
 	    driver = new ChromeDriver();
+	    driver.manage().window().maximize();
 	    break;
 	    
 	case MOZILLA_FIREFOX:
