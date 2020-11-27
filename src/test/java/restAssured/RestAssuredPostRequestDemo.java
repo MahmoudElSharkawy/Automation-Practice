@@ -8,18 +8,23 @@ import java.util.Date;
 
 public class RestAssuredPostRequestDemo {
     Date date = new Date();
+    
+    String firstname = "aw3a";
+    String lastname = "alAPI";
+    String phone = "01155150745";
     String email = "test" + date.getTime() + "@test.com";
+    String password = "12345678";
     
     @Test
     public void restAssuredGherkinsSyntaxTest1() {
 	System.out.println("The mail is: " + email);
 	given().
-	     formParam("firstname", "aw3a").
-	     formParam("lastname", "alAPI").
-	     formParam("phone", "01155150745").
+	     formParam("firstname", firstname).
+	     formParam("lastname", lastname).
+	     formParam("phone", phone).
 	     formParam("email", email).
-	     formParam("password", "12345678").
-	     formParam("confirmpassword", "12345678").
+	     formParam("password", password).
+	     formParam("confirmpassword", password).
 	when().
 	     post("https://www.phptravels.net/account/signup").
 	then().
