@@ -25,6 +25,7 @@ public class RestAssuredPostRequestDemo {
 	     formParam("email", email).
 	     formParam("password", password).
 	     formParam("confirmpassword", password).
+	     log().all().
 	when().
 	     post("https://www.phptravels.net/account/signup").
 	then().

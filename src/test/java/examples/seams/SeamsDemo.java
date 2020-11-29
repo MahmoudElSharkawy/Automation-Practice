@@ -3,7 +3,6 @@ package examples.seams;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeTest;
@@ -38,6 +37,7 @@ public class SeamsDemo {
 	     formParam("email", email).
 	     formParam("password", password).
 	     formParam("confirmpassword", password).
+	     log().all().
 	when().
 	     post("https://www.phptravels.net/account/signup").
 	then().
@@ -49,7 +49,6 @@ public class SeamsDemo {
     
     @Test
     public void Login() {	
-	System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/windows-64/chromedriver.exe");
 	driver = BrowserFactory.openBrowser(BrowserType.GOOGLE_CHROME);
 	
 	driver.get("https://www.phptravels.net/login");
