@@ -1,4 +1,4 @@
-package examples.actions;
+package examples.selenium;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,7 +9,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class MouseHoverDemo {
+public class Actions_MouseHoverDemo {
 	
 	WebDriver driver;
 	

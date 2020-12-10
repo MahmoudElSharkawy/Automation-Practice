@@ -1,4 +1,4 @@
-package examples.alerts;
+package examples.selenium;
 
 import static org.testng.Assert.assertTrue;
 
@@ -11,7 +11,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class ConfirmAlertDemo {
+public class Alerts_ConfirmAlertDemo {
 	
 	WebDriver driver;
 	

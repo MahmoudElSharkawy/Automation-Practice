@@ -1,17 +1,16 @@
-package examples.beginning;
-
-import java.util.List;
+package examples.selenium;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class FindByElementsDemo {
+public class Actions_DragAndDropDemo {
 
 	WebDriver driver;
 
@@ -22,26 +21,26 @@ public class FindByElementsDemo {
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 
-		driver.get("https://the-internet.herokuapp.com");
+		driver.get("http://cookbook.seleniumacademy.com/DragDropDemo.html");
 	}
 
 	@Test
-	public void testFindElements() 
-	{
-		// Get All the links displayed on Page
-		List<WebElement> links = driver.findElements(By.tagName("a"));
+	public void DragDrop(){
 
-		//Verify there are 41 Links displayed on the page
-		Assert.assertEquals(41, links.size());
+		WebElement source = driver.findElement(By.id("draggable"));
+		WebElement target = driver.findElement(By.id("droppable"));
 
-		// Print each link value
-		for (WebElement link : links) {
-			System.out.println(link.getAttribute("href"));
-		}
+		Actions dd = new Actions(driver);
+		dd.dragAndDrop(source, target).perform();
+
+		Assert.assertEquals("Dropped!", target.getText());
+
+
 	}
 
 	@AfterTest
 	public void closeBrowser() {
 		driver.quit();
-	}
+	}	
+
 }

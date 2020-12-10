@@ -1,4 +1,4 @@
-package examples.actions;
+package examples.selenium;
 
 import static org.testng.Assert.assertEquals;
 
@@ -12,7 +12,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class DoubleClickDemo {
+public class Actions_DoubleClickDemo {
 
 	WebDriver driver;
 
