@@ -1,4 +1,4 @@
-package assignments;
+package examples.testautomation.foundation;
 
 import static org.testng.Assert.assertEquals;
 
@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 import generic.BrowserFactory;
 import generic.BrowserFactory.BrowserType;
 
-public class PHPTravelsAssignment {
+public class UIDemo {
 
     String firstName = "TestFN";
     String lastName = "TestLN";

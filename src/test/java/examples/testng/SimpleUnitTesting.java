@@ -11,6 +11,6 @@ public class SimpleUnitTesting {
   @Test
   public void calculation() {
       System.out.println("Calculating x + y");
-      Assert.assertEquals(x + y, 16, "The calculation is wrong:");
+      Assert.assertEquals(x + y, 16, "The calculation is wrong!");
   }
 }
