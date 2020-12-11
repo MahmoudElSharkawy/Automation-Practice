@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import generic.Utils;
+import engine.Utils;
 
 public class HomePage {
     private WebDriver driver;

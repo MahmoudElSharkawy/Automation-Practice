@@ -1,17 +1,18 @@
-package examples.datadriven;
+package examples.selenium;
 
 import static org.testng.Assert.assertTrue;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class DataReaderDemo {
-
+public class Waits_ImplicitWaitDemo {
     WebDriver driver;
 
     @BeforeTest
@@ -21,19 +22,21 @@ public class DataReaderDemo {
 	driver = new ChromeDriver();
 	driver.manage().window().maximize();
 
-	driver.get(FileDataReader.readFromExcel("DataDrivenDemoTestData", 2));
+	driver.get("http://cookbook.seleniumacademy.com/AjaxDemo.html");
+	driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     }
 
     @Test
-    public void dataDrivenTest() {
-	driver.findElement(By.xpath(FileDataReader.readFromExcel("DataDrivenDemoTestData", 3)))
-		.sendKeys(FileDataReader.readFromExcel("DataDrivenDemoTestData", 4), Keys.ENTER);
-	assertTrue(driver.getTitle().contains(FileDataReader.readFromExcel("DataDrivenDemoTestData", 4)));
-
+    public void testImplicitlyWait() {
+	// set the implicit wait time to 20 Seconds
+	driver.findElement(By.linkText("Page 4")).click();
+	WebElement message = driver.findElement(By.id("page4"));
+	assertTrue(message.getText().contains("Nunc nibh tortor"));
     }
 
     @AfterTest
     public void closeBrowser() {
 	driver.quit();
     }
+
 }

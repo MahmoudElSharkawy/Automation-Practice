@@ -8,10 +8,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import examples.datadriven.FileDataReader;
-import generic.BrowserFactory;
-import generic.BrowserFactory.BrowserType;
-import generic.Utils;
 import assignments.booking.pages.HomePage;
+import engine.BrowserFactory;
+import engine.Utils;
+import engine.BrowserFactory.BrowserType;
 
 public class BookingTest {
     private WebDriver driver;

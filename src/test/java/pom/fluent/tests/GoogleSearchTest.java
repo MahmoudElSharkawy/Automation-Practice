@@ -1,30 +1,26 @@
 package pom.fluent.tests;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import generic.BrowserFactory;
-import generic.BrowserFactory.BrowserType;
-import io.github.bonigarcia.wdm.WebDriverManager;
+import engine.BrowserFactory;
+import engine.BrowserFactory.BrowserType;
 import pom.fluent.pages.GoogleHomePage;
-import pom.fluent.pages.GoogleSearchResultsPage;
 
 public class GoogleSearchTest {
     private WebDriver driver;
 
     @BeforeClass
     public void setup() {
-	WebDriverManager.chromedriver().setup();
+	driver = BrowserFactory.openBrowser(BrowserType.GOOGLE_CHROME);
     }
-    
+
     @BeforeMethod
     public void beforemethod() {
 	driver = new ChromeDriver();

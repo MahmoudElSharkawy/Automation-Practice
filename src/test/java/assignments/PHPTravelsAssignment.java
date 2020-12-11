@@ -14,8 +14,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import generic.BrowserFactory;
-import generic.BrowserFactory.BrowserType;
+import engine.BrowserFactory;
+import engine.BrowserFactory.BrowserType;
 
 public class PHPTravelsAssignment {
 

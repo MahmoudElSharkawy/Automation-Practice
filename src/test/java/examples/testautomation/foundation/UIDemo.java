@@ -14,8 +14,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import generic.BrowserFactory;
-import generic.BrowserFactory.BrowserType;
+import engine.BrowserFactory;
+import engine.BrowserFactory.BrowserType;
 
 public class UIDemo {
 
@@ -31,7 +31,6 @@ public class UIDemo {
     public void setUp() {
 	date = new Date();
 	email = "test" + date.getTime() + "@test.com";
-	System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/windows-64/chromedriver.exe");
 	driver = BrowserFactory.openBrowser(BrowserType.GOOGLE_CHROME);
 	driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 	driver.get("https://www.phptravels.net/");
@@ -67,8 +66,7 @@ public class UIDemo {
 	driver.findElement(By.name("username")).sendKeys(email);
 	driver.findElement(By.name("password")).sendKeys(password);
 	driver.findElement(
-		By.xpath("//button[@type='submit' and contains (class, signupbtn) and contains(text() ,'Login')]"))
-		.click();
+		By.xpath("//button[contains(text() ,'Login')]")).click();
 
 	WebDriverWait wait = new WebDriverWait(driver, 20);
 	wait.until(ExpectedConditions.titleContains("My Account"));
