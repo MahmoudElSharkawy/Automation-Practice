@@ -1,12 +1,10 @@
 package pom.angie.tests;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
 import pom.angie.pages.GoogleSearchResultsPage;
 
 public class googleSearchTest extends BaseTests {
-	WebDriver driver;
 	GoogleSearchResultsPage googleSearchResults;
 	
 	@Test

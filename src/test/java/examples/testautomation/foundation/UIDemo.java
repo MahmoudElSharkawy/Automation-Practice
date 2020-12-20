@@ -31,6 +31,7 @@ public class UIDemo {
     public void setUp() {
 	date = new Date();
 	email = "test" + date.getTime() + "@test.com";
+	System.out.println(email);
 	driver = BrowserFactory.openBrowser(BrowserType.GOOGLE_CHROME);
 	driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 	driver.get("https://www.phptravels.net/");
@@ -58,24 +59,24 @@ public class UIDemo {
 	assertEquals(welcomeTxt.getText(), "Hi, " + firstName + " " + lastName);
     }
 
-    @Test(dependsOnMethods = { "Registration" })
-    public void loginWithRegisteredData() {
-	driver.findElement(By.linkText(firstName.toUpperCase())).click();
-	driver.findElement(By.linkText("Logout")).click();
-
-	driver.findElement(By.name("username")).sendKeys(email);
-	driver.findElement(By.name("password")).sendKeys(password);
-	driver.findElement(
-		By.xpath("//button[contains(text() ,'Login')]")).click();
-
-	WebDriverWait wait = new WebDriverWait(driver, 20);
-	wait.until(ExpectedConditions.titleContains("My Account"));
-	System.out.println(driver.getTitle());
-
-	WebElement welcomeTxt = driver.findElement(By.xpath("//*[@style='margin-left: 17px']"));
-
-	assertEquals(welcomeTxt.getText(), "Hi, " + firstName + " " + lastName);
-    }
+//    @Test(dependsOnMethods = { "Registration" })
+//    public void loginWithRegisteredData() {
+//	driver.findElement(By.linkText(firstName.toUpperCase())).click();
+//	driver.findElement(By.linkText("Logout")).click();
+//
+//	driver.findElement(By.name("username")).sendKeys(email);
+//	driver.findElement(By.name("password")).sendKeys(password);
+//	driver.findElement(
+//		By.xpath("//button[contains(text() ,'Login')]")).click();
+//
+//	WebDriverWait wait = new WebDriverWait(driver, 20);
+//	wait.until(ExpectedConditions.titleContains("My Account"));
+//	System.out.println(driver.getTitle());
+//
+//	WebElement welcomeTxt = driver.findElement(By.xpath("//*[@style='margin-left: 17px']"));
+//
+//	assertEquals(welcomeTxt.getText(), "Hi, " + firstName + " " + lastName);
+//    }
 
     @AfterClass
     public void closeBrowser() {
