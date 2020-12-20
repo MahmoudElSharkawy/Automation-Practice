@@ -9,10 +9,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 public class GoogleSearchResultsPage {
-    private EventFiringWebDriver driver;
+    private WebDriver driver;
 
     // Constructor
-    public GoogleSearchResultsPage(EventFiringWebDriver driver) {
+    public GoogleSearchResultsPage(WebDriver driver) {
 	this.driver = driver;
     }
 
@@ -21,7 +21,7 @@ public class GoogleSearchResultsPage {
 
     // Methods
     private WebElement getGoogleSearchResultIndex(String resultIndex) {
-	return driver.findElement(By.xpath("(//h3[@class='LC20lb'])" + resultIndex));
+	return driver.findElement(By.xpath("(//h3[contains (@class, 'LC20lb')])" + resultIndex));
     }
 
     public void assertOnPageTitle(String searchData) {

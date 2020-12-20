@@ -6,10 +6,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 public class GoogleHomePage {
-	private EventFiringWebDriver driver;
+	private WebDriver driver;
 
 	//Constructor
-    public GoogleHomePage(EventFiringWebDriver driver){
+    public GoogleHomePage(WebDriver driver){
         this.driver = driver;
     }
     
