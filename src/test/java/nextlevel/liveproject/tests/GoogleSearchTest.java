@@ -1,40 +1,41 @@
 package nextlevel.liveproject.tests;
 
+import java.io.File;
+
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import nextlevel.liveproject.pages.GoogleHomePage;
-import nextlevel.liveproject.pages.GoogleSearchResultsPage;
 import nextlevel.liveproject.utils.BrowserFactory;
 import nextlevel.liveproject.utils.PropertiesReader;
+import nextlevel.liveproject.utils.SpreadsheetUtil;
 import nextlevel.liveproject.utils.BrowserFactory.BrowserType;
 
 public class GoogleSearchTest {
     private WebDriver driver;
-    GoogleHomePage homePage;
-    GoogleSearchResultsPage googleSearchResults;
+    SpreadsheetUtil spreadSheet;
+    String sheet = "testsheet2";
+
+    String googleHomePageURL = PropertiesReader.getProperty("liveproject.properties", "google.home.url");
 
     @BeforeClass
     public void setUp() {
-	driver = BrowserFactory.openBrowser(BrowserType.GOOGLE_CHROME);
-	driver.get(PropertiesReader.getProperty("liveproject.properties", "url"));
-
-	homePage = new GoogleHomePage(driver);
-	googleSearchResults = new GoogleSearchResultsPage(driver);
+	spreadSheet = new SpreadsheetUtil(new File("src/test/resources/TestData/LiveProject_TestData.xlsx"));
+	spreadSheet.switchToSheet(sheet);
+	driver = BrowserFactory.openBrowser(BrowserType.FROM_PROPERTIES);
+	driver.get(googleHomePageURL);
     }
 
     @Test
     public void testingGoogleSearch() {
-	String searchIndex = "[1]";
-	String searchData = "Selenium WebDriver";
-	String expected = "Selenium Projects - Selenium WebDriver";
-	homePage.googleSearch(searchData);
-	googleSearchResults.assertOnPageTitle(searchData);
-	googleSearchResults.assertOnSearchResult(expected, searchIndex);
-	googleSearchResults.clickOnSearchResult(searchIndex);
+	String searchIndex = spreadSheet.getCellData("Search Index", 1);
+	String searchData = spreadSheet.getCellData("Search Data", 1);
+	String expected = spreadSheet.getCellData("Expected", 1);
+	new GoogleHomePage(driver).googleSearch(searchData)
+		.assertOnPageTitle(searchData)
+		.assertOnSearchResult(expected, searchIndex);
     }
 
     @AfterClass

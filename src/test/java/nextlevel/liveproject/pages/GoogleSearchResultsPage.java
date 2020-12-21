@@ -6,7 +6,6 @@ import static org.testng.Assert.assertTrue;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 public class GoogleSearchResultsPage {
     private WebDriver driver;
@@ -21,21 +20,17 @@ public class GoogleSearchResultsPage {
 
     // Methods
     private WebElement getGoogleSearchResultIndex(String resultIndex) {
-	return driver.findElement(By.xpath("(//h3[contains (@class, 'LC20lb')])" + resultIndex));
+	return driver.findElement(By.xpath("(//h3[contains (@class, 'LC20lb')])" + "[" + resultIndex + "]"));
     }
 
-    public void assertOnPageTitle(String searchData) {
+    public GoogleSearchResultsPage assertOnPageTitle(String searchData) {
 	assertTrue(driver.getTitle().contains(searchData));
-
+	return this;
     }
 
-    public void assertOnSearchResult(String searchData, String resultIndex) {
+    public GoogleSearchResultsPage assertOnSearchResult(String searchData, String resultIndex) {
 	assertEquals(getGoogleSearchResultIndex(resultIndex).getText(), searchData);
-
-    }
-
-    public void clickOnSearchResult(String resultIndex) {
-	getGoogleSearchResultIndex(resultIndex).click();
+	return this;
     }
 
 }
