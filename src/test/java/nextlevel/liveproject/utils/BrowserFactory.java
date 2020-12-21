@@ -40,7 +40,7 @@ public class BrowserFactory {
 	    driver.register(new EventReporter());
 	} else {
 	    System.out.println("The browser " + browserProperty
-		    + " is not valid/supported; Please chose from the given choices in the propertied file");
+		    + " is not valid/supported; Please chose from the given choices in the properties file");
 	}
 	return driver;
     }

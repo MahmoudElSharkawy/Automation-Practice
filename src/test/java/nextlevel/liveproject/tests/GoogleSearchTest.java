@@ -7,6 +7,11 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.TmsLink;
 import nextlevel.liveproject.pages.GoogleHomePage;
 import nextlevel.liveproject.utils.BrowserFactory;
 import nextlevel.liveproject.utils.PropertiesReader;
@@ -29,6 +34,10 @@ public class GoogleSearchTest {
     }
 
     @Test
+    @Description("Validating the Goole home page title")
+    @Severity(SeverityLevel.CRITICAL)
+    @TmsLink("focus-case-1539798")
+    @Issue("bug-tracker#1")
     public void testingGoogleSearch() {
 	String searchIndex = spreadSheet.getCellData("Search Index", 1);
 	String searchData = spreadSheet.getCellData("Search Data", 1);
