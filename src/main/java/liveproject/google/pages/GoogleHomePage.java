@@ -1,4 +1,4 @@
-package liveproject.pages;
+package liveproject.google.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;

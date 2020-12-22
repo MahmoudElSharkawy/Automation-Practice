@@ -1,4 +1,4 @@
-package liveproject.pages;
+package liveproject.google.pages;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;

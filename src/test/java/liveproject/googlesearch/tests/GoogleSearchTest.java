@@ -1,4 +1,4 @@
-package liveproject.tests;
+package liveproject.googlesearch.tests;
 
 import java.io.File;
 
@@ -16,7 +16,7 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
-import liveproject.pages.GoogleHomePage;
+import liveproject.google.pages.GoogleHomePage;
 import utils.AllureReport;
 import utils.BrowserFactory;
 import utils.PropertiesReader;
@@ -33,7 +33,7 @@ public class GoogleSearchTest {
 
     @BeforeClass
     public void setUp() {
-	spreadSheet = new Spreadsheet(new File("src/test/resources/TestData/LiveProject_TestData.xlsx"));
+	spreadSheet = new Spreadsheet(new File("src/test/resources/TestData/LiveProject_Google_TestData.xlsx"));
 	spreadSheet.switchToSheet("testsheet2");
 	driver = BrowserFactory.openBrowser(BrowserType.FROM_PROPERTIES);
 	driver.get(googleHomePageURL);
