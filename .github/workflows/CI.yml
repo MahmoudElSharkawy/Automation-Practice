@@ -18,7 +18,5 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 15.0.1
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml
-    - name: d
+    - name: Run liveproject tests
       run: mvn -Dtest=nextlevel.liveproject.tests.GoogleSearchTest test
