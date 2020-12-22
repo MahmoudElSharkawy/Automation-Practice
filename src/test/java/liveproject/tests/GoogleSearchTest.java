@@ -39,7 +39,7 @@ public class GoogleSearchTest {
 	driver.get(googleHomePageURL);
     }
 
-    @Test(description = "Validating the search function on Goole home page")
+    @Test(description = "Validating the search function on Google home page")
     @Story("Search Engine Story")
     @Description("Given I'm on the Google home page; When I search for a value in the search bar And click Enter; Then I should be navigated to the search results page And get the search results related to the search value entered")
     @Severity(SeverityLevel.CRITICAL)
@@ -52,8 +52,8 @@ public class GoogleSearchTest {
 
 	new GoogleHomePage(driver)
 		.googleSearch(searchData)
-		.assertOnPageTitle(searchData)
-		.assertOnSearchResult(expected, searchIndex);
+		.assertOnSearchResult(expected, searchIndex)
+		.assertOnPageTitle(searchData);
     }
 
     @AfterMethod

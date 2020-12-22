@@ -1,5 +1,7 @@
 package utils;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
@@ -35,6 +37,7 @@ public class BrowserFactory {
 	    driver = new EventFiringWebDriver(new ChromeDriver());
 	    driver.register(new EventReporter());
 	    driver.manage().window().maximize();
+	    driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 	} else if (browserType == BrowserType.MOZILLA_FIREFOX
 		|| (browserType == BrowserType.FROM_PROPERTIES && browserProperty.equalsIgnoreCase("firefox"))) {
 //	    System.out.println("Opening Mozilla Firefox Browser!....");
@@ -42,6 +45,8 @@ public class BrowserFactory {
 	    WebDriverManager.firefoxdriver().setup();
 	    driver = new EventFiringWebDriver(new FirefoxDriver());
 	    driver.register(new EventReporter());
+	    driver.manage().window().maximize();
+	    driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 	} else {
 	    System.out.println("The browser " + browserProperty
 		    + " is not valid/supported; Please chose from the given choices in the properties file");

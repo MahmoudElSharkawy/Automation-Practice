@@ -27,13 +27,13 @@ public class GoogleSearchResultsPage {
 
     @Step("Assert on the page title")
     public GoogleSearchResultsPage assertOnPageTitle(String searchData) {
-	assertTrue(driver.getTitle().contains(searchData));
+	assertEquals(driver.getTitle(), searchData + " - Google Search");
 	return this;
     }
 
     @Step("Assert on the search results")
     public GoogleSearchResultsPage assertOnSearchResult(String expected, String resultIndex) {
-	assertEquals(getGoogleSearchResultIndex(resultIndex).getText(), expected);
+	assertTrue(getGoogleSearchResultIndex(resultIndex).getText().contains(expected));
 	return this;
     }
 
