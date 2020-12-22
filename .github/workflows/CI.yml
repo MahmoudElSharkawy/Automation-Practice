@@ -19,7 +19,7 @@ jobs:
       with:
         java-version: 15
     - name: Run liveproject tests
-      run: mvn -Dtest=examples.selenium.WebdriverManagerDemot test
+      run: mvn -Dtest=examples.selenium.WebdriverManagerDemo test
     - name: Generate Allure Report with history
       uses: simple-elf/allure-report-action@v1.3
       with:
