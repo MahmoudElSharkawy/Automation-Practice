@@ -9,8 +9,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import engine.BrowserFactory;
-import engine.BrowserFactory.BrowserType;
+import utils.BrowserFactory;
+import utils.BrowserFactory.BrowserType;
 import pom.fluent.pages.GoogleHomePage;
 
 public class GoogleSearchTest {

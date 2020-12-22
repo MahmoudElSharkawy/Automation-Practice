@@ -12,7 +12,7 @@
 			</run>
 		</groups>
 		<classes>
-			<class name="testNG.TestNGGroupsDemo" />
+			<class name="examples.testng.TestNGGroupsDemo" />
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Groups -->

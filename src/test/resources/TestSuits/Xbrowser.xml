@@ -4,14 +4,14 @@
 <test name="Testchrome">
 		<parameter name="browserName" value="chrome"></parameter>
 		<classes>
-			<class name="examples.more.CrossBrowserDemo" />
+			<class name="examples.selenium.CrossBrowserDemo" />
 		</classes>
 	</test> <!-- Test -->
 
 	<test name="Testfirefox">
 		<parameter name="browserName" value="firefox"></parameter>
 		<classes>
-			<class name="examples.more.CrossBrowserDemo" />
+			<class name="examples.selenium.CrossBrowserDemo" />
 		</classes>
 	</test> <!-- Test -->
 	
