@@ -1,12 +1,12 @@
-package pom.fluent.pages;
+package pom.basic;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class GoogleSearchResultsPage {
-    private WebDriver driver;
+    WebDriver driver;
 
-    private By google_search_result = By.xpath("(//h3[contains(@class,'LC20lb')])[1]");
+    private final static By google_search_result = By.xpath("(//h3[@class='LC20lb'])[1]");
 
     public GoogleSearchResultsPage(WebDriver driver) {
 	this.driver = driver;
@@ -23,5 +23,4 @@ public class GoogleSearchResultsPage {
     public void clickOnSearchResult() {
 	driver.findElement(google_search_result).click();
     }
-
 }

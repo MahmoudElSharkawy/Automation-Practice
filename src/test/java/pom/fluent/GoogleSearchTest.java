@@ -1,4 +1,4 @@
-package pom.fluent.tests;
+package pom.fluent;
 
 import static org.testng.Assert.assertEquals;
 
@@ -11,7 +11,6 @@ import org.testng.annotations.Test;
 
 import utils.BrowserFactory;
 import utils.BrowserFactory.BrowserType;
-import pom.fluent.pages.GoogleHomePage;
 
 public class GoogleSearchTest {
     private WebDriver driver;

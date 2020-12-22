@@ -1,4 +1,4 @@
-package pom.simple.pages;
+package pom.basic;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;

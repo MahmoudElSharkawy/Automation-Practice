@@ -1,4 +1,4 @@
-package pom.fluent.pages;
+package pom.fluent;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;

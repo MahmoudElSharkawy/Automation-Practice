@@ -1,4 +1,4 @@
-package pom.simple.tests;
+package pom.basic;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -8,9 +8,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
-import pom.simple.pages.GoogleHomePage;
-import pom.simple.pages.GoogleSearchResultsPage;
 
 public class GoogleSearchTest {
     private WebDriver driver;
