@@ -4,12 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
-
-@Epic("Live Project")
-@Feature("Google Search")
 
 public class GoogleHomePage {
     private WebDriver driver;
