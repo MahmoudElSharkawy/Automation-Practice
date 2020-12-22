@@ -19,7 +19,7 @@ jobs:
       with:
         java-version: 15
     - name: Run liveproject tests
-      run: mvn -Dtest=examples.selenium.WebdriverManagerDemo test
+      run: mvn -Dtest=liveproject.tests.GoogleSearchTesto test
     - name: Generate Allure Report with history
       uses: simple-elf/allure-report-action@v1.3
       with:
@@ -32,10 +32,3 @@ jobs:
           github_run_num: ${{ github.run_number }}
           github_run_id: ${{ github.run_id }}
           github_repo: ${{ github.repository }}      
-    - name: Deploy report to Github Pages
-      uses: peaceiris/actions-gh-pages@v3.7.3
-      with:
-          personal_token: ${{ secrets.PERSONAL_TOKEN }}
-          publish_dir: allure-history/allure
-          destination_dir: allure
-          publish_branch: gh-pages
