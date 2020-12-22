@@ -9,24 +9,33 @@ on:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
-
+    name: Test on Ubuntu
+    runs-on: [ubuntu-latest]
+    
     steps:
-
     - uses: actions/checkout@v2
-    - name: Set up JDK 15.0.1
-      uses: actions/setup-java@v1
+    - name: Set up JDK 15
+      uses: actions/setup-java@v1.4.3
       with:
-        java-version: 15.0.1
-
+        java-version: 15
     - name: Run liveproject tests
-      run: mvn -Dtest=nextlevel.liveproject.tests.GoogleSearchTest test
-
-    - name: Allure Report with history
+      run: mvn -Dtest=liveproject.tests.GoogleSearchTest test
+    - name: Generate Allure Report with history
       uses: simple-elf/allure-report-action@v1.3
       with:
-        allure_results: target/allure-results
-        allure_report: allure-report
-        allure_history: allure-history
-
+          allure_results: target/allure-results
+          allure_report: allure-report
+          allure_version: 2.13.6
+          gh_pages: gh-pages
+          allure_history: allure-history
+          subfolder: allure
+          github_run_num: ${{ github.run_number }}
+          github_run_id: ${{ github.run_id }}
+          github_repo: ${{ github.repository }}      
+    - name: Deploy report to Github Pages
+      uses: peaceiris/actions-gh-pages@v3.7.3
+      with:
+          personal_token: ${{ secrets.PERSONAL_TOKEN }}
+          publish_dir: allure-history/allure
+          destination_dir: allure
+          publish_branch: gh-pages
