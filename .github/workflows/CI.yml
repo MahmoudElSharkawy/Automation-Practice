@@ -9,8 +9,8 @@ on:
 
 jobs:
   build:
-    name: Test on Windows
-    runs-on: windows-latest
+    name: Test on Ubuntu
+    runs-on: ubuntu-latest
     
     steps:
     - uses: actions/checkout@v2
