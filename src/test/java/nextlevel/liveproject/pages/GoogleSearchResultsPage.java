@@ -7,6 +7,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import io.qameta.allure.Step;
+
 public class GoogleSearchResultsPage {
     private WebDriver driver;
 
@@ -23,11 +25,13 @@ public class GoogleSearchResultsPage {
 	return driver.findElement(By.xpath("(//h3[contains (@class, 'LC20lb')])" + "[" + resultIndex + "]"));
     }
 
+    @Step("Assert on the page title")
     public GoogleSearchResultsPage assertOnPageTitle(String searchData) {
 	assertTrue(driver.getTitle().contains(searchData));
 	return this;
     }
 
+    @Step("Assert on the search results")
     public GoogleSearchResultsPage assertOnSearchResult(String searchData, String resultIndex) {
 	assertEquals(getGoogleSearchResultIndex(resultIndex).getText(), searchData);
 	return this;
