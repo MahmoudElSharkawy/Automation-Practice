@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 
+import io.qameta.allure.Step;
+
 public class EventReporter implements WebDriverEventListener {
     @Override
     public void beforeAlertAccept(WebDriver webDriver) {
@@ -28,13 +30,15 @@ public class EventReporter implements WebDriverEventListener {
     }
 
     @Override
-    public void beforeNavigateTo(String s, WebDriver webDriver) {
-
+    @Step("Selenium logs: Navigating to")
+    public void beforeNavigateTo(String url, WebDriver webDriver) {
+	AllureReport.logMessage("Navigating to url: " + url);
     }
 
     @Override
-    public void afterNavigateTo(String s, WebDriver webDriver) {
-
+    @Step("Selenium logs: Successfully navigated to")
+    public void afterNavigateTo(String url, WebDriver webDriver) {
+	AllureReport.logMessage("Successfully navigated to url: " + url);
     }
 
     @Override
@@ -68,33 +72,39 @@ public class EventReporter implements WebDriverEventListener {
     }
 
     @Override
+    @Step("Selenium logs: Finding element")
     public void beforeFindBy(By by, WebElement webElement, WebDriver webDriver) {
-    	System.out.println("Finding element " + by.toString());
+	AllureReport.logMessage("Finding element --> " + by);
     }
 
     @Override
+    @Step("Selenium logs: Successfully found element")
     public void afterFindBy(By by, WebElement webElement, WebDriver webDriver) {
-
+	AllureReport.logMessage("Successfully found element --> " + by);
     }
 
     @Override
+    @Step("Selenium logs: Clicking on element")
     public void beforeClickOn(WebElement webElement, WebDriver webDriver) {
-        System.out.println("Clicking on " + webElement.getText());
+	AllureReport.logMessage("Clicking on element: " + webElement);
     }
 
     @Override
+    @Step("Selenium logs: Successfully Clicked on element")
     public void afterClickOn(WebElement webElement, WebDriver webDriver) {
-
+	AllureReport.logMessage("Successfully clicked on element: " + webElement);
     }
 
     @Override
+    @Step("Selenium logs: Changing value of Element")
     public void beforeChangeValueOf(WebElement webElement, WebDriver webDriver, CharSequence[] charSequences) {
-
+	AllureReport.logMessage("Changing value of element: " + webElement);
     }
 
     @Override
+    @Step("Selenium logs: Successfully changed the value of element")
     public void afterChangeValueOf(WebElement webElement, WebDriver webDriver, CharSequence[] charSequences) {
-    	
+	AllureReport.logMessage("Successfully changed the value of element: " + webElement);
     }
 
     @Override
@@ -134,11 +144,11 @@ public class EventReporter implements WebDriverEventListener {
 
     @Override
     public void beforeGetText(WebElement webElement, WebDriver webDriver) {
-    	System.out.println("Getting the text of " + webElement.getText());
+	AllureReport.logMessage("Getting text of element: " + webElement);
     }
 
     @Override
-    public void afterGetText(WebElement webElement, WebDriver webDriver, String s) {
-
+    public void afterGetText(WebElement webElement, WebDriver webDriver, String text) {
+	AllureReport.logMessage("Successfully got the text of the element --> " + text);
     }
 }

@@ -5,6 +5,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Step;
 
 public class BrowserFactory {
     private static EventFiringWebDriver driver;
@@ -24,17 +25,20 @@ public class BrowserFactory {
 	}
     }
 
+    @Step("Opening Browser")
     public static EventFiringWebDriver openBrowser(BrowserType browserType) {
 	if (browserType == BrowserType.GOOGLE_CHROME
 		|| (browserType == BrowserType.FROM_PROPERTIES && browserProperty.equalsIgnoreCase("chrome"))) {
-	    System.out.println("Opening Google Chrome Browser!....");
+//	    System.out.println("Opening Google Chrome Browser!....");
+	    AllureReport.logMessage("Opening Google Chrome Browser!....");
 	    WebDriverManager.chromedriver().setup();
 	    driver = new EventFiringWebDriver(new ChromeDriver());
 	    driver.register(new EventReporter());
 	    driver.manage().window().maximize();
 	} else if (browserType == BrowserType.MOZILLA_FIREFOX
 		|| (browserType == BrowserType.FROM_PROPERTIES && browserProperty.equalsIgnoreCase("firefox"))) {
-	    System.out.println("Opening Mozilla Firefox Browser!....");
+//	    System.out.println("Opening Mozilla Firefox Browser!....");
+	    AllureReport.logMessage("Opening Mozilla Firefox Browser!....");
 	    WebDriverManager.firefoxdriver().setup();
 	    driver = new EventFiringWebDriver(new FirefoxDriver());
 	    driver.register(new EventReporter());

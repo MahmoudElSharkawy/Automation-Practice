@@ -32,8 +32,8 @@ public class GoogleSearchResultsPage {
     }
 
     @Step("Assert on the search results")
-    public GoogleSearchResultsPage assertOnSearchResult(String searchData, String resultIndex) {
-	assertEquals(getGoogleSearchResultIndex(resultIndex).getText(), searchData);
+    public GoogleSearchResultsPage assertOnSearchResult(String expected, String resultIndex) {
+	assertEquals(getGoogleSearchResultIndex(resultIndex).getText(), expected);
 	return this;
     }
 

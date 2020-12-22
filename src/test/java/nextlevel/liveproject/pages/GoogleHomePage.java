@@ -16,8 +16,14 @@ public class GoogleHomePage {
 
     // Elements
     private By google_search_bar = By.name("q");
+    private By google_search_btn = By.name("btnK");
 
-    // Method
+    // Methods
+    @Step("click on Google search button for no reason")
+    public GoogleHomePage clickOnGoogleSearchButton() {
+	driver.findElement(google_search_btn).click();
+	return this;
+    }
     @Step("Searching and clicking Enter")
     public GoogleSearchResultsPage googleSearch(String searchData) {
 	driver.findElement(google_search_bar).sendKeys(searchData, Keys.ENTER);

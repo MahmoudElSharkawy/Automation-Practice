@@ -11,7 +11,7 @@ import io.qameta.allure.Step;
 
 public class AllureReport {
 
-    @Step("User message")
+    @Step("Log message")
     public static void logMessage(String message) {
 	System.out.println(message);
     }

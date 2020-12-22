@@ -50,7 +50,8 @@ public class GoogleSearchTest {
 	String searchData = spreadSheet.getCellData("Search Data", 1);
 	String expected = spreadSheet.getCellData("Expected", 1);
 
-	new GoogleHomePage(driver).googleSearch(searchData)
+	new GoogleHomePage(driver)
+		.googleSearch(searchData)
 		.assertOnPageTitle(searchData)
 		.assertOnSearchResult(expected, searchIndex);
     }
@@ -64,7 +65,7 @@ public class GoogleSearchTest {
     }
 
     @AfterClass
-    public void tearDown() {
+    public void closingBrowser() {
 	driver.quit();
     }
 }
