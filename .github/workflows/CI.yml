@@ -9,8 +9,8 @@ on:
 
 jobs:
   build:
-    name: Test on Ubuntu
-    runs-on: [ubuntu-latest]
+    name: Test on Windows
+    runs-on: windows-latest
     
     steps:
     - uses: actions/checkout@v2
@@ -19,7 +19,7 @@ jobs:
       with:
         java-version: 15
     - name: Run liveproject tests
-      run: mvn -Dtest=liveproject.tests.GoogleSearchTesto test
+      run: mvn -Dtest=liveproject.tests.GoogleSearchTest test
     - name: Generate Allure Report with history
       uses: simple-elf/allure-report-action@v1.3
       with:
