@@ -39,23 +39,23 @@ public class BrowserFactory {
     public static EventFiringWebDriver openBrowser(BrowserType browserType) {
 	if (browserType == BrowserType.GOOGLE_CHROME
 		|| (browserType == BrowserType.FROM_PROPERTIES && browserProperty.equalsIgnoreCase("chrome"))) {
-	    AllureReport.logMessage("Opening [Google Chrome] Browser!....");
+	    Logger.logMessage("Opening [Google Chrome] Browser!....");
 	    WebDriverManager.chromedriver().setup();
 	    driver = new EventFiringWebDriver(new ChromeDriver());
-	    driver.register(new EventReporter());
+	    driver.register(new SeleniumEventReporter());
 	    driver.manage().window().maximize();
 	    WebDriverWaits.getImplicitWait(driver);
 	} else if (browserType == BrowserType.MOZILLA_FIREFOX
 		|| (browserType == BrowserType.FROM_PROPERTIES && browserProperty.equalsIgnoreCase("firefox"))) {
-	    AllureReport.logMessage("Opening [Mozilla Firefox] Browser!....");
+	    Logger.logMessage("Opening [Mozilla Firefox] Browser!....");
 	    WebDriverManager.firefoxdriver().setup();
 	    driver = new EventFiringWebDriver(new FirefoxDriver());
-	    driver.register(new EventReporter());
+	    driver.register(new SeleniumEventReporter());
 	    driver.manage().window().maximize();
 	    WebDriverWaits.getImplicitWait(driver);
 
 	} else {
-	    AllureReport.logMessage("The browser " + browserProperty
+	    Logger.logMessage("The browser " + browserProperty
 		    + " is not valid/supported; Please chose from the given choices in the properties file");
 	}
 	return driver;
@@ -65,7 +65,7 @@ public class BrowserFactory {
     public static RemoteWebDriver openRemoteBrowser(BrowserType browserType) {
 	if (browserType == BrowserType.GOOGLE_CHROME
 		|| (browserType == BrowserType.FROM_PROPERTIES && browserProperty.equalsIgnoreCase("chrome"))) {
-	    AllureReport.logMessage("Opening Remote [Google Chrome] Browser!....");
+	    Logger.logMessage("Opening Remote [Google Chrome] Browser!....");
 	    try {
 		remoteDriver = new RemoteWebDriver(new URL("http://" + host + ":" + port + "/wd/hub"),
 			getChromeOptions());
@@ -76,7 +76,7 @@ public class BrowserFactory {
 
 	} else if (browserType == BrowserType.MOZILLA_FIREFOX
 		|| (browserType == BrowserType.FROM_PROPERTIES && browserProperty.equalsIgnoreCase("firefox"))) {
-	    AllureReport.logMessage("Opening Remote [Mozilla Firefox] Browser!....");
+	    Logger.logMessage("Opening Remote [Mozilla Firefox] Browser!....");
 	    try {
 		remoteDriver = new RemoteWebDriver(new URL("http://" + host + ":" + port + "/wd/hub"),
 			getFirefoxOptions());
@@ -86,7 +86,7 @@ public class BrowserFactory {
 	    }
 
 	} else {
-	    AllureReport.logMessage("The browser " + browserProperty
+	    Logger.logMessage("The browser " + browserProperty
 		    + " is not valid/supported; Please chose from the given choices in the properties file");
 	}
 	return remoteDriver;
@@ -96,6 +96,7 @@ public class BrowserFactory {
 	ChromeOptions chOptions = new ChromeOptions();
 	chOptions.setCapability("platform", Platform.LINUX);
 	chOptions.addArguments("--headless");
+	chOptions.addArguments("--start-maximized");
 //	chOptions.addArguments("disable--infobars");
 //	chOptions.setExperimentalOption("excludeSwitches", new String[] { "enable-automation" });
 //	chOptions.setHeadless(true);
@@ -106,6 +107,7 @@ public class BrowserFactory {
 	FirefoxOptions ffOptions = new FirefoxOptions();
 	ffOptions.setCapability("platform", Platform.LINUX);
 	ffOptions.addArguments("--headless");
+	ffOptions.addArguments("--start-maximized");
 	return ffOptions;
     }
 

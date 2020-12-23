@@ -9,7 +9,7 @@ import com.google.common.io.Files;
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 
-public class AllureReport {
+public class Logger {
 
     @Step("Log message")
     public static void logMessage(String message) {

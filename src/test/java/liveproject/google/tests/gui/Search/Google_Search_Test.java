@@ -17,7 +17,7 @@ import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import liveproject.google.gui.pages.Google_HomePage;
-import utils.AllureReport;
+import utils.Logger;
 import utils.BrowserFactory;
 import utils.PropertiesReader;
 import utils.Spreadsheet;
@@ -25,8 +25,8 @@ import utils.BrowserFactory.BrowserType;
 
 @Epic("Live Project")
 @Feature("Google Search")
-public class Google_SearchTest {
-    private WebDriver driver;
+public class Google_Search_Test {
+    WebDriver driver;
     Spreadsheet spreadSheet;
 
     String googleHomePageURL = PropertiesReader.getProperty("liveproject.properties", "google.home.url");
@@ -59,8 +59,8 @@ public class Google_SearchTest {
     @AfterMethod
     public void AfterMethod(ITestResult result) {
 	if (result.getStatus() == ITestResult.FAILURE) {
-	    AllureReport.logMessage("The Test Case Failed!; Taking Screenshot....");
-	    AllureReport.logScreenshot(driver);
+	    Logger.logMessage("The Test Case Failed!; Taking Screenshot....");
+	    Logger.logScreenshot(driver);
 	}
     }
 

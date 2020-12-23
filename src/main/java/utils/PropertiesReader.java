@@ -16,14 +16,14 @@ public class PropertiesReader {
 	try {
 	    reader = new FileReader(propPath);
 	} catch (FileNotFoundException e) {
-	    AllureReport.logMessage("No file found in the given path: " + propPath);
+	    Logger.logMessage("No file found in the given path: " + propPath);
 	    e.printStackTrace();
 	}
 
 	try {
 	    p.load(reader);
 	} catch (IOException e) {
-	    AllureReport.logMessage("Couldn't find any properties with the given property name: " + propertyName);
+	    Logger.logMessage("Couldn't find any properties with the given property name: " + propertyName);
 	    e.printStackTrace();
 	}
 

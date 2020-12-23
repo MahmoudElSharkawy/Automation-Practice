@@ -11,8 +11,8 @@ public class WebDriverWaits {
     private final static int TIMEOUT = Integer
 	    .parseInt(PropertiesReader.getProperty("liveproject.properties", "Webdriver.Wait"));
 
-    public static void getExplicitWait(WebDriver driver) {
-	wait = new WebDriverWait(driver, TIMEOUT);
+    public static WebDriverWait getExplicitWait(WebDriver driver) {
+	return wait = new WebDriverWait(driver, TIMEOUT);
     }
 
     public static void getImplicitWait(WebDriver driver) {
