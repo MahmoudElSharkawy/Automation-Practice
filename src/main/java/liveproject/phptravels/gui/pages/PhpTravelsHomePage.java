@@ -1,4 +1,4 @@
-package liveproject.phptravels.pages;
+package liveproject.phptravels.gui.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

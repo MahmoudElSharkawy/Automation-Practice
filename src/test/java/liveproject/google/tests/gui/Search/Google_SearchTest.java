@@ -1,4 +1,4 @@
-package liveproject.googlesearch.tests;
+package liveproject.google.tests.gui.Search;
 
 import java.io.File;
 
@@ -16,7 +16,7 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
-import liveproject.google.pages.GoogleHomePage;
+import liveproject.google.gui.pages.Google_HomePage;
 import utils.AllureReport;
 import utils.BrowserFactory;
 import utils.PropertiesReader;
@@ -25,7 +25,7 @@ import utils.BrowserFactory.BrowserType;
 
 @Epic("Live Project")
 @Feature("Google Search")
-public class GoogleSearchTest {
+public class Google_SearchTest {
     private WebDriver driver;
     Spreadsheet spreadSheet;
 
@@ -50,7 +50,7 @@ public class GoogleSearchTest {
 	String searchData = spreadSheet.getCellData("Search Data", 1);
 	String expected = spreadSheet.getCellData("Expected", 1);
 
-	new GoogleHomePage(driver)
+	new Google_HomePage(driver)
 		.googleSearch(searchData)
 		.assertOnSearchResult(expected, searchIndex)
 		.assertOnPageTitle(searchData);

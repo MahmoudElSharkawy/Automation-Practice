@@ -1,4 +1,4 @@
-package liveproject.phptravels.reservation.search.tests;
+package liveproject.phptravels.tests.gui.ReservationSearch;
 
 import java.io.File;
 
@@ -16,7 +16,7 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
-import liveproject.phptravels.pages.PhpTravelsHomePage;
+import liveproject.phptravels.gui.pages.PhpTravelsHomePage;
 import utils.AllureReport;
 import utils.BrowserFactory;
 import utils.PropertiesReader;
@@ -25,7 +25,7 @@ import utils.BrowserFactory.BrowserType;
 
 @Epic("Live Project")
 @Feature("PHPTravels Reservation Search")
-public class PhpTravelsReservationTest {
+public class PhpTravelsReservation_HotelsTest {
     private WebDriver driver;
     Spreadsheet spreadSheet;
 
@@ -41,19 +41,11 @@ public class PhpTravelsReservationTest {
 
     @Test(description = "Validating the search function of the HOTELS")
     @Story("Reservation Search Story")
-    @Description("Given I'm on the PHPTravels home page; When I Enter the data And click search; Then I should be navigated to the search results page And get the search results related to the search value entered")
+    @Description("Given I'm on the PHPTravels home page; When I Enter the data And click search; Then I should be navigated to the hotels search results page, Then I should get the search results related to the search value entered")
     @Severity(SeverityLevel.CRITICAL)
     @TmsLink("focus-case-1539798")
     @Issue("bug-tracker#1")
     public void testingHotelsSearch() {
-//	String searchIndex = spreadSheet.getCellData("Search Index", 1);
-//	String searchData = spreadSheet.getCellData("Search Data", 1);
-//	String expected = spreadSheet.getCellData("Expected", 1);
-//
-//	new GoogleHomePage(driver)
-//		.googleSearch(searchData)
-//		.assertOnSearchResult(expected, searchIndex)
-//		.assertOnPageTitle(searchData);
 	new PhpTravelsHomePage(driver).hotelsSearch();
 	
     }
