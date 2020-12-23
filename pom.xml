@@ -103,6 +103,7 @@
 					<version>${maven-surefire-plugin.version}</version>
 					<configuration>
 						<!--<suiteXmlFiles> <suiteXmlFile>${testNGSuite}</suiteXmlFile> </suiteXmlFiles> -->
+						<suiteXmlFiles> <suiteXmlFile>${testNGSuite}</suiteXmlFile> </suiteXmlFiles>
 						<argLine>
 							-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
 						</argLine>
@@ -120,16 +121,22 @@
 	</build>
 
 	<profiles>
-		<profile>
-			<id>testng</id>
+			<profile>
+			<id>liveproject</id>
 			<properties>
-				<testNGSuite>testng.xml</testNGSuite>
+				<testNGSuite>src\test\resources\TestSuits\liveproject.xml</testNGSuite>
 			</properties>
 		</profile>
 		<profile>
-			<id>groups</id>
+			<id>testng-groups</id>
 			<properties>
-				<testNGSuite>testgroups.xml</testNGSuite>
+				<testNGSuite>src\test\resources\TestSuits\testgroups.xml</testNGSuite>
+			</properties>
+		</profile>
+				<profile>
+			<id>xbrowser</id>
+			<properties>
+				<testNGSuite>src\test\resources\TestSuits\Xbrowser.xml</testNGSuite>
 			</properties>
 		</profile>
 	</profiles>
