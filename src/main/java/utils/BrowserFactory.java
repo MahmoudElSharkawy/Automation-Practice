@@ -69,11 +69,8 @@ public class BrowserFactory {
 	if (browserType == BrowserType.GOOGLE_CHROME
 		|| (browserType == BrowserType.FROM_PROPERTIES && browserProperty.equalsIgnoreCase("chrome"))) {
 	    AllureReport.logMessage("Opening Remote [Google Chrome] Browser!....");
-	    DesiredCapabilities capabilities = new DesiredCapabilities();
-	    capabilities.setBrowserName(browserProperty);
-	    capabilities.setPlatform(Platform.LINUX);
 	    try {
-		remoteDriver = new RemoteWebDriver(new URL("http://" + host + ":" + port + "/wd/hub"), capabilities);
+		remoteDriver = new RemoteWebDriver(new URL("http://" + host + ":" + port + "/wd/hub"), getChromeOptions());
 	    } catch (MalformedURLException e) {
 		e.printStackTrace();
 	    }
@@ -81,12 +78,14 @@ public class BrowserFactory {
 	return remoteDriver;
     }
 
-//    private ChromeOptions getOptions() {
-//	ChromeOptions options = new ChromeOptions();
-//	options.addArguments("disable--infobars");
-//	options.setExperimentalOption("excludeSwitches", new String[] { "enable-automation" });
-//	options.setHeadless(true);
-//	return options;
-//    }
+    private static ChromeOptions getChromeOptions() {
+	ChromeOptions chOptions = new ChromeOptions();
+	chOptions.setCapability("platform", Platform.LINUX);
+	chOptions.addArguments("--headless");
+//	chOptions.addArguments("disable--infobars");
+//	chOptions.setExperimentalOption("excludeSwitches", new String[] { "enable-automation" });
+//	chOptions.setHeadless(true);
+	return chOptions;
+    }
 
 }
