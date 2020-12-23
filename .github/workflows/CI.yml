@@ -28,18 +28,14 @@ jobs:
       uses: simple-elf/allure-report-action@v1.3
       with:
           allure_results: target/allure-results
-          allure_report: target/allure-report
-          allure_version: 2.13.6
+          allure_report: allure-report
+#          allure_version: 2.13.6
           gh_pages: gh-pages
-          allure_history: target/allure-history
+          allure_history: allure-history
           subfolder: allure
-          github_run_num: ${{ github.run_number }}
-          github_run_id: ${{ github.run_id }}
-          github_repo: ${{ github.repository }}   
-          github_repo_owner: ${{ github.repository_owner }}
-    - name: Deploy report to Github Pages
-      uses: peaceiris/actions-gh-pages@v3.7.3
-      with:
-          publish_dir: target/allure-history/allure
-          destination_dir: allure
-          publish_branch: gh-pages
+#    - name: Deploy report to Github Pages
+#      uses: peaceiris/actions-gh-pages@v3.7.3
+#      with:
+#          publish_dir: target/allure-history/allure
+#          destination_dir: allure
+#          publish_branch: gh-pages
