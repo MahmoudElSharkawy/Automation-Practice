@@ -17,6 +17,7 @@ public class BrowserFactory {
     private static EventFiringWebDriver driver;
     private static RemoteWebDriver remoteDriver;
     private static String browserProperty = PropertiesReader.getProperty("liveproject.properties", "target.browser");
+    private static String remoteExecutionProperty = PropertiesReader.getProperty("liveproject.properties", "remote.execution");
     private static String host = "localhost";
     private static String port = "4444";
 
@@ -62,13 +63,14 @@ public class BrowserFactory {
     }
 
     @Step("Opening Browser")
-    public static RemoteWebDriver openBrowser_remote(BrowserType browserType) {
+    public static RemoteWebDriver openRemoteBrowser(BrowserType browserType) {
 	if (browserType == BrowserType.GOOGLE_CHROME
 		|| (browserType == BrowserType.FROM_PROPERTIES && browserProperty.equalsIgnoreCase("chrome"))) {
 	    AllureReport.logMessage("Opening Remote [Google Chrome] Browser!....");
 	    DesiredCapabilities capabilities = new DesiredCapabilities();
 	    capabilities.setCapability("browserName", browserProperty);
 	    capabilities.setCapability("version", "ANY");
+	    capabilities.setCapability("platform", "LINUX");
 	    try {
 		remoteDriver = new RemoteWebDriver(new URL("http://" + host + ":" + port + "/wd/hub"), capabilities);
 	    } catch (MalformedURLException e) {

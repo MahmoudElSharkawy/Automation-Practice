@@ -4,13 +4,13 @@
 
   <test name="Google Search">
     <classes>
-      <class name="liveproject.googlesearch.tests.GoogleSearchTest"/>
+      <class name="liveproject.google.tests.gui.Search.Google_SearchTest"/>
     </classes>
   </test> <!-- Google Search -->
   
   <test name="PHPTRAVELS">
     <classes>
-      <class name="liveproject.phptravels.reservation.search.tests.PhpTravelsReservationTest"/>
+      <class name="liveproject.phptravels.tests.gui.ReservationSearch.PhpTravelsReservation_HotelsTest"/>
     </classes>
   </test> <!-- Php Travels -->
   
