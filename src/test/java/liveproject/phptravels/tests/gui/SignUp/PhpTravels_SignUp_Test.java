@@ -35,7 +35,7 @@ public class PhpTravels_SignUp_Test {
     @BeforeClass
     public void setUp() {
 	date = new Date();
-	spreadSheet = new Spreadsheet(new File("src/test/resources/TestData/LiveProject_PHPTravels_SignUp_TestData.xlsx"));
+	spreadSheet = new Spreadsheet(new File("src/test/resources/TestData/LiveProject_PhpTravels_SignUp_TestData.xlsx"));
 	spreadSheet.switchToSheet("testsheet2");
 	driver = BrowserFactory.openRemoteBrowser(BrowserType.FROM_PROPERTIES);
 	driver.get(phptravelsHomePageURL);
