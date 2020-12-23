@@ -2,12 +2,12 @@ package utils;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
@@ -18,7 +18,6 @@ public class BrowserFactory {
     private static EventFiringWebDriver driver;
     private static RemoteWebDriver remoteDriver;
     private static String browserProperty = PropertiesReader.getProperty("liveproject.properties", "target.browser");
-//    private static String remoteExecutionProperty = PropertiesReader.getProperty("liveproject.properties", "remote.execution");
     private static String host = "localhost";
     private static String port = "4444";
 
@@ -40,22 +39,21 @@ public class BrowserFactory {
     public static EventFiringWebDriver openBrowser(BrowserType browserType) {
 	if (browserType == BrowserType.GOOGLE_CHROME
 		|| (browserType == BrowserType.FROM_PROPERTIES && browserProperty.equalsIgnoreCase("chrome"))) {
-//	    System.out.println("Opening Google Chrome Browser!....");
 	    AllureReport.logMessage("Opening [Google Chrome] Browser!....");
 	    WebDriverManager.chromedriver().setup();
 	    driver = new EventFiringWebDriver(new ChromeDriver());
 	    driver.register(new EventReporter());
 	    driver.manage().window().maximize();
-	    driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+	    WebDriverWaits.getImplicitWait(driver);
 	} else if (browserType == BrowserType.MOZILLA_FIREFOX
 		|| (browserType == BrowserType.FROM_PROPERTIES && browserProperty.equalsIgnoreCase("firefox"))) {
-//	    System.out.println("Opening Mozilla Firefox Browser!....");
 	    AllureReport.logMessage("Opening [Mozilla Firefox] Browser!....");
 	    WebDriverManager.firefoxdriver().setup();
 	    driver = new EventFiringWebDriver(new FirefoxDriver());
 	    driver.register(new EventReporter());
 	    driver.manage().window().maximize();
-	    driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+	    WebDriverWaits.getImplicitWait(driver);
+
 	} else {
 	    AllureReport.logMessage("The browser " + browserProperty
 		    + " is not valid/supported; Please chose from the given choices in the properties file");
@@ -69,11 +67,27 @@ public class BrowserFactory {
 		|| (browserType == BrowserType.FROM_PROPERTIES && browserProperty.equalsIgnoreCase("chrome"))) {
 	    AllureReport.logMessage("Opening Remote [Google Chrome] Browser!....");
 	    try {
-		remoteDriver = new RemoteWebDriver(new URL("http://" + host + ":" + port + "/wd/hub"), getChromeOptions());
-		remoteDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		remoteDriver = new RemoteWebDriver(new URL("http://" + host + ":" + port + "/wd/hub"),
+			getChromeOptions());
+		WebDriverWaits.getImplicitWait(remoteDriver);
 	    } catch (MalformedURLException e) {
 		e.printStackTrace();
 	    }
+
+	} else if (browserType == BrowserType.MOZILLA_FIREFOX
+		|| (browserType == BrowserType.FROM_PROPERTIES && browserProperty.equalsIgnoreCase("firefox"))) {
+	    AllureReport.logMessage("Opening Remote [Mozilla Firefox] Browser!....");
+	    try {
+		remoteDriver = new RemoteWebDriver(new URL("http://" + host + ":" + port + "/wd/hub"),
+			getFirefoxOptions());
+		WebDriverWaits.getImplicitWait(remoteDriver);
+	    } catch (MalformedURLException e) {
+		e.printStackTrace();
+	    }
+
+	} else {
+	    AllureReport.logMessage("The browser " + browserProperty
+		    + " is not valid/supported; Please chose from the given choices in the properties file");
 	}
 	return remoteDriver;
     }
@@ -86,6 +100,13 @@ public class BrowserFactory {
 //	chOptions.setExperimentalOption("excludeSwitches", new String[] { "enable-automation" });
 //	chOptions.setHeadless(true);
 	return chOptions;
+    }
+
+    private static FirefoxOptions getFirefoxOptions() {
+	FirefoxOptions ffOptions = new FirefoxOptions();
+	ffOptions.setCapability("platform", Platform.LINUX);
+	ffOptions.addArguments("--headless");
+	return ffOptions;
     }
 
 }
