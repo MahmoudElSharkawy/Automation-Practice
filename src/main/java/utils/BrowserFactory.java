@@ -4,7 +4,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -68,9 +70,8 @@ public class BrowserFactory {
 		|| (browserType == BrowserType.FROM_PROPERTIES && browserProperty.equalsIgnoreCase("chrome"))) {
 	    AllureReport.logMessage("Opening Remote [Google Chrome] Browser!....");
 	    DesiredCapabilities capabilities = new DesiredCapabilities();
-	    capabilities.setCapability("browserName", browserProperty);
-	    capabilities.setCapability("version", "ANY");
-	    capabilities.setCapability("platform", "LINUX");
+	    capabilities.setBrowserName(browserProperty);
+	    capabilities.setPlatform(Platform.LINUX);
 	    try {
 		remoteDriver = new RemoteWebDriver(new URL("http://" + host + ":" + port + "/wd/hub"), capabilities);
 	    } catch (MalformedURLException e) {
