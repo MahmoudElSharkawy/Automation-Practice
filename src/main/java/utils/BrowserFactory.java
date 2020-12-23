@@ -8,7 +8,6 @@ import org.openqa.selenium.Platform;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
@@ -19,7 +18,7 @@ public class BrowserFactory {
     private static EventFiringWebDriver driver;
     private static RemoteWebDriver remoteDriver;
     private static String browserProperty = PropertiesReader.getProperty("liveproject.properties", "target.browser");
-    private static String remoteExecutionProperty = PropertiesReader.getProperty("liveproject.properties", "remote.execution");
+//    private static String remoteExecutionProperty = PropertiesReader.getProperty("liveproject.properties", "remote.execution");
     private static String host = "localhost";
     private static String port = "4444";
 
@@ -71,6 +70,7 @@ public class BrowserFactory {
 	    AllureReport.logMessage("Opening Remote [Google Chrome] Browser!....");
 	    try {
 		remoteDriver = new RemoteWebDriver(new URL("http://" + host + ":" + port + "/wd/hub"), getChromeOptions());
+		remoteDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 	    } catch (MalformedURLException e) {
 		e.printStackTrace();
 	    }
