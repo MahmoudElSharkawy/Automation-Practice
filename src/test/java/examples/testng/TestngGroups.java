@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 //	Can add a Group for the class level that will be applied for all the Test Cases inside this class
 @Test(groups = { "classLevelGroup" })
-public class groups {
+public class TestngGroups {
 
 //	The Test Cases
     @Test(groups = "Group1")
