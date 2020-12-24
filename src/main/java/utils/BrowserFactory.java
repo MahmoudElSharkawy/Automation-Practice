@@ -61,7 +61,16 @@ public class BrowserFactory {
 	return driver;
     }
 
-    @Step("Opening Browser")
+    @Step("Opening Remote Browser")
+    /*
+     * Steps to executo remotely with selenium grid of dockers VERY simple steps
+     * 1- Install docker
+     * 2- You need to have a .yml file to configure the network between the containers like that we have in the project root file "docker-compose_native.yml"
+     * 3- open a terminal on the project directory
+     * 4- Enter the following command that will setup the containers and run them automatically: docker-compose -f docker-compose_native.yml up --scale chrome=4 --remove-orphans -d
+     * 5- Enter the following command to check the running containers: docker ps
+     * 6- execute using this method
+     */
     public static RemoteWebDriver openRemoteBrowser(BrowserType browserType) {
 	if (browserType == BrowserType.GOOGLE_CHROME
 		|| (browserType == BrowserType.FROM_PROPERTIES && browserProperty.equalsIgnoreCase("chrome"))) {

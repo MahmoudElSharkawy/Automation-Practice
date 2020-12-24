@@ -12,6 +12,7 @@
     <classes>
       <class name="liveproject.phptravels.tests.gui.ReservationSearch.PhpTravels_ReservationHotelsSearch_Test"/>
       <class name="liveproject.phptravels.tests.gui.SignUp.PhpTravels_SignUp_Test"/>
+      <class name="liveproject.phptravels.tests.gui.Login.PhpTravels_Login_Test"/>
     </classes>
   </test> <!-- Php Travels -->
   

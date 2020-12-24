@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
+import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
@@ -20,13 +21,14 @@ public class OptimizingCodeDemo {
     @BeforeClass
     public static void createSpecifications() {
 
-        requestSpec = new RequestSpecBuilder().
-            setBaseUri("http://api.zippopotam.us").
-            build();
+        requestSpec = new RequestSpecBuilder()
+        	.setBaseUri("http://api.zippopotam.us")
+        	.log(LogDetail.ALL)
+        	.build();
         
         responseSpec = new ResponseSpecBuilder().
                 expectStatusCode(200).
-                expectContentType(ContentType.JSON).
+                expectContentType(ContentType.JSON).log(LogDetail.BODY).
                 build();
     }
 

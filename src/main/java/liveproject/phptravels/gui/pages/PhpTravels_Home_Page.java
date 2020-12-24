@@ -16,9 +16,17 @@ public class PhpTravels_Home_Page {
     // Elements
     private By myaccount_button = By.linkText("MY ACCOUNT");
     private By signup_button = By.linkText("Sign Up");
+    private By login_button = By.linkText("Login");
     private By hotels_button = By.xpath("//div[@class = 'menu-horizontal-wrapper-02']//a[contains(text(),'Hotels')]");
 
     // Methods
+    @Step("Navigate to Login page")
+    public PhpTravels_Login_Page navigateToLoginPage() {
+	driver.findElement(myaccount_button).click();
+	driver.findElement(login_button).click();
+	return new PhpTravels_Login_Page(driver);
+    }
+
     @Step("Navigate to Sign Up page")
     public PhpTravels_SignUp_Page navigateToSignUpPage() {
 	driver.findElement(myaccount_button).click();
