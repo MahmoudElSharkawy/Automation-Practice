@@ -31,7 +31,7 @@ public class Waits_FluentWaitDemo {
 	driver.findElement(By.linkText("Example 1: Element on page that is hidden")).click();
 	driver.findElement(By.cssSelector("#start button")).click();
 
-	FluentWait wait = new FluentWait(driver)
+	FluentWait<WebDriver> wait = new FluentWait<WebDriver>(driver)
 		.withTimeout(Duration.ofSeconds(5))
 		.pollingEvery(Duration.ofSeconds(1))
 		.ignoring(NoSuchElementException.class);

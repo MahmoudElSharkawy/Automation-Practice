@@ -16,7 +16,7 @@ public class Spreadsheet {
 
     public Spreadsheet(File file) {
 	spreadsheet = file;
-	columns = new HashMap();
+	columns = new HashMap<String, Integer>();
     }
 
     public void switchToSheet(String name) {
