@@ -23,6 +23,6 @@ public class PhpTravels_UserAccount_Page {
 	String m = driver.findElement(hi_text).getText(); 
 	Logger.logMessage("The Hi message is: " + m);
 	return m;
-
     }
+    
 }

@@ -31,7 +31,7 @@ public class Spreadsheet {
     }
 
     public String getCellData(String column, int row) {
-	var dataRow = currentSheet.getRow(row);
+	var dataRow = currentSheet.getRow(row - 1);
 	return getCellDataAsString(dataRow.getCell(columns.get(column)));
     }
 

@@ -46,9 +46,9 @@ public class Google_Search_Test {
     @TmsLink("focus-case-1539798")
     @Issue("bug-tracker#1")
     public void testingGoogleSearch() {
-	String searchIndex = spreadSheet.getCellData("Search Index", 1);
-	String searchData = spreadSheet.getCellData("Search Data", 1);
-	String expected = spreadSheet.getCellData("Expected", 1);
+	String searchIndex = spreadSheet.getCellData("Search Index", 2);
+	String searchData = spreadSheet.getCellData("Search Data", 2);
+	String expected = spreadSheet.getCellData("Expected", 2);
 
 	new Google_HomePage(driver)
 		.googleSearch(searchData)
