@@ -110,8 +110,7 @@ public class PhpTravels_SignUp_Test {
     @AfterMethod
     public void afterMethod(ITestResult result) {
 	if (result.getStatus() == ITestResult.FAILURE) {
-	    Logger.logMessage("The Test Case Failed!; Taking Screenshot....");
-	    Logger.logScreenshot(driver);
+	    Logger.screenshotOnfailureGui(driver);
 	}
 	driver.quit();
     }

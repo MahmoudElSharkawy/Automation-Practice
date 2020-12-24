@@ -59,8 +59,7 @@ public class Google_Search_Test {
     @AfterMethod
     public void AfterMethod(ITestResult result) {
 	if (result.getStatus() == ITestResult.FAILURE) {
-	    Logger.logMessage("The Test Case Failed!; Taking Screenshot....");
-	    Logger.logScreenshot(driver);
+	    Logger.screenshotOnfailureGui(driver);
 	}
     }
 

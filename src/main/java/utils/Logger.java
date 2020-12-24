@@ -21,6 +21,11 @@ public class Logger {
 	attachScreenshot(driver);
     }
 
+    @Step("Taking Screenshot in case of Failure on GUI")
+    public static void screenshotOnfailureGui(WebDriver driver) {
+	attachScreenshot(driver);
+    }
+
     //////////////////////////////////////////////////////
     //////////////////////////////////////////////////////
 
