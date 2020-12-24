@@ -68,7 +68,7 @@ public class PhpTravels_SignUp_Test {
     }
     
     @Test(description = "Invalid User Sign Up - Email Already Exists" , dependsOnMethods = {"testingValidUserSignUp"})
-    @Description("")
+    @Description("Given i already signed up with an email, When I use the same email for new sign up , Then I should get an error message ")
     @Severity(SeverityLevel.CRITICAL)
     @TmsLink("focus-case-1539798")
     @Issue("bug-tracker#1")
@@ -88,7 +88,7 @@ public class PhpTravels_SignUp_Test {
     }
     
     @Test(description = "Invalid User Sign Up - Wrong Email Format")
-    @Description("")
+    @Description("When I use a wrong email format on the sign up , Then I should get an error message ")
     @Severity(SeverityLevel.CRITICAL)
     @TmsLink("focus-case-1539798")
     @Issue("bug-tracker#1")
