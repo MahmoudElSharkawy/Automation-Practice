@@ -9,31 +9,32 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class RelativeXpathDemo {
-	WebDriver driver;
+    WebDriver driver;
 
-	@BeforeTest
-	public void setup() {
-		System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/windows-64/chromedriver.exe");
+    @BeforeTest
+    public void setup() {
+	WebDriverManager.chromedriver().setup();
+	driver = new ChromeDriver();
+	driver.manage().window().maximize();
 
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
+	driver.get("https://www.google.com/ncr");
+    }
 
-		driver.get("https://www.google.com/ncr");
-	}
+    @Test
+    public void SearchAndAssertTheFirstResultText() {
+	driver.findElement(By.xpath("//input[@name='q']")).sendKeys("Selenium", Keys.ENTER);
 
-	@Test
-	public void SearchAndAssertTheFirstResultText() {
-		driver.findElement(By.xpath("//input[@name='q']")).sendKeys("Selenium", Keys.ENTER);
-		
-		String firstSearchResultText = driver.findElement(By.xpath("(//h3[@class='LC20lb'])" + "[" + 1 + "]")).getText();
-		Assert.assertTrue(firstSearchResultText.contains("Selenium"));
-	}
+	String firstSearchResultText = driver.findElement(By.xpath("(//h3[@class='LC20lb'])" + "[" + 1 + "]"))
+		.getText();
+	Assert.assertTrue(firstSearchResultText.contains("Selenium"));
+    }
 
-	@AfterTest
-	public void closeBrowser(){
-		driver.quit();
-	}
+    @AfterTest
+    public void closeBrowser() {
+	driver.quit();
+    }
 
 }

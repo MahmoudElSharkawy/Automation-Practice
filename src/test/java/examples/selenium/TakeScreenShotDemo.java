@@ -16,45 +16,44 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 public class TakeScreenShotDemo {
 
-	WebDriver driver;
+    WebDriver driver;
 
-	@BeforeTest
-	public void setup() {
-		System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/windows-64/chromedriver.exe");
+    @BeforeTest
+    public void setup() {
+	WebDriverManager.chromedriver().setup();
+	driver = new ChromeDriver();
+	driver.manage().window().maximize();
 
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
+	driver.get("http://www.amazon.com");
+    }
 
-		driver.get("http://www.amazon.com");
+    @Test
+    public void ScreenshotOnFailureTest() throws InterruptedException {
+	WebElement searchTxt = driver.findElement(By.id("twotabsearchtextbox"));
+	searchTxt.sendKeys("Selenium WebDriver Book");
+	searchTxt.submit();
+	fail("Failed of purpose to take the screenshot");
+    }
+
+    @AfterMethod
+    public void takeScreenShot(ITestResult result) {
+	if (result.getStatus() == ITestResult.FAILURE) {
+	    TakesScreenshot ts = (TakesScreenshot) driver;
+	    File source = ts.getScreenshotAs(OutputType.FILE);
+	    try {
+		FileUtils.copyFile(source, new File("src/test/resources/ScreenShots/" + result.getName() + ".png"));
+	    } catch (Exception e) {
+		e.printStackTrace();
+	    }
 	}
+    }
 
-	@Test
-	public void ScreenshotOnFailureTest() throws InterruptedException 
-	{
-		WebElement searchTxt =driver.findElement(By.id("twotabsearchtextbox"));
-		searchTxt.sendKeys("Selenium WebDriver Book");
-		searchTxt.submit();
-		fail("Failed of purpose to take the screenshot");
-	}
-
-	@AfterMethod
-	public void takeScreenShot(ITestResult result) {
-		if (result.getStatus() == ITestResult.FAILURE) 
-		{
-			TakesScreenshot ts = (TakesScreenshot)driver; 
-			File source = ts.getScreenshotAs(OutputType.FILE); 
-			try {
-				FileUtils.copyFile(source, new File("src/test/resources/ScreenShots/"+ result.getName()+".png"));
-			} catch (Exception e) {
-		        e.printStackTrace();
-			}
-		}
-	}
-
-	@AfterTest
-	public void closeBrowser() {
-		driver.quit();
-	}	
+    @AfterTest
+    public void closeBrowser() {
+	driver.quit();
+    }
 }

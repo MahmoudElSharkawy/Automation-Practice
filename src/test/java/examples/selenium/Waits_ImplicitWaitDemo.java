@@ -12,13 +12,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 public class Waits_ImplicitWaitDemo {
     WebDriver driver;
 
     @BeforeTest
     public void setup() {
-	System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/windows-64/chromedriver.exe");
-
+	WebDriverManager.chromedriver().setup();
 	driver = new ChromeDriver();
 	driver.manage().window().maximize();
 

@@ -11,50 +11,50 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 public class DropdownListDemo {
 
-	WebDriver driver;
+    WebDriver driver;
 
-	@BeforeTest
-	public void setup() {
-		System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/windows-64/chromedriver.exe");
+    @BeforeTest
+    public void setup() {
+	WebDriverManager.chromedriver().setup();
+	driver = new ChromeDriver();
+	driver.manage().window().maximize();
 
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
+	driver.get("https://the-internet.herokuapp.com/dropdown");
+    }
 
-		driver.get("https://the-internet.herokuapp.com/dropdown");
-	}
+    @Test
+    public void dropDownListTest() {
 
-	@Test
-	public void dropDownListTest() {
+	// get the dropdown as a select using it's name attribute
+	Select s = new Select(driver.findElement(By.id("dropdown")));
 
-		//get the dropdown as a select using it's name attribute
-		Select s = new Select(driver.findElement(By.id("dropdown")));
+	// assert that it doesn't support multiple selection
+	assertFalse(s.isMultiple());
 
-		//assert that it doesn't support multiple selection
-		assertFalse(s.isMultiple());
+	// Verify that it has 2 options only
+	assertEquals(s.getOptions().size(), 3);
 
-		//Verify that it has 2 options only
-		assertEquals(s.getOptions().size(), 3);
+	// Select by visibleText
+	s.selectByVisibleText("Option 1");
+	assertEquals("Option 1", s.getFirstSelectedOption().getText());
 
+	// Select by value
+	s.selectByValue("2");
+	assertEquals("Option 2", s.getFirstSelectedOption().getText());
 
-		//Select by visibleText
-		s.selectByVisibleText("Option 1");
-		assertEquals("Option 1", s.getFirstSelectedOption().getText());
+	// Select by index
+	s.selectByIndex(1);
+	assertEquals("Option 1", s.getFirstSelectedOption().getText());
 
-		//Select by value
-		s.selectByValue("2");
-		assertEquals("Option 2", s.getFirstSelectedOption().getText());
+    }
 
-		//Select by index
-		s.selectByIndex(1);
-		assertEquals("Option 1", s.getFirstSelectedOption().getText());
-
-	}
-
-	@AfterTest
-	public void closeBrowser() {
-		driver.quit();
-	}
+    @AfterTest
+    public void closeBrowser() {
+	driver.quit();
+    }
 
 }

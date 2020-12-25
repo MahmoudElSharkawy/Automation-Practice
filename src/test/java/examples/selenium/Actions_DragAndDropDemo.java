@@ -10,37 +10,37 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 public class Actions_DragAndDropDemo {
 
-	WebDriver driver;
+    WebDriver driver;
 
-	@BeforeTest
-	public void setup() {
-		System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/windows-64/chromedriver.exe");
+    @BeforeTest
+    public void setup() {
+	WebDriverManager.chromedriver().setup();
+	driver = new ChromeDriver();
+	driver.manage().window().maximize();
 
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
+	driver.get("http://cookbook.seleniumacademy.com/DragDropDemo.html");
+    }
 
-		driver.get("http://cookbook.seleniumacademy.com/DragDropDemo.html");
-	}
+    @Test
+    public void DragDrop() {
 
-	@Test
-	public void DragDrop(){
+	WebElement source = driver.findElement(By.id("draggable"));
+	WebElement target = driver.findElement(By.id("droppable"));
 
-		WebElement source = driver.findElement(By.id("draggable"));
-		WebElement target = driver.findElement(By.id("droppable"));
+	Actions dd = new Actions(driver);
+	dd.dragAndDrop(source, target).perform();
 
-		Actions dd = new Actions(driver);
-		dd.dragAndDrop(source, target).perform();
+	Assert.assertEquals("Dropped!", target.getText());
 
-		Assert.assertEquals("Dropped!", target.getText());
+    }
 
-
-	}
-
-	@AfterTest
-	public void closeBrowser() {
-		driver.quit();
-	}	
+    @AfterTest
+    public void closeBrowser() {
+	driver.quit();
+    }
 
 }

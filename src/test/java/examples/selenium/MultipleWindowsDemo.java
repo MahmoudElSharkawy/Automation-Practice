@@ -9,14 +9,15 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 public class MultipleWindowsDemo {
 
     WebDriver driver;
 
     @BeforeTest
     public void setup() {
-	System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/mac-64/chromedriver");
-
+	WebDriverManager.chromedriver().setup();
 	driver = new ChromeDriver();
 	driver.manage().window().maximize();
 

@@ -10,37 +10,39 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 public class CrossBrowserDemo {
 
-	WebDriver driver;
+    WebDriver driver;
 
-	@Parameters("browserName")
-	@BeforeTest()
-	public void setup(String browserName) {
+    @Parameters("browserName")
+    @BeforeTest()
+    public void setup(String browserName) {
 
-		if (browserName.equalsIgnoreCase("chrome")) {
-			System.out.println("Browser name: " + browserName);
-			System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/windows-64/chromedriver.exe");
-			driver = new ChromeDriver();
-			driver.manage().window().maximize();
-		}
-
-		else if (browserName.equalsIgnoreCase("firefox")) {
-			System.out.println("Browser name: " + browserName);
-			System.setProperty("webdriver.gecko.driver", "src/main/resources/drivers/windows-64/geckodriver.exe");
-			driver = new FirefoxDriver();
-		}
+	if (browserName.equalsIgnoreCase("chrome")) {
+	    System.out.println("Browser name: " + browserName);
+	    WebDriverManager.chromedriver().setup();
+	    driver = new ChromeDriver();
+	    driver.manage().window().maximize();
 	}
 
-	@Test
-	public void crossBrowserTest() {
-		driver.get("https://www.google.com/ncr");
-		driver.findElement(By.xpath("//input[@name='q']")).sendKeys("Selenium", Keys.ENTER);
-
+	else if (browserName.equalsIgnoreCase("firefox")) {
+	    System.out.println("Browser name: " + browserName);
+	    WebDriverManager.firefoxdriver().setup();
+	    driver = new FirefoxDriver();
 	}
+    }
 
-	@AfterTest
-	public void closeBrowser() {
-		driver.quit();
-	}	
+    @Test
+    public void crossBrowserTest() {
+	driver.get("https://www.google.com/ncr");
+	driver.findElement(By.xpath("//input[@name='q']")).sendKeys("Selenium", Keys.ENTER);
+
+    }
+
+    @AfterTest
+    public void closeBrowser() {
+	driver.quit();
+    }
 }

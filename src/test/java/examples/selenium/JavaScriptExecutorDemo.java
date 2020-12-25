@@ -7,31 +7,32 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 public class JavaScriptExecutorDemo {
-	
-	WebDriver driver;
-	
-	@BeforeTest
-	public void javaScriptExecutorTest() {
-		System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/windows-64/chromedriver.exe");
 
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
+    WebDriver driver;
 
-		driver.get("https://www.softwaretestingmaterial.com/javascriptexecutor-selenium-webdriver/");
-	}
-	
-	@Test
-	public void jsDemo(){
-		JavascriptExecutor js = (JavascriptExecutor) driver;  
-		//Vertical scroll - down by 500  pixels
+    @BeforeTest
+    public void javaScriptExecutorTest() {
+	WebDriverManager.chromedriver().setup();
+	driver = new ChromeDriver();
+	driver.manage().window().maximize();
+
+	driver.get("https://www.softwaretestingmaterial.com/javascriptexecutor-selenium-webdriver/");
+    }
+
+    @Test
+    public void jsDemo() {
+	JavascriptExecutor js = (JavascriptExecutor) driver;
+	// Vertical scroll - down by 500 pixels
 //		js.executeScript("window.scrollBy(0,3000)");
-		// for scrolling till the bottom of the page we can use the code like
-		js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
-	}
-	
-	@AfterTest
-	public void closeBrowser() {
-		driver.quit();
-	}	
+	// for scrolling till the bottom of the page we can use the code like
+	js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
+    }
+
+    @AfterTest
+    public void closeBrowser() {
+	driver.quit();
+    }
 }

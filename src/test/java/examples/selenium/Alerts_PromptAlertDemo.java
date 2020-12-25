@@ -11,49 +11,50 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 public class Alerts_PromptAlertDemo {
 
-	WebDriver driver;
+    WebDriver driver;
 
-	@BeforeTest
-	public void setup() {
-		System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/windows-64/chromedriver.exe");
+    @BeforeTest
+    public void setup() {
+	WebDriverManager.chromedriver().setup();
+	driver = new ChromeDriver();
+	driver.manage().window().maximize();
 
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
+	driver.get("http://cookbook.seleniumacademy.com/Alerts.html");
+    }
 
-		driver.get("http://cookbook.seleniumacademy.com/Alerts.html");
-	}
+    @Test(priority = 1)
+    public void promptDialogAcceptTest() {
 
-	@Test(priority = 1)
-	public void promptDialogAcceptTest() {
+	// Confirm Dialog
+	WebElement tryitP = driver.findElement(By.id("prompt"));
+	tryitP.click();
 
-		//Confirm Dialog
-		WebElement tryitP = driver.findElement(By.id("prompt"));
-		tryitP.click();
+	Alert jsPAlertConfirm = driver.switchTo().alert();
+	// insert your name
+	String name = "Sharkawy";
+	jsPAlertConfirm.sendKeys(name);
+	// Confirm
+	jsPAlertConfirm.accept();
+	// assert
+	WebElement d = driver.findElement(By.id("prompt_demo"));
+	assertTrue(d.getText().equals("Hello " + name + "! How are you today?"));
+    }
 
-		Alert jsPAlertConfirm = driver.switchTo().alert();
-		//insert your name
-		String name = "Sharkawy";
-		jsPAlertConfirm.sendKeys(name);
-		//Confirm
-		jsPAlertConfirm.accept();
-		//assert
-		WebElement d = driver.findElement(By.id("prompt_demo"));
-		assertTrue(d.getText().equals("Hello " + name + "! How are you today?"));
-	}
+    @Test(priority = 2)
+    public void promptDialogDismissTest() {
+	WebElement tryitP = driver.findElement(By.id("prompt"));
+	tryitP.click();
+	// Dismiss
+	Alert jsPAlertDismiss = driver.switchTo().alert();
+	jsPAlertDismiss.dismiss();
+    }
 
-	@Test(priority = 2)
-	public void promptDialogDismissTest() {
-		WebElement tryitP = driver.findElement(By.id("prompt"));
-		tryitP.click();		
-		//Dismiss
-		Alert jsPAlertDismiss = driver.switchTo().alert();
-		jsPAlertDismiss.dismiss();
-	}
-
-	@AfterTest
-	public void closeBrowser() {
-		driver.quit();
-	}	
+    @AfterTest
+    public void closeBrowser() {
+	driver.quit();
+    }
 }

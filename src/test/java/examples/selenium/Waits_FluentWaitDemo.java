@@ -13,13 +13,14 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 public class Waits_FluentWaitDemo {
     WebDriver driver;
 
     @BeforeClass
     public void setUp() {
-	System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/windows-64/chromedriver.exe");
-
+	WebDriverManager.chromedriver().setup();
 	driver = new ChromeDriver();
 	driver.manage().window().maximize();
 
@@ -31,10 +32,8 @@ public class Waits_FluentWaitDemo {
 	driver.findElement(By.linkText("Example 1: Element on page that is hidden")).click();
 	driver.findElement(By.cssSelector("#start button")).click();
 
-	FluentWait<WebDriver> wait = new FluentWait<WebDriver>(driver)
-		.withTimeout(Duration.ofSeconds(5))
-		.pollingEvery(Duration.ofSeconds(1))
-		.ignoring(NoSuchElementException.class);
+	FluentWait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(5))
+		.pollingEvery(Duration.ofSeconds(1)).ignoring(NoSuchElementException.class);
 
 	wait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.id("loading"))));
 
