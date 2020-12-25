@@ -17,6 +17,7 @@ import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.TmsLink;
 import liveproject.phptravels.gui.pages.PhpTravels_Home_Page;
 import utils.Logger;
+import utils.BrowserActions;
 import utils.BrowserFactory;
 import utils.PropertiesReader;
 import utils.Spreadsheet;
@@ -35,7 +36,7 @@ public class PhpTravels_ReservationHotelsSearch_Test {
 	spreadSheet = new Spreadsheet(new File("src/test/resources/TestData/LiveProject_PhpTravels_ReservationHotelsSearch_TestData.xlsx"));
 	spreadSheet.switchToSheet("testsheet2");
 	driver = BrowserFactory.openRemoteBrowser(BrowserType.FROM_PROPERTIES);
-	driver.get(phptravelsHomePageURL);
+	BrowserActions.navigateToUrl(driver, phptravelsHomePageURL);
     }
 
     @Test(description = "Validating the search function of the hotels")

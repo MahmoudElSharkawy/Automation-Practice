@@ -43,17 +43,16 @@ public class BrowserFactory {
 	    WebDriverManager.chromedriver().setup();
 	    driver = new EventFiringWebDriver(new ChromeDriver());
 	    driver.register(new SeleniumEventReporter());
-	    driver.manage().window().maximize();
-	    WebDriverWaits.getImplicitWait(driver);
+	    WebDriverWaits.implicitWait(driver);
+	    BrowserActions.maximizeTheWindow(driver);
 	} else if (browserType == BrowserType.MOZILLA_FIREFOX
 		|| (browserType == BrowserType.FROM_PROPERTIES && browserProperty.equalsIgnoreCase("firefox"))) {
 	    Logger.logMessage("Opening [Mozilla Firefox] Browser!....");
 	    WebDriverManager.firefoxdriver().setup();
 	    driver = new EventFiringWebDriver(new FirefoxDriver());
 	    driver.register(new SeleniumEventReporter());
-	    driver.manage().window().maximize();
-	    WebDriverWaits.getImplicitWait(driver);
-
+	    WebDriverWaits.implicitWait(driver);
+	    BrowserActions.maximizeTheWindow(driver);
 	} else {
 	    Logger.logMessage("The browser " + browserProperty
 		    + " is not valid/supported; Please chose from the given choices in the properties file");
@@ -78,7 +77,7 @@ public class BrowserFactory {
 	    try {
 		remoteDriver = new RemoteWebDriver(new URL("http://" + host + ":" + port + "/wd/hub"),
 			getChromeOptions());
-		WebDriverWaits.getImplicitWait(remoteDriver);
+		WebDriverWaits.implicitWait(remoteDriver);
 	    } catch (MalformedURLException e) {
 		e.printStackTrace();
 	    }
@@ -89,7 +88,7 @@ public class BrowserFactory {
 	    try {
 		remoteDriver = new RemoteWebDriver(new URL("http://" + host + ":" + port + "/wd/hub"),
 			getFirefoxOptions());
-		WebDriverWaits.getImplicitWait(remoteDriver);
+		WebDriverWaits.implicitWait(remoteDriver);
 	    } catch (MalformedURLException e) {
 		e.printStackTrace();
 	    }

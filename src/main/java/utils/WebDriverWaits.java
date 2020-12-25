@@ -15,7 +15,7 @@ public class WebDriverWaits {
 	return wait = new WebDriverWait(driver, TIMEOUT);
     }
 
-    public static void getImplicitWait(WebDriver driver) {
+    public static void implicitWait(WebDriver driver) {
 	driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
     }
 

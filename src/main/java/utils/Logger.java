@@ -11,7 +11,7 @@ import io.qameta.allure.Step;
 
 public class Logger {
 
-    @Step("Log message")
+    @Step("Console Log Message: [{message}]")
     public static void logMessage(String message) {
 	System.out.println(message);
     }

@@ -19,6 +19,7 @@ import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.TmsLink;
 import liveproject.phptravels.gui.pages.PhpTravels_Home_Page;
 import utils.Logger;
+import utils.BrowserActions;
 import utils.BrowserFactory;
 import utils.PropertiesReader;
 import utils.Spreadsheet;
@@ -44,7 +45,7 @@ public class PhpTravels_SignUp_Test {
     @BeforeMethod
     public void beforeMethod() {
 	driver = BrowserFactory.openRemoteBrowser(BrowserType.FROM_PROPERTIES);
-	driver.get(phptravelsHomePageURL);
+	BrowserActions.navigateToUrl(driver, phptravelsHomePageURL);
     }
 
     @Test(description = "Valid User Sign Up")
@@ -57,7 +58,7 @@ public class PhpTravels_SignUp_Test {
 	lastName = spreadSheet.getCellData("LastName", 2);
 	mobileNumber = spreadSheet.getCellData("Mobile Number", 2);
 	email = spreadSheet.getCellData("Email", 2) + currentTime + "@test.com";
-	Logger.logMessage("The mail registering is: " + email);
+	Logger.logMessage("The mail signing up is: " + email);
 	password = spreadSheet.getCellData("Password", 2);
 
 	String hiMessage = new PhpTravels_Home_Page(driver)
@@ -77,7 +78,7 @@ public class PhpTravels_SignUp_Test {
 	lastName = spreadSheet.getCellData("LastName", 3);
 	mobileNumber = spreadSheet.getCellData("Mobile Number", 3);
 	email = spreadSheet.getCellData("Email", 3) + currentTime + "@test.com";
-	Logger.logMessage("The mail registering is: " + email);
+	Logger.logMessage("The mail signing up is: " + email);
 	password = spreadSheet.getCellData("Password", 3);
 
 	String alertMessage = new PhpTravels_Home_Page(driver)
@@ -97,7 +98,7 @@ public class PhpTravels_SignUp_Test {
 	lastName = spreadSheet.getCellData("LastName", 4);
 	mobileNumber = spreadSheet.getCellData("Mobile Number", 4);
 	email = spreadSheet.getCellData("Email", 4) + currentTime;
-	Logger.logMessage("The mail is: " + email);
+	Logger.logMessage("The mail signing up is: " + email);
 	password = spreadSheet.getCellData("Password", 4);
 
 	String alertMessage = new PhpTravels_Home_Page(driver)

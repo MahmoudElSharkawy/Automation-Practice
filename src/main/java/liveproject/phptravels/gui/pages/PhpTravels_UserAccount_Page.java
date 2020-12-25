@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import io.qameta.allure.Step;
+import utils.ElementActions;
 import utils.Logger;
 
 public class PhpTravels_UserAccount_Page {
@@ -20,9 +21,9 @@ public class PhpTravels_UserAccount_Page {
     // Methods
     @Step("Get the text of the Hi message")
     public String getHiMessage() {
-	String m = driver.findElement(hi_text).getText(); 
-	Logger.logMessage("The Hi message is: " + m);
-	return m;
+	String hiMessage = ElementActions.getText(driver, hi_text);
+	Logger.logMessage("The Hi message is: " + hiMessage);
+	return hiMessage;
     }
     
 }

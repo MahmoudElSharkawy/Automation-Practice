@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import io.qameta.allure.Step;
+import utils.ElementActions;
 
 public class PhpTravels_Home_Page {
     private WebDriver driver;
@@ -20,23 +21,23 @@ public class PhpTravels_Home_Page {
     private By hotels_button = By.xpath("//div[@class = 'menu-horizontal-wrapper-02']//a[contains(text(),'Hotels')]");
 
     // Methods
-    @Step("Navigate to Login page")
+    @Step("Navigating to Login page")
     public PhpTravels_Login_Page navigateToLoginPage() {
-	driver.findElement(myaccount_button).click();
-	driver.findElement(login_button).click();
+	ElementActions.click(driver, myaccount_button);
+	ElementActions.click(driver, login_button);
 	return new PhpTravels_Login_Page(driver);
     }
 
-    @Step("Navigate to Sign Up page")
+    @Step("Navigating to Sign Up page")
     public PhpTravels_SignUp_Page navigateToSignUpPage() {
-	driver.findElement(myaccount_button).click();
-	driver.findElement(signup_button).click();
+	ElementActions.click(driver, myaccount_button);
+	ElementActions.click(driver, signup_button);
 	return new PhpTravels_SignUp_Page(driver);
     }
 
     @Step("Search for Hotels")
     public PhpTravels_Home_Page hotelsSearch() {
-	driver.findElement(hotels_button).click();
+	ElementActions.click(driver, hotels_button);
 	return this;
     }
 

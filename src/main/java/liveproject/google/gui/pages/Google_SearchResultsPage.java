@@ -5,9 +5,9 @@ import static org.testng.Assert.assertTrue;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import io.qameta.allure.Step;
+import utils.ElementActions;
 
 public class Google_SearchResultsPage {
     private WebDriver driver;
@@ -18,23 +18,23 @@ public class Google_SearchResultsPage {
     }
 
     // Elements
-//    private By google_search_result = By.xpath("(//h3[@class='LC20lb'])[1]");
 
     // Methods
-    private WebElement getGoogleSearchResultIndex(String resultIndex) {
-	return driver.findElement(By.xpath("(//h3[contains (@class, 'LC20lb')])" + "[" + resultIndex + "]"));
-    }
-
-    @Step("Assert on the page title")
+    @Step("Assert on the page title; Expected: [{searchData}] - Google Search")
     public Google_SearchResultsPage assertOnPageTitle(String searchData) {
 	assertEquals(driver.getTitle(), searchData + " - Google Search");
 	return this;
     }
 
-    @Step("Assert on the search results")
+    @Step("Assert on the search results of results number: [{resultIndex}]; Expected: [{expected}], ")
     public Google_SearchResultsPage assertOnSearchResult(String expected, String resultIndex) {
-	assertTrue(getGoogleSearchResultIndex(resultIndex).getText().contains(expected));
+	assertTrue(ElementActions.getText(driver, result_link(resultIndex)).contains(expected));
 	return this;
     }
 
+    ///////////////////////////////////////////////
+    ///////////////////////////////////////////////
+    private By result_link(String resultIndex) {
+	return By.xpath("(//h3[contains (@class, 'LC20lb')])" + "[" + resultIndex + "]");
+    }
 }

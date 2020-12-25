@@ -20,6 +20,7 @@ import io.qameta.allure.TmsLink;
 import liveproject.phptravels.apis.APIs;
 import liveproject.phptravels.gui.pages.PhpTravels_Home_Page;
 import utils.Logger;
+import utils.BrowserActions;
 import utils.BrowserFactory;
 import utils.PropertiesReader;
 import utils.Spreadsheet;
@@ -47,7 +48,7 @@ public class PhpTravels_Login_Test {
     @BeforeMethod
     public void beforeMethod() {
 	driver = BrowserFactory.openRemoteBrowser(BrowserType.FROM_PROPERTIES);
-	driver.get(phptravelsHomePageURL);
+	BrowserActions.navigateToUrl(driver, phptravelsHomePageURL);
     }
 
     @Test(description = "Valid User Login")

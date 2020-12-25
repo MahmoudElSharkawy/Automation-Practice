@@ -18,6 +18,7 @@ import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import liveproject.google.gui.pages.Google_HomePage;
 import utils.Logger;
+import utils.BrowserActions;
 import utils.BrowserFactory;
 import utils.PropertiesReader;
 import utils.Spreadsheet;
@@ -36,7 +37,7 @@ public class Google_Search_Test {
 	spreadSheet = new Spreadsheet(new File("src/test/resources/TestData/LiveProject_Google_TestData.xlsx"));
 	spreadSheet.switchToSheet("testsheet2");
 	driver = BrowserFactory.openRemoteBrowser(BrowserType.FROM_PROPERTIES);
-	driver.get(googleHomePageURL);
+	BrowserActions.navigateToUrl(driver, googleHomePageURL);
     }
 
     @Test(description = "Validating the search function on Google home page")

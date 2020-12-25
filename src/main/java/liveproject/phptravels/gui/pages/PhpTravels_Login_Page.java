@@ -1,10 +1,10 @@
 package liveproject.phptravels.gui.pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 import io.qameta.allure.Step;
+import utils.ElementActions;
 import utils.Logger;
 
 public class PhpTravels_Login_Page {
@@ -21,14 +21,15 @@ public class PhpTravels_Login_Page {
     private By alert_text = By.xpath("//div[contains(@class, 'alert')]");
 
     // Methods
-    @Step("User Sign up")
+    @Step("User Login with Data --> Email: [{email}] and Password: [{password}]")
     public PhpTravels_UserAccount_Page userLogin(String email, String password) {
-	driver.findElement(email_field).sendKeys(email);
-	driver.findElement(password_field).sendKeys(password, Keys.ENTER);
+	ElementActions.type(driver, email_field, email);
+	ElementActions.type(driver, password_field, password);
+	ElementActions.clickEnterKey(driver, password_field);
 	return new PhpTravels_UserAccount_Page(driver);
     }
 
-    @Step("User Invalid Login")
+    @Step("User Invalid Login with Data --> Email: [{email}] and Password: [{password}]")
     public PhpTravels_Login_Page invalidUserLogin(String email, String password) {
 	userLogin(email, password);
 	return this;
@@ -36,9 +37,9 @@ public class PhpTravels_Login_Page {
 
     @Step("Get the text of the Alert message")
     public String getAlertMessage() {
-	String m = driver.findElement(alert_text).getText();
-	Logger.logMessage("The Alert message is: " + m);
-	return m;
+	String alertMessage = ElementActions.getText(driver, alert_text);
+	Logger.logMessage("The Alert message is: " + alertMessage);
+	return alertMessage;
     }
 
 }
