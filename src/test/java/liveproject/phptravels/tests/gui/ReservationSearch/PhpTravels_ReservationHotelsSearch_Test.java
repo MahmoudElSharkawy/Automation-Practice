@@ -58,6 +58,6 @@ public class PhpTravels_ReservationHotelsSearch_Test {
 
     @AfterClass
     public void closingBrowser() {
-	driver.quit();
+	BrowserActions.closeAllWindows(driver);
     }
 }

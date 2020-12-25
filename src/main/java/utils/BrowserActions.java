@@ -12,6 +12,11 @@ public class BrowserActions {
 	Logger.logMessage("Navigating to URL: " + url);
 	driver.get(url);
     }
+    @Step("Closing All Opened Browser Windows.....")
+    public static void closeAllWindows(WebDriver driver) {
+	Logger.logMessage("Closing All Opened Browser Windows.....");
+	driver.quit();
+    }
 
     @Step("Maximizing the Browser Window")
     public static void maximizeTheWindow(WebDriver driver) {
