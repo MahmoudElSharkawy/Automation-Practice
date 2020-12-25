@@ -9,6 +9,13 @@ import org.openqa.selenium.support.events.WebDriverEventListener;
 import io.qameta.allure.Step;
 
 public class SeleniumEventReporter implements WebDriverEventListener {
+    /*
+     * user the following code to be able to listen to the WebDriverEventListener in your tests:.....
+     * 	    After the WebDriverManger line.
+     * 	    driver = new EventFiringWebDriver(new ChromeDriver());
+	    driver.register(new SeleniumEventReporter());
+     */
+    
     @Override
     public void beforeAlertAccept(WebDriver webDriver) {
 

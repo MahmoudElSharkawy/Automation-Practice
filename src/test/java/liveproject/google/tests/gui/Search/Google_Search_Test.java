@@ -36,7 +36,7 @@ public class Google_Search_Test {
     public void setUp() {
 	spreadSheet = new Spreadsheet(new File("src/test/resources/TestData/LiveProject_Google_TestData.xlsx"));
 	spreadSheet.switchToSheet("testsheet2");
-	driver = BrowserFactory.openRemoteBrowser(BrowserType.FROM_PROPERTIES);
+	driver = BrowserFactory.openBrowser(BrowserType.FROM_PROPERTIES, true);
 	BrowserActions.navigateToUrl(driver, googleHomePageURL);
     }
 

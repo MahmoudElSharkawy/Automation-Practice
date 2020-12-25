@@ -47,7 +47,7 @@ public class PhpTravels_Login_Test {
     
     @BeforeMethod
     public void beforeMethod() {
-	driver = BrowserFactory.openRemoteBrowser(BrowserType.FROM_PROPERTIES);
+	driver = BrowserFactory.openBrowser(BrowserType.FROM_PROPERTIES, true);
 	BrowserActions.navigateToUrl(driver, phptravelsHomePageURL);
     }
 
