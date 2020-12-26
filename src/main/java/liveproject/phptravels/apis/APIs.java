@@ -6,11 +6,14 @@ import io.qameta.allure.Step;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
+import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import utils.PropertiesReader;
 
 public class APIs {
+//    private static String account_endpoint = "account/";
+//    private static String login_endpoint = "account/login";
     private static String signup_endpoint = "account/signup";
     
     private RequestSpecification requestSpec = new RequestSpecBuilder()
@@ -23,7 +26,8 @@ public class APIs {
 	    .build();
 
     @Step("User Sign Up using APIs")
-    public void userSignUp(String firstName, String lastName, String mobileNumber, String email, String password) {
+    public Response userSignUp(String firstName, String lastName, String mobileNumber, String email, String password) {
+	return
 	given()
 		.formParam("firstname", firstName)
 		.formParam("lastname", lastName)
@@ -36,7 +40,9 @@ public class APIs {
 	.when()
 		.post(signup_endpoint)
 	.then()
-		.spec(responseSpec);
+		.spec(responseSpec)
+	.and()
+		.extract().response();
     }
 
 }
