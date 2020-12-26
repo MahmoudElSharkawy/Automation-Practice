@@ -10,14 +10,13 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import utils.BrowserFactory;
-import utils.BrowserFactory.BrowserType;
 
 public class GoogleSearchTest {
     private WebDriver driver;
 
     @BeforeClass
     public void setup() {
-	driver = BrowserFactory.openBrowser(BrowserType.GOOGLE_CHROME);
+	driver = BrowserFactory.openBrowser();
     }
 
     @BeforeMethod

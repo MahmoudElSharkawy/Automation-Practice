@@ -15,7 +15,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import utils.BrowserFactory;
-import utils.BrowserFactory.BrowserType;
 
 public class UIDemo {
 
@@ -32,7 +31,7 @@ public class UIDemo {
 	date = new Date();
 	email = "test" + date.getTime() + "@test.com";
 	System.out.println(email);
-	driver = BrowserFactory.openBrowser(BrowserType.GOOGLE_CHROME);
+	driver = BrowserFactory.openBrowser();
 	driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 	driver.get("https://www.phptravels.net/");
     }

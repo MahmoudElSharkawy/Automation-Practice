@@ -9,7 +9,6 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import utils.BrowserFactory;
-import utils.BrowserFactory.BrowserType;
 
 import static io.restassured.RestAssured.given;
 import static org.testng.Assert.assertEquals;
@@ -49,7 +48,7 @@ public class SeamsDemo {
     
     @Test
     public void Login() {	
-	driver = BrowserFactory.openBrowser(BrowserType.GOOGLE_CHROME);
+	driver = BrowserFactory.openBrowser();
 	
 	driver.get("https://www.phptravels.net/login");
 	driver.findElement(By.name("username")).sendKeys(email);

@@ -25,6 +25,7 @@ import utils.BrowserFactory;
 import utils.PropertiesReader;
 import utils.Spreadsheet;
 import utils.BrowserFactory.BrowserType;
+import utils.BrowserFactory.ExecutionType;
 
 @Epic("Live Project")
 @Feature("PHPTravels Login")
@@ -47,7 +48,7 @@ public class PhpTravels_Login_Test {
     
     @BeforeMethod
     public void beforeMethod() {
-	driver = BrowserFactory.openBrowser(BrowserType.FROM_PROPERTIES, true);
+	driver = BrowserFactory.openBrowser(BrowserType.FROM_PROPERTIES, ExecutionType.FROM_PROPERTIES);
 	BrowserActions.navigateToUrl(driver, phptravelsHomePageURL);
     }
 

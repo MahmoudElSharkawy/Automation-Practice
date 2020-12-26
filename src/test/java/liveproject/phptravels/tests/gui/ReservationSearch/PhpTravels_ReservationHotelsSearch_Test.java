@@ -22,6 +22,7 @@ import utils.BrowserFactory;
 import utils.PropertiesReader;
 import utils.Spreadsheet;
 import utils.BrowserFactory.BrowserType;
+import utils.BrowserFactory.ExecutionType;
 
 @Epic("Live Project")
 @Feature("PHPTravels Reservation Search")
@@ -35,7 +36,7 @@ public class PhpTravels_ReservationHotelsSearch_Test {
     public void setUp() {
 	spreadSheet = new Spreadsheet(new File("src/test/resources/TestData/LiveProject_PhpTravels_ReservationHotelsSearch_TestData.xlsx"));
 	spreadSheet.switchToSheet("testsheet2");
-	driver = BrowserFactory.openBrowser(BrowserType.FROM_PROPERTIES, true);
+	driver = BrowserFactory.openBrowser(BrowserType.FROM_PROPERTIES, ExecutionType.FROM_PROPERTIES);
 	BrowserActions.navigateToUrl(driver, phptravelsHomePageURL);
     }
 
