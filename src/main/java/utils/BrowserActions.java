@@ -15,7 +15,9 @@ public class BrowserActions {
     @Step("Closing All Opened Browser Windows.....")
     public static void closeAllWindows(WebDriver driver) {
 	Logger.logMessage("Closing All Opened Browser Windows.....");
-	driver.quit();
+	if (driver != null) {
+		driver.quit();
+	}
     }
 
     @Step("Maximizing the Browser Window")
