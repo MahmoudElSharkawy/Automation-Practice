@@ -16,8 +16,8 @@ import io.qameta.allure.Step;
 
 public class BrowserFactory {
     private static WebDriver driver;
-    private static String browserTypeProperty = PropertiesReader.getProperty("liveproject.properties", "target.browser");
-    private static String executionTypeProperty = PropertiesReader.getProperty("liveproject.properties", "remote.execution");
+    private static String browserTypeProperty = PropertiesReader.getProperty("liveproject.properties", "browser.type");
+    private static String executionTypeProperty = PropertiesReader.getProperty("liveproject.properties", "execution.type");
     private static String host = "localhost";
     private static String port = "4444";
 
@@ -47,9 +47,9 @@ public class BrowserFactory {
     @Step("Opening Browser")
     public static WebDriver openBrowser(BrowserType browserType, ExecutionType executionType) {
 	if (executionType == ExecutionType.REMOTE
-		|| (executionType == ExecutionType.FROM_PROPERTIES && executionTypeProperty.equalsIgnoreCase("true"))) {
+		|| (executionType == ExecutionType.FROM_PROPERTIES && executionTypeProperty.equalsIgnoreCase("remote"))) {
 	    /*
-	     * Steps to executo remotely with selenium grid of dockers VERY simple steps:...
+	     * Steps to executo remotely with selenium grid and dockers VERY simple steps:...
 	     * 1- Install docker 2- You need to have a .yml file to configure the network
 	     * between the containers like that we have in the project root file
 	     * "docker-compose_native.yml" 3- open a terminal on the project directory 4-
@@ -88,7 +88,7 @@ public class BrowserFactory {
 	}
 	// Local execution......
 	else if (executionType == ExecutionType.LOCAL || (executionType == ExecutionType.FROM_PROPERTIES
-		&& executionTypeProperty.equalsIgnoreCase("false"))) {
+		&& executionTypeProperty.equalsIgnoreCase("local"))) {
 	    if (browserType == BrowserType.GOOGLE_CHROME
 		    || (browserType == BrowserType.FROM_PROPERTIES && browserTypeProperty.equalsIgnoreCase("chrome"))) {
 		Logger.logMessage("Opening [Google Chrome] Browser!....");
