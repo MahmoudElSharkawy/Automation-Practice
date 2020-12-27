@@ -23,16 +23,28 @@ public class PhpTravels_Login_Page {
     // Methods
     @Step("User Login with Data --> Email: [{email}] and Password: [{password}]")
     public PhpTravels_UserAccount_Page userLogin(String email, String password) {
-	ElementActions.type(driver, email_field, email);
-	ElementActions.type(driver, password_field, password);
+	enterEmail(email);
+	enterPassword(password);
 	ElementActions.clickEnterKey(driver, password_field);
 	return new PhpTravels_UserAccount_Page(driver);
     }
 
-    @Step("User Invalid Login with Data --> Email: [{email}] and Password: [{password}]")
+    @Step("User Invalid Login")
     public PhpTravels_Login_Page invalidUserLogin(String email, String password) {
 	userLogin(email, password);
 	return this;
+    }
+
+    @Step("Enter Email --> [{email}]")
+    public PhpTravels_UserAccount_Page enterEmail(String email) {
+	ElementActions.type(driver, email_field, email);
+	return new PhpTravels_UserAccount_Page(driver);
+    }
+
+    @Step("Enter password --> [{password}]")
+    public PhpTravels_UserAccount_Page enterPassword(String password) {
+	ElementActions.type(driver, password_field, password);
+	return new PhpTravels_UserAccount_Page(driver);
     }
 
     @Step("Get the text of the Alert message")

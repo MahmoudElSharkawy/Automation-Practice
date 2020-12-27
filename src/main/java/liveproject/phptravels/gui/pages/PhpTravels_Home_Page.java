@@ -15,9 +15,9 @@ public class PhpTravels_Home_Page {
     }
 
     // Elements
-    private By myaccount_button = By.linkText("MY ACCOUNT");
-    private By signup_button = By.linkText("Sign Up");
-    private By login_button = By.linkText("Login");
+    private By myaccount_link = By.linkText("MY ACCOUNT");
+    private By signup_link = By.linkText("Sign Up");
+    private By login_link = By.linkText("Login");
     private By hotels_link = By.xpath("//div[@class = 'menu-horizontal-wrapper-02']//a[contains(text(),'Hotels')]");
     private By destination_field = By.id("s2id_autogen16");
     private By checkin_field = By.id("checkin");
@@ -31,19 +31,36 @@ public class PhpTravels_Home_Page {
     // Methods
     @Step("Navigate to Login page")
     public PhpTravels_Login_Page navigateToLoginPage() {
-	ElementActions.click(driver, myaccount_button);
-	ElementActions.click(driver, login_button);
+	clickOnMyAccountLink();
+	clickOnLoginLink();
 	return new PhpTravels_Login_Page(driver);
     }
 
     @Step("Navigate to Sign Up page")
     public PhpTravels_SignUp_Page navigateToSignUpPage() {
-	ElementActions.click(driver, myaccount_button);
-	ElementActions.click(driver, signup_button);
+	clickOnMyAccountLink();
+	clickOnSignUpLink();
 	return new PhpTravels_SignUp_Page(driver);
     }
 
-    // Hotels Search Methods
+    @Step("Click on MY ACCOUNT link")
+    public PhpTravels_SignUp_Page clickOnMyAccountLink() {
+	ElementActions.click(driver, myaccount_link);
+	return new PhpTravels_SignUp_Page(driver);
+    }
+
+    @Step("Click on Login link")
+    public PhpTravels_SignUp_Page clickOnLoginLink() {
+	ElementActions.click(driver, login_link);
+	return new PhpTravels_SignUp_Page(driver);
+    }
+
+    @Step("Click on Sign Up link")
+    public PhpTravels_SignUp_Page clickOnSignUpLink() {
+	ElementActions.click(driver, signup_link);
+	return new PhpTravels_SignUp_Page(driver);
+    }
+
     @Step("Search for Hotels with Data --> DESTINATION: [{hotelsOrCityname}], CHECK IN date: [{checkinDate}] and CHECK OUT date: [{checkoutDate}]")
     public PhpTravels_Home_Page hotelsSearch(String hotelsOrCityname, String checkinDate, String checkoutDate) {
 	clickOnHotelsLink();

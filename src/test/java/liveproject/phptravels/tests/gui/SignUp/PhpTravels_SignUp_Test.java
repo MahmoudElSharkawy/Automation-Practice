@@ -59,7 +59,6 @@ public class PhpTravels_SignUp_Test {
 	lastName = spreadSheet.getCellData("LastName", 2);
 	mobileNumber = spreadSheet.getCellData("Mobile Number", 2);
 	email = spreadSheet.getCellData("Email", 2) + currentTime + "@test.com";
-	Logger.logMessage("The mail signing up is: " + email);
 	password = spreadSheet.getCellData("Password", 2);
 
 	String hiMessage = new PhpTravels_Home_Page(driver)
@@ -79,7 +78,6 @@ public class PhpTravels_SignUp_Test {
 	lastName = spreadSheet.getCellData("LastName", 3);
 	mobileNumber = spreadSheet.getCellData("Mobile Number", 3);
 	email = spreadSheet.getCellData("Email", 3) + currentTime + "@test.com";
-	Logger.logMessage("The mail signing up is: " + email);
 	password = spreadSheet.getCellData("Password", 3);
 
 	String alertMessage = new PhpTravels_Home_Page(driver)
@@ -99,7 +97,6 @@ public class PhpTravels_SignUp_Test {
 	lastName = spreadSheet.getCellData("LastName", 4);
 	mobileNumber = spreadSheet.getCellData("Mobile Number", 4);
 	email = spreadSheet.getCellData("Email", 4) + currentTime;
-	Logger.logMessage("The mail signing up is: " + email);
 	password = spreadSheet.getCellData("Password", 4);
 
 	String alertMessage = new PhpTravels_Home_Page(driver)

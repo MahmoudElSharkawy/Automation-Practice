@@ -20,11 +20,12 @@ public class ElementActions {
 	driver.findElement(by).click();
     }
 
-    @Step("Clear and Typing: [{data}] on element: [{by}]")
+    @Step("Clear then Type: [{data}] on element: [{by}]")
     public static void type(WebDriver driver, By by, String data) {
 	Helper.getExplicitWait(driver).until(ExpectedConditions.visibilityOfElementLocated(by));
-	Logger.logMessage("Typing: " + data + " on element: " + by);
+	Logger.logMessage("Clearing the data from element: " + by);
 	driver.findElement(by).clear();
+	Logger.logMessage("Typing: " + data + " on element: " + by);
 	driver.findElement(by).sendKeys(data);
 //	WebDriverWaits.getExplicitWait(driver).until(ExpectedConditions.textToBe(by, data));
 //	WebDriverWaits.getExplicitWait(driver).until(ExpectedConditions.textToBePresentInElementLocated(by, data));
