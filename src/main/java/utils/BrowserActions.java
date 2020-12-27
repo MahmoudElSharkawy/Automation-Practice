@@ -7,12 +7,12 @@ import io.qameta.allure.Step;
 public class BrowserActions {
     static WebDriver driver;
 
-    @Step("Navigating to URL: [{url}]")
+    @Step("Navigate to URL: [{url}]")
     public static void navigateToUrl(WebDriver driver, String url) {
 	Logger.logMessage("Navigating to URL: " + url);
 	driver.get(url);
     }
-    @Step("Closing All Opened Browser Windows.....")
+    @Step("Close All Opened Browser Windows.....")
     public static void closeAllOpenedBrowserWindows(WebDriver driver) {
 	Logger.logMessage("Closing All Opened Browser Windows.....");
 	if (driver != null) {
@@ -20,7 +20,7 @@ public class BrowserActions {
 	}
     }
 
-    @Step("Maximizing the Browser Window")
+    @Step("Maximize the Browser Window")
     public static void maximizeTheWindow(WebDriver driver) {
 	Logger.logMessage("Maximizing the Browser Window");
 	driver.manage().window().maximize();

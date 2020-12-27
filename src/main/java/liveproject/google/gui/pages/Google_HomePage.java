@@ -18,7 +18,7 @@ public class Google_HomePage {
     private By google_search_bar = By.name("q");
 
     // Methods
-    @Step("Searching for [{searchData}]")
+    @Step("Search for [{searchData}]")
     public Google_SearchResultsPage googleSearch(String searchData) {
 	ElementActions.type(driver, google_search_bar, searchData);
 	ElementActions.clickEnterKey(driver, google_search_bar);
