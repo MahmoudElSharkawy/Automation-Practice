@@ -59,7 +59,7 @@ public class Google_Search_Test {
     }
 
     @AfterMethod
-    public void AfterMethod(ITestResult result) {
+    public void afterMethod(ITestResult result) {
 	if (result.getStatus() == ITestResult.FAILURE) {
 	    Logger.screenshotOnfailureGui(driver);
 	}
