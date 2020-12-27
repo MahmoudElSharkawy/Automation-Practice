@@ -117,7 +117,8 @@ public class BrowserFactory {
 	ChromeOptions chOptions = new ChromeOptions();
 	chOptions.setCapability("platform", Platform.LINUX);
 	chOptions.addArguments("--headless");
-	chOptions.addArguments("--start-maximized");
+//	chOptions.addArguments("--start-maximized");
+	chOptions.addArguments("--window-size=1920,1080");
 //	chOptions.addArguments("disable--infobars");
 //	chOptions.setExperimentalOption("excludeSwitches", new String[] { "enable-automation" });
 //	chOptions.setHeadless(true);
@@ -128,7 +129,8 @@ public class BrowserFactory {
 	FirefoxOptions ffOptions = new FirefoxOptions();
 	ffOptions.setCapability("platform", Platform.LINUX);
 	ffOptions.addArguments("--headless");
-	ffOptions.addArguments("--start-maximized");
+//	ffOptions.addArguments("--start-maximized");
+	ffOptions.addArguments("--window-size=1920,1080");
 	return ffOptions;
     }
 
