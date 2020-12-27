@@ -95,6 +95,6 @@ public class PhpTravels_Login_Test {
 	if (result.getStatus() == ITestResult.FAILURE) {
 	    Logger.screenshotOnfailureGui(driver);
 	}
-	BrowserActions.closeAllWindows(driver);
+	BrowserActions.closeAllOpenedBrowserWindows(driver);
     }
 }

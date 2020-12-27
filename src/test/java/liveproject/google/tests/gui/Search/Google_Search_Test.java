@@ -67,6 +67,6 @@ public class Google_Search_Test {
 
     @AfterClass
     public void closingBrowser() {
-	BrowserActions.closeAllWindows(driver);
+	BrowserActions.closeAllOpenedBrowserWindows(driver);
     }
 }

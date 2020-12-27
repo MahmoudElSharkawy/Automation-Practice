@@ -13,7 +13,7 @@ public class BrowserActions {
 	driver.get(url);
     }
     @Step("Closing All Opened Browser Windows.....")
-    public static void closeAllWindows(WebDriver driver) {
+    public static void closeAllOpenedBrowserWindows(WebDriver driver) {
 	Logger.logMessage("Closing All Opened Browser Windows.....");
 	if (driver != null) {
 		driver.quit();

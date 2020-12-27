@@ -41,12 +41,13 @@ public class PhpTravels_ReservationHotelsSearch_Test {
     }
 
     @Test(description = "Validating the search function of the hotels")
-    @Description("Given I'm on the PHPTravels home page; When I Enter the data of the hotels And click search button; Then I should be navigated to the hotels search results page, Then I should get the search results related to the search value entered")
+    @Description("Given I'm on the PHPTravels home page; When I Enter the data needed to search for hotels And click the search button; Then I should be navigated to the hotels search results page, Then I should get the search results related to the search value entered")
     @Severity(SeverityLevel.CRITICAL)
     @TmsLink("focus-case-1539798")
     @Issue("bug-tracker#1")
     public void testingHotelsSearch() {
-	new PhpTravels_Home_Page(driver).hotelsSearch();
+	new PhpTravels_Home_Page(driver).hotelsSearch(spreadSheet.getCellData("Destination", 2),
+		spreadSheet.getCellData("Checkin Date", 2), spreadSheet.getCellData("Checkout Date", 2));
 	
     }
 
@@ -59,6 +60,6 @@ public class PhpTravels_ReservationHotelsSearch_Test {
 
     @AfterClass
     public void closingBrowser() {
-	BrowserActions.closeAllWindows(driver);
+	BrowserActions.closeAllOpenedBrowserWindows(driver);
     }
 }

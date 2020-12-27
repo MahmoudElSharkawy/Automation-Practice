@@ -18,6 +18,9 @@ public class Google_SearchResultsPage {
     }
 
     // Elements
+    private By result_link(String resultIndex) {
+	return By.xpath("(//h3[contains (@class, 'LC20lb')])" + "[" + resultIndex + "]");
+    }
 
     // Methods
     @Step("Assert on the page title; Expected: [{searchData}] - Google Search")
@@ -31,10 +34,5 @@ public class Google_SearchResultsPage {
 	assertTrue(ElementActions.getText(driver, result_link(resultIndex)).contains(expected));
 	return this;
     }
-
-    ///////////////////////////////////////////////
-    ///////////////////////////////////////////////
-    private By result_link(String resultIndex) {
-	return By.xpath("(//h3[contains (@class, 'LC20lb')])" + "[" + resultIndex + "]");
-    }
+    
 }
