@@ -9,9 +9,8 @@ import io.qameta.allure.Step;
 
 public class ElementActions {
     static WebDriver driver;
-//TODO: add scroll into view java script with java script executor to handle the firefox cases
-//TODO: ashel al ing mn hena wmen al classes kolaha
-    
+//TODO: add scroll into view java script executor to handle the firefox cases
+
     @Step("Click on element: [{by}]")
     public static void click(WebDriver driver, By by) {
 	Helper.getExplicitWait(driver).until(ExpectedConditions.visibilityOfElementLocated(by));
