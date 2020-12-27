@@ -16,6 +16,7 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import liveproject.phptravels.gui.pages.PhpTravels_Home_Page;
 import utils.Logger;
@@ -27,7 +28,7 @@ import utils.BrowserFactory.BrowserType;
 import utils.BrowserFactory.ExecutionType;
 
 @Epic("Live Project")
-@Feature("PHPTravels Sign Up")
+@Feature("PHPTRAVELS")
 public class PhpTravels_SignUp_Test {
     WebDriver driver;
     Spreadsheet spreadSheet;
@@ -51,6 +52,7 @@ public class PhpTravels_SignUp_Test {
 
     @Test(description = "Valid User Sign Up")
     @Description("When I enter valid data in the sign up form And click the signup button, Then I should be registered successfully And be navigated to the user account page And I can see my user data and Hi message")
+    @Story("Sign Up")
     @Severity(SeverityLevel.CRITICAL)
     @TmsLink("focus-case-1539798")
     @Issue("bug-tracker#1")
@@ -70,6 +72,7 @@ public class PhpTravels_SignUp_Test {
     
     @Test(description = "Invalid User Sign Up - Email Already Exists" , dependsOnMethods = {"testingValidUserSignUp"})
     @Description("Given i already signed up with an email, When I use the same email for new sign up , Then I should get an error message ")
+    @Story("Sign Up")
     @Severity(SeverityLevel.CRITICAL)
     @TmsLink("focus-case-1539798")
     @Issue("bug-tracker#1")
@@ -89,6 +92,7 @@ public class PhpTravels_SignUp_Test {
     
     @Test(description = "Invalid User Sign Up - Wrong Email Format")
     @Description("When I use a wrong email format on the sign up , Then I should get an error message ")
+    @Story("Sign Up")
     @Severity(SeverityLevel.CRITICAL)
     @TmsLink("focus-case-1539798")
     @Issue("bug-tracker#1")

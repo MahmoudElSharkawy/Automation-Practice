@@ -14,6 +14,7 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import liveproject.phptravels.gui.pages.PhpTravels_Home_Page;
 import utils.Logger;
@@ -25,7 +26,7 @@ import utils.BrowserFactory.BrowserType;
 import utils.BrowserFactory.ExecutionType;
 
 @Epic("Live Project")
-@Feature("PHPTravels Reservation Search")
+@Feature("PHPTRAVELS")
 public class PhpTravels_ReservationHotelsSearch_Test {
     WebDriver driver;
     Spreadsheet spreadSheet;
@@ -42,6 +43,7 @@ public class PhpTravels_ReservationHotelsSearch_Test {
 
     @Test(description = "Validating the search function of the hotels")
     @Description("Given I'm on the PHPTravels home page; When I Enter the data needed to search for hotels And click the search button; Then I should be navigated to the hotels search results page, Then I should get the search results related to the search value entered")
+    @Story("Reservation Search")
     @Severity(SeverityLevel.CRITICAL)
     @TmsLink("focus-case-1539798")
     @Issue("bug-tracker#1")

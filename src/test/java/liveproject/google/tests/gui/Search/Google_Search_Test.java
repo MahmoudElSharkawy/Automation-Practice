@@ -26,7 +26,7 @@ import utils.BrowserFactory.BrowserType;
 import utils.BrowserFactory.ExecutionType;
 
 @Epic("Live Project")
-@Feature("Google Search")
+@Feature("Google")
 public class Google_Search_Test {
     WebDriver driver;
     Spreadsheet spreadSheet;
@@ -42,7 +42,7 @@ public class Google_Search_Test {
     }
 
     @Test(description = "Validating the search function on Google home page")
-    @Story("Search Engine Story")
+    @Story("Search Engine")
     @Description("Given I'm on the Google home page; When I search for a value in the search bar And click Enter; Then I should be navigated to the search results page And get the search results related to the search value entered")
     @Severity(SeverityLevel.CRITICAL)
     @TmsLink("focus-case-1539798")

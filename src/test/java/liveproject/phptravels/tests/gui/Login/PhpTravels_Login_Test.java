@@ -16,6 +16,7 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import liveproject.phptravels.apis.APIs;
 import liveproject.phptravels.gui.pages.PhpTravels_Home_Page;
@@ -28,7 +29,7 @@ import utils.BrowserFactory.BrowserType;
 import utils.BrowserFactory.ExecutionType;
 
 @Epic("Live Project")
-@Feature("PHPTravels Login")
+@Feature("PHPTRAVELS")
 public class PhpTravels_Login_Test {
     WebDriver driver;
     Spreadsheet spreadSheet;
@@ -54,6 +55,7 @@ public class PhpTravels_Login_Test {
 
     @Test(description = "Valid User Login")
     @Description("When I login with an already signed up user, Then I should login successfully")
+    @Story("Login")
     @Severity(SeverityLevel.CRITICAL)
     @TmsLink("focus-case-1539798")
     @Issue("bug-tracker#1")
@@ -76,6 +78,7 @@ public class PhpTravels_Login_Test {
     
     @Test(description = "Invalid User Login")
     @Description("When I enter a not signed up user , Then I should get an error message ")
+    @Story("Login")
     @Severity(SeverityLevel.CRITICAL)
     @TmsLink("focus-case-1539798")
     @Issue("bug-tracker#1")
