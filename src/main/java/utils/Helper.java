@@ -2,6 +2,7 @@ package utils;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -9,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class Helper {
     static WebDriverWait wait;
     static Actions actions;
+    static JavascriptExecutor jsE;
 
     private final static int TIMEOUT = Integer
 	    .parseInt(PropertiesReader.getProperty("liveproject.properties", "Webdriver.Wait"));
@@ -24,5 +26,10 @@ public class Helper {
     public static Actions getActions(WebDriver driver) {
 	return actions = new Actions(driver);
     }
+    
+    public static JavascriptExecutor getJavascriptExecutor(WebDriver driver) {
+	return jsE = (JavascriptExecutor) driver;
+    }
+    
 
 }
