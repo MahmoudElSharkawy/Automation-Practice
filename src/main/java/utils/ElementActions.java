@@ -59,8 +59,9 @@ public class ElementActions {
     public static String getText(WebDriver driver, By by) {
 	Helper.getExplicitWait(driver).until(ExpectedConditions.visibilityOfElementLocated(by));
 	driver.findElement(by).isDisplayed();
-	Logger.logMessage("Getting the Text of element: " + by + " .... The Text is: " + driver.findElement(by).getText());
-	return driver.findElement(by).getText();
+	String text = driver.findElement(by).getText();
+	Logger.logMessage("Getting the Text of element: " + by + " .... The Text is: " + text);
+	return text;
     }
 
 }

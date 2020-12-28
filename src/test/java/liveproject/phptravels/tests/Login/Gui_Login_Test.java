@@ -1,4 +1,4 @@
-package liveproject.phptravels.tests.gui.Login;
+package liveproject.phptravels.tests.Login;
 
 import java.io.File;
 import java.util.Date;
@@ -30,7 +30,7 @@ import utils.BrowserFactory.ExecutionType;
 
 @Epic("Live Project")
 @Feature("PHPTRAVELS")
-public class PhpTravels_Login_Test {
+public class Gui_Login_Test {
     WebDriver driver;
     Spreadsheet spreadSheet;
     APIs apis;
@@ -42,11 +42,12 @@ public class PhpTravels_Login_Test {
 
     @BeforeClass
     public void setUp() {
-	spreadSheet = new Spreadsheet(new File("src/test/resources/TestData/LiveProject_PhpTravels_Login_TestData.xlsx"));
-	spreadSheet.switchToSheet("testsheet2");
+	spreadSheet = new Spreadsheet(
+		new File("src/test/resources/TestData/LiveProject_PhpTravels_Login_TestData.xlsx"));
+	spreadSheet.switchToSheet("GUI");
 	apis = new APIs();
     }
-    
+
     @BeforeMethod
     public void beforeMethod() {
 	driver = BrowserFactory.openBrowser(BrowserType.FROM_PROPERTIES, ExecutionType.FROM_PROPERTIES);
@@ -64,7 +65,6 @@ public class PhpTravels_Login_Test {
 	lastName = spreadSheet.getCellData("LastName", 2);
 	mobileNumber = spreadSheet.getCellData("Mobile Number", 2);
 	email = spreadSheet.getCellData("Email", 2) + currentTime + "@test.com";
-	Logger.logMessage("The mail registering is: " + email);
 	password = spreadSheet.getCellData("Password", 2);
 //register using api
 	apis.userSignUp(firstName, lastName, mobileNumber, email, password);
@@ -73,7 +73,7 @@ public class PhpTravels_Login_Test {
 		.navigateToLoginPage()
 		.userLogin(email, password)
 		.getHiMessage();
-	Assert.assertEquals(hiMessage,  "Hi, " + firstName + " " + lastName);
+	Assert.assertEquals(hiMessage, "Hi, " + firstName + " " + lastName, "No/Wrong Hi Message Names!;");
     }
     
     @Test(description = "Invalid User Login")
@@ -90,7 +90,8 @@ public class PhpTravels_Login_Test {
 		.navigateToLoginPage()
 		.invalidUserLogin(email, password)
 		.getAlertMessage();
-	Assert.assertEquals(alertMessage, spreadSheet.getCellData("Expected Alert Message", 3));
+	Assert.assertEquals(alertMessage, spreadSheet.getCellData("Expected Alert Message", 3),
+		"No/Wrong Alert Message!;");
     }
 
     @AfterMethod

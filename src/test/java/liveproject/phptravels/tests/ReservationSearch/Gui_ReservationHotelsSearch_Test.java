@@ -1,4 +1,4 @@
-package liveproject.google.tests.gui.Search;
+package liveproject.phptravels.tests.ReservationSearch;
 
 import java.io.File;
 
@@ -16,7 +16,7 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
-import liveproject.google.gui.pages.Google_HomePage;
+import liveproject.phptravels.gui.pages.PhpTravels_Home_Page;
 import utils.Logger;
 import utils.BrowserActions;
 import utils.BrowserFactory;
@@ -26,40 +26,36 @@ import utils.BrowserFactory.BrowserType;
 import utils.BrowserFactory.ExecutionType;
 
 @Epic("Live Project")
-@Feature("Google")
-public class Google_Search_Test {
+@Feature("PHPTRAVELS")
+public class Gui_ReservationHotelsSearch_Test {
     WebDriver driver;
     Spreadsheet spreadSheet;
 
-    String googleHomePageURL = PropertiesReader.getProperty("liveproject.properties", "google.home.url");
+    String phptravelsHomePageURL = PropertiesReader.getProperty("liveproject.properties", "phptravels.home.url");
 
     @BeforeClass
     public void setUp() {
-	spreadSheet = new Spreadsheet(new File("src/test/resources/TestData/LiveProject_Google_TestData.xlsx"));
+	spreadSheet = new Spreadsheet(
+		new File("src/test/resources/TestData/LiveProject_PhpTravels_ReservationHotelsSearch_TestData.xlsx"));
 	spreadSheet.switchToSheet("testsheet2");
 	driver = BrowserFactory.openBrowser(BrowserType.FROM_PROPERTIES, ExecutionType.FROM_PROPERTIES);
-	BrowserActions.navigateToUrl(driver, googleHomePageURL);
+	BrowserActions.navigateToUrl(driver, phptravelsHomePageURL);
     }
 
-    @Test(description = "Validating the search function on Google home page")
-    @Story("Search Engine")
-    @Description("Given I'm on the Google home page; When I search for a value in the search bar And click Enter; Then I should be navigated to the search results page And get the search results related to the search value entered")
+    @Test(description = "Validating the search function of the hotels")
+    @Description("Given I'm on the PHPTravels home page; When I Enter the data needed to search for hotels And click the search button; Then I should be navigated to the hotels search results page, Then I should get the search results related to the search value entered")
+    @Story("Reservation Search")
     @Severity(SeverityLevel.CRITICAL)
     @TmsLink("focus-case-1539798")
     @Issue("bug-tracker#1")
-    public void testingGoogleSearch() {
-	String searchIndex = spreadSheet.getCellData("Search Index", 2);
-	String searchData = spreadSheet.getCellData("Search Data", 2);
-	String expected = spreadSheet.getCellData("Expected", 2);
+    public void testingHotelsSearch() {
+	new PhpTravels_Home_Page(driver).hotelsSearch(spreadSheet.getCellData("Destination", 2),
+		spreadSheet.getCellData("Checkin Date", 2), spreadSheet.getCellData("Checkout Date", 2));
 
-	new Google_HomePage(driver)
-		.googleSearch(searchData)
-		.assertOnSearchResult(expected, searchIndex)
-		.assertOnPageTitle(searchData);
     }
 
     @AfterMethod
-    public void afterMethod(ITestResult result) {
+    public void AfterMethod(ITestResult result) {
 	if (result.getStatus() == ITestResult.FAILURE) {
 	    Logger.screenshotOnfailureGui(driver);
 	}

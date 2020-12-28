@@ -29,13 +29,6 @@ public class PhpTravels_SignUp_Page {
     @Step("User Sign up with Data --> First Name: [{firstName}], Last Name: [{lastName}], Mobile Number: [{mobileNumber}], Email: [{email}] and Password: [{password}]")
     public PhpTravels_UserAccount_Page userSignUp(String firstName, String lastName, String mobileNumber, String email,
 	    String password) {
-//	ElementActions.type(driver, firstname_field, firstName);
-//	ElementActions.type(driver, lastname_field, lastName);
-//	ElementActions.type(driver, phone_field, mobileNumber);
-//	ElementActions.type(driver, email_field, email);
-//	ElementActions.type(driver, password_field, password);
-//	ElementActions.type(driver, confirmpassword_field, password);
-//	ElementActions.clickEnterKey(driver, confirmpassword_field);
 	enterFirstNameField(firstName);
 	enterLastNameField(lastName);
 	enterMobileNumberField(mobileNumber);

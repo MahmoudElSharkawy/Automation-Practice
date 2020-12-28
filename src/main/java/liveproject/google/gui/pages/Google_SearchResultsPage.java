@@ -31,7 +31,8 @@ public class Google_SearchResultsPage {
 
     @Step("Assert on the search results of results number: [{resultIndex}]; Expected: [{expected}], ")
     public Google_SearchResultsPage assertOnSearchResult(String expected, String resultIndex) {
-	assertTrue(ElementActions.getText(driver, result_link(resultIndex)).contains(expected));
+	assertTrue(ElementActions.getText(driver, result_link(resultIndex)).contains(expected),
+		"Didn't find [" + expected + "] text");
 	return this;
     }
     
