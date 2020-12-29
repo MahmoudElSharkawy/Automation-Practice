@@ -57,7 +57,7 @@ public class Gui_ReservationHotelsSearch_Test {
     @AfterMethod
     public void AfterMethod(ITestResult result) {
 	if (result.getStatus() == ITestResult.FAILURE) {
-	    Logger.screenshotOnfailureGui(driver);
+	    Logger.attachScreenshotInCaseOfFailure(driver);
 	}
     }
 

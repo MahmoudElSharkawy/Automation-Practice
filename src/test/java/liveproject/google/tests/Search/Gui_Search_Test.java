@@ -61,7 +61,7 @@ public class Gui_Search_Test {
     @AfterMethod
     public void afterMethod(ITestResult result) {
 	if (result.getStatus() == ITestResult.FAILURE) {
-	    Logger.screenshotOnfailureGui(driver);
+	    Logger.attachScreenshotInCaseOfFailure(driver);
 	}
     }
 

@@ -97,7 +97,7 @@ public class Gui_Login_Test {
     @AfterMethod
     public void afterMethod(ITestResult result) {
 	if (result.getStatus() == ITestResult.FAILURE) {
-	    Logger.screenshotOnfailureGui(driver);
+	    Logger.attachScreenshotInCaseOfFailure(driver);
 	}
 	BrowserActions.closeAllOpenedBrowserWindows(driver);
     }

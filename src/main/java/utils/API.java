@@ -25,7 +25,7 @@ public class API {
     
     @Step("Perform API Request with end point --> {endpoint}]")
     public Response performRequest(String endpoint, Map<String, Object> formParams) {
-	return RestAssured
+	Response res = RestAssured
 	.given()
 		.formParams(formParams)	
 	.and()
@@ -36,12 +36,16 @@ public class API {
 		.spec(responseSpec)
 	.and()
 		.extract().response();
+	
+	Logger.attachApiResponse(res.asByteArray());
+	
+	return res;
 
     }
     
     @Step("Perform API Request with end point --> [{endpoint}]")
     public Response performRequestWithCookies(String endpoint, Map<String, String> cookies) {
-	return RestAssured
+	Response res = RestAssured
 	.given()
 		.spec(requestSpec)
 		.cookies(cookies)
@@ -51,6 +55,10 @@ public class API {
 		.spec(responseSpec)
 	.and()
 		.extract().response();
+	
+	Logger.attachApiResponse(res.asByteArray());
+	
+	return res;
 
     }
 
