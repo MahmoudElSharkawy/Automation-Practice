@@ -18,11 +18,13 @@ public class PhpTravels_Home_Page {
     private By myaccount_link = By.linkText("MY ACCOUNT");
     private By signup_link = By.linkText("Sign Up");
     private By login_link = By.linkText("Login");
-    private By hotels_link = By.xpath("//div[@class = 'menu-horizontal-wrapper-02']//a[contains(text(),'Hotels')]");
+    private By hotels_link = By.xpath("//a[contains(text(),'Hotels')]");
     private By destination_field = By.id("s2id_autogen16");
     private By checkin_field = By.id("checkin");
     private By checkout_field = By.id("checkout");
     private By hotels_search_button = By.xpath("//form[@name='HOTELS']//button[contains(text(),'Search')]");
+//    private By flights_link = By.xpath("//a[contains(text(),'Flights')]");
+
 
     private By hotles_result(String hotelsResult) {
 	return By.xpath("//div[contains(text(),'" + hotelsResult + "')]");
@@ -62,13 +64,13 @@ public class PhpTravels_Home_Page {
     }
 
     @Step("Search for Hotels with Data --> DESTINATION: [{hotelsOrCityname}], CHECK IN date: [{checkinDate}] and CHECK OUT date: [{checkoutDate}]")
-    public PhpTravels_Home_Page hotelsSearch(String hotelsOrCityname, String checkinDate, String checkoutDate) {
+    public PhpTravels_HotelsDetails_Page hotelsSearch(String hotelsOrCityname, String checkinDate, String checkoutDate) {
 	clickOnHotelsLink();
 	selectDestination(hotelsOrCityname);
 	enterCheckinDate(checkinDate);
 	enterCheckoutDate(checkoutDate);
 	clickOnseachButton();
-	return this;
+	return new PhpTravels_HotelsDetails_Page(driver);
     }
 
     @Step("Click on the HOTELS to Display the Hotels Fields")

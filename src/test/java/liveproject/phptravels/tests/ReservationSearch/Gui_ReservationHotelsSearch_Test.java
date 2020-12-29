@@ -3,6 +3,7 @@ package liveproject.phptravels.tests.ReservationSearch;
 import java.io.File;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -37,7 +38,7 @@ public class Gui_ReservationHotelsSearch_Test {
     public void setUp() {
 	spreadSheet = new Spreadsheet(
 		new File("src/test/resources/TestData/LiveProject_PhpTravels_ReservationHotelsSearch_TestData.xlsx"));
-	spreadSheet.switchToSheet("testsheet2");
+	spreadSheet.switchToSheet("GUI");
 	driver = BrowserFactory.openBrowser(BrowserType.FROM_PROPERTIES, ExecutionType.FROM_PROPERTIES);
 	BrowserActions.navigateToUrl(driver, phptravelsHomePageURL);
     }
@@ -49,8 +50,12 @@ public class Gui_ReservationHotelsSearch_Test {
     @TmsLink("focus-case-1539798")
     @Issue("bug-tracker#1")
     public void testingHotelsSearch() {
-	new PhpTravels_Home_Page(driver).hotelsSearch(spreadSheet.getCellData("Destination", 2),
-		spreadSheet.getCellData("Checkin Date", 2), spreadSheet.getCellData("Checkout Date", 2));
+	String hotelName =
+	new PhpTravels_Home_Page(driver)
+		.hotelsSearch(spreadSheet.getCellData("Destination", 2), spreadSheet.getCellData("Checkin Date", 2),
+			spreadSheet.getCellData("Checkout Date", 2))
+		.getHotelName();
+	Assert.assertEquals(hotelName, spreadSheet.getCellData("Expected Hotel Name", 2));
 
     }
 

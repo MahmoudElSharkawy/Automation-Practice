@@ -33,7 +33,7 @@ public class PhpTravels_APIs {
 	formParams.put("password", password);
 	formParams.put("confirmpassword", password);
 	
-	return	api.performRequest(signup_endpoint, formParams);
+	return	api.performRequest_withFormParams(signup_endpoint, formParams);
 	
 //	given()
 //		.formParam("firstname", firstName)
@@ -59,7 +59,7 @@ public class PhpTravels_APIs {
 	formParams.put("email", email);
 	formParams.put("password", password);
 	
-	return api.performRequest(login_endpoint, formParams);
+	return api.performRequest_withFormParams(login_endpoint, formParams);
 	
 //	given()
 //		.formParam("username", email)
@@ -77,7 +77,7 @@ public class PhpTravels_APIs {
     @Step("Getting User Account")
     public Response userAccount(Map<String, String> cookies) {
 	
-	return api.performRequestWithCookies(account_endpoint, cookies);
+	return api.performRequest_withCookies(account_endpoint, cookies);
 
 //	given()
 //		.cookies(cookies)

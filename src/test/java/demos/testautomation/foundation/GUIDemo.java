@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 
 import utils.BrowserFactory;
 
-public class UIDemo {
+public class GUIDemo {
 
     String firstName = "TestFN";
     String lastName = "TestLN";
