@@ -18,7 +18,7 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
-import liveproject.phptravels.apis.APIs;
+import liveproject.phptravels.apis.PhpTravels_APIs;
 import liveproject.phptravels.gui.pages.PhpTravels_Home_Page;
 import utils.Logger;
 import utils.BrowserActions;
@@ -33,7 +33,7 @@ import utils.BrowserFactory.ExecutionType;
 public class Gui_Login_Test {
     WebDriver driver;
     Spreadsheet spreadSheet;
-    APIs apis;
+    PhpTravels_APIs apis;
     String phptravelsHomePageURL = PropertiesReader.getProperty("liveproject.properties", "phptravels.home.url");
     Date date = new Date();
     
@@ -45,7 +45,7 @@ public class Gui_Login_Test {
 	spreadSheet = new Spreadsheet(
 		new File("src/test/resources/TestData/LiveProject_PhpTravels_Login_TestData.xlsx"));
 	spreadSheet.switchToSheet("GUI");
-	apis = new APIs();
+	apis = new PhpTravels_APIs();
     }
 
     @BeforeMethod
