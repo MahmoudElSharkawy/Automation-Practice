@@ -23,7 +23,7 @@ public class API {
 	    .log(LogDetail.BODY)
 	    .build();
     
-    @Step("Perform API Request with end point --> {endpoint}]")
+    @Step("Perform API Request with end point --> [{endpoint}]")
     public Response performRequest(String endpoint) {
 	Response res = RestAssured
 	.given()
@@ -41,7 +41,7 @@ public class API {
 
     }
     
-    @Step("Perform API Request with end point --> {endpoint}]")
+    @Step("Perform API Request with end point --> [{endpoint}]")
     public Response performRequest_withFormParams(String endpoint, Map<String, Object> formParams) {
 	Response res = RestAssured
 	.given()

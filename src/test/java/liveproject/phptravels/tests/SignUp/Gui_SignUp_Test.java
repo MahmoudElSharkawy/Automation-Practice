@@ -27,8 +27,8 @@ import utils.Spreadsheet;
 import utils.BrowserFactory.BrowserType;
 import utils.BrowserFactory.ExecutionType;
 
-@Epic("Live Project")
-@Feature("PHPTRAVELS")
+@Epic("PHPTRAVELS")
+@Feature("GUI")
 public class Gui_SignUp_Test {
     WebDriver driver;
     Spreadsheet spreadSheet;

@@ -13,6 +13,7 @@ public class PhpTravels_APIs {
     private static final String account_endpoint = "account/";
     private static final String login_endpoint = "account/login";
     private static final String signup_endpoint = "account/signup";
+    private static final String hotelsdetails_endpoint = "hotels/detail";
     
 //    private RequestSpecification requestSpec = new RequestSpecBuilder()
 //	    .setBaseUri(PropertiesReader.getProperty("liveproject.properties", "phptravels.home.url"))
@@ -74,9 +75,8 @@ public class PhpTravels_APIs {
 //		.extract().response();
     }
     
-    @Step("Getting User Account")
+    @Step("Get User Account")
     public Response userAccount(Map<String, String> cookies) {
-	
 	return api.performRequest_withCookies(account_endpoint, cookies);
 
 //	given()
@@ -89,6 +89,12 @@ public class PhpTravels_APIs {
 //		.spec(responseSpec)
 //	.and()
 //		.extract().response();
+    }
+    
+    @Step("Get Hotel Details with Data --> City Name: [{}], Hotel Name: [{}], Check In Date: [{}], Check Out Date: [{}], Adults Count: [{}], Child Count: [{}]")
+    public Response hotelsSearch(String cityName, String hotelName, String checkIn, String checkOut, String adultsCount, String childCount) {
+	return api.performRequest(hotelsdetails_endpoint + "/" + cityName + "/" + hotelName + "/" + checkIn + "/"
+		+ checkOut + "/" + adultsCount + "/" + childCount);
     }
 
 }

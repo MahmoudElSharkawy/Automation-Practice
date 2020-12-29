@@ -26,8 +26,8 @@ import utils.Spreadsheet;
 import utils.BrowserFactory.BrowserType;
 import utils.BrowserFactory.ExecutionType;
 
-@Epic("Live Project")
-@Feature("PHPTRAVELS")
+@Epic("PHPTRAVELS")
+@Feature("GUI")
 public class Gui_ReservationHotelsSearch_Test {
     WebDriver driver;
     Spreadsheet spreadSheet;
@@ -52,8 +52,8 @@ public class Gui_ReservationHotelsSearch_Test {
     public void testingHotelsSearch() {
 	String hotelName =
 	new PhpTravels_Home_Page(driver)
-		.hotelsSearch(spreadSheet.getCellData("Destination", 2), spreadSheet.getCellData("Checkin Date", 2),
-			spreadSheet.getCellData("Checkout Date", 2))
+		.hotelsSearch(spreadSheet.getCellData("Destination", 2), spreadSheet.getCellData("Check In Date", 2),
+			spreadSheet.getCellData("Check Out Date", 2))
 		.getHotelName();
 	Assert.assertEquals(hotelName, spreadSheet.getCellData("Expected Hotel Name", 2));
 

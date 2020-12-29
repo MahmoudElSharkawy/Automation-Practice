@@ -25,8 +25,8 @@ import utils.Spreadsheet;
 import utils.BrowserFactory.BrowserType;
 import utils.BrowserFactory.ExecutionType;
 
-@Epic("Live Project")
-@Feature("Google")
+@Epic("Google")
+@Feature("GUI")
 public class Gui_Search_Test {
     WebDriver driver;
     Spreadsheet spreadSheet;
