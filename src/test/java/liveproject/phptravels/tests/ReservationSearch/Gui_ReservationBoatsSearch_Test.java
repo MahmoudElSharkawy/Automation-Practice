@@ -28,7 +28,7 @@ import utils.BrowserFactory.ExecutionType;
 
 @Epic("PHPTRAVELS")
 @Feature("GUI")
-public class Gui_ReservationHotelsSearch_Test {
+public class Gui_ReservationBoatsSearch_Test {
     WebDriver driver;
     Spreadsheet spreadSheet;
 
@@ -37,27 +37,25 @@ public class Gui_ReservationHotelsSearch_Test {
     @BeforeClass
     public void setUp() {
 	spreadSheet = new Spreadsheet(
-		new File("src/test/resources/TestData/LiveProject_PhpTravels_ReservationHotelsSearch_TestData.xlsx"));
+		new File("src/test/resources/TestData/LiveProject_PhpTravels_ReservationBoatsSearch_TestData.xlsx"));
 	spreadSheet.switchToSheet("GUI");
 	driver = BrowserFactory.openBrowser(BrowserType.FROM_PROPERTIES, ExecutionType.FROM_PROPERTIES);
 	BrowserActions.navigateToUrl(driver, phptravelsHomePageURL);
     }
 
-    @Test(description = "Validating the search function of the Hotels")
-    @Description("Given I'm on the PHPTravels home page; When I enter the data needed to search for hotels And click the search button; Then I should be navigated to the hotels search results page, Then I should get the search results related to the search value entered")
-    @Story("Reservation Hotels Search")
+    @Test(description = "Validating the search function of the Boats")
+    @Description("Given I'm on the PHPTravels home page; When I enter the data needed to search for Boats And click the search button; Then I should be navigated to the Boats search results page, Then I should get the search results related to the search value entered")
+    @Story("Reservation Boats Search")
     @Severity(SeverityLevel.CRITICAL)
     @TmsLink("focus-case-1539798")
     @Issue("bug-tracker#1")
-    public void testingHotelsSearch() {
-	String hotelName =
+    public void testingBoatsSearch() {
+	String boatName =
 		new PhpTravels_Home_Page(driver)
-			.hotelsSearch(spreadSheet.getCellData("Destination", 2),
-				spreadSheet.getCellData("Check In Date", 2),
-				spreadSheet.getCellData("Check Out Date", 2),
-				spreadSheet.getCellData("Adults Count", 2), spreadSheet.getCellData("Child Count", 2))
-			.getHotelNameText();
-	Assert.assertEquals(hotelName, spreadSheet.getCellData("Expected Hotel Name", 2));
+			.boatsSearch(spreadSheet.getCellData("Boat Name", 2), spreadSheet.getCellData("Boat Type", 2),
+				spreadSheet.getCellData("Boat Date", 2), spreadSheet.getCellData("Adults Count", 2))
+			.getBoatNameText();
+	Assert.assertEquals(boatName, spreadSheet.getCellData("Expected Boat Name", 2));
 
     }
 

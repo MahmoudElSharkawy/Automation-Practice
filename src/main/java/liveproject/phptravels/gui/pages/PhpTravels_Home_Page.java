@@ -19,9 +19,9 @@ public class PhpTravels_Home_Page {
     private By signup_link = By.linkText("Sign Up");
     private By login_link = By.linkText("Login");
     private By hotels_link = By.xpath("//a[contains(text(),'Hotels')]");
-    private By destination_field = By.id("s2id_autogen16");
-    private By checkin_field = By.id("checkin");
-    private By checkout_field = By.id("checkout");
+    private By hotels_destination_field = By.id("s2id_autogen16");
+    private By hotels_checkin_field = By.id("checkin");
+    private By hotels_checkout_field = By.id("checkout");
     private By hotels_search_button = By.xpath("//form[@name='HOTELS']//button[contains(text(),'Search')]");
 //    private By flights_link = By.xpath("//a[contains(text(),'Flights')]");
     private By hotels_parents_up_button = By.xpath(
@@ -32,9 +32,19 @@ public class PhpTravels_Home_Page {
 	    "//form[@name='HOTELS']//input[@name='children']//parent::div[contains(@class,'input-group')]//button[contains(@class,'bootstrap-touchspin-up')]");
 //    private By hotels_children_down_button = By.xpath(
 //	    "//form[@name='HOTELS']//input[@name='children']//parent::div[contains(@class,'input-group')]//button[contains(@class,'bootstrap-touchspin-down')]");
-    
-    private By hotles_result(String hotelsResult) {
-	return By.xpath("//div[contains(text(),'" + hotelsResult + "')]");
+    private By boats_link = By.xpath("//a[contains(text(),'Boats')]");
+    private By boats_destination_field = By.id("s2id_autogen19");
+    private By boattype_choose = By.id("boattype_chosen");
+    private By boats_date_field = By.xpath("//div[@id='boats']//input[@id='DateTours']");
+    private By boats_adults_up_button = By
+	    .xpath("//div[@id='boats']//button[contains(@class,'bootstrap-touchspin-up')]");
+    private By boats_search_button = By.xpath("//div[@id='boats']//button[contains(text(),'Search')]");
+
+    private By search_results(String searchresult) {
+	return By.xpath("//div[contains(text(),'" + searchresult + "')]");
+    }
+    private By boattype_results(String searchresult) {
+	return By.xpath("//li[contains(text(),'" + searchresult + "')]");
     }
 
     // Methods
@@ -70,16 +80,16 @@ public class PhpTravels_Home_Page {
 	return new PhpTravels_SignUp_Page(driver);
     }
 
-    @Step("Search for Hotels with Data --> DESTINATION: [{hotelsOrCityname}], CHECK IN date: [{checkinDate}], CHECK OUT date: [{checkoutDate}], ADULTS Count; [{adultsCount}], CHILD Count; [{childCount}]")
+    @Step("Search for HOTELS with Data --> DESTINATION: [{hotelsOrCityname}], CHECK IN date: [{checkinDate}], CHECK OUT date: [{checkoutDate}], ADULTS Count; [{adultsCount}], CHILD Count; [{childCount}]")
     public PhpTravels_HotelsDetails_Page hotelsSearch(String hotelsOrCityname, String checkinDate, String checkoutDate,
 	    String adultsCount, String childCount) {
 	clickOnHotelsLink();
-	selectDestination(hotelsOrCityname);
+	selectHotelsDestination(hotelsOrCityname);
 	enterCheckinDate(checkinDate);
 	enterCheckoutDate(checkoutDate);
-	enterAdultsCount(adultsCount);
-	enterChildCount(childCount);
-	clickOnseachButton();
+	enterHotelsAdultsCount(adultsCount);
+	enterHotelsChildCount(childCount);
+	clickOnHotelsSearchButton();
 	return new PhpTravels_HotelsDetails_Page(driver);
     }
 
@@ -89,28 +99,28 @@ public class PhpTravels_Home_Page {
 	return this;
     }
 
-    @Step("Select DESTINATION --> [{hotelsOrCityname}]")
-    public PhpTravels_Home_Page selectDestination(String hotelsOrCityname) {
-	ElementActions.click(driver, destination_field);
+    @Step("Select HOTELS DESTINATION --> [{hotelsOrCityName}]")
+    public PhpTravels_Home_Page selectHotelsDestination(String hotelsOrCityName) {
+	ElementActions.click(driver, hotels_destination_field);
 //	ElementActions.type(driver, destination_field, hotelsOrCityname);
-	ElementActions.click(driver, hotles_result(hotelsOrCityname));
+	ElementActions.click(driver, search_results(hotelsOrCityName));
 	return this;
     }
 
-    @Step("Enter CHECK IN Date --> [{checkinDate}]")
+    @Step("Enter HOTELS CHECK IN Date --> [{checkinDate}]")
     public PhpTravels_Home_Page enterCheckinDate(String checkinDate) {
-	ElementActions.type(driver, checkin_field, checkinDate);
+	ElementActions.type(driver, hotels_checkin_field, checkinDate);
 	return this;
     }
 
-    @Step("Enter CHECK OUT Date --> [{checkoutDate}]")
+    @Step("Enter HOTELS CHECK OUT Date --> [{checkoutDate}]")
     public PhpTravels_Home_Page enterCheckoutDate(String checkoutDate) {
-	ElementActions.type(driver, checkout_field, checkoutDate);
+	ElementActions.type(driver, hotels_checkout_field, checkoutDate);
 	return this;
     }
-    
-    @Step("Enter ADULTS Count --> [{adultsCount}]")
-    public PhpTravels_Home_Page enterAdultsCount(String adultsCount) {
+
+    @Step("Enter HOTELS ADULTS Count --> [{adultsCount}]")
+    public PhpTravels_Home_Page enterHotelsAdultsCount(String adultsCount) {
 	int count = Integer.parseInt(adultsCount);
 	ElementActions.click(driver, hotels_parents_down_button);
 	ElementActions.click(driver, hotels_parents_down_button);
@@ -120,9 +130,9 @@ public class PhpTravels_Home_Page {
 	}
 	return this;
     }
-    
-    @Step("Enter CHILD Count --> [{childCount}]")
-    public PhpTravels_Home_Page enterChildCount(String childCount) {
+
+    @Step("Enter HOTELS CHILD Count --> [{childCount}]")
+    public PhpTravels_Home_Page enterHotelsChildCount(String childCount) {
 	int count = Integer.parseInt(childCount);
 	for (int i = 0; i < count; i++) {
 	    ElementActions.click(driver, hotels_child_up_button);
@@ -130,9 +140,63 @@ public class PhpTravels_Home_Page {
 	return this;
     }
 
-    @Step("Click on SEARCH button")
-    public PhpTravels_Home_Page clickOnseachButton() {
+    @Step("Click on HOTLES SEARCH button")
+    public PhpTravels_Home_Page clickOnHotelsSearchButton() {
 	ElementActions.click(driver, hotels_search_button);
+	return this;
+    }
+
+    @Step("Search for BOATS with Data --> DESTINATION: [{boatName}], BOAT TYPE: [{boatType}], BOAT date: [{boatDate}], ADULTS Count; [{adultsCount}]")
+    public PhpTravels_BoatsDetails_Page boatsSearch(String boatName, String boatType, String boatDate,
+	    String adultsCount) {
+	clickOnBoatsLink();
+	selectBoatsDestination(boatName);
+	selectBoatType(boatType);
+	enterboatDate(boatDate);
+	enterBoatsAdultsCount(adultsCount);
+	clickOnBoatsSearchButton();
+	return new PhpTravels_BoatsDetails_Page(driver);
+    }
+
+    @Step("Click on BOATS Link")
+    public PhpTravels_Home_Page clickOnBoatsLink() {
+	ElementActions.click(driver, boats_link);
+	return this;
+    }
+
+    @Step("Select BOATS DESTINATION --> [{boatName}]")
+    public PhpTravels_Home_Page selectBoatsDestination(String boatName) {
+	ElementActions.click(driver, boats_destination_field);
+//	ElementActions.type(driver, destination_field, hotelsOrCityname);
+	ElementActions.click(driver, search_results(boatName));
+	return this;
+    }
+
+    @Step("Select a BOAT TYPE --> [{boatType}]")
+    public PhpTravels_Home_Page selectBoatType(String boatType) {
+	ElementActions.click(driver, boattype_choose);
+	ElementActions.click(driver, boattype_results(boatType));
+	return this;
+    }
+
+    @Step("Enter BOATS DATE --> [{boatDate}]")
+    public PhpTravels_Home_Page enterboatDate(String boatDate) {
+	ElementActions.type(driver, boats_date_field, boatDate);
+	return this;
+    }
+
+    @Step("Enter BOATS ADULTS Count --> [{adultsCount}]")
+    public PhpTravels_Home_Page enterBoatsAdultsCount(String adultsCount) {
+	int count = Integer.parseInt(adultsCount);
+	for (int i = 0; i < count; i++) {
+	    ElementActions.click(driver, boats_adults_up_button);
+	}
+	return this;
+    }
+
+    @Step("Click on BOATS SEARCH button")
+    public PhpTravels_Home_Page clickOnBoatsSearchButton() {
+	ElementActions.click(driver, boats_search_button);
 	return this;
     }
 

@@ -32,9 +32,9 @@ public class Api_ReservationHotelsSearch_Test {
 	spreadSheet.switchToSheet("API");
     }
     
-    @Test(description = "Validating the search function of the hotels")
+    @Test(description = "Validating the search function of the Hotels")
     @Description("Given I'm on the PHPTravels home page; When I Enter the data needed to search for hotels And click the search button; Then I should be navigated to the hotels search results page, Then I should get the search results related to the search value entered")
-    @Story("Reservation Search")
+    @Story("Reservation Hotels Search")
     @Severity(SeverityLevel.CRITICAL)
     @TmsLink("focus-case-1539798")
     @Issue("bug-tracker#1")

@@ -19,7 +19,7 @@ public class PhpTravels_HotelsDetails_Page {
 
     // Methods
     @Step("Get the text of the Hotel Name")
-    public String getHotelName() {
+    public String getHotelNameText() {
 	return ElementActions.getText(driver, hotelName_title);
     }
     
