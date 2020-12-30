@@ -22,6 +22,7 @@
       <class name="liveproject.phptravels.tests.SignUp.Api_SignUp_Test"/>
       <!-- <class name="liveproject.phptravels.tests.Login.Api_Login_Test"/> -->
 	  <class name="liveproject.phptravels.tests.ReservationSearch.Api_ReservationHotelsSearch_Test"/>
+	  <class name="liveproject.phptravels.tests.ReservationSearch.Api_ReservationBoatsSearch_Test"/>
     </classes>
   </test> <!-- PHPTRAVELS - API -->
   

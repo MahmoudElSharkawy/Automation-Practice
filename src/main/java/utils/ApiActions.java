@@ -11,7 +11,7 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
-public class API {
+public class ApiActions {
     private String baseURI = PropertiesReader.getProperty("liveproject.properties", "phptravels.home.url");
     
     private RequestSpecification requestSpec = new RequestSpecBuilder()
@@ -46,6 +46,26 @@ public class API {
 	Response res = RestAssured
 	.given()
 		.formParams(formParams)	
+	.and()
+		.spec(requestSpec)
+	.when()
+		.post(endpoint)
+	.then()
+		.spec(responseSpec)
+	.and()
+		.extract().response();
+	
+	Logger.attachApiResponse(res.asByteArray());
+	
+	return res;
+
+    }
+    
+    @Step("Perform API Request with end point --> [{endpoint}]")
+    public Response performRequest_withQueryParams(String endpoint, Map<String, Object> queryParams) {
+	Response res = RestAssured
+	.given()
+		.queryParams(queryParams)
 	.and()
 		.spec(requestSpec)
 	.when()

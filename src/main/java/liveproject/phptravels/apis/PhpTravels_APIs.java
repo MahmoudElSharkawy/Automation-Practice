@@ -5,15 +5,17 @@ import java.util.Map;
 
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
-import utils.API;
+import utils.ApiActions;
 
 public class PhpTravels_APIs {
-    API api = new API();
+    ApiActions api = new ApiActions();
 
-    private static final String account_endpoint = "account/";
-    private static final String login_endpoint = "account/login";
-    private static final String signup_endpoint = "account/signup";
-    private static final String hotelsdetails_endpoint = "hotels/detail";
+    private String account_endpoint = "account/";
+    private String login_endpoint = "account/login";
+    private String signup_endpoint = "account/signup";
+    private String hotelsdetails_endpoint = "hotels/detail";
+    private String boats_endpoint = "boats";
+
     
 //    private RequestSpecification requestSpec = new RequestSpecBuilder()
 //	    .setBaseUri(PropertiesReader.getProperty("liveproject.properties", "phptravels.home.url"))
@@ -95,6 +97,14 @@ public class PhpTravels_APIs {
     public Response hotelsSearch(String cityName, String hotelName, String checkInDate, String checkOutDate, String adultsCount, String childCount) {
 	return api.performRequest(hotelsdetails_endpoint + "/" + cityName + "/" + hotelName + "/" + checkInDate + "/"
 		+ checkOutDate + "/" + adultsCount + "/" + childCount);
+    }
+    
+    @Step("Get Hotel Details with Data --> City Name: [{cityName}], Hotel Name: [{hotelName}], Check In Date: [{checkInDate}], Check Out Date: [{checkOutDate}], Adults Count: [{adultsCount}], Child Count: [{childCount}]")
+    public Response boatsSearch(String countryName, String cityName, String boatName, String boatDate, String adultsCount) {
+	Map<String, Object> queryParams = new HashMap<String, Object>();
+	queryParams.put("date", boatDate);
+	queryParams.put("adults", adultsCount);
+	return api.performRequest_withQueryParams(boats_endpoint + "/" + countryName + "/" + cityName + "/" + boatName, queryParams);
     }
 
 }
