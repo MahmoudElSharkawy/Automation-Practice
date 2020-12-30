@@ -20,7 +20,7 @@ public class ElementActions {
 	Helper.getExplicitWait(driver).until(ExpectedConditions.elementToBeClickable(by));
 	// Log element text if not empty
 	if (!driver.findElement(by).getText().isBlank()) {
-	    Logger.logMessage("Clicking on element: " + driver.findElement(by).getText());
+	    Logger.logMessage("Clicking on: " + driver.findElement(by).getText());
 	} else {
 	    Logger.logMessage("Clicking on element:" + by);
 	}

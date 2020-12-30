@@ -91,10 +91,10 @@ public class PhpTravels_APIs {
 //		.extract().response();
     }
     
-    @Step("Get Hotel Details with Data --> City Name: [{}], Hotel Name: [{}], Check In Date: [{}], Check Out Date: [{}], Adults Count: [{}], Child Count: [{}]")
-    public Response hotelsSearch(String cityName, String hotelName, String checkIn, String checkOut, String adultsCount, String childCount) {
-	return api.performRequest(hotelsdetails_endpoint + "/" + cityName + "/" + hotelName + "/" + checkIn + "/"
-		+ checkOut + "/" + adultsCount + "/" + childCount);
+    @Step("Get Hotel Details with Data --> City Name: [{cityName}], Hotel Name: [{hotelName}], Check In Date: [{checkInDate}], Check Out Date: [{checkOutDate}], Adults Count: [{adultsCount}], Child Count: [{childCount}]")
+    public Response hotelsSearch(String cityName, String hotelName, String checkInDate, String checkOutDate, String adultsCount, String childCount) {
+	return api.performRequest(hotelsdetails_endpoint + "/" + cityName + "/" + hotelName + "/" + checkInDate + "/"
+		+ checkOutDate + "/" + adultsCount + "/" + childCount);
     }
 
 }

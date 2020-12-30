@@ -51,10 +51,12 @@ public class Gui_ReservationHotelsSearch_Test {
     @Issue("bug-tracker#1")
     public void testingHotelsSearch() {
 	String hotelName =
-	new PhpTravels_Home_Page(driver)
-		.hotelsSearch(spreadSheet.getCellData("Destination", 2), spreadSheet.getCellData("Check In Date", 2),
-			spreadSheet.getCellData("Check Out Date", 2))
-		.getHotelName();
+		new PhpTravels_Home_Page(driver)
+			.hotelsSearch(spreadSheet.getCellData("Destination", 2),
+				spreadSheet.getCellData("Check In Date", 2),
+				spreadSheet.getCellData("Check Out Date", 2),
+				spreadSheet.getCellData("Adults Count", 2), spreadSheet.getCellData("Child Count", 2))
+			.getHotelName();
 	Assert.assertEquals(hotelName, spreadSheet.getCellData("Expected Hotel Name", 2));
 
     }

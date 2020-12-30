@@ -24,8 +24,15 @@ public class PhpTravels_Home_Page {
     private By checkout_field = By.id("checkout");
     private By hotels_search_button = By.xpath("//form[@name='HOTELS']//button[contains(text(),'Search')]");
 //    private By flights_link = By.xpath("//a[contains(text(),'Flights')]");
-
-
+    private By hotels_parents_up_button = By.xpath(
+	    "//form[@name='HOTELS']//input[@name='adults']//parent::div[contains(@class,'input-group')]//button[contains(@class,'bootstrap-touchspin-up')]");
+    private By hotels_parents_down_button = By.xpath(
+	    "//form[@name='HOTELS']//input[@name='adults']//parent::div[contains(@class,'input-group')]//button[contains(@class,'bootstrap-touchspin-down')]");
+    private By hotels_child_up_button = By.xpath(
+	    "//form[@name='HOTELS']//input[@name='children']//parent::div[contains(@class,'input-group')]//button[contains(@class,'bootstrap-touchspin-up')]");
+//    private By hotels_children_down_button = By.xpath(
+//	    "//form[@name='HOTELS']//input[@name='children']//parent::div[contains(@class,'input-group')]//button[contains(@class,'bootstrap-touchspin-down')]");
+    
     private By hotles_result(String hotelsResult) {
 	return By.xpath("//div[contains(text(),'" + hotelsResult + "')]");
     }
@@ -63,12 +70,15 @@ public class PhpTravels_Home_Page {
 	return new PhpTravels_SignUp_Page(driver);
     }
 
-    @Step("Search for Hotels with Data --> DESTINATION: [{hotelsOrCityname}], CHECK IN date: [{checkinDate}] and CHECK OUT date: [{checkoutDate}]")
-    public PhpTravels_HotelsDetails_Page hotelsSearch(String hotelsOrCityname, String checkinDate, String checkoutDate) {
+    @Step("Search for Hotels with Data --> DESTINATION: [{hotelsOrCityname}], CHECK IN date: [{checkinDate}], CHECK OUT date: [{checkoutDate}], ADULTS Count; [{adultsCount}], CHILD Count; [{childCount}]")
+    public PhpTravels_HotelsDetails_Page hotelsSearch(String hotelsOrCityname, String checkinDate, String checkoutDate,
+	    String adultsCount, String childCount) {
 	clickOnHotelsLink();
 	selectDestination(hotelsOrCityname);
 	enterCheckinDate(checkinDate);
 	enterCheckoutDate(checkoutDate);
+	enterAdultsCount(adultsCount);
+	enterChildCount(childCount);
 	clickOnseachButton();
 	return new PhpTravels_HotelsDetails_Page(driver);
     }
@@ -96,6 +106,27 @@ public class PhpTravels_Home_Page {
     @Step("Enter CHECK OUT Date --> [{checkoutDate}]")
     public PhpTravels_Home_Page enterCheckoutDate(String checkoutDate) {
 	ElementActions.type(driver, checkout_field, checkoutDate);
+	return this;
+    }
+    
+    @Step("Enter ADULTS Count --> [{adultsCount}]")
+    public PhpTravels_Home_Page enterAdultsCount(String adultsCount) {
+	int count = Integer.parseInt(adultsCount);
+	ElementActions.click(driver, hotels_parents_down_button);
+	ElementActions.click(driver, hotels_parents_down_button);
+
+	for (int i = 0; i < count; i++) {
+	    ElementActions.click(driver, hotels_parents_up_button);
+	}
+	return this;
+    }
+    
+    @Step("Enter CHILD Count --> [{childCount}]")
+    public PhpTravels_Home_Page enterChildCount(String childCount) {
+	int count = Integer.parseInt(childCount);
+	for (int i = 0; i < count; i++) {
+	    ElementActions.click(driver, hotels_child_up_button);
+	}
 	return this;
     }
 

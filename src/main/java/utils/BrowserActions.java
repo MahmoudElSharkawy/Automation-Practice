@@ -12,11 +12,12 @@ public class BrowserActions {
 	Logger.logMessage("Navigating to URL: " + url);
 	driver.get(url);
     }
+
     @Step("Close All Opened Browser Windows.....")
     public static void closeAllOpenedBrowserWindows(WebDriver driver) {
 	Logger.logMessage("Closing All Opened Browser Windows.....");
 	if (driver != null) {
-		driver.quit();
+	    driver.quit();
 	}
     }
 
