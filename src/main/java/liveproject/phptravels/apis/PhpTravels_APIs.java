@@ -99,7 +99,7 @@ public class PhpTravels_APIs {
 		+ checkOutDate + "/" + adultsCount + "/" + childCount);
     }
     
-    @Step("Get Hotel Details with Data --> City Name: [{cityName}], Hotel Name: [{hotelName}], Check In Date: [{checkInDate}], Check Out Date: [{checkOutDate}], Adults Count: [{adultsCount}], Child Count: [{childCount}]")
+    @Step("Get Boat Details with Data --> Country Name: [{countryName}], City Name: [{cityName}], Boat Name: [{boatName}], Boat Date: [{boatDate}] and Adults Count: [{adultsCount}]")
     public Response boatsSearch(String countryName, String cityName, String boatName, String boatDate, String adultsCount) {
 	Map<String, Object> queryParams = new HashMap<String, Object>();
 	queryParams.put("date", boatDate);
