@@ -19,7 +19,7 @@ public class PhpTravels_Home_Page {
     private By signup_link = By.linkText("Sign Up");
     private By login_link = By.linkText("Login");
     private By hotels_link = By.xpath("//a[contains(text(),'Hotels')]");
-    private By hotels_destination_field = By.id("s2id_autogen16");
+    private By hotels_destination_field = By.xpath("//div[contains(@class,'locationlistHotels')]");
     private By hotels_checkin_field = By.id("checkin");
     private By hotels_checkout_field = By.id("checkout");
     private By hotels_search_button = By.xpath("//form[@name='HOTELS']//button[contains(text(),'Search')]");
@@ -33,7 +33,7 @@ public class PhpTravels_Home_Page {
 //    private By hotels_children_down_button = By.xpath(
 //	    "//form[@name='HOTELS']//input[@name='children']//parent::div[contains(@class,'input-group')]//button[contains(@class,'bootstrap-touchspin-down')]");
     private By boats_link = By.xpath("//a[contains(text(),'Boats')]");
-    private By boats_destination_field = By.id("s2id_autogen19");
+    private By boats_destination_field = By.xpath("//div[contains(@class,'locationlistboats')]");
     private By boattype_choose = By.id("boattype_chosen");
     private By boats_date_field = By.xpath("//div[@id='boats']//input[@id='DateTours']");
     private By boats_adults_up_button = By

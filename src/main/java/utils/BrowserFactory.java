@@ -39,12 +39,12 @@ public class BrowserFactory {
 	LOCAL, REMOTE, FROM_PROPERTIES;
     }
 
-    @Step("Opening Browser")
+    @Step("Open Browser")
     public static WebDriver openBrowser() {
 	return openBrowser(BrowserType.GOOGLE_CHROME, ExecutionType.LOCAL);
     }
 
-    @Step("Opening Browser")
+    @Step("Open Browser")
     public static WebDriver openBrowser(BrowserType browserType, ExecutionType executionType) {
 	if (executionType == ExecutionType.REMOTE
 		|| (executionType == ExecutionType.FROM_PROPERTIES && executionTypeProperty.equalsIgnoreCase("remote"))) {
