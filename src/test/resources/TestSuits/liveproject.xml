@@ -2,11 +2,11 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Live Project">
 
-  <test name="Google Search - GUI">
+  <test name="Google - GUI">
     <classes>
       <class name="liveproject.google.tests.Search.Gui_Search_Test"/>
     </classes>
-  </test> <!-- Google Search - GUI -->
+  </test> <!-- Google - GUI -->
   
   <test name="PHPTRAVELS - GUI">
     <classes>
@@ -17,7 +17,7 @@
     </classes>
   </test> <!-- PHPTRAVELS - GUI -->
   
-    <test name="PHPTRAVELS - API">
+  <test name="PHPTRAVELS - API">
     <classes>
       <class name="liveproject.phptravels.tests.SignUp.Api_SignUp_Test"/>
       <!-- <class name="liveproject.phptravels.tests.Login.Api_Login_Test"/> -->

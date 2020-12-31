@@ -23,7 +23,7 @@ public class ApiActions {
 	    .log(LogDetail.BODY)
 	    .build();
     
-    @Step("Perform API Request with end point --> [{endpoint}]")
+    @Step("Perform API Request --> [https://www.phptravels.net/{endpoint}]")
     public Response performRequest(String endpoint) {
 	Response res = RestAssured
 	.given()
@@ -41,7 +41,7 @@ public class ApiActions {
 
     }
     
-    @Step("Perform API Request with end point --> [{endpoint}]")
+    @Step("Perform API Request --> [https://www.phptravels.net/{endpoint}]")
     public Response performRequest_withFormParams(String endpoint, Map<String, Object> formParams) {
 	Response res = RestAssured
 	.given()
@@ -61,7 +61,7 @@ public class ApiActions {
 
     }
     
-    @Step("Perform API Request with end point --> [{endpoint}]")
+    @Step("Perform API Request --> [https://www.phptravels.net/{endpoint}]")
     public Response performRequest_withQueryParams(String endpoint, Map<String, Object> queryParams) {
 	Response res = RestAssured
 	.given()
@@ -81,7 +81,7 @@ public class ApiActions {
 
     }
     
-    @Step("Perform API Request with end point --> [{endpoint}]")
+    @Step("Perform API Request --> [https://www.phptravels.net/{endpoint}]")
     public Response performRequest_withCookies(String endpoint, Map<String, String> cookies) {
 	Response res = RestAssured
 	.given()
