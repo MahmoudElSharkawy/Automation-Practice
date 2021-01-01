@@ -12,7 +12,7 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
 public class ApiActions {
-    private String baseURI = PropertiesReader.getProperty("liveproject.properties", "phptravels.home.url");
+    private String baseURI = PropertiesReader.getProperty("liveproject.properties", "phptravels.baseuri");
     
     private RequestSpecification requestSpec = new RequestSpecBuilder()
 	    .setBaseUri(baseURI)

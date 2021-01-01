@@ -11,6 +11,8 @@ public class BrowserActions {
     public static void navigateToUrl(WebDriver driver, String url) {
 	Logger.logMessage("Navigating to URL: " + url);
 	driver.get(url);
+//	driver.navigate().to(url);
+//	Helper.getJavascriptExecutor(driver).executeScript("return document.readyState").equals("complete");
     }
 
     @Step("Close All Opened Browser Windows.....")
