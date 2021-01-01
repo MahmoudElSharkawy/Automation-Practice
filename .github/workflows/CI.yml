@@ -24,11 +24,23 @@ jobs:
       run: docker ps
     - name: Run liveproject tests - Chrome Headless
       run: mvn -P=liveproject test
-    - name: Remove the containers
-      run: docker-compose -f src/main/resources/docker-compose_native.yml down --remove-orphans
-    - name: Set up Native Selenium Grid with one hub and four Firefox nodes 
-      run: docker-compose -f src/main/resources/docker-compose_native.yml up --scale firefox=4 --remove-orphans -d
-    - name: Check running containers
-      run: docker ps
-    - name: Run liveproject tests - Firefox Headless
-      run: mvn -P=liveproject test
+    - name: Generate Allure Report with history
+      uses: simple-elf/allure-report-action@v1.3
+      with:
+        allure_results: target/allure-results
+        allure_report: allure-report
+        allure_version: 2.13.8
+        gh_pages: gh-pages
+        allure_history: allure-history
+        subfolder: allure
+        github_run_num: ${{ github.run_number }}
+        github_run_id: ${{ github.run_id }}
+        github_repo: ${{ github.repository }}
+        github_repo_owner: ${{ github.repository_owner }}
+    - name: Deploy report to Github Pages
+      uses: peaceiris/actions-gh-pages@v3.7.3
+      with:
+        personal_token: ${{ secrets.PERSONAL_TOKEN }}
+        publish_dir: allure-history/allure
+        destination_dir: allure
+        publish_branch: gh-pages
