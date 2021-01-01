@@ -77,7 +77,7 @@ public class ElementActions {
 	driver.findElement(by).isDisplayed();
 	// We get the text here! :D
 	String text = driver.findElement(by).getText();
-	Logger.logMessage("Getting the Text of element: " + by + " .... The Text is: " + text);
+	Logger.logMessage("Getting the Text of element: " + by + "; The Text is: " + text);
 	return text;
     }
 
