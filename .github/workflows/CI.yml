@@ -22,12 +22,13 @@ jobs:
       run: docker-compose -f src/main/resources/docker-compose_native.yml up --scale chrome=4 --remove-orphans -d
     - name: Check running containers
       run: docker ps
-    - name: Run liveproject tests - Chrome Headaless
+    - name: Run liveproject tests - Chrome Headless
       run: mvn -P=liveproject test
-    - name: Remove the hub and the nodes
+    - name: Remove the containers
+      run: docker-compose -f src/main/resources/docker-compose_native.yml down --remove-orphans
     - name: Set up Native Selenium Grid with one hub and four Firefox nodes 
       run: docker-compose -f src/main/resources/docker-compose_native.yml up --scale firefox=4 --remove-orphans -d
     - name: Check running containers
       run: docker ps
-    - name: Run liveproject tests - Firefox Headaless
+    - name: Run liveproject tests - Firefox Headless
       run: mvn -P=liveproject test
