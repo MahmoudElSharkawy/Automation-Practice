@@ -131,6 +131,7 @@ public class BrowserFactory {
 	ffOptions.addArguments("--headless");
 //	ffOptions.addArguments("--start-maximized");
 	ffOptions.addArguments("--window-size=1920,1080");
+//	ffOptions.addArguments("disable--infobars");
 	return ffOptions;
     }
 
