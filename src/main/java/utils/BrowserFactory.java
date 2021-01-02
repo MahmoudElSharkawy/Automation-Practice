@@ -84,8 +84,8 @@ public class BrowserFactory {
 		}
 
 	    } else {
-		Logger.logMessage("The browser " + browserTypeProperty
-			+ " is not valid/supported; Please chose from the given choices in the properties file");
+		Logger.logMessage("WARNING!! The browser [" + browserTypeProperty
+			+ "] is not valid/supported; Please choose from the given choices in the properties file");
 	    }
 	}
 	// Local execution......
@@ -106,14 +106,13 @@ public class BrowserFactory {
 		Helper.implicitWait(driver);
 		BrowserActions.maximizeTheWindow(driver);
 	    } else {
-		Logger.logMessage("The browser " + browserTypeProperty
-			+ " is not valid/supported; Please chose from the given choices in the properties file");
+		Logger.logMessage("WARNING!! The browser [" + browserTypeProperty
+			+ "] is not valid/supported; Please choose from the given choices in the properties file");
 	    }
 	}
 	// Local headless execution......
 	else if (executionType == ExecutionType.LOCAL_HEADLESS || (executionType == ExecutionType.FROM_PROPERTIES
 		&& executionTypeProperty.equalsIgnoreCase("local_headless"))) {
-
 	    if (browserType == BrowserType.GOOGLE_CHROME
 		    || (browserType == BrowserType.FROM_PROPERTIES && browserTypeProperty.equalsIgnoreCase("chrome"))) {
 		Logger.logMessage("Opening Headless [Google Chrome] Browser!....");
@@ -127,10 +126,14 @@ public class BrowserFactory {
 		driver = new FirefoxDriver(getFirefoxOptions_localHeadless());
 		Helper.implicitWait(driver);
 	    } else {
-		Logger.logMessage("The browser " + browserTypeProperty
-			+ " is not valid/supported; Please chose from the given choices in the properties file");
+		Logger.logMessage("WARNING!! The browser [" + browserTypeProperty
+			+ "] is not valid/supported; Please choose from the given choices in the properties file");
 	    }
 	
+	}
+	else {
+	    Logger.logMessage("WARNING!! The execution type [" + executionTypeProperty
+			+ "] is not valid/supported; Please choose from the given choices in the properties file");
 	}
 	return driver;
     }
