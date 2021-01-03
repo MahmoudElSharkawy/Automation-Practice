@@ -1,6 +1,7 @@
-package liveproject.phptravels.tests.ReservationSearch;
+package liveproject.phptravels.tests.Booking;
 
 import java.io.File;
+import java.util.Date;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -17,7 +18,8 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
-import liveproject.phptravels.gui.pages.PhpTravels_Home_Page;
+import liveproject.phptravels.apis.PhpTravels_APIs;
+import liveproject.phptravels.gui.pages.PhpTravels_BoatsDetails_Page;
 import utils.Logger;
 import utils.BrowserActions;
 import utils.BrowserFactory;
@@ -28,35 +30,46 @@ import utils.BrowserFactory.ExecutionType;
 
 @Epic("PHPTRAVELS")
 @Feature("GUI")
-public class Gui_ReservationBoatsSearch_Test {
+public class Gui_BookBoats_Test {
     WebDriver driver;
     Spreadsheet spreadSheet;
+    PhpTravels_APIs apis;
+    String phptravelsHomePageURL = PropertiesReader.getProperty("liveproject.properties", "phptravels.baseuri");
 
-    String phptravelsHomePageURL = PropertiesReader.getProperty("liveproject.properties", "phptravels.home.url");
+    Date date = new Date();
+    String firstName, lastName, mobileNumber, email, password;
+    String currentTime = date.getTime() + "";
 
     @BeforeClass
     public void setUp() {
-	spreadSheet = new Spreadsheet(
-		new File("src/test/resources/TestData/LiveProject_PhpTravels_ReservationBoatsSearch_TestData.xlsx"));
-	spreadSheet.switchToSheet("GUI");
+//	spreadSheet = new Spreadsheet(
+//		new File("src/test/resources/TestData/LiveProject_PhpTravels_BookBoats_TestData.xlsx"));
+//	spreadSheet.switchToSheet("GUI");
+	apis = new PhpTravels_APIs();
 	driver = BrowserFactory.openBrowser(BrowserType.FROM_PROPERTIES, ExecutionType.FROM_PROPERTIES);
-	BrowserActions.navigateToUrl(driver, phptravelsHomePageURL);
+	BrowserActions.navigateToUrl(driver, phptravelsHomePageURL
+		+ "/boats/sri-lanka/colombo/Speedboat-Bravo-410---2016-refit-2016-?date=01/01/2025&adults=2");
     }
 
-    @Test(description = "Validating the search function of the Boats")
-    @Description("Given I'm on the PHPTravels home page; When I enter the data needed to search for Boats And click the search button; Then I should be navigated to the Boats search results page, Then I should get the search results related to the search value entered")
-    @Story("Reservation Search")
+    @Test(description = "Validating the booking function of the Boats")
+    @Description("")
+    @Story("Booking")
     @Severity(SeverityLevel.CRITICAL)
     @TmsLink("focus-case-1539798")
     @Issue("bug-tracker#1")
     public void testingBoatsSearch() {
-	String boatName =
-		new PhpTravels_Home_Page(driver)
-			.dismissCookieBar()
-			.boatsSearch(spreadSheet.getCellData("Boat Name", 2), spreadSheet.getCellData("Boat Type", 2),
-				spreadSheet.getCellData("Boat Date", 2), spreadSheet.getCellData("Adults Count", 2))
-			.getBoatNameText();
-	Assert.assertEquals(boatName, spreadSheet.getCellData("Expected Boat Name", 2));
+	firstName = "mah";
+	lastName = "mah";
+	mobileNumber = "12321321321";
+	email = "mah" + currentTime + "@test.com";
+	password = "12345678";
+//sign up using api
+	apis.userSignUp(firstName, lastName, mobileNumber, email, password);
+	
+	new PhpTravels_BoatsDetails_Page(driver)
+		.dismissCookieBar()
+		.clickOnBookNow();
+	Assert.assertEquals("", "");
 
     }
 

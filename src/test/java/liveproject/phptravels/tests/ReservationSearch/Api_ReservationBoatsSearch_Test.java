@@ -34,7 +34,7 @@ public class Api_ReservationBoatsSearch_Test {
     
     @Test(description = "Validating the search function of the Boats")
     @Description("Given I'm on the PHPTravels home page; When I enter the data needed to search for Boats And click the search button; Then I should be navigated to the Boats search results page, Then I should get the search results related to the search value entered")
-    @Story("Reservation Boats Search")
+    @Story("Reservation Search")
     @Severity(SeverityLevel.CRITICAL)
     @TmsLink("focus-case-1539798")
     @Issue("bug-tracker#1")
