@@ -17,6 +17,7 @@ public class PhpTravels_UserAccount_Page {
 
     // Elements
     private By hi_text = By.xpath("//*[@style='margin-left: 17px']");
+    private By booking_status = By.xpath("//div[@id='bookings']//h5");
 
     // Methods
     @Step("Get the text of the Hi message")
@@ -24,6 +25,13 @@ public class PhpTravels_UserAccount_Page {
 	String hiMessage = ElementActions.getText(driver, hi_text);
 	Logger.logMessage("The Hi message is: " + hiMessage);
 	return hiMessage;
+    }
+    
+    @Step("Get the text of the current Booking status")
+    public String getBookingStatus() {
+	String bookingStatus = ElementActions.getText(driver, booking_status);
+	Logger.logMessage("The Hi message is: " + bookingStatus);
+	return bookingStatus;
     }
     
 }

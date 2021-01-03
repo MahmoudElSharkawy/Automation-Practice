@@ -20,7 +20,6 @@ public class PhpTravels_BoatsDetails_Page {
     private By booknow_button = By.xpath("//div[@class='booking-selection-box']//button[contains(.,'Book Now')]");
 
     // Methods
-    @Step("Dismiss the cookie bar")
     public PhpTravels_BoatsDetails_Page dismissCookieBar() {
 	ElementActions.click(driver, gotit_cookie_button);
 	return this;

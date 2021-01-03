@@ -10,10 +10,11 @@
   
   <test name="PHPTRAVELS - GUI">
     <classes>
-      <class name="liveproject.phptravels.tests.ReservationSearch.Gui_ReservationHotelsSearch_Test"/>
-      <class name="liveproject.phptravels.tests.ReservationSearch.Gui_ReservationBoatsSearch_Test"/>
       <class name="liveproject.phptravels.tests.SignUp.Gui_SignUp_Test"/>
       <class name="liveproject.phptravels.tests.Login.Gui_Login_Test"/>
+      <class name="liveproject.phptravels.tests.ReservationSearch.Gui_ReservationHotelsSearch_Test"/>
+      <class name="liveproject.phptravels.tests.ReservationSearch.Gui_ReservationBoatsSearch_Test"/>
+      <class name="liveproject.phptravels.tests.Booking.Gui_BoatsBooking_Test"/>  
     </classes>
   </test> <!-- PHPTRAVELS - GUI -->
   
@@ -23,6 +24,7 @@
       <!-- <class name="liveproject.phptravels.tests.Login.Api_Login_Test"/> -->
 	  <class name="liveproject.phptravels.tests.ReservationSearch.Api_ReservationHotelsSearch_Test"/>
 	  <class name="liveproject.phptravels.tests.ReservationSearch.Api_ReservationBoatsSearch_Test"/>
+	  <!-- <class name="liveproject.phptravels.tests.Booking.Api_BoatsBooking_Test"/> -->
     </classes>
   </test> <!-- PHPTRAVELS - API -->
   

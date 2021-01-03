@@ -49,7 +49,6 @@ public class PhpTravels_Home_Page {
     }
 
     // Methods
-    @Step("Dismiss the cookie bar")
     public PhpTravels_Home_Page dismissCookieBar() {
 	ElementActions.click(driver, gotit_cookie_button);
 	return this;

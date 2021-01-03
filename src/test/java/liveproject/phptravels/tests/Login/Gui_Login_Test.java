@@ -66,7 +66,7 @@ public class Gui_Login_Test {
 	mobileNumber = spreadSheet.getCellData("Mobile Number", 2);
 	email = spreadSheet.getCellData("Email", 2) + currentTime + "@test.com";
 	password = spreadSheet.getCellData("Password", 2);
-//sing up using api
+	//sing up using api
 	apis.userSignUp(firstName, lastName, mobileNumber, email, password);
 	
 	String hiMessage = new PhpTravels_Home_Page(driver)

@@ -2,6 +2,7 @@ package utils;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -13,6 +14,7 @@ public class Helper {
     static Actions actions;
     static JavascriptExecutor jsE;
     static Cookie cookie;
+    static Alert alert;
 
     private final static int TIMEOUT = Integer
 	    .parseInt(PropertiesReader.getProperty("liveproject.properties", "webdriver.wait"));
@@ -39,4 +41,7 @@ public class Helper {
 	return cookie;
     }
 
+    public static Alert alert(WebDriver driver) {
+	return driver.switchTo().alert();
+    }
 }
