@@ -31,7 +31,7 @@ public class PhpTravels_Invoice_Page {
     }
 
     @Step("Get the text of the current invoice status")
-    public String GetTextOfCurrentInvoiceStatus() {
+    public String getInvoiceStatus() {
 	return ElementActions.getText(driver, booking_status);
     }
 

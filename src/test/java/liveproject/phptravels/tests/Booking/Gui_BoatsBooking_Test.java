@@ -53,7 +53,7 @@ public class Gui_BoatsBooking_Test {
     }
 
     @Test(description = "Validating the booking function of the Boats")
-    @Description("")
+    @Description("When I book a boat, And confirm the booking request, Then the boat should be Reserved on my profile")
     @Story("Booking")
     @Severity(SeverityLevel.CRITICAL)
     @TmsLink("focus-case-1539798")
@@ -74,7 +74,7 @@ public class Gui_BoatsBooking_Test {
 		.dismissCookieBar()
 		.clickOnConfirmThisBooking()
 		.clickOnPayOnArrivalAndAcceptAlert()
-		.GetTextOfCurrentInvoiceStatus();
+		.getInvoiceStatus();
 	Assert.assertEquals(invoiceStatus, spreadSheet.getCellData("Expected Invoice Status", 2));
 	
 	BrowserActions.navigateToUrl(driver, phptravelsBaseUrl + "/account");

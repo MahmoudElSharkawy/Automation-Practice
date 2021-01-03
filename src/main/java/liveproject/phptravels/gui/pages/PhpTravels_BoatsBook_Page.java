@@ -27,7 +27,7 @@ public class PhpTravels_BoatsBook_Page {
 	return this;
     }
     
-    @Step("Sign In")
+    @Step("Sign In with data --> Email: [{email}] and Password: [{password}]")
     public PhpTravels_BoatsBook_Page signIn(String email, String password) {
 	clickOnSignInTab();
 	enterEmailField(email);
