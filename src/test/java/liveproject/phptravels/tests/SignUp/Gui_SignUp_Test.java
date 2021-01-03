@@ -65,6 +65,7 @@ public class Gui_SignUp_Test {
 	password = spreadSheet.getCellData("Password", 2);
 
 	String hiMessage = new PhpTravels_Home_Page(driver)
+		.dismissCookieBar()
 		.navigateToSignUpPage()
 		.userSignUp(firstName, lastName, mobileNumber, email, password)
 		.getHiMessage();
@@ -85,6 +86,7 @@ public class Gui_SignUp_Test {
 	password = spreadSheet.getCellData("Password", 3);
 
 	String alertMessage = new PhpTravels_Home_Page(driver)
+		.dismissCookieBar()
 		.navigateToSignUpPage()
 		.invalidUserSignUp(firstName, lastName, mobileNumber, email, password)
 		.getAlertMessage();
@@ -106,6 +108,7 @@ public class Gui_SignUp_Test {
 	password = spreadSheet.getCellData("Password", 4);
 
 	String alertMessage = new PhpTravels_Home_Page(driver)
+		.dismissCookieBar()
 		.navigateToSignUpPage()
 		.invalidUserSignUp(firstName, lastName, mobileNumber, email, password)
 		.getAlertMessage();

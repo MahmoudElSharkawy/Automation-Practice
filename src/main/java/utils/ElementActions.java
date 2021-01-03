@@ -16,7 +16,7 @@ public class ElementActions {
 	// Wait for the element to be visible
 	Helper.getExplicitWait(driver).until(ExpectedConditions.visibilityOfElementLocated(by));
 	// Scroll the element into view to handle some browsers cases
-	Helper.getJavascriptExecutor(driver).executeScript("arguments[0].scrollIntoView(true);",
+	Helper.getJavascriptExecutor(driver).executeScript("arguments[0].scrollIntoView(false);",
 		driver.findElement(by));
 	// Check if the element is displayed
 	driver.findElement(by).isDisplayed();
@@ -37,7 +37,7 @@ public class ElementActions {
     @Step("Clear then Type: [{data}] on element: [{by}]")
     public static void type(WebDriver driver, By by, String data) {
 	Helper.getExplicitWait(driver).until(ExpectedConditions.visibilityOfElementLocated(by));
-	Helper.getJavascriptExecutor(driver).executeScript("arguments[0].scrollIntoView(true);",
+	Helper.getJavascriptExecutor(driver).executeScript("arguments[0].scrollIntoView(false);",
 		driver.findElement(by));
 	driver.findElement(by).isDisplayed();
 	// Clear the element values if it has any before typing on it
@@ -61,7 +61,7 @@ public class ElementActions {
     @Step("Click: [ENTER key] on element: [{by}]")
     public static void clickEnterKey(WebDriver driver, By by) {
 	Helper.getExplicitWait(driver).until(ExpectedConditions.visibilityOfElementLocated(by));
-	Helper.getJavascriptExecutor(driver).executeScript("arguments[0].scrollIntoView(true);",
+	Helper.getJavascriptExecutor(driver).executeScript("arguments[0].scrollIntoView(false);",
 		driver.findElement(by));
 	driver.findElement(by).isDisplayed();
 	Logger.logMessage("Clicking: [ENTER key] on element: " + by);
@@ -72,7 +72,7 @@ public class ElementActions {
     @Step("Get the Text of element: [{by}]")
     public static String getText(WebDriver driver, By by) {
 	Helper.getExplicitWait(driver).until(ExpectedConditions.visibilityOfElementLocated(by));
-	Helper.getJavascriptExecutor(driver).executeScript("arguments[0].scrollIntoView(true);",
+	Helper.getJavascriptExecutor(driver).executeScript("arguments[0].scrollIntoView(false);",
 		driver.findElement(by));
 	driver.findElement(by).isDisplayed();
 	// We get the text here! :D

@@ -13,7 +13,7 @@ public class Helper {
     static JavascriptExecutor jsE;
 
     private final static int TIMEOUT = Integer
-	    .parseInt(PropertiesReader.getProperty("liveproject.properties", "Webdriver.Wait"));
+	    .parseInt(PropertiesReader.getProperty("liveproject.properties", "webdriver.wait"));
 
     public static WebDriverWait getExplicitWait(WebDriver driver) {
 	return wait = new WebDriverWait(driver, TIMEOUT);

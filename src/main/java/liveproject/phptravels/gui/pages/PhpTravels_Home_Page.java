@@ -15,6 +15,7 @@ public class PhpTravels_Home_Page {
     }
 
     // Elements
+    private By gotit_cookie_button = By.xpath("//button[@aria-label='dismiss cookie message']");
     private By myaccount_link = By.linkText("MY ACCOUNT");
     private By signup_link = By.linkText("Sign Up");
     private By login_link = By.linkText("Login");
@@ -48,6 +49,12 @@ public class PhpTravels_Home_Page {
     }
 
     // Methods
+    @Step("Dismiss the cookie bar")
+    public PhpTravels_Home_Page dismissCookieBar() {
+	ElementActions.click(driver, gotit_cookie_button);
+	return this;
+    }
+    
     @Step("Navigate to Login page")
     public PhpTravels_Login_Page navigateToLoginPage() {
 	clickOnMyAccountLink();

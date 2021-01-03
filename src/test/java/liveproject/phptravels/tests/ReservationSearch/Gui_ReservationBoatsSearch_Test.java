@@ -52,6 +52,7 @@ public class Gui_ReservationBoatsSearch_Test {
     public void testingBoatsSearch() {
 	String boatName =
 		new PhpTravels_Home_Page(driver)
+			.dismissCookieBar()
 			.boatsSearch(spreadSheet.getCellData("Boat Name", 2), spreadSheet.getCellData("Boat Type", 2),
 				spreadSheet.getCellData("Boat Date", 2), spreadSheet.getCellData("Adults Count", 2))
 			.getBoatNameText();

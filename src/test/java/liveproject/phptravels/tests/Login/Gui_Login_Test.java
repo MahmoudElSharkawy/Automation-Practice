@@ -70,6 +70,7 @@ public class Gui_Login_Test {
 	apis.userSignUp(firstName, lastName, mobileNumber, email, password);
 	
 	String hiMessage = new PhpTravels_Home_Page(driver)
+		.dismissCookieBar()
 		.navigateToLoginPage()
 		.userLogin(email, password)
 		.getHiMessage();
@@ -87,6 +88,7 @@ public class Gui_Login_Test {
 	password = spreadSheet.getCellData("Password", 3);
 
 	String alertMessage = new PhpTravels_Home_Page(driver)
+		.dismissCookieBar()
 		.navigateToLoginPage()
 		.invalidUserLogin(email, password)
 		.getAlertMessage();

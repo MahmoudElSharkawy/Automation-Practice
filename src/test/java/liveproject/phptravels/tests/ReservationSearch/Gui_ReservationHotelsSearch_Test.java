@@ -52,6 +52,7 @@ public class Gui_ReservationHotelsSearch_Test {
     public void testingHotelsSearch() {
 	String hotelName =
 		new PhpTravels_Home_Page(driver)
+			.dismissCookieBar()
 			.hotelsSearch(spreadSheet.getCellData("Destination", 2),
 				spreadSheet.getCellData("Check In Date", 2),
 				spreadSheet.getCellData("Check Out Date", 2),
