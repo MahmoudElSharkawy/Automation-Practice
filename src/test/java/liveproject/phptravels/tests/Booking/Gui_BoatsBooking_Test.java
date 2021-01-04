@@ -52,13 +52,13 @@ public class Gui_BoatsBooking_Test {
 		+ "/boats/sri-lanka/colombo/Speedboat-Bravo-410---2016-refit-2016-?date=01/01/2025&adults=2");
     }
 
-    @Test(description = "Validating the booking function of the Boats")
-    @Description("When I book a boat, And confirm the booking request, Then the boat should be Reserved on my profile")
+    @Test(description = "Validating the booking function of the Boats - PAY ON ARRIVAL payment method")
+    @Description("When I book a boat, And confirm the booking request with PAY ON ARRIVAL payment method, Then the boat should be Reserved on my profile")
     @Story("Booking")
     @Severity(SeverityLevel.CRITICAL)
     @TmsLink("focus-case-1539798")
     @Issue("bug-tracker#1")
-    public void testingBoatsBooking() {
+    public void testingBoatsBooking_payOnArrival() {
 	firstName = spreadSheet.getCellData("FirstName", 2);
 	lastName = spreadSheet.getCellData("LastName", 2);
 	mobileNumber = spreadSheet.getCellData("Mobile Number", 2);

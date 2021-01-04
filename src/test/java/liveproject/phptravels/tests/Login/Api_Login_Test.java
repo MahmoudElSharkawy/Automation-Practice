@@ -50,8 +50,8 @@ public class Api_Login_Test {
 	mobileNumber = spreadSheet.getCellData("Mobile Number", 2);
 	email = spreadSheet.getCellData("Email", 2) + currentTime + "@test.com";
 	password = spreadSheet.getCellData("Password", 2);
-
 	apis.userSignUp(firstName, lastName, mobileNumber, email, password);
+
 	Response login = apis.userLogin(email, password);
 	Map<String, String> cookies = login.getCookies();
 	Response account = apis.userAccount(cookies);

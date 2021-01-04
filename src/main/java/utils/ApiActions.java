@@ -23,8 +23,8 @@ public class ApiActions {
 	    .log(LogDetail.BODY)
 	    .build();
     
-    @Step("Perform API Request --> [https://www.phptravels.net/{endpoint}]")
-    public Response performRequest(String endpoint) {
+    @Step("Perform API Request --> [https://phptravels.net/{endpoint}]")
+    public Response performPostRequest(String endpoint) {
 	Response res = RestAssured
 	.given()
 		.spec(requestSpec)
@@ -41,8 +41,8 @@ public class ApiActions {
 
     }
     
-    @Step("Perform API Request --> [https://www.phptravels.net/{endpoint}]")
-    public Response performRequest_withFormParams(String endpoint, Map<String, Object> formParams) {
+    @Step("Perform API Request --> [https://phptravels.net/{endpoint}]")
+    public Response performPostRequest_withFormParams(String endpoint, Map<String, Object> formParams) {
 	Response res = RestAssured
 	.given()
 		.formParams(formParams)	
@@ -61,8 +61,8 @@ public class ApiActions {
 
     }
     
-    @Step("Perform API Request --> [https://www.phptravels.net/{endpoint}]")
-    public Response performRequest_withQueryParams(String endpoint, Map<String, Object> queryParams) {
+    @Step("Perform API Request --> [https://phptravels.net/{endpoint}]")
+    public Response performPostRequest_withQueryParams(String endpoint, Map<String, Object> queryParams) {
 	Response res = RestAssured
 	.given()
 		.queryParams(queryParams)
@@ -81,10 +81,31 @@ public class ApiActions {
 
     }
     
-    @Step("Perform API Request --> [https://www.phptravels.net/{endpoint}]")
-    public Response performRequest_withCookies(String endpoint, Map<String, String> cookies) {
+    @Step("Perform API Request --> [https://phptravels.net/{endpoint}]")
+    public Response performGetRequest_withCookies(String endpoint, Map<String, String> cookies) {
 	Response res = RestAssured
 	.given()
+		.spec(requestSpec)
+		.cookies(cookies)
+	.when()
+		.get(endpoint)
+	.then()
+		.spec(responseSpec)
+	.and()
+		.extract().response();
+	
+	Logger.attachApiResponse(res.asByteArray());
+	
+	return res;
+
+    }
+    
+    @Step("Perform API Request --> [https://phptravels.net/{endpoint}]")
+    public Response performPostRequest_withFormParamsAndCookies(String endpoint, Map<String, String> cookies, Map<String, Object> formParams) {
+	Response res = RestAssured
+	.given()
+		.formParams(formParams)	
+	.and()
 		.spec(requestSpec)
 		.cookies(cookies)
 	.when()

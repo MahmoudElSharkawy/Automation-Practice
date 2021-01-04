@@ -15,16 +15,8 @@ public class PhpTravels_APIs {
     private String signup_endpoint = "account/signup";
     private String hotelsdetails_endpoint = "hotels/detail";
     private String boats_endpoint = "boats";
-
-    
-//    private RequestSpecification requestSpec = new RequestSpecBuilder()
-//	    .setBaseUri(PropertiesReader.getProperty("liveproject.properties", "phptravels.home.url"))
-//	    .log(LogDetail.ALL)
-//	    .build();
-//    private ResponseSpecification responseSpec = new ResponseSpecBuilder()
-//	    .expectStatusCode(200)
-//	    .log(LogDetail.BODY)
-//	    .build();
+    private String processbookinglogged_endpoint = "admin/ajaxcalls/processBookinglogged";
+//    private String invoice_updatepayonarrival_endpoint = "invoice/updatePayOnArrival";
 
     @Step("User Sign up with Data --> First Name: [{firstName}], Last Name: [{lastName}], Mobile Number: [{mobileNumber}], Email: [{email}] and Password: [{password}]")
     public Response userSignUp(String firstName, String lastName, String mobileNumber, String email, String password) {
@@ -35,76 +27,76 @@ public class PhpTravels_APIs {
 	formParams.put("email", email);
 	formParams.put("password", password);
 	formParams.put("confirmpassword", password);
-	
-	return	api.performRequest_withFormParams(signup_endpoint, formParams);
-	
-//	given()
-//		.formParam("firstname", firstName)
-//		.formParam("lastname", lastName)
-//		.formParam("phone", mobileNumber)
-//		.formParam("email", email)
-//		.formParam("password", password)
-//		.formParam("confirmpassword", password)
-//	.and()
-//		.spec(requestSpec)
-//	.when()
-//		.post(signup_endpoint)
-//	.then()
-//		.spec(responseSpec)
-//	.and()
-//		.extract().response();
-		
+
+	return api.performPostRequest_withFormParams(signup_endpoint, formParams);
+
     }
-    
+
     @Step("User Login with Data --> Email: [{email}] and Password: [{password}]")
     public Response userLogin(String email, String password) {
 	Map<String, Object> formParams = new HashMap<String, Object>();
 	formParams.put("email", email);
 	formParams.put("password", password);
-	
-	return api.performRequest_withFormParams(login_endpoint, formParams);
-	
-//	given()
-//		.formParam("username", email)
-//		.formParam("password", password)
-//	.and()
-//		.spec(requestSpec)
-//	.when()
-//		.post(login_endpoint)
-//	.then()
-//		.spec(responseSpec)
-//	.and()
-//		.extract().response();
+
+	return api.performPostRequest_withFormParams(login_endpoint, formParams);
+
     }
-    
+
     @Step("Get User Account")
     public Response userAccount(Map<String, String> cookies) {
-	return api.performRequest_withCookies(account_endpoint, cookies);
+	return api.performGetRequest_withCookies(account_endpoint, cookies);
 
-//	given()
-//		.cookies(cookies)
-//	.and()
-//		.spec(requestSpec)
-//	.when()
-//		.get(account_endpoint)
-//	.then()
-//		.spec(responseSpec)
-//	.and()
-//		.extract().response();
     }
-    
+
     @Step("Get Hotel Details with Data --> City Name: [{cityName}], Hotel Name: [{hotelName}], Check In Date: [{checkInDate}], Check Out Date: [{checkOutDate}], Adults Count: [{adultsCount}], Child Count: [{childCount}]")
-    public Response hotelsSearch(String cityName, String hotelName, String checkInDate, String checkOutDate, String adultsCount, String childCount) {
-	return api.performRequest(hotelsdetails_endpoint + "/" + cityName + "/" + hotelName + "/" + checkInDate + "/"
-		+ checkOutDate + "/" + adultsCount + "/" + childCount);
+    public Response hotelsSearch(String cityName, String hotelName, String checkInDate, String checkOutDate,
+	    String adultsCount, String childCount) {
+	return api.performPostRequest(hotelsdetails_endpoint + "/" + cityName + "/" + hotelName + "/" + checkInDate
+		+ "/" + checkOutDate + "/" + adultsCount + "/" + childCount);
     }
-    
+
     @Step("Get Boat Details with Data --> Country Name: [{countryName}], City Name: [{cityName}], Boat Name: [{boatName}], Boat Date: [{boatDate}] and Adults Count: [{adultsCount}]")
-    public Response boatsSearch(String countryName, String cityName, String boatName, String boatDate, String adultsCount) {
+    public Response boatsSearch(String countryName, String cityName, String boatName, String boatDate,
+	    String adultsCount) {
 	Map<String, Object> queryParams = new HashMap<String, Object>();
 	queryParams.put("date", boatDate);
 	queryParams.put("adults", adultsCount);
-	return api.performRequest_withQueryParams(boats_endpoint + "/" + countryName + "/" + cityName + "/" + boatName, queryParams);
+	return api.performPostRequest_withQueryParams(
+		boats_endpoint + "/" + countryName + "/" + cityName + "/" + boatName, queryParams);
     }
+
+    @Step("Process Booking with Logged User")
+    public Response processBookingLogged(Map<String, String> cookies, String additionalNotes, String itemId,
+	    String adultsCount, String childrenCount, String bookingType, String checkInDate, String checkOutDate) {
+	Map<String, Object> formParams = new HashMap<String, Object>();
+	formParams.put("additionalnotes", additionalNotes);
+	formParams.put("itemid", itemId);
+	formParams.put("checkout", checkOutDate);
+	formParams.put("adults", adultsCount);
+	formParams.put("couponid", "");
+	formParams.put("btype", bookingType);
+	formParams.put("tourType", "");
+	formParams.put("subitemid", itemId);
+	formParams.put("children", childrenCount);
+	formParams.put("checkin", checkInDate);
+	formParams.put("infant", "0");
+	formParams.put("passport[1][name]", "");
+	formParams.put("passport[1][passportnumber]", "");
+	formParams.put("passport[1][age]", "");
+	formParams.put("passport[2][name]", "");
+	formParams.put("passport[2][passportnumber]", "");
+	formParams.put("passport[2][age]", "");
+
+	return api.performPostRequest_withFormParamsAndCookies(processbookinglogged_endpoint, cookies, formParams);
+    }
+
+//    @Step("Pay on Arrival")
+//    public Response updatePayOnArrival(Map<String, String> cookies) {
+//	Map<String, Object> formParams = new HashMap<String, Object>();
+//	formParams.put("id", "55");
+//	formParams.put("module", "boats");
+//
+//	return api.performPostRequest_withFormParamsAndCookies(invoice_updatepayonarrival_endpoint, cookies, formParams);
+//    }
 
 }
