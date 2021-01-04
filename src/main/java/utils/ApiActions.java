@@ -82,6 +82,28 @@ public class ApiActions {
     }
     
     @Step("Perform API Request --> [https://phptravels.net/{endpoint}]")
+    public Response performPostRequest_withFormParamsAndHeaders(String endpoint, Map<String, Object> formParams,
+	    Map<String, Object> headers) {
+	Response res = RestAssured
+	.given()
+		.formParams(formParams)
+		.headers(headers)
+	.and()
+		.spec(requestSpec)
+	.when()
+		.post(endpoint)
+	.then()
+		.spec(responseSpec)
+	.and()
+		.extract().response();
+	
+	Logger.attachApiResponse(res.asByteArray());
+	
+	return res;
+
+    }
+    
+    @Step("Perform API Request --> [https://phptravels.net/{endpoint}]")
     public Response performGetRequest_withCookies(String endpoint, Map<String, String> cookies) {
 	Response res = RestAssured
 	.given()

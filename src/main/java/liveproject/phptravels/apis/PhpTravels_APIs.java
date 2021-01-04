@@ -35,10 +35,13 @@ public class PhpTravels_APIs {
     @Step("User Login with Data --> Email: [{email}] and Password: [{password}]")
     public Response userLogin(String email, String password) {
 	Map<String, Object> formParams = new HashMap<String, Object>();
-	formParams.put("email", email);
+	formParams.put("username", email);
 	formParams.put("password", password);
+	
+	Map<String, Object> headers = new HashMap<String, Object>();
+	headers.put("x-requested-with", "XMLHttpRequest");
 
-	return api.performPostRequest_withFormParams(login_endpoint, formParams);
+	return api.performPostRequest_withFormParamsAndHeaders(login_endpoint, formParams, headers);
 
     }
 
