@@ -42,7 +42,7 @@ public class Api_BoatsBooking_Test {
     @Description("When I book a boat without confirming any payment methods, Then the boat booking should has Unpaid status on my accpunt profile")
     @Story("Booking")
     @Severity(SeverityLevel.CRITICAL)
-    @TmsLink("focus-case-1539798")
+    @TmsLink("focus-case-1637104")
     @Issue("bug-tracker#1")
     public void testingBoatsBooking_noPaymentMethod() {
 	firstName = spreadSheet.getCellData("FirstName", 2);

@@ -58,7 +58,7 @@ public class Gui_Login_Test {
     @Description("When I login with an already signed up user, Then I should login successfully")
     @Story("Login")
     @Severity(SeverityLevel.CRITICAL)
-    @TmsLink("focus-case-1539798")
+    @TmsLink("focus-case-1637101")
     @Issue("bug-tracker#1")
     public void testingValidUserLogin() {
 	firstName = spreadSheet.getCellData("FirstName", 2);
@@ -81,7 +81,7 @@ public class Gui_Login_Test {
     @Description("When I enter a not signed up user , Then I should get an error message ")
     @Story("Login")
     @Severity(SeverityLevel.CRITICAL)
-    @TmsLink("focus-case-1539798")
+    @TmsLink("focus-case-1637102")
     @Issue("bug-tracker#1")
     public void testingInvalidUserLogin() {
 	email = spreadSheet.getCellData("Email", 3) + "@test.com";

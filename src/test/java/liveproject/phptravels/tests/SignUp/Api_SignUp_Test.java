@@ -42,7 +42,7 @@ public class Api_SignUp_Test {
     @Description("When I enter valid data in the sign up form And click the signup button, Then I should be registered successfully And be navigated to the user account page And I can see my user data and Hi message")
     @Story("Sign Up")
     @Severity(SeverityLevel.CRITICAL)
-    @TmsLink("focus-case-1539798")
+    @TmsLink("focus-case-1637098")
     @Issue("bug-tracker#1")
     public void testingValidUserSignUp() {
 	firstName = spreadSheet.getCellData("FirstName", 2);
@@ -63,7 +63,7 @@ public class Api_SignUp_Test {
     @Description("Given i already signed up with an email, When I use the same email for new sign up , Then I should get an error message ")
     @Story("Sign Up")
     @Severity(SeverityLevel.CRITICAL)
-    @TmsLink("focus-case-1539798")
+    @TmsLink("focus-case-1637099")
     @Issue("bug-tracker#1")
     public void testingInvalidUserSignUp_emailAlreadyExists() {
 	firstName = spreadSheet.getCellData("FirstName", 3);
@@ -83,7 +83,7 @@ public class Api_SignUp_Test {
     @Description("When I use a wrong email format on the sign up , Then I should get an error message ")
     @Story("Sign Up")
     @Severity(SeverityLevel.CRITICAL)
-    @TmsLink("focus-case-1539798")
+    @TmsLink("focus-case-1637100")
     @Issue("bug-tracker#1")
     public void testingInvalidUserSignUp_emailWrongFormat() {
 	firstName = spreadSheet.getCellData("FirstName", 4);

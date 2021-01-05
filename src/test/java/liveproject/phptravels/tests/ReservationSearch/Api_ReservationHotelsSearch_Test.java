@@ -36,7 +36,7 @@ public class Api_ReservationHotelsSearch_Test {
     @Description("Given I'm on the PHPTravels home page; When I Enter the data needed to search for hotels And click the search button; Then I should be navigated to the hotels search results page, Then I should get the search results related to the search value entered")
     @Story("Reservation Search")
     @Severity(SeverityLevel.CRITICAL)
-    @TmsLink("focus-case-1539798")
+    @TmsLink("focus-case-1637105")
     @Issue("bug-tracker#1")
     public void testingHotelsSearch() {
 	Response hotel = apis.hotelsSearch(spreadSheet.getCellData("City Name", 2), spreadSheet.getCellData("Hotel Name", 2),
