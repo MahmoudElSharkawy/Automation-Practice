@@ -35,21 +35,21 @@ services:
          START_XVFB: "false"
          NODE_MAX_SESSION: 1
          NODE_MAX_INSTANCES: 1
-   firefox:
-      image: selenium/node-firefox:3.141.59-20200515
-      image: selenium/node-firefox:4.0.0
-      depends_on:
-        - selenium-hub
-      shm_size: 2gb
-      volumes:
-      - /dev/shm:/dev/shm
-      environment:
-         SE_EVENT_BUS_HOST: selenium-hub
-         SE_EVENT_BUS_PUBLISH_PORT: 4442
-         SE_EVENT_BUS_SUBSCRIBE_PORT: 4443
-         SCREEN_WIDTH: 1920
-         SCREEN_HEIGHT: 1080
-# set false for headless execution
-         START_XVFB: "false"
-         NODE_MAX_SESSION: 1
-         NODE_MAX_INSTANCES: 1
+#   firefox:
+#      image: selenium/node-firefox:3.141.59-20200515
+#      image: selenium/node-firefox:4.0.0
+#      depends_on:
+#        - selenium-hub
+#      shm_size: 2gb
+#      volumes:
+#      - /dev/shm:/dev/shm
+#      environment:
+#         SE_EVENT_BUS_HOST: selenium-hub
+#         SE_EVENT_BUS_PUBLISH_PORT: 4442
+#         SE_EVENT_BUS_SUBSCRIBE_PORT: 4443
+#         SCREEN_WIDTH: 1920
+#         SCREEN_HEIGHT: 1080
+## set false for headless execution
+#         START_XVFB: "false"
+#         NODE_MAX_SESSION: 1
+#         NODE_MAX_INSTANCES: 1
