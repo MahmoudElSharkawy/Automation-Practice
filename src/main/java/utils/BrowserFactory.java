@@ -142,13 +142,13 @@ public class BrowserFactory {
     ////////////////////////////////////////////////////////////////////////
     private static ChromeOptions getChromeOptions_remote() {
 	ChromeOptions chOptions = new ChromeOptions();
-	chOptions.setCapability("platform", Platform.LINUX);
-	chOptions.addArguments("--headless");
+//	chOptions.setCapability("platform", Platform.LINUX);
+//	chOptions.addArguments("--headless");
 //	chOptions.addArguments("--start-maximized");
 	chOptions.addArguments("--window-size=1920,1080");
 //	chOptions.addArguments("disable--infobars");
 //	chOptions.setExperimentalOption("excludeSwitches", new String[] { "enable-automation" });
-//	chOptions.setHeadless(true);
+	chOptions.setHeadless(true);
 	return chOptions;
     }
 
