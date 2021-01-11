@@ -24,8 +24,8 @@ public class ElementActions {
 		    driver.findElement(by));
 	    // Check if the element is displayed
 	    driver.findElement(by).isDisplayed();
-	} catch (TimeoutException e) {
-	    Logger.logMessage("The element is not Visible...." + e.getMessage());
+	} catch (TimeoutException toe) {
+	    Logger.logMessage("The element is not Visible...." + toe.getMessage());
 	} catch (Exception e) {
 	    Logger.logMessage(e.getMessage());
 	}
@@ -36,8 +36,8 @@ public class ElementActions {
 	try {
 	    // wait for the element to be clickable
 	    Helper.getExplicitWait(driver).until(ExpectedConditions.elementToBeClickable(by));
-	} catch (TimeoutException e) {
-	    Logger.logMessage("The element is not Clickable...." + e.getMessage());
+	} catch (TimeoutException toe) {
+	    Logger.logMessage("The element is not Clickable...." + toe.getMessage());
 	}
 
 	// Log element text if not empty. Else, log clicking
@@ -50,13 +50,13 @@ public class ElementActions {
 	// Now we click on the element! :D
 	try {
 	    driver.findElement(by).click();
-	} catch (Exception exception1) {
+	} catch (Exception exception) {
 	    try {
 		Helper.getJavascriptExecutor(driver).executeScript("arguments[arguments.length - 1].click();",
 			driver.findElement(by));
 	    } catch (Exception rootCauseException) {
-		rootCauseException.initCause(exception1);
-		Logger.logMessage(exception1.getMessage());
+		rootCauseException.initCause(exception);
+		Logger.logMessage(exception.getMessage());
 		Logger.logMessage(rootCauseException.getMessage());
 	//Force fail the test case if couldn't perform the click 
 		fail("Couldn't click on the element", rootCauseException);
