@@ -1,7 +1,10 @@
 package utils;
 
+import static org.testng.Assert.fail;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
@@ -13,28 +16,74 @@ public class ElementActions {
 
     @Step("Click on element: [{by}]")
     public static void click(WebDriver driver, By by) {
-	// Wait for the element to be visible
-	Helper.getExplicitWait(driver).until(ExpectedConditions.visibilityOfElementLocated(by));
-	// Scroll the element into view to handle some browsers cases
-	Helper.getJavascriptExecutor(driver).executeScript("arguments[0].scrollIntoView(false);",
-		driver.findElement(by));
-	// Check if the element is displayed
-	driver.findElement(by).isDisplayed();
-	// wait for the element to be clickable
-	Helper.getExplicitWait(driver).until(ExpectedConditions.elementToBeClickable(by));
-	// Log element text if not empty
+	try {
+	    // Wait for the element to be visible
+	    Helper.getExplicitWait(driver).until(ExpectedConditions.visibilityOfElementLocated(by));
+	    // Scroll the element into view to handle some browsers cases
+	    Helper.getJavascriptExecutor(driver).executeScript("arguments[0].scrollIntoView(false);",
+		    driver.findElement(by));
+	    // Check if the element is displayed
+	    driver.findElement(by).isDisplayed();
+	} catch (TimeoutException e) {
+	    Logger.logMessage("The element is not Visible...." + e.getMessage());
+	} catch (Exception e) {
+	    Logger.logMessage(e.getMessage());
+	}
+
+	// Mouse hover on the element before clicking
+	Helper.getActions(driver).moveToElement(driver.findElement(by)).perform();
+
+	try {
+	    // wait for the element to be clickable
+	    Helper.getExplicitWait(driver).until(ExpectedConditions.elementToBeClickable(by));
+	} catch (TimeoutException e) {
+	    Logger.logMessage("The element is not Clickable...." + e.getMessage());
+	}
+
+	// Log element text if not empty. Else, log clicking
 	if (!driver.findElement(by).getText().isBlank()) {
 	    Logger.logMessage("Clicking on: " + driver.findElement(by).getText());
 	} else {
 	    Logger.logMessage("Clicking on element:" + by);
 	}
-	// Mouse hover on the element before clicking
-	Helper.getActions(driver).moveToElement(driver.findElement(by)).perform();
-	// Now we click on the element! :D
-	driver.findElement(by).click();
+
+	try {
+	    driver.findElement(by).click();
+	} catch (Exception exception1) {
+	    try {
+		Helper.getJavascriptExecutor(driver).executeScript("arguments[arguments.length - 1].click();",
+			driver.findElement(by));
+	    } catch (Exception rootCauseException) {
+		rootCauseException.initCause(exception1);
+		Logger.logMessage(exception1.getMessage());
+		Logger.logMessage(rootCauseException.getMessage());
+		fail("Couldn't click on the element", rootCauseException);
+
+	    }
+	}
+
+//	// Wait for the element to be visible
+//	Helper.getExplicitWait(driver).until(ExpectedConditions.visibilityOfElementLocated(by));
+//	// Scroll the element into view to handle some browsers cases
+//	Helper.getJavascriptExecutor(driver).executeScript("arguments[0].scrollIntoView(false);",
+//		driver.findElement(by));
+//	// Check if the element is displayed
+//	driver.findElement(by).isDisplayed();
+//	// wait for the element to be clickable
+//	Helper.getExplicitWait(driver).until(ExpectedConditions.elementToBeClickable(by));
+//	// Log element text if not empty
+//	if (!driver.findElement(by).getText().isBlank()) {
+//	    Logger.logMessage("Clicking on: " + driver.findElement(by).getText());
+//	} else {
+//	    Logger.logMessage("Clicking on element:" + by);
+//	}
+//	// Mouse hover on the element before clicking
+//	Helper.getActions(driver).moveToElement(driver.findElement(by)).perform();
+//	// Now we click on the element! :D
+//	driver.findElement(by).click();
     }
 
-    @Step("Clear then Type: [{data}] on element: [{by}]")
+    @Step("Type data: [{data}] on element: [{by}]")
     public static void type(WebDriver driver, By by, String data) {
 	Helper.getExplicitWait(driver).until(ExpectedConditions.visibilityOfElementLocated(by));
 	Helper.getJavascriptExecutor(driver).executeScript("arguments[0].scrollIntoView(false);",
@@ -65,7 +114,7 @@ public class ElementActions {
 		driver.findElement(by));
 	driver.findElement(by).isDisplayed();
 	Logger.logMessage("Clicking: [ENTER key] on element: " + by);
-	// We click ENTER here! :D 
+	// We click ENTER here! :D
 	driver.findElement(by).sendKeys(Keys.ENTER);
     }
 
