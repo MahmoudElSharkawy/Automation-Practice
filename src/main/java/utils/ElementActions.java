@@ -47,6 +47,7 @@ public class ElementActions {
 	    Logger.logMessage("Clicking on element:" + by);
 	}
 
+	// Now we click on the element! :D
 	try {
 	    driver.findElement(by).click();
 	} catch (Exception exception1) {
@@ -57,6 +58,7 @@ public class ElementActions {
 		rootCauseException.initCause(exception1);
 		Logger.logMessage(exception1.getMessage());
 		Logger.logMessage(rootCauseException.getMessage());
+	//Force fail the test case if couldn't perform the click 
 		fail("Couldn't click on the element", rootCauseException);
 
 	    }
