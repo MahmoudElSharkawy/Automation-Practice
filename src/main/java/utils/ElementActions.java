@@ -58,7 +58,7 @@ public class ElementActions {
 		rootCauseException.initCause(exception);
 		Logger.logMessage(exception.getMessage());
 		Logger.logMessage(rootCauseException.getMessage());
-	//Force fail the test case if couldn't perform the click 
+		// Force fail the test case if couldn't perform the click
 		fail("Couldn't click on the element", rootCauseException);
 
 	    }
@@ -87,26 +87,65 @@ public class ElementActions {
 
     @Step("Type data: [{data}] on element: [{by}]")
     public static void type(WebDriver driver, By by, String data) {
-	Helper.getExplicitWait(driver).until(ExpectedConditions.visibilityOfElementLocated(by));
-	Helper.getJavascriptExecutor(driver).executeScript("arguments[0].scrollIntoView(false);",
-		driver.findElement(by));
-	driver.findElement(by).isDisplayed();
-	// Clear the element values if it has any before typing on it
-	if (!driver.findElement(by).getAttribute("value").isBlank()) {
-	    Logger.logMessage("Clearing the data from element: " + by);
-	    driver.findElement(by).clear();
-	    Logger.logMessage("Typing: " + data + " on element: " + by);
-	    // We type here! :D
-	    driver.findElement(by).sendKeys(data);
-	} else {
-	    Logger.logMessage("Typing: " + data + " on element: " + by);
-	    // We type here! :D
-	    driver.findElement(by).sendKeys(data);
+	type(driver, by, data, true);
+    }
+
+    @Step("Type data: [{data}] on element: [{by}]")
+    public static void type(WebDriver driver, By by, String data, boolean clearBeforeTyping) {
+	try {
+	    // Wait for the element to be visible
+	    Helper.getExplicitWait(driver).until(ExpectedConditions.visibilityOfElementLocated(by));
+	    // Scroll the element into view to handle some browsers cases
+	    Helper.getJavascriptExecutor(driver).executeScript("arguments[0].scrollIntoView(false);",
+		    driver.findElement(by));
+	    // Check if the element is displayed
+	    driver.findElement(by).isDisplayed();
+	} catch (TimeoutException toe) {
+	    Logger.logMessage("The element is not Visible...." + toe.getMessage());
+	} catch (Exception e) {
+	    Logger.logMessage(e.getMessage());
 	}
+
+	// Type here! 
+	try {
+	    // Clear before typing condition
+	    if (!driver.findElement(by).getAttribute("value").isBlank() && clearBeforeTyping) {
+		Logger.logMessage("Clearing the data from element: " + by);
+		driver.findElement(by).clear();
+		Logger.logMessage("Typing: " + data + " on element: " + by);
+		// We type here! :D
+		driver.findElement(by).sendKeys(data);
+	    } else {
+		Logger.logMessage("Typing: " + data + " on element: " + by);
+		// We type here! :D
+		driver.findElement(by).sendKeys(data);
+	    }
+	} catch (Exception e) {
+	    Logger.logMessage(e.getMessage());
+	}
+
 	// Make sure that the data is inserted correctly to the field
 	Assert.assertTrue(driver.findElement(by).getAttribute("value").contains(data),
 		"The data is not inserted successfully to the field, the inserted data should be: [" + data
 			+ "]; But the current field value is: [" + driver.findElement(by).getAttribute("value") + "]");
+
+//	Helper.getExplicitWait(driver).until(ExpectedConditions.visibilityOfElementLocated(by));
+//	Helper.getJavascriptExecutor(driver).executeScript("arguments[0].scrollIntoView(false);",
+//		driver.findElement(by));
+//	driver.findElement(by).isDisplayed();
+//	// Clear the element values if it has any before typing on it
+//	if (!driver.findElement(by).getAttribute("value").isBlank()) {
+//	    Logger.logMessage("Clearing the data from element: " + by);
+//	    driver.findElement(by).clear();
+//	    Logger.logMessage("Typing: " + data + " on element: " + by);
+//	    // We type here! :D
+//	    driver.findElement(by).sendKeys(data);
+//	} else {
+//	    Logger.logMessage("Typing: " + data + " on element: " + by);
+//	    // We type here! :D
+//	    driver.findElement(by).sendKeys(data);
+//	}
+
     }
 
     @Step("Click: [ENTER key] on element: [{by}]")

@@ -12,7 +12,7 @@ public class BrowserActions {
 	Logger.logMessage("Navigating to URL: " + url);
 	driver.get(url);
 //	driver.navigate().to(url);
-//	Helper.getJavascriptExecutor(driver).executeScript("return document.readyState").equals("complete");
+	Helper.getJavascriptExecutor(driver).executeScript("return document.readyState").equals("complete");
     }
 
     @Step("Close All Opened Browser Windows.....")
@@ -24,7 +24,7 @@ public class BrowserActions {
     }
 
     @Step("Maximize the Browser Window")
-    public static void maximizeTheWindow(WebDriver driver) {
+    public static void maximizeWindow(WebDriver driver) {
 	Logger.logMessage("Maximizing the Browser Window");
 	driver.manage().window().maximize();
     }

@@ -95,14 +95,14 @@ public class BrowserFactory {
 		WebDriverManager.chromedriver().setup();
 		driver = new ChromeDriver();
 		Helper.implicitWait(driver);
-		BrowserActions.maximizeTheWindow(driver);
+		BrowserActions.maximizeWindow(driver);
 	    } else if (browserType == BrowserType.MOZILLA_FIREFOX || (browserType == BrowserType.FROM_PROPERTIES
 		    && browserTypeProperty.equalsIgnoreCase("firefox"))) {
 		Logger.logMessage("Opening [Mozilla Firefox] Browser!....");
 		WebDriverManager.firefoxdriver().setup();
 		driver = new FirefoxDriver();
 		Helper.implicitWait(driver);
-		BrowserActions.maximizeTheWindow(driver);
+		BrowserActions.maximizeWindow(driver);
 	    } else {
 		Logger.logMessage("WARNING!! The browser [" + browserTypeProperty
 			+ "] is not valid/supported; Please choose from the given choices in the properties file");
