@@ -9,10 +9,14 @@ public class BrowserActions {
 
     @Step("Navigate to URL: [{url}]")
     public static void navigateToUrl(WebDriver driver, String url) {
-	Logger.logMessage("Navigating to URL: " + url);
-	driver.get(url);
-//	driver.navigate().to(url);
-	Helper.getJavascriptExecutor(driver).executeScript("return document.readyState").equals("complete");
+	try {
+	    driver.get(url);
+	    Logger.logMessage("Navigating to URL: " + url);
+	    Helper.getJavascriptExecutor(driver).executeScript("return document.readyState").equals("complete");
+	} catch (Exception e) {
+	    Logger.logMessage(e.getMessage());
+	}
+
     }
 
     @Step("Close All Opened Browser Windows.....")
@@ -25,8 +29,12 @@ public class BrowserActions {
 
     @Step("Maximize the Browser Window")
     public static void maximizeWindow(WebDriver driver) {
-	Logger.logMessage("Maximizing the Browser Window");
-	driver.manage().window().maximize();
+	try {
+	    Logger.logMessage("Maximizing the Browser Window");
+	    driver.manage().window().maximize();
+	} catch (Exception e) {
+	    Logger.logMessage(e.getMessage());
+	}
     }
 
 }
