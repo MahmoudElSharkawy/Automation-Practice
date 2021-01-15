@@ -80,10 +80,12 @@ public class BrowserFactory {
 		} catch (MalformedURLException e) {
 		    e.printStackTrace();
 		}
-
 	    } else {
-		Logger.logMessage("WARNING!! The browser [" + browserTypeProperty
-			+ "] is not valid/supported; Please choose from the given choices in the properties file");
+		String warningMsg = "The driver is null! because the browser type [" + browserTypeProperty
+			+ "] is not valid/supported; Please choose a valid browser type from the given choices in the properties file";
+		Logger.logMessage(warningMsg);
+//		fail(warningMsg);
+		throw new NullPointerException(warningMsg);
 	    }
 	}
 	// Local execution......
@@ -104,8 +106,11 @@ public class BrowserFactory {
 		Helper.implicitWait(driver);
 		BrowserActions.maximizeWindow(driver);
 	    } else {
-		Logger.logMessage("WARNING!! The browser [" + browserTypeProperty
-			+ "] is not valid/supported; Please choose from the given choices in the properties file");
+		String warningMsg = "The driver is null! because the browser type [" + browserTypeProperty
+			+ "] is not valid/supported; Please choose a valid browser type from the given choices in the properties file";
+		Logger.logMessage(warningMsg);
+//		fail(warningMsg);
+		throw new NullPointerException(warningMsg);
 	    }
 	}
 	// Local headless execution......
@@ -124,14 +129,19 @@ public class BrowserFactory {
 		driver = new FirefoxDriver(getFirefoxOptions_localHeadless());
 		Helper.implicitWait(driver);
 	    } else {
-		Logger.logMessage("WARNING!! The browser [" + browserTypeProperty
-			+ "] is not valid/supported; Please choose from the given choices in the properties file");
+		String warningMsg = "The driver is null! because the browser type [" + browserTypeProperty
+			+ "] is not valid/supported; Please choose a valid browser type from the given choices in the properties file";
+		Logger.logMessage(warningMsg);
+//		fail(warningMsg);
+		throw new NullPointerException(warningMsg);
 	    }
-	
-	}
-	else {
-	    Logger.logMessage("WARNING!! The execution type [" + executionTypeProperty
-			+ "] is not valid/supported; Please choose from the given choices in the properties file");
+
+	} else {
+	    String warningMsg = "The driver is null! because the execution type [" + executionTypeProperty
+		    + "] is not valid/supported; Please choose a valid execution type from the given choices in the properties file";
+	    Logger.logMessage(warningMsg);
+//		fail(warningMsg);
+	    throw new NullPointerException(warningMsg);
 	}
 	return driver;
     }
@@ -142,7 +152,6 @@ public class BrowserFactory {
 	ChromeOptions chOptions = new ChromeOptions();
 	chOptions.addArguments("--window-size=1920,1080");
 	chOptions.setHeadless(true);
-
 //	chOptions.setCapability("platform", Platform.LINUX);
 //	chOptions.addArguments("--headless");
 //	chOptions.addArguments("--start-maximized");
@@ -157,7 +166,7 @@ public class BrowserFactory {
 	ffOptions.setHeadless(true);
 	return ffOptions;
     }
-    
+
     private static ChromeOptions getChromeOptions_localHeadless() {
 	ChromeOptions chOptions = new ChromeOptions();
 	chOptions.setHeadless(true);
