@@ -1,5 +1,6 @@
 package utils;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 import io.qameta.allure.Step;
@@ -12,7 +13,7 @@ public class BrowserActions {
 	try {
 	    driver.get(url);
 	    Logger.logMessage("Navigating to URL: " + url);
-	    Helper.getJavascriptExecutor(driver).executeScript("return document.readyState").equals("complete");
+	    ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
 	} catch (Exception e) {
 	    Logger.logMessage(e.getMessage());
 	}

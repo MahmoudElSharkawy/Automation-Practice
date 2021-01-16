@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import io.qameta.allure.Step;
 import utils.ElementActions;
 import utils.Helper;
+import utils.Helper.ConfirmAlerActionType;
 
 public class PhpTravels_Invoice_Page {
     private WebDriver driver;
@@ -24,7 +25,7 @@ public class PhpTravels_Invoice_Page {
     @Step("Click on PAY ON ARRIVAL button and accept pay at arrival alert")
     public PhpTravels_Invoice_Page clickOnPayOnArrivalAndAcceptAlert() {
 	ElementActions.click(driver, payonarrival_button);
-	Helper.alert(driver).accept();
+	Helper.confirmAlert(driver, ConfirmAlerActionType.ACCEPT_ALERT);
 	Helper.getExplicitWait(driver).until(
 		ExpectedConditions.invisibilityOfElementWithText(booking_status, "Your booking status is Unpaid"));
 	return this;

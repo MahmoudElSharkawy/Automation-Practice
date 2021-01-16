@@ -3,6 +3,7 @@ package utils;
 import static org.testng.Assert.fail;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -10,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
 import io.qameta.allure.Step;
+import utils.Helper.ActionType;
 
 public class ElementActions {
     static WebDriver driver;
@@ -20,7 +22,7 @@ public class ElementActions {
 
 	try {
 	    // Mouse hover on the element before clicking
-	    Helper.getActions(driver).moveToElement(driver.findElement(by)).perform();
+	    Helper.actions(driver, by, ActionType.MOUSE_HOVER);
 	    // wait for the element to be clickable
 	    Helper.getExplicitWait(driver).until(ExpectedConditions.elementToBeClickable(by));
 	} catch (TimeoutException toe) {
@@ -40,7 +42,7 @@ public class ElementActions {
 	    driver.findElement(by).click();
 	} catch (Exception exception) {
 	    try {
-		Helper.getJavascriptExecutor(driver).executeScript("arguments[arguments.length - 1].click();",
+		((JavascriptExecutor) driver).executeScript("arguments[arguments.length - 1].click();",
 			driver.findElement(by));
 	    } catch (Exception rootCauseException) {
 		rootCauseException.initCause(exception);
@@ -124,8 +126,7 @@ public class ElementActions {
 	    // Wait for the element to be visible
 	    Helper.getExplicitWait(driver).until(ExpectedConditions.visibilityOfElementLocated(by));
 	    // Scroll the element into view to handle some browsers cases
-	    Helper.getJavascriptExecutor(driver).executeScript("arguments[0].scrollIntoView(false);",
-		    driver.findElement(by));
+	    ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", driver.findElement(by));
 	    // Check if the element is displayed
 	    driver.findElement(by).isDisplayed();
 	} catch (TimeoutException toe) {
