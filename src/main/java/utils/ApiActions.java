@@ -12,6 +12,9 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
 public class ApiActions {
+    // TODO: Don't use the Request & Response Specifications
+    // TODO: Dont's use the Gerkin language for the requests
+    // TODO: Get the Base URI from the properties to be generic, not static in the code
     private String baseURI = PropertiesReader.getProperty("liveproject.properties", "phptravels.baseuri");
     
     private RequestSpecification requestSpec = new RequestSpecBuilder()
@@ -104,25 +107,6 @@ public class ApiActions {
     }
     
     @Step("Perform API Request --> [https://phptravels.net/{endpoint}]")
-    public Response performGetRequest_withCookies(String endpoint, Map<String, String> cookies) {
-	Response res = RestAssured
-	.given()
-		.spec(requestSpec)
-		.cookies(cookies)
-	.when()
-		.get(endpoint)
-	.then()
-		.spec(responseSpec)
-	.and()
-		.extract().response();
-	
-	Logger.attachApiResponse(res.asByteArray());
-	
-	return res;
-
-    }
-    
-    @Step("Perform API Request --> [https://phptravels.net/{endpoint}]")
     public Response performPostRequest_withFormParamsAndCookies(String endpoint, Map<String, String> cookies, Map<String, Object> formParams) {
 	Response res = RestAssured
 	.given()
@@ -142,5 +126,25 @@ public class ApiActions {
 	return res;
 
     }
+    
+    @Step("Perform API Request --> [https://phptravels.net/{endpoint}]")
+    public Response performGetRequest_withCookies(String endpoint, Map<String, String> cookies) {
+	Response res = RestAssured
+	.given()
+		.spec(requestSpec)
+		.cookies(cookies)
+	.when()
+		.get(endpoint)
+	.then()
+		.spec(responseSpec)
+	.and()
+		.extract().response();
+	
+	Logger.attachApiResponse(res.asByteArray());
+	
+	return res;
+
+    }
+    
 
 }

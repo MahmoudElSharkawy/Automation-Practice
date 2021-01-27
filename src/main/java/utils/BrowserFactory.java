@@ -148,6 +148,8 @@ public class BrowserFactory {
 
     ////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////
+    // TODO: Use only one option method for each browser (they have the same implementation now anyways)
+    // TODO: Can add enums/switch case for other options when needed
     private static ChromeOptions getChromeOptions_remote() {
 	ChromeOptions chOptions = new ChromeOptions();
 	chOptions.addArguments("--window-size=1920,1080");
