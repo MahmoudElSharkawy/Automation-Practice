@@ -47,7 +47,7 @@ public class Gui_SignUp_Test {
 
     @BeforeMethod
     public void beforeMethod() {
-	driver = BrowserFactory.openBrowser(BrowserType.FROM_PROPERTIES, ExecutionType.FROM_PROPERTIES);
+	driver = BrowserFactory.getBrowser(BrowserType.FROM_PROPERTIES, ExecutionType.FROM_PROPERTIES);
 	BrowserActions.navigateToUrl(driver, phptravelsHomePageURL);
     }
 

@@ -1,5 +1,7 @@
 package utils;
 
+import static org.testng.Assert.fail;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -41,11 +43,11 @@ public class BrowserFactory {
 
     @Step("Open Browser")
     public static WebDriver openBrowser() {
-	return openBrowser(BrowserType.GOOGLE_CHROME, ExecutionType.LOCAL);
+	return getBrowser(BrowserType.GOOGLE_CHROME, ExecutionType.LOCAL);
     }
 
     @Step("Open Browser")
-    public static WebDriver openBrowser(BrowserType browserType, ExecutionType executionType) {
+    public static WebDriver getBrowser(BrowserType browserType, ExecutionType executionType) {
 	if (executionType == ExecutionType.REMOTE || (executionType == ExecutionType.FROM_PROPERTIES
 		&& executionTypeProperty.equalsIgnoreCase("remote"))) {
 	    /*
@@ -64,7 +66,7 @@ public class BrowserFactory {
 		Logger.logMessage("Opening Remote [Google Chrome] Browser!....");
 		try {
 		    driver = new RemoteWebDriver(new URL("http://" + host + ":" + port + "/wd/hub"),
-			    getChromeOptions_remote());
+			    getChromeOptions());
 		    Helper.implicitWait(driver);
 		} catch (MalformedURLException e) {
 		    e.printStackTrace();
@@ -75,7 +77,7 @@ public class BrowserFactory {
 		Logger.logMessage("Opening Remote [Mozilla Firefox] Browser!....");
 		try {
 		    driver = new RemoteWebDriver(new URL("http://" + host + ":" + port + "/wd/hub"),
-			    getFirefoxOptions_remote());
+			    getFirefoxOptions());
 		    Helper.implicitWait(driver);
 		} catch (MalformedURLException e) {
 		    e.printStackTrace();
@@ -84,102 +86,75 @@ public class BrowserFactory {
 		String warningMsg = "The driver is null! because the browser type [" + browserTypeProperty
 			+ "] is not valid/supported; Please choose a valid browser type from the given choices in the properties file";
 		Logger.logMessage(warningMsg);
-//		fail(warningMsg);
-		throw new NullPointerException(warningMsg);
+		fail(warningMsg);
+//		throw new NullPointerException(warningMsg);
 	    }
 	}
-	// Local execution......
-	else if (executionType == ExecutionType.LOCAL || (executionType == ExecutionType.FROM_PROPERTIES
-		&& executionTypeProperty.equalsIgnoreCase("local"))) {
+	// Local & Local Headless execution......
+	else if (executionType == ExecutionType.LOCAL
+		|| (executionType == ExecutionType.FROM_PROPERTIES && executionTypeProperty.equalsIgnoreCase("local"))
+		|| executionType == ExecutionType.LOCAL_HEADLESS 
+		|| (executionType == ExecutionType.FROM_PROPERTIES && executionTypeProperty.equalsIgnoreCase("local_headless"))) {
 	    if (browserType == BrowserType.GOOGLE_CHROME
 		    || (browserType == BrowserType.FROM_PROPERTIES && browserTypeProperty.equalsIgnoreCase("chrome"))) {
 		Logger.logMessage("Opening [Google Chrome] Browser!....");
 		WebDriverManager.chromedriver().setup();
-		driver = new ChromeDriver();
+		driver = new ChromeDriver(getChromeOptions());
 		Helper.implicitWait(driver);
-		BrowserActions.maximizeWindow(driver);
+//		BrowserActions.maximizeWindow(driver);
 	    } else if (browserType == BrowserType.MOZILLA_FIREFOX || (browserType == BrowserType.FROM_PROPERTIES
 		    && browserTypeProperty.equalsIgnoreCase("firefox"))) {
 		Logger.logMessage("Opening [Mozilla Firefox] Browser!....");
 		WebDriverManager.firefoxdriver().setup();
-		driver = new FirefoxDriver();
+		driver = new FirefoxDriver(getFirefoxOptions());
 		Helper.implicitWait(driver);
 		BrowserActions.maximizeWindow(driver);
 	    } else {
 		String warningMsg = "The driver is null! because the browser type [" + browserTypeProperty
 			+ "] is not valid/supported; Please choose a valid browser type from the given choices in the properties file";
 		Logger.logMessage(warningMsg);
-//		fail(warningMsg);
-		throw new NullPointerException(warningMsg);
+		fail(warningMsg);
+//		throw new NullPointerException(warningMsg);
 	    }
-	}
-	// Local headless execution......
-	else if (executionType == ExecutionType.LOCAL_HEADLESS || (executionType == ExecutionType.FROM_PROPERTIES
-		&& executionTypeProperty.equalsIgnoreCase("local_headless"))) {
-	    if (browserType == BrowserType.GOOGLE_CHROME
-		    || (browserType == BrowserType.FROM_PROPERTIES && browserTypeProperty.equalsIgnoreCase("chrome"))) {
-		Logger.logMessage("Opening Headless [Google Chrome] Browser!....");
-		WebDriverManager.chromedriver().setup();
-		driver = new ChromeDriver(getChromeOptions_localHeadless());
-		Helper.implicitWait(driver);
-	    } else if (browserType == BrowserType.MOZILLA_FIREFOX || (browserType == BrowserType.FROM_PROPERTIES
-		    && browserTypeProperty.equalsIgnoreCase("firefox"))) {
-		Logger.logMessage("Opening Headless [Mozilla Firefox] Browser!....");
-		WebDriverManager.firefoxdriver().setup();
-		driver = new FirefoxDriver(getFirefoxOptions_localHeadless());
-		Helper.implicitWait(driver);
-	    } else {
-		String warningMsg = "The driver is null! because the browser type [" + browserTypeProperty
-			+ "] is not valid/supported; Please choose a valid browser type from the given choices in the properties file";
-		Logger.logMessage(warningMsg);
-//		fail(warningMsg);
-		throw new NullPointerException(warningMsg);
-	    }
-
 	} else {
 	    String warningMsg = "The driver is null! because the execution type [" + executionTypeProperty
 		    + "] is not valid/supported; Please choose a valid execution type from the given choices in the properties file";
 	    Logger.logMessage(warningMsg);
-//		fail(warningMsg);
-	    throw new NullPointerException(warningMsg);
+	    fail(warningMsg);
+//	    throw new NullPointerException(warningMsg);
 	}
 	return driver;
     }
 
     ////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////
-    // TODO: Use only one option method for each browser (they have the same implementation now anyways)
-    // TODO: Can add enums/switch case for other options when needed
-    private static ChromeOptions getChromeOptions_remote() {
+    private static ChromeOptions getChromeOptions() {
 	ChromeOptions chOptions = new ChromeOptions();
-	chOptions.addArguments("--window-size=1920,1080");
-	chOptions.setHeadless(true);
+	if (executionTypeProperty.equalsIgnoreCase("local_headless")
+		|| executionTypeProperty.equalsIgnoreCase("remote")) {
+	    chOptions.setHeadless(true);
+	    chOptions.addArguments("--window-size=1920,1080");
+	} else {
+	    chOptions.addArguments("--start-maximized");
+	}
+	
 //	chOptions.setCapability("platform", Platform.LINUX);
 //	chOptions.addArguments("--headless");
-//	chOptions.addArguments("--start-maximized");
 //	chOptions.addArguments("disable--infobars");
 //	chOptions.setExperimentalOption("excludeSwitches", new String[] { "enable-automation" });
+//	chOptions.addArguments("--ignore-certificate-errors");
 	return chOptions;
     }
 
-    private static FirefoxOptions getFirefoxOptions_remote() {
+    private static FirefoxOptions getFirefoxOptions() {
 	FirefoxOptions ffOptions = new FirefoxOptions();
-	ffOptions.addArguments("--window-size=1920,1080");
-	ffOptions.setHeadless(true);
-	return ffOptions;
-    }
-
-    private static ChromeOptions getChromeOptions_localHeadless() {
-	ChromeOptions chOptions = new ChromeOptions();
-	chOptions.setHeadless(true);
-	chOptions.addArguments("--window-size=1920,1080");
-	return chOptions;
-    }
-
-    private static FirefoxOptions getFirefoxOptions_localHeadless() {
-	FirefoxOptions ffOptions = new FirefoxOptions();
-	ffOptions.setHeadless(true);
-	ffOptions.addArguments("--window-size=1920,1080");
+	if (executionTypeProperty.equalsIgnoreCase("local_headless")
+		|| executionTypeProperty.equalsIgnoreCase("remote")) {
+	    ffOptions.setHeadless(true);
+	    ffOptions.addArguments("--window-size=1920,1080");
+	} else {
+//	    ffOptions.addArguments("--start-maximized");
+	}
 	return ffOptions;
     }
 

@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Helper {
@@ -66,10 +67,12 @@ public class Helper {
     public static void confirmAlert(WebDriver driver, ConfirmAlerActionType confirmAlerActionType) {
 	switch (confirmAlerActionType) {
 	case ACCEPT_ALERT:
+	    Helper.getExplicitWait(driver).until(ExpectedConditions.alertIsPresent());
 	    alert = driver.switchTo().alert();
 	    alert.accept();
 	    break;
 	case DISMISS_ALERT:
+	    Helper.getExplicitWait(driver).until(ExpectedConditions.alertIsPresent());
 	    alert = driver.switchTo().alert();
 	    alert.dismiss();
 	    break;

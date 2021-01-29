@@ -47,7 +47,7 @@ public class Gui_BoatsBooking_Test {
 		new File("src/test/resources/TestData/LiveProject_PhpTravels_BoatsBooking_TestData.xlsx"));
 	spreadSheet.switchToSheet("GUI");
 	apis = new PhpTravels_APIs();
-	driver = BrowserFactory.openBrowser(BrowserType.FROM_PROPERTIES, ExecutionType.FROM_PROPERTIES);
+	driver = BrowserFactory.getBrowser(BrowserType.FROM_PROPERTIES, ExecutionType.FROM_PROPERTIES);
 	BrowserActions.navigateToUrl(driver, phptravelsBaseUrl
 		+ "/boats/sri-lanka/colombo/Speedboat-Bravo-410---2016-refit-2016-?date=01/01/2025&adults=2");
     }
