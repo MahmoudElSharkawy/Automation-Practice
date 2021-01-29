@@ -16,18 +16,18 @@ import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import io.restassured.response.Response;
 import liveproject.phptravels.apis.PhpTravels_APIs;
-import utils.Spreadsheet;
+import utils.ExcelFileManager;
 
 @Epic("PHPTRAVELS")
 @Feature("API")
 public class Api_ReservationHotelsSearch_Test {
     PhpTravels_APIs apis;
-    Spreadsheet spreadSheet;
+    ExcelFileManager spreadSheet;
     
     @BeforeClass
     public void beforeClass() {
 	apis = new PhpTravels_APIs();
-	spreadSheet = new Spreadsheet(
+	spreadSheet = new ExcelFileManager(
 		new File("src/test/resources/TestData/LiveProject_PhpTravels_ReservationHotelsSearch_TestData.xlsx"));
 	spreadSheet.switchToSheet("API");
     }

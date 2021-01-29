@@ -22,7 +22,7 @@ import utils.Logger;
 import utils.BrowserActions;
 import utils.BrowserFactory;
 import utils.PropertiesReader;
-import utils.Spreadsheet;
+import utils.ExcelFileManager;
 import utils.BrowserFactory.BrowserType;
 import utils.BrowserFactory.ExecutionType;
 
@@ -30,13 +30,13 @@ import utils.BrowserFactory.ExecutionType;
 @Feature("GUI")
 public class Gui_ReservationBoatsSearch_Test {
     WebDriver driver;
-    Spreadsheet spreadSheet;
+    ExcelFileManager spreadSheet;
 
     String phptravelsHomePageURL = PropertiesReader.getProperty("liveproject.properties", "phptravels.home.url");
 
     @BeforeClass
     public void setUp() {
-	spreadSheet = new Spreadsheet(
+	spreadSheet = new ExcelFileManager(
 		new File("src/test/resources/TestData/LiveProject_PhpTravels_ReservationBoatsSearch_TestData.xlsx"));
 	spreadSheet.switchToSheet("GUI");
 	driver = BrowserFactory.openBrowser(BrowserType.FROM_PROPERTIES, ExecutionType.FROM_PROPERTIES);
