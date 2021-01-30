@@ -37,7 +37,7 @@ public class Api_BoatsBooking_Test {
 		new File("src/test/resources/TestData/LiveProject_PhpTravels_BoatsBooking_TestData.xlsx"));
 	spreadSheet.switchToSheet("API");
     }
-    
+
     @Test(description = "Validating the booking function of the Boats without applying any payment method")
     @Description("When I book a boat without confirming any payment methods, Then the boat booking should has Unpaid status on my accpunt profile")
     @Story("Booking")
@@ -60,6 +60,7 @@ public class Api_BoatsBooking_Test {
 	Assert.assertTrue(account.getBody().asString().contains(spreadSheet.getCellData("Expected Profile Status", 2)),
 		"No/Wrong Booking Status!; The Account response doesn't contain the expected booking status: " + "["
 			+ spreadSheet.getCellData("Expected Profile Status", 2) + "]");
+
     }
 
 }

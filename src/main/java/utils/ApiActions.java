@@ -19,7 +19,7 @@ public class ApiActions {
     QueryableRequestSpecification queryableRequestSpecs;
     
     public enum RequestType {
-	POST, GET, DELETE;
+	POST, GET, PUT, DELETE, PATCH;
     }
 
     private RequestSpecification requestSpec = new RequestSpecBuilder()
@@ -74,141 +74,29 @@ public class ApiActions {
 	    Logger.attachApiRequest_coockies(qCookies.getBytes());
 	}
 
-	if (requestType == RequestType.POST) {
+	switch (requestType) {
+	case POST:
 	    response = request.post(serviceName);
-	} else if (requestType == RequestType.GET) {
+	    break;
+	case GET:
 	    response = request.get(serviceName);
-	} else if (requestType == RequestType.DELETE) {
+	    break;
+	case PUT:
+	    response = request.put(serviceName);
+	    break;
+	case DELETE:
 	    response = request.delete(serviceName);
+	    break;
+	case PATCH:
+	    response = request.patch(serviceName);
+	    break;
 	}
 
 	response.then().spec(responseSpec).statusCode(expectedStatusCode);
 
 	Logger.attachApiResponse(response.asByteArray());
+	
 	return response;
-
     }
-
-//    @Step("Perform API Request --> [https://phptravels.net/{endpoint}]")
-//    public Response performPostRequest(String endpoint) {
-//	RestAssured.baseURI = baseURI;
-//	Response res = RestAssured
-//	.given()
-//		.spec(requestSpec)
-//	.when()
-//		.post(endpoint)
-//	.then()
-//		.spec(responseSpec)
-//	.and()
-//		.extract().response();
-//	
-//	Logger.attachApiResponse(res.asByteArray());
-//	
-//	return res;
-//
-//    }
-//    
-//    @Step("Perform API Request --> [https://phptravels.net/{endpoint}]")
-//    public Response performPostRequest_withFormParams(String endpoint, Map<String, Object> formParams) {
-//	Response res = RestAssured
-//	.given()
-//		.formParams(formParams)	
-//	.and()
-//		.spec(requestSpec)
-//	.when()
-//		.post(endpoint)
-//	.then()
-//		.spec(responseSpec)
-//	.and()
-//		.extract().response();
-//	
-//	Logger.attachApiResponse(res.asByteArray());
-//	
-//	return res;
-//
-//    }
-//    
-//    @Step("Perform API Request --> [https://phptravels.net/{endpoint}]")
-//    public Response performPostRequest_withQueryParams(String endpoint, Map<String, Object> queryParams) {
-//	Response res = RestAssured
-//	.given()
-//		.queryParams(queryParams)
-//	.and()
-//		.spec(requestSpec)
-//	.when()
-//		.post(endpoint)
-//	.then()
-//		.spec(responseSpec)
-//	.and()
-//		.extract().response();
-//	
-//	Logger.attachApiResponse(res.asByteArray());
-//	
-//	return res;
-//
-//    }
-//    
-//    @Step("Perform API Request --> [https://phptravels.net/{endpoint}]")
-//    public Response performPostRequest_withFormParamsAndHeaders(String endpoint, Map<String, Object> formParams,
-//	    Map<String, Object> headers) {
-//	Response res = RestAssured
-//	.given()
-//		.formParams(formParams)
-//		.headers(headers)
-//	.and()
-//		.spec(requestSpec)
-//	.when()
-//		.post(endpoint)
-//	.then()
-//		.spec(responseSpec)
-//	.and()
-//		.extract().response();
-//	
-//	Logger.attachApiResponse(res.asByteArray());
-//	
-//	return res;
-//
-//    }
-//    
-//    @Step("Perform API Request --> [https://phptravels.net/{endpoint}]")
-//    public Response performPostRequest_withFormParamsAndCookies(String endpoint, Map<String, String> cookies, Map<String, Object> formParams) {
-//	Response res = RestAssured
-//	.given()
-//		.formParams(formParams)	
-//	.and()
-//		.spec(requestSpec)
-//		.cookies(cookies)
-//	.when()
-//		.post(endpoint)
-//	.then()
-//		.spec(responseSpec)
-//	.and()
-//		.extract().response();
-//	
-//	Logger.attachApiResponse(res.asByteArray());
-//	
-//	return res;
-//
-//    }
-//    
-//    @Step("Perform API Request --> [https://phptravels.net/{endpoint}]")
-//    public Response performGetRequest_withCookies(String endpoint, Map<String, String> cookies) {
-//	Response res = RestAssured
-//	.given()
-//		.spec(requestSpec)
-//		.cookies(cookies)
-//	.when()
-//		.get(endpoint)
-//	.then()
-//		.spec(responseSpec)
-//	.and()
-//		.extract().response();
-//	
-//	Logger.attachApiResponse(res.asByteArray());
-//	
-//	return res;
-//
-//    }
-    
 
 }

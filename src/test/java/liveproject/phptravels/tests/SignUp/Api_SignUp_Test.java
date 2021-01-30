@@ -55,8 +55,9 @@ public class Api_SignUp_Test {
 	Map<String, String> cookies = signUp.getCookies();
 	Response account = apis.getUserAccount(cookies);
 	Assert.assertTrue(account.getBody().asString().contains("Hi, " + firstName + " " + lastName),
-		"No/Wrong Hi Message!; The Account response doesn't contain the expected message: " + "[Hi, " + firstName
-			+ " " + lastName + "]");
+		"No/Wrong Hi Message!; The Account response doesn't contain the expected message: " + "[Hi, "
+			+ firstName + " " + lastName + "]");
+
     }
 
     @Test(description = "Invalid User Sign Up - Email Already Exists", dependsOnMethods = { "testingValidUserSignUp" })

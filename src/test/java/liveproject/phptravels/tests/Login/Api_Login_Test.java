@@ -36,6 +36,7 @@ public class Api_Login_Test {
 	spreadSheet = new ExcelFileManager(
 		new File("src/test/resources/TestData/LiveProject_PhpTravels_Login_TestData.xlsx"));
 	spreadSheet.switchToSheet("API");
+
     }
 
     @Test(description = "Valid User Login")
@@ -58,6 +59,7 @@ public class Api_Login_Test {
 	Assert.assertTrue(account.getBody().asString().contains("Hi, " + firstName + " " + lastName),
 		"No/Wrong Hi Message!; The Account response doesn't contain the expected message: " + "[Hi, "
 			+ firstName + " " + lastName + "]");
+
     }
 
     @Test(description = "Invalid User Login")
