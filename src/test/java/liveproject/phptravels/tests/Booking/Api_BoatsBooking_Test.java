@@ -56,7 +56,7 @@ public class Api_BoatsBooking_Test {
 	apis.processBookingLogged(cookies, "", spreadSheet.getCellData("Item ID", 2),
 		spreadSheet.getCellData("Adults Count", 2), spreadSheet.getCellData("CheckIn Date", 2), "boats", "",
 		"");
-	Response account = apis.userAccount(cookies);
+	Response account = apis.getUserAccount(cookies);
 	Assert.assertTrue(account.getBody().asString().contains(spreadSheet.getCellData("Expected Profile Status", 2)),
 		"No/Wrong Booking Status!; The Account response doesn't contain the expected booking status: " + "["
 			+ spreadSheet.getCellData("Expected Profile Status", 2) + "]");

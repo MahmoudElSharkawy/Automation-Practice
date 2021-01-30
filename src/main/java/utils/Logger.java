@@ -17,16 +17,7 @@ public class Logger {
 	System.out.println(message);
     }
 
-    @Attachment(type = "text/plain")
-    public static byte[] attachApiResponse(byte[] b) {
-	try {
-	    return b;
-	} catch (Exception e) {
-	    return null;
-	}
-    }
-
-    @Attachment(type = "image/png")
+    @Attachment(value = "Page Screenshot", type = "image/png")
     public static byte[] attachScreenshot(WebDriver driver) {
 	try {
 	    File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
@@ -35,10 +26,44 @@ public class Logger {
 	    return null;
 	}
     }
-    
+
     @Step("The Test Case Failed; Attach A Screenshot.....")
     public static void attachScreenshotInCaseOfFailure(WebDriver driver) {
 	attachScreenshot(driver);
     }
+
+    @Attachment(value = "API Request: Headers", type = "text/json")
+    public static byte[] attachApiRequest_headers(byte[] b) {
+	return attachTextJson(b);
+    }
+
+    @Attachment(value = "API Request: Form Parameters", type = "text/json")
+    public static byte[] attachApiRequest_formParams(byte[] b) {
+	return attachTextJson(b);
+    }
+
+    @Attachment(value = "API Request: Query Parameters", type = "text/json")
+    public static byte[] attachApiRequest_queryParams(byte[] b) {
+	return attachTextJson(b);
+    }
+
+    @Attachment(value = "API Request: Cookies", type = "text/json")
+    public static byte[] attachApiRequest_coockies(byte[] b) {
+	return attachTextJson(b);
+    }
+
+    @Attachment(value = "API Response", type = "text/json")
+    public static byte[] attachApiResponse(byte[] b) {
+	return attachTextJson(b);
+    }
+    
+//  @Attachment(type = "text/json")
+  public static byte[] attachTextJson(byte[] b) {
+	try {
+	    return b;
+	} catch (Exception e) {
+	    return null;
+	}
+  }
 
 }

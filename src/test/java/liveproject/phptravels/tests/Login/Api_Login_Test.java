@@ -54,7 +54,7 @@ public class Api_Login_Test {
 
 	Response login = apis.userLogin(email, password);
 	Map<String, String> cookies = login.getCookies();
-	Response account = apis.userAccount(cookies);
+	Response account = apis.getUserAccount(cookies);
 	Assert.assertTrue(account.getBody().asString().contains("Hi, " + firstName + " " + lastName),
 		"No/Wrong Hi Message!; The Account response doesn't contain the expected message: " + "[Hi, "
 			+ firstName + " " + lastName + "]");

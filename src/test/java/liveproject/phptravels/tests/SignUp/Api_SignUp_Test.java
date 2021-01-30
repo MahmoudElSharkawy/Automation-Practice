@@ -53,7 +53,7 @@ public class Api_SignUp_Test {
 
 	Response signUp = apis.userSignUp(firstName, lastName, mobileNumber, email, password);
 	Map<String, String> cookies = signUp.getCookies();
-	Response account = apis.userAccount(cookies);
+	Response account = apis.getUserAccount(cookies);
 	Assert.assertTrue(account.getBody().asString().contains("Hi, " + firstName + " " + lastName),
 		"No/Wrong Hi Message!; The Account response doesn't contain the expected message: " + "[Hi, " + firstName
 			+ " " + lastName + "]");
