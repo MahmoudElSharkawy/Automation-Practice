@@ -14,6 +14,7 @@
 		<allure-testng.version>2.13.8</allure-testng.version>
 		<allure-maven.version>2.10.0</allure-maven.version>
 		<allure-maven-report.version>2.10.0</allure-maven-report.version>
+		<extentreports.version>5.0.6</extentreports.version>
 		<poi-ooxml.version>4.0.1</poi-ooxml.version>
 		<commons-io.version>2.6</commons-io.version>
 		<aspectj.version>1.9.6</aspectj.version>
@@ -57,6 +58,11 @@
 			<groupId>io.qameta.allure</groupId>
 			<artifactId>allure-testng</artifactId>
 			<version>${allure-testng.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.aventstack</groupId>
+			<artifactId>extentreports</artifactId>
+			<version>${extentreports.version}</version>
 		</dependency>
 
 		<dependency>
