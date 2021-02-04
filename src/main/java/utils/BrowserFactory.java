@@ -90,25 +90,48 @@ public class BrowserFactory {
 //		throw new NullPointerException(warningMsg);
 	    }
 	}
-	// Local & Local Headless execution......
-	else if (executionType == ExecutionType.LOCAL
-		|| (executionType == ExecutionType.FROM_PROPERTIES && executionTypeProperty.equalsIgnoreCase("local"))
-		|| executionType == ExecutionType.LOCAL_HEADLESS 
-		|| (executionType == ExecutionType.FROM_PROPERTIES && executionTypeProperty.equalsIgnoreCase("local_headless"))) {
+	// Local execution......
+	else if (executionType == ExecutionType.LOCAL || (executionType == ExecutionType.FROM_PROPERTIES
+		&& executionTypeProperty.equalsIgnoreCase("local"))) {
 	    if (browserType == BrowserType.GOOGLE_CHROME
 		    || (browserType == BrowserType.FROM_PROPERTIES && browserTypeProperty.equalsIgnoreCase("chrome"))) {
 		Logger.logMessage("Opening [Google Chrome] Browser!....");
+		WebDriverManager.chromedriver().setup();
+		driver = new ChromeDriver();
+		Helper.implicitWait(driver);
+		BrowserActions.maximizeWindow(driver);
+	    } else if (browserType == BrowserType.MOZILLA_FIREFOX || (browserType == BrowserType.FROM_PROPERTIES
+		    && browserTypeProperty.equalsIgnoreCase("firefox"))) {
+		Logger.logMessage("Opening [Mozilla Firefox] Browser!....");
+		WebDriverManager.firefoxdriver().setup();
+		driver = new FirefoxDriver();
+		Helper.implicitWait(driver);
+		BrowserActions.maximizeWindow(driver);
+	    } else {
+		String warningMsg = "The driver is null! because the browser type [" + browserTypeProperty
+			+ "] is not valid/supported; Please choose a valid browser type from the given choices in the properties file";
+		Logger.logMessage(warningMsg);
+		fail(warningMsg);
+//		throw new NullPointerException(warningMsg);
+	    }
+	}
+	// Local Headless execution......
+	else if (executionType == ExecutionType.LOCAL_HEADLESS || (executionType == ExecutionType.FROM_PROPERTIES
+		&& executionTypeProperty.equalsIgnoreCase("local_headless"))) {
+	    if (browserType == BrowserType.GOOGLE_CHROME
+		    || (browserType == BrowserType.FROM_PROPERTIES && browserTypeProperty.equalsIgnoreCase("chrome"))) {
+		Logger.logMessage("Opening Headless [Google Chrome] Browser!....");
 		WebDriverManager.chromedriver().setup();
 		driver = new ChromeDriver(getChromeOptions());
 		Helper.implicitWait(driver);
 //		BrowserActions.maximizeWindow(driver);
 	    } else if (browserType == BrowserType.MOZILLA_FIREFOX || (browserType == BrowserType.FROM_PROPERTIES
 		    && browserTypeProperty.equalsIgnoreCase("firefox"))) {
-		Logger.logMessage("Opening [Mozilla Firefox] Browser!....");
+		Logger.logMessage("Opening Headless [Mozilla Firefox] Browser!....");
 		WebDriverManager.firefoxdriver().setup();
 		driver = new FirefoxDriver(getFirefoxOptions());
 		Helper.implicitWait(driver);
-		BrowserActions.maximizeWindow(driver);
+//		BrowserActions.maximizeWindow(driver);
 	    } else {
 		String warningMsg = "The driver is null! because the browser type [" + browserTypeProperty
 			+ "] is not valid/supported; Please choose a valid browser type from the given choices in the properties file";
@@ -130,14 +153,10 @@ public class BrowserFactory {
     ////////////////////////////////////////////////////////////////////////
     private static ChromeOptions getChromeOptions() {
 	ChromeOptions chOptions = new ChromeOptions();
-	if (executionTypeProperty.equalsIgnoreCase("local_headless")
-		|| executionTypeProperty.equalsIgnoreCase("remote")) {
-	    chOptions.setHeadless(true);
-	    chOptions.addArguments("--window-size=1920,1080");
-	} else {
-	    chOptions.addArguments("--start-maximized");
-	}
+	chOptions.setHeadless(true);
+	chOptions.addArguments("--window-size=1920,1080");
 	
+//	chOptions.addArguments("--start-maximized");
 //	chOptions.setCapability("platform", Platform.LINUX);
 //	chOptions.addArguments("--headless");
 //	chOptions.addArguments("disable--infobars");
@@ -148,13 +167,9 @@ public class BrowserFactory {
 
     private static FirefoxOptions getFirefoxOptions() {
 	FirefoxOptions ffOptions = new FirefoxOptions();
-	if (executionTypeProperty.equalsIgnoreCase("local_headless")
-		|| executionTypeProperty.equalsIgnoreCase("remote")) {
-	    ffOptions.setHeadless(true);
-	    ffOptions.addArguments("--window-size=1920,1080");
-	} else {
-//	    ffOptions.addArguments("--start-maximized");
-	}
+	ffOptions.setHeadless(true);
+	ffOptions.addArguments("--window-size=1920,1080");
+
 	return ffOptions;
     }
 
