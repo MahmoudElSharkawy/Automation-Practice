@@ -46,7 +46,7 @@ public class ExtentReportsDemo {
     public void fail() {
 	test = report.createTest("Fail test case", "Testing fail status");
 
-	test.log(Status.FAIL, "Fail! status");
+	test.log(Status.FAIL, "Fail status!");
     }
 
     @AfterClass
