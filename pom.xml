@@ -112,7 +112,18 @@
 						<argLine>
 							-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
 						</argLine>
+							<properties>
+								<property>
+									<name>usedefaultlisteners</name>
+									<value>false</value> <!-- disabling default listeners is optional -->
+								</property>
+								<property>
+									<name>listener</name>
+									<value>utils.SuiteListener,utils.InvokedMethodListener</value>
+								</property>
+							</properties>
 					</configuration>
+
 					<dependencies>
 						<dependency>
 							<groupId>org.aspectj</groupId>
@@ -120,6 +131,7 @@
 							<version>${aspectj.version}</version>
 						</dependency>
 					</dependencies>
+
 				</plugin>
 			</plugins>
 		</pluginManagement>
