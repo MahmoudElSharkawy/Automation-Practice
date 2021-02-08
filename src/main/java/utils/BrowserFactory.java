@@ -42,7 +42,7 @@ public class BrowserFactory {
     }
 
     @Step("Open Browser")
-    public static WebDriver openBrowser() {
+    public static WebDriver getBrowser() {
 	return getBrowser(BrowserType.GOOGLE_CHROME, ExecutionType.LOCAL);
     }
 

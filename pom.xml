@@ -119,7 +119,7 @@
 								</property>
 								<property>
 									<name>listener</name>
-									<value>utils.SuiteListener,utils.InvokedMethodListener</value>
+									<value>utils.TestngListener</value>
 								</property>
 							</properties>
 					</configuration>

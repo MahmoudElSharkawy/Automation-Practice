@@ -48,7 +48,7 @@ public class SeamsDemo {
     
     @Test
     public void Login() {	
-	driver = BrowserFactory.openBrowser();
+	driver = BrowserFactory.getBrowser();
 	
 	driver.get("https://www.phptravels.net/login");
 	driver.findElement(By.name("username")).sendKeys(email);
