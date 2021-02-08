@@ -6,6 +6,7 @@ This is where I practice Test Automation!
 * Rest-Assured
 * TestNG
 * Allure Report
+* Extent Reports
 * Apachi POI
 
 
