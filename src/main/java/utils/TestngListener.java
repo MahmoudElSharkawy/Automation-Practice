@@ -36,14 +36,12 @@ public class TestngListener implements ISuiteListener, ITestListener, IInvokedMe
     /////////////////////////////////////////////////
     @Override
     public void onStart(ITestContext context) {
-	// When a Test Class is started
 	System.out.println("\n" + "**************************************************** " + "Test: ["
 		+ context.getName() + "] Started" + " ****************************************************" + "\n");
     }
 
     @Override
     public void onFinish(ITestContext context) {
-	// When a Test Class is finished
 	System.out.println("\n" + "**************************************************** " + "Test: ["
 		+ context.getName() + "] Finished" + " ****************************************************" + "\n");
     }
