@@ -8,7 +8,6 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestNGMethod;
 import org.testng.ITestResult;
-import org.testng.internal.ConfigurationMethod;
 
 public class TestngListener implements ISuiteListener, ITestListener, IInvokedMethodListener {
 
@@ -48,7 +47,7 @@ public class TestngListener implements ISuiteListener, ITestListener, IInvokedMe
 
     @Override
     public void onTestStart(ITestResult result) {
-	ExtentReport.createTest(result.getName());
+//	ExtentReport.createTest(result.getName());
     }
 
     @Override
@@ -78,9 +77,15 @@ public class TestngListener implements ISuiteListener, ITestListener, IInvokedMe
     @Override
     public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
 	ITestNGMethod testMethod = method.getTestMethod();
+	if (testMethod.getDescription() != null && !testMethod.getDescription().equals("")) {
+	    ExtentReport.createTest(testMethod.getDescription());
+	} else {
+	    ExtentReport.createTest(testResult.getName());
+	}
 	System.out.println("\n" + "*******************************************");
-	if (testMethod instanceof ConfigurationMethod) {
+	if (method.isConfigurationMethod()) {
 	    System.out.println("Starting Configuration Method (Setup or Teardown): [" + testResult.getName() + "]");
+	    ExtentReport.removeTest(testResult.getName());
 	} else {
 	    System.out.println("Starting Test Case: [" + testResult.getName() + "]");
 	}
@@ -89,9 +94,8 @@ public class TestngListener implements ISuiteListener, ITestListener, IInvokedMe
 
     @Override
     public void afterInvocation(IInvokedMethod method, ITestResult testResult) {
-	ITestNGMethod testMethod = method.getTestMethod();
 	System.out.println("\n" + "*******************************************");
-	if (testMethod instanceof ConfigurationMethod) {
+	if (method.isConfigurationMethod()) {
 	    System.out.println("Finished Configuration Method (Setup or Teardown): [" + testResult.getName() + "]");
 	} else {
 	    System.out.println("Finished Test Case: [" + testResult.getName() + "]");

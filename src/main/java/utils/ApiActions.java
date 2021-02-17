@@ -2,6 +2,8 @@ package utils;
 
 import java.util.Map;
 
+import com.aventstack.extentreports.markuputils.MarkupHelper;
+
 import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -46,32 +48,33 @@ public class ApiActions {
     public Response performRequest(RequestType requestType, String serviceName, int expectedStatusCode,
 	    Map<String, Object> headers, Map<String, Object> formParams, Map<String, Object> queryParams,
 	    Map<String, String> cookies) {
-
+	ExtentReport.info("Perform API Request --> ["+serviceName+"]");
+		
 	request = RestAssured.given().spec(requestSpec);
 	queryableRequestSpecs = SpecificationQuerier.query(request);
 
 	if (headers != null) {
 	    request.headers(headers);
 	    String qHeaders = queryableRequestSpecs.getHeaders().toString();
-	    Logger.attachApiRequest_headers(qHeaders.getBytes());
+	    Logger.attachApiRequest(qHeaders.getBytes());
 	}
 
 	if (formParams != null) {
 	    request.formParams(formParams);
 	    String qFormParams = queryableRequestSpecs.getFormParams().toString();
-	    Logger.attachApiRequest_formParams(qFormParams.getBytes());
+	    Logger.attachApiRequest(qFormParams.getBytes());
 	}
 
 	if (queryParams != null) {
 	    request.queryParams(queryParams);
 	    String qQueryParams = queryableRequestSpecs.getQueryParams().toString();
-	    Logger.attachApiRequest_queryParams(qQueryParams.getBytes());
+	    Logger.attachApiRequest(qQueryParams.getBytes());
 	}
 
 	if (cookies != null) {
 	    request.cookies(cookies);
 	    String qCookies = queryableRequestSpecs.getCookies().toString();
-	    Logger.attachApiRequest_coockies(qCookies.getBytes());
+	    Logger.attachApiRequest(qCookies.getBytes());
 	}
 
 	switch (requestType) {
@@ -95,6 +98,7 @@ public class ApiActions {
 	response.then().spec(responseSpec).statusCode(expectedStatusCode);
 
 	Logger.attachApiResponse(response.asByteArray());
+	ExtentReport.info(MarkupHelper.createCodeBlock(response.asPrettyString()));
 	
 	return response;
     }

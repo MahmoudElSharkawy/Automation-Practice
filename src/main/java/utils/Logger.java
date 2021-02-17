@@ -15,6 +15,7 @@ public class Logger {
     @Step("Console Log Message: [{message}]")
     public static void logMessage(String message) {
 	System.out.println(message);
+	ExtentReport.info(message);
     }
 
     @Attachment(value = "Page Screenshot", type = "image/png")
@@ -32,23 +33,8 @@ public class Logger {
 	attachScreenshot(driver);
     }
 
-    @Attachment(value = "API Request: Headers", type = "text/json")
-    public static byte[] attachApiRequest_headers(byte[] b) {
-	return attachTextJson(b);
-    }
-
-    @Attachment(value = "API Request: Form Parameters", type = "text/json")
-    public static byte[] attachApiRequest_formParams(byte[] b) {
-	return attachTextJson(b);
-    }
-
-    @Attachment(value = "API Request: Query Parameters", type = "text/json")
-    public static byte[] attachApiRequest_queryParams(byte[] b) {
-	return attachTextJson(b);
-    }
-
-    @Attachment(value = "API Request: Cookies", type = "text/json")
-    public static byte[] attachApiRequest_coockies(byte[] b) {
+    @Attachment(value = "API Request", type = "text/json")
+    public static byte[] attachApiRequest(byte[] b) {
 	return attachTextJson(b);
     }
 

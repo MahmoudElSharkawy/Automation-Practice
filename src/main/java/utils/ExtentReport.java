@@ -2,6 +2,7 @@ package utils;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 
@@ -24,7 +25,15 @@ public class ExtentReport {
 	test = report.createTest(testcasename);
     }
     
+    public static void removeTest(String testcasename) {
+	report.removeTest(testcasename);
+    }
+    
     public static void info(String message) {
+	test.info(message);
+    }
+    
+    public static void info(Markup message) {
 	test.info(message);
     }
 
