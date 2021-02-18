@@ -24,7 +24,8 @@ Included a live project which I summarize my practice with
 ### How to run the live project:
 * A properties file ***"liveproject.properties"*** can be found it *src/main/resources* file path including all the configurations needed in the execution
 * Can run the live project Test Suit ***"liveproject.xml"*** in *src/test/resources/TestSuits* file path that includes all the test classes of the live project
-* After executing, you can generate the ***Allure Report*** by opening a commandline terminal on the project root path and type `mvn allure:serve`
+* After executing, you can generate the ***Allure Report*** by opening a commandline terminal on the project root path and type `mvn allure:serve`.
+Or you can find the Extent Report ***ExtentReports.html*** in the project root path for the latest execution 
 
 
 ###### Finally, you can also find a [playlist on Youtube](https://youtube.com/playlist?list=PLmayvCz0Xqr6TT-XJHlPtjDSdJ8WArBHi) (Arabic content) that summarizes and executing the project
