@@ -85,7 +85,12 @@ public class TestngListener implements ISuiteListener, ITestListener, IInvokedMe
 	System.out.println("\n" + "*******************************************");
 	if (method.isConfigurationMethod()) {
 	    System.out.println("Starting Configuration Method (Setup or Teardown): [" + testResult.getName() + "]");
-	    ExtentReport.removeTest(testResult.getName());
+	    if (testMethod.getDescription() != null && !testMethod.getDescription().equals("")) {
+		ExtentReport.removeTest(testMethod.getDescription());
+	    } else {
+		ExtentReport.removeTest(testResult.getName());
+	    }
+//	    ExtentReport.removeTest(testResult.getName());
 	} else {
 	    System.out.println("Starting Test Case: [" + testResult.getName() + "]");
 	}
