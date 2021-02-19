@@ -9,6 +9,9 @@ import org.testng.ITestListener;
 import org.testng.ITestNGMethod;
 import org.testng.ITestResult;
 
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
+
 public class TestngListener implements ISuiteListener, ITestListener, IInvokedMethodListener {
 
     ////////////////////////////////////////////////////
@@ -52,12 +55,14 @@ public class TestngListener implements ISuiteListener, ITestListener, IInvokedMe
 
     @Override
     public void onTestSuccess(ITestResult result) {
-	ExtentReport.pass(result.getMethod().getMethodName() + " is Passed");
+//	ExtentReport.pass(result.getMethod().getMethodName() + " Passed");
+	ExtentReport.pass(MarkupHelper.createLabel(result.getMethod().getMethodName() + " Passed!", ExtentColor.GREEN));
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
-	ExtentReport.fail(result.getMethod().getMethodName() + " is Failed");
+//	ExtentReport.fail(result.getMethod().getMethodName() + " Failed");
+	ExtentReport.fail(MarkupHelper.createLabel(result.getMethod().getMethodName() + " Failed!", ExtentColor.RED));
 	if (result.getThrowable() != null) {
 	    ExtentReport.fail(result.getThrowable());
 	}
@@ -65,7 +70,8 @@ public class TestngListener implements ISuiteListener, ITestListener, IInvokedMe
 
     @Override
     public void onTestSkipped(ITestResult result) {
-	ExtentReport.skip(result.getMethod().getMethodName() + " is Skipped");
+//	ExtentReport.skip(result.getMethod().getMethodName() + " Skipped");
+	ExtentReport.skip(MarkupHelper.createLabel(result.getMethod().getMethodName() + " Skipped!", ExtentColor.YELLOW));
 	if (result.getThrowable() != null) {
 	    ExtentReport.skip(result.getThrowable());
 	}

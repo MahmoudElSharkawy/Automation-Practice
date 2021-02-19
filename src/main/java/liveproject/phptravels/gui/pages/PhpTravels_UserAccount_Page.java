@@ -3,8 +3,12 @@ package liveproject.phptravels.gui.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
+
 import io.qameta.allure.Step;
 import utils.ElementActions;
+import utils.ExtentReport;
 import utils.Logger;
 
 public class PhpTravels_UserAccount_Page {
@@ -22,6 +26,8 @@ public class PhpTravels_UserAccount_Page {
     // Methods
     @Step("Get the text of the Hi message")
     public String getHiMessage() {
+	ExtentReport.info(MarkupHelper.createLabel("Get the text of the Hi message", ExtentColor.BLUE));
+
 	String hiMessage = ElementActions.getText(driver, hi_text);
 	Logger.logMessage("The Hi message is: " + hiMessage);
 	return hiMessage;

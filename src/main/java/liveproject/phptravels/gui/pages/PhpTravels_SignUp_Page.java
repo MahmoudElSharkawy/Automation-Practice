@@ -3,8 +3,12 @@ package liveproject.phptravels.gui.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
+
 import io.qameta.allure.Step;
 import utils.ElementActions;
+import utils.ExtentReport;
 import utils.Logger;
 
 public class PhpTravels_SignUp_Page {
@@ -29,6 +33,7 @@ public class PhpTravels_SignUp_Page {
     @Step("User Sign up with Data --> First Name: [{firstName}], Last Name: [{lastName}], Mobile Number: [{mobileNumber}], Email: [{email}] and Password: [{password}]")
     public PhpTravels_UserAccount_Page userSignUp(String firstName, String lastName, String mobileNumber, String email,
 	    String password) {
+	ExtentReport.info(MarkupHelper.createLabel("User Sign up", ExtentColor.BLUE));
 	enterFirstNameField(firstName);
 	enterLastNameField(lastName);
 	enterMobileNumberField(mobileNumber);

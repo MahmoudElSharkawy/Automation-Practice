@@ -33,28 +33,40 @@ public class ExtentReport {
 	test.info(message);
     }
     
-    public static void info(Markup message) {
-	test.info(message);
+    public static void info(Markup m) {
+	test.info(m);
     }
 
     public static void pass(String message) {
 	test.pass(message);
     }
+    
+    public static void pass(Markup m) {
+	test.pass(m);
+    }
 
     public static void fail(String message) {
 	test.fail(message);
     }
+    
+    public static void fail(Markup m) {
+	test.fail(m);
+    }
 
-    public static void fail(Throwable message) {
-	test.fail(message);
+    public static void fail(Throwable t) {
+	test.fail(t);
     }
 
     public static void skip(String message) {
 	test.skip(message);
     }
+    
+    public static void skip(Markup m) {
+	test.skip(m);
+    }
 
-    public static void skip(Throwable message) {
-	test.skip(message);
+    public static void skip(Throwable t) {
+	test.skip(t);
     }
 
     public static void flushReports() {

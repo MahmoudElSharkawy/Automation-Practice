@@ -3,9 +3,13 @@ package liveproject.phptravels.apis;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
+
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import utils.ApiActions;
+import utils.ExtentReport;
 import utils.PropertiesReader;
 import utils.ApiActions.RequestType;
 
@@ -26,6 +30,8 @@ public class PhpTravels_APIs {
 
     @Step("User Sign up with Data --> First Name: [{firstName}], Last Name: [{lastName}], Mobile Number: [{mobileNumber}], Email: [{email}] and Password: [{password}]")
     public Response userSignUp(String firstName, String lastName, String mobileNumber, String email, String password) {
+	ExtentReport.info(MarkupHelper.createLabel("User Sign up", ExtentColor.BLUE));
+
 	Map<String, Object> formParams = new HashMap<>();
 	formParams.put("firstname", firstName);
 	formParams.put("lastname", lastName);
@@ -40,6 +46,8 @@ public class PhpTravels_APIs {
 
     @Step("User Login with Data --> Email: [{email}] and Password: [{password}]")
     public Response userLogin(String email, String password) {
+	ExtentReport.info(MarkupHelper.createLabel("User Login", ExtentColor.BLUE));
+
 	Map<String, Object> headers = new HashMap<>();
 	headers.put("x-requested-with", "XMLHttpRequest");
 	
@@ -53,6 +61,8 @@ public class PhpTravels_APIs {
 
     @Step("Get User Account")
     public Response getUserAccount(Map<String, String> cookies) {
+	ExtentReport.info(MarkupHelper.createLabel("Get User Account", ExtentColor.BLUE));
+
 	return api.performRequest(RequestType.GET, baseURI + account_endpoint, successStatusCode, null, null, null, cookies);
 
     }
@@ -60,6 +70,8 @@ public class PhpTravels_APIs {
     @Step("Get Hotel Details with Data --> City Name: [{cityName}], Hotel Name: [{hotelName}], Check In Date: [{checkInDate}], Check Out Date: [{checkOutDate}], Adults Count: [{adultsCount}], Child Count: [{childCount}]")
     public Response hotelsSearch(String cityName, String hotelName, String checkInDate, String checkOutDate,
 	    String adultsCount, String childCount) {
+	ExtentReport.info(MarkupHelper.createLabel("Get Hotel Details", ExtentColor.BLUE));
+
 	return api.performRequest(RequestType.POST, baseURI + hotelsdetails_endpoint  + "/" + cityName + "/" + hotelName + "/" + checkInDate
 		+ "/" + checkOutDate + "/" + adultsCount + "/" + childCount, successStatusCode, null, null, null, null);
 
@@ -68,6 +80,8 @@ public class PhpTravels_APIs {
     @Step("Get Boat Details with Data --> Country Name: [{countryName}], City Name: [{cityName}], Boat Name: [{boatName}], Boat Date: [{boatDate}] and Adults Count: [{adultsCount}]")
     public Response boatsSearch(String countryName, String cityName, String boatName, String boatDate,
 	    String adultsCount) {
+	ExtentReport.info(MarkupHelper.createLabel("Get Boat Details", ExtentColor.BLUE));
+
 	Map<String, Object> queryParams = new HashMap<>();
 	queryParams.put("date", boatDate);
 	queryParams.put("adults", adultsCount);
@@ -81,6 +95,8 @@ public class PhpTravels_APIs {
     @Step("Process Booking with Logged-in User")
     public Response processBookingLogged(Map<String, String> cookies, String additionalNotes, String itemId,
 	    String adultsCount, String childrenCount, String bookingType, String checkInDate, String checkOutDate) {
+	ExtentReport.info(MarkupHelper.createLabel("Process Booking with Logged-in User", ExtentColor.BLUE));
+
 	Map<String, Object> formParams = new HashMap<>();
 	formParams.put("additionalnotes", additionalNotes);
 	formParams.put("itemid", itemId);

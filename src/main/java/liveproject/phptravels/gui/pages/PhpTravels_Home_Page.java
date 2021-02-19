@@ -3,8 +3,12 @@ package liveproject.phptravels.gui.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
+
 import io.qameta.allure.Step;
 import utils.ElementActions;
+import utils.ExtentReport;
 
 public class PhpTravels_Home_Page {
     private WebDriver driver;
@@ -56,6 +60,7 @@ public class PhpTravels_Home_Page {
     
     @Step("Navigate to Login page")
     public PhpTravels_Login_Page navigateToLoginPage() {
+	ExtentReport.info(MarkupHelper.createLabel("Navigate to Login page", ExtentColor.BLUE));
 	clickOnMyAccountLink();
 	clickOnLoginLink();
 	return new PhpTravels_Login_Page(driver);
@@ -63,6 +68,7 @@ public class PhpTravels_Home_Page {
 
     @Step("Navigate to Sign Up page")
     public PhpTravels_SignUp_Page navigateToSignUpPage() {
+	ExtentReport.info(MarkupHelper.createLabel("Navigate to Sign Up page", ExtentColor.BLUE));
 	clickOnMyAccountLink();
 	clickOnSignUpLink();
 	return new PhpTravels_SignUp_Page(driver);
@@ -89,6 +95,8 @@ public class PhpTravels_Home_Page {
     @Step("Search for HOTELS with Data --> DESTINATION: [{hotelsOrCityname}], CHECK IN date: [{checkinDate}], CHECK OUT date: [{checkoutDate}], ADULTS Count; [{adultsCount}], CHILD Count; [{childCount}]")
     public PhpTravels_HotelsDetails_Page hotelsSearch(String hotelsOrCityname, String checkinDate, String checkoutDate,
 	    String adultsCount, String childCount) {
+	ExtentReport.info(MarkupHelper.createLabel("Search for HOTELS", ExtentColor.BLUE));
+
 	clickOnHotelsLink();
 	selectHotelsDestination(hotelsOrCityname);
 	enterCheckinDate(checkinDate);
@@ -155,6 +163,7 @@ public class PhpTravels_Home_Page {
     @Step("Search for BOATS with Data --> DESTINATION: [{boatName}], BOAT TYPE: [{boatType}], BOAT date: [{boatDate}], ADULTS Count; [{adultsCount}]")
     public PhpTravels_BoatsDetails_Page boatsSearch(String boatName, String boatType, String boatDate,
 	    String adultsCount) {
+	ExtentReport.info(MarkupHelper.createLabel("Search for BOATS", ExtentColor.BLUE));
 	clickOnBoatsLink();
 	selectBoatsDestination(boatName);
 	selectBoatType(boatType);

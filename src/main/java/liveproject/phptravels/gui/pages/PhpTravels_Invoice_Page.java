@@ -4,8 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
+
 import io.qameta.allure.Step;
 import utils.ElementActions;
+import utils.ExtentReport;
 import utils.Helper;
 import utils.Helper.ConfirmAlerActionType;
 
@@ -24,6 +28,7 @@ public class PhpTravels_Invoice_Page {
     // Methods
     @Step("Click on PAY ON ARRIVAL button and accept pay at arrival alert")
     public PhpTravels_Invoice_Page clickOnPayOnArrivalAndAcceptAlert() {
+	ExtentReport.info(MarkupHelper.createLabel("Click on PAY ON ARRIVAL button and accept pay at arrival alert", ExtentColor.BLUE));
 	ElementActions.click(driver, payonarrival_button);
 	Helper.confirmAlert(driver, ConfirmAlerActionType.ACCEPT_ALERT);
 	Helper.getExplicitWait(driver).until(

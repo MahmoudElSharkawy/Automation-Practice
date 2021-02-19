@@ -32,7 +32,7 @@ public class ApiActions {
 //	    .expectStatusCode(200)
 	    .log(LogDetail.BODY)
 	    .build();
-    
+
     @Step("Perform API Request --> [{serviceName}]")
     /**
      * 
@@ -48,8 +48,8 @@ public class ApiActions {
     public Response performRequest(RequestType requestType, String serviceName, int expectedStatusCode,
 	    Map<String, Object> headers, Map<String, Object> formParams, Map<String, Object> queryParams,
 	    Map<String, String> cookies) {
-	ExtentReport.info("Perform API Request --> ["+serviceName+"]");
-		
+	ExtentReport.info("Perform API Request --> [" + serviceName + "]");
+
 	request = RestAssured.given().spec(requestSpec);
 	queryableRequestSpecs = SpecificationQuerier.query(request);
 
@@ -57,24 +57,29 @@ public class ApiActions {
 	    request.headers(headers);
 	    String qHeaders = queryableRequestSpecs.getHeaders().toString();
 	    Logger.attachApiRequest(qHeaders.getBytes());
+	    ExtentReport.info(MarkupHelper.createCodeBlock("Headers: " + "\n" + qHeaders));
+
 	}
 
 	if (formParams != null) {
 	    request.formParams(formParams);
 	    String qFormParams = queryableRequestSpecs.getFormParams().toString();
 	    Logger.attachApiRequest(qFormParams.getBytes());
+	    ExtentReport.info(MarkupHelper.createCodeBlock("Form params: " + "\n" + qFormParams));
 	}
 
 	if (queryParams != null) {
 	    request.queryParams(queryParams);
 	    String qQueryParams = queryableRequestSpecs.getQueryParams().toString();
 	    Logger.attachApiRequest(qQueryParams.getBytes());
+	    ExtentReport.info(MarkupHelper.createCodeBlock("Query params: " + "\n" + qQueryParams));
 	}
 
 	if (cookies != null) {
 	    request.cookies(cookies);
 	    String qCookies = queryableRequestSpecs.getCookies().toString();
 	    Logger.attachApiRequest(qCookies.getBytes());
+	    ExtentReport.info(MarkupHelper.createCodeBlock("Cookies: " + "\n" + qCookies));
 	}
 
 	switch (requestType) {
@@ -95,11 +100,14 @@ public class ApiActions {
 	    break;
 	}
 
+	Logger.attachApiRequest(queryableRequestSpecs.getMethod().getBytes());
+	ExtentReport.info(MarkupHelper.createCodeBlock("Request method: " + queryableRequestSpecs.getMethod()));
+
 	response.then().spec(responseSpec).statusCode(expectedStatusCode);
 
 	Logger.attachApiResponse(response.asByteArray());
-	ExtentReport.info(MarkupHelper.createCodeBlock(response.asPrettyString()));
-	
+	ExtentReport.info(MarkupHelper.createCodeBlock("API Response: " + "\n" + response.asPrettyString()));
+
 	return response;
     }
 

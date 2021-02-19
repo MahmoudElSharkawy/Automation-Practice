@@ -3,8 +3,12 @@ package liveproject.phptravels.gui.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
+
 import io.qameta.allure.Step;
 import utils.ElementActions;
+import utils.ExtentReport;
 
 public class PhpTravels_BoatsBook_Page {
     private WebDriver driver;
@@ -29,6 +33,7 @@ public class PhpTravels_BoatsBook_Page {
     
     @Step("Sign In with data --> Email: [{email}] and Password: [{password}]")
     public PhpTravels_BoatsBook_Page signIn(String email, String password) {
+	ExtentReport.info(MarkupHelper.createLabel("Sign In", ExtentColor.BLUE));
 	clickOnSignInTab();
 	enterEmailField(email);
 	enterPasswordField(password);

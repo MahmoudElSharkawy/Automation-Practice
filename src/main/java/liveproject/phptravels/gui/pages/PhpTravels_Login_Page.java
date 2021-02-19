@@ -3,8 +3,12 @@ package liveproject.phptravels.gui.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
+
 import io.qameta.allure.Step;
 import utils.ElementActions;
+import utils.ExtentReport;
 import utils.Logger;
 
 public class PhpTravels_Login_Page {
@@ -23,6 +27,7 @@ public class PhpTravels_Login_Page {
     // Methods
     @Step("User Login with Data --> Email: [{email}] and Password: [{password}]")
     public PhpTravels_UserAccount_Page userLogin(String email, String password) {
+	ExtentReport.info(MarkupHelper.createLabel("User Login", ExtentColor.BLUE));
 	enterEmail(email);
 	enterPassword(password);
 	ElementActions.clickEnterKey(driver, password_field);
@@ -31,6 +36,7 @@ public class PhpTravels_Login_Page {
 
     @Step("User Invalid Login")
     public PhpTravels_Login_Page invalidUserLogin(String email, String password) {
+	ExtentReport.info(MarkupHelper.createLabel("User Invalid Login", ExtentColor.BLUE));
 	userLogin(email, password);
 	return this;
     }
@@ -49,6 +55,8 @@ public class PhpTravels_Login_Page {
 
     @Step("Get the text of the Alert message")
     public String getAlertMessage() {
+	ExtentReport.info(MarkupHelper.createLabel("Get the text of the Alert message", ExtentColor.BLUE));
+
 	String alertMessage = ElementActions.getText(driver, alert_text);
 	Logger.logMessage("The Alert message is: " + alertMessage);
 	return alertMessage;
