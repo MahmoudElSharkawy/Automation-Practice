@@ -34,13 +34,14 @@ public class ElementActions {
 	try {
 	    // Log element text if not empty. Else, log clicking
 	    if (!driver.findElement(by).getText().isBlank()) {
-		Logger.logMessage("Clicking on: " + driver.findElement(by).getText());
+		Logger.logMessage("Clicking on: [" + driver.findElement(by).getText() + "] Button");
 	    } else {
 		Logger.logMessage("Clicking on element:" + by);
 	    }
 	    // Now we click on the element! :D
 	    driver.findElement(by).click();
 	} catch (Exception exception) {
+	 // Click using JavascriptExecutor in case of the click is not performed successfully and got an exception using the Selenium click method
 	    try {
 		((JavascriptExecutor) driver).executeScript("arguments[arguments.length - 1].click();",
 			driver.findElement(by));
@@ -71,13 +72,25 @@ public class ElementActions {
 	    if (!driver.findElement(by).getAttribute("value").isBlank() && clearBeforeTyping) {
 		Logger.logMessage("Clearing the data from element: " + by);
 		driver.findElement(by).clear();
-		Logger.logMessage("Typing: " + data + " on element: " + by);
+		Logger.logMessage("Typing: [" + data + "] on element: " + by);
 		// We type here! :D
 		driver.findElement(by).sendKeys(data);
+		// Type using JavascriptExecutor in case of the data is not typed successfully using the Selenium sendKeys method
+		if (!driver.findElement(by).getAttribute("value").equals(data)) {
+		    ((JavascriptExecutor) driver).executeScript("arguments[0].setAttribute('value', '" + data + "')",
+			    driver.findElement(by));
+		}
 	    } else {
-		Logger.logMessage("Typing: " + data + " on element: " + by);
+		Logger.logMessage("Typing: [" + data + "] on element: " + by);
 		// We type here! :D
 		driver.findElement(by).sendKeys(data);
+		// Type using JavascriptExecutor in case of the data is not typed successfully using the Selenium sendKeys method
+		if (!driver.findElement(by).getAttribute("value").contains(data)) {
+		    String currentValue = driver.findElement(by).getAttribute("value");
+		    ((JavascriptExecutor) driver).executeScript(
+			    "arguments[0].setAttribute('value', '" + currentValue + data + "')",
+			    driver.findElement(by));
+		}
 	    }
 	} catch (Exception e) {
 	    Logger.logMessage(e.getMessage());
