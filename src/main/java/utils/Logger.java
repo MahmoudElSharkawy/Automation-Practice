@@ -8,13 +8,22 @@ import java.util.Date;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.google.common.io.Files;
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 
 public class Logger {
 
-    @Step("Console Log Message: [{message}]")
+    @Step("{message}")
+    public static void logStep(String message) {
+	String timeStamp = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss.SSS a").format(new Date());
+	System.out.println("<" + timeStamp + "> " + message);
+	ExtentReport.info(MarkupHelper.createLabel(message, ExtentColor.BLUE));
+    }
+
     public static void logMessage(String message) {
 	String timeStamp = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss.SSS a").format(new Date());
 	System.out.println("<" + timeStamp + "> " + message);
@@ -45,14 +54,14 @@ public class Logger {
     public static byte[] attachApiResponse(byte[] b) {
 	return attachTextJson(b);
     }
-    
+
 //  @Attachment(type = "text/json")
-  public static byte[] attachTextJson(byte[] b) {
+    public static byte[] attachTextJson(byte[] b) {
 	try {
 	    return b;
 	} catch (Exception e) {
 	    return null;
 	}
-  }
+    }
 
 }

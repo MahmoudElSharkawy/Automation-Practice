@@ -1,6 +1,7 @@
 package liveproject.phptravels.gui.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 import com.aventstack.extentreports.markuputils.ExtentColor;
@@ -39,7 +40,7 @@ public class PhpTravels_SignUp_Page {
 	enterMobileNumberField(mobileNumber);
 	enterEmailField(email);
 	enterPasswordFields(password);
-	ElementActions.clickEnterKey(driver, confirmpassword_field);
+	ElementActions.clickKeyboardKey(driver, confirmpassword_field, Keys.ENTER);
 	return new PhpTravels_UserAccount_Page(driver);
     }
     

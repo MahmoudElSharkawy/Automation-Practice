@@ -1,6 +1,7 @@
 package liveproject.phptravels.gui.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 import com.aventstack.extentreports.markuputils.ExtentColor;
@@ -30,7 +31,7 @@ public class PhpTravels_Login_Page {
 	ExtentReport.info(MarkupHelper.createLabel("User Login", ExtentColor.BLUE));
 	enterEmail(email);
 	enterPassword(password);
-	ElementActions.clickEnterKey(driver, password_field);
+	ElementActions.clickKeyboardKey(driver, password_field, Keys.ENTER);
 	return new PhpTravels_UserAccount_Page(driver);
     }
 
