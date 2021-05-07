@@ -2,6 +2,8 @@ package utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -14,7 +16,8 @@ public class Logger {
 
     @Step("Console Log Message: [{message}]")
     public static void logMessage(String message) {
-	System.out.println(message);
+	String timeStamp = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss.SSS a").format(new Date());
+	System.out.println("<" + timeStamp + "> " + message);
 	ExtentReport.info(message);
     }
 
