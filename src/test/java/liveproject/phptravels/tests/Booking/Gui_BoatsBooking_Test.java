@@ -56,8 +56,8 @@ public class Gui_BoatsBooking_Test {
     @Description("When I book a boat, And confirm the booking request with PAY ON ARRIVAL payment method, Then the boat should be Reserved on my profile")
     @Story("Booking")
     @Severity(SeverityLevel.CRITICAL)
-    @TmsLink("focus-case-1637103")
-    @Issue("bug-tracker#1")
+    @TmsLink("Test_case")
+    @Issue("Software_bug")
     public void testingBoatsBooking_payOnArrival() {
 	firstName = spreadSheet.getCellData("FirstName", 2);
 	lastName = spreadSheet.getCellData("LastName", 2);

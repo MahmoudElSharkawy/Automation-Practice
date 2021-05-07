@@ -47,8 +47,8 @@ public class Gui_ReservationBoatsSearch_Test {
     @Description("Given I'm on the PHPTravels home page; When I enter the data needed to search for Boats And click the search button; Then I should be navigated to the Boats search results page, Then I should get the search results related to the search value entered")
     @Story("Reservation Search")
     @Severity(SeverityLevel.CRITICAL)
-    @TmsLink("focus-case-1637106")
-    @Issue("bug-tracker#1")
+    @TmsLink("Test_case")
+    @Issue("Software_bug")
     public void testingBoatsSearch() {
 	String boatName =
 		new PhpTravels_Home_Page(driver)
