@@ -41,25 +41,37 @@ public class BrowserFactory {
     }
 
     public enum ExecutionType {
-	LOCAL, REMOTE, LOCAL_HEADLESS, FROM_PROPERTIES;
+	LOCAL("Local"), REMOTE("Remote"), LOCAL_HEADLESS("Local Headless"), FROM_PROPERTIES(executionTypeProperty);
+
+	private String value;
+
+	ExecutionType(String type) {
+	    this.value = type;
+	}
+
+	protected String getValue() {
+	    return value;
+	}
     }
 
-    @Step("Open Browser")
     public static WebDriver getBrowser() {
-	return getBrowser(BrowserType.GOOGLE_CHROME, ExecutionType.LOCAL);
+	return getBrowser(BrowserType.FROM_PROPERTIES, ExecutionType.FROM_PROPERTIES);
     }
 
-    @Step("Open Browser")
+    @Step("Initializing a new Web GUI Browser!.....")
     public static WebDriver getBrowser(BrowserType browserType, ExecutionType executionType) {
+	Logger.logStep("Initialize [" + browserType.getValue() + "] Browser and the Execution Type is ["
+		+ executionType.getValue() + "]");
     	ITestResult result = Reporter.getCurrentTestResult();
 	ITestContext context = result.getTestContext();
+	// Remote execution condition
 	if (executionType == ExecutionType.REMOTE || (executionType == ExecutionType.FROM_PROPERTIES
 		&& executionTypeProperty.equalsIgnoreCase("remote"))) {
 	    /*
 	     * Steps to execute remotely with selenium grid and dockers VERY simpl steps:... 
 	     * 1- Install docker 
 	     * 2- You need to have a .yml file to configure the network between the containers like that we have in the src/main/resource file "docker-compose_native.yml" 
-	     * 3- open a terminal on the project directory 
+	     * 3- open a terminal on the .yml file directory 
 	     * 4- Enter the following command that will setup the containers (1 hub & 4 nodes) and run them automatically: 
 	     * docker-compose -f docker-compose_native.yml up --scale chrome=4 --remove-orphans -d 
 	     * 5- Enter the following command to check the running containers: docker ps 
@@ -67,8 +79,7 @@ public class BrowserFactory {
 	     * 7- execute using this condition
 	     */
 	    if (browserType == BrowserType.GOOGLE_CHROME
-		    || (browserType == BrowserType.FROM_PROPERTIES && browserTypeProperty.equalsIgnoreCase("chrome"))) {
-		Logger.logMessage("Opening Remote [Google Chrome] Browser!....");
+		    || (browserType == BrowserType.FROM_PROPERTIES && browserTypeProperty.equalsIgnoreCase("google chrome"))) {
 		try {
 		    driver = new RemoteWebDriver(new URL("http://" + host + ":" + port + "/wd/hub"),
 			    getChromeOptions());
@@ -79,8 +90,7 @@ public class BrowserFactory {
 		}
 
 	    } else if (browserType == BrowserType.MOZILLA_FIREFOX || (browserType == BrowserType.FROM_PROPERTIES
-		    && browserTypeProperty.equalsIgnoreCase("firefox"))) {
-		Logger.logMessage("Opening Remote [Mozilla Firefox] Browser!....");
+		    && browserTypeProperty.equalsIgnoreCase("mozilla firefox"))) {
 		try {
 		    driver = new RemoteWebDriver(new URL("http://" + host + ":" + port + "/wd/hub"),
 			    getFirefoxOptions());
@@ -97,20 +107,18 @@ public class BrowserFactory {
 //		throw new NullPointerException(warningMsg);
 	    }
 	}
-	// Local execution......
+	// Local execution condition
 	else if (executionType == ExecutionType.LOCAL || (executionType == ExecutionType.FROM_PROPERTIES
 		&& executionTypeProperty.equalsIgnoreCase("local"))) {
 	    if (browserType == BrowserType.GOOGLE_CHROME
-		    || (browserType == BrowserType.FROM_PROPERTIES && browserTypeProperty.equalsIgnoreCase("chrome"))) {
-		Logger.logMessage("Opening [Google Chrome] Browser!....");
+		    || (browserType == BrowserType.FROM_PROPERTIES && browserTypeProperty.equalsIgnoreCase("google chrome"))) {
 		WebDriverManager.chromedriver().setup();
 		driver = new ChromeDriver();
 		context.setAttribute("driver", driver);
 		Helper.implicitWait(driver);
 		BrowserActions.maximizeWindow(driver);
 	    } else if (browserType == BrowserType.MOZILLA_FIREFOX || (browserType == BrowserType.FROM_PROPERTIES
-		    && browserTypeProperty.equalsIgnoreCase("firefox"))) {
-		Logger.logMessage("Opening [Mozilla Firefox] Browser!....");
+		    && browserTypeProperty.equalsIgnoreCase("mozilla firefox"))) {
 		WebDriverManager.firefoxdriver().setup();
 		driver = new FirefoxDriver();
 		context.setAttribute("driver", driver);
@@ -124,20 +132,18 @@ public class BrowserFactory {
 //		throw new NullPointerException(warningMsg);
 	    }
 	}
-	// Local Headless execution......
+	// Local Headless execution condition
 	else if (executionType == ExecutionType.LOCAL_HEADLESS || (executionType == ExecutionType.FROM_PROPERTIES
-		&& executionTypeProperty.equalsIgnoreCase("local_headless"))) {
+		&& executionTypeProperty.equalsIgnoreCase("local headless"))) {
 	    if (browserType == BrowserType.GOOGLE_CHROME
-		    || (browserType == BrowserType.FROM_PROPERTIES && browserTypeProperty.equalsIgnoreCase("chrome"))) {
-		Logger.logMessage("Opening Headless [Google Chrome] Browser!....");
+		    || (browserType == BrowserType.FROM_PROPERTIES && browserTypeProperty.equalsIgnoreCase("google chrome"))) {
 		WebDriverManager.chromedriver().setup();
 		driver = new ChromeDriver(getChromeOptions());
 		context.setAttribute("driver", driver);
 		Helper.implicitWait(driver);
 //		BrowserActions.maximizeWindow(driver);
 	    } else if (browserType == BrowserType.MOZILLA_FIREFOX || (browserType == BrowserType.FROM_PROPERTIES
-		    && browserTypeProperty.equalsIgnoreCase("firefox"))) {
-		Logger.logMessage("Opening Headless [Mozilla Firefox] Browser!....");
+		    && browserTypeProperty.equalsIgnoreCase("mozilla firefox"))) {
 		WebDriverManager.firefoxdriver().setup();
 		driver = new FirefoxDriver(getFirefoxOptions());
 		context.setAttribute("driver", driver);

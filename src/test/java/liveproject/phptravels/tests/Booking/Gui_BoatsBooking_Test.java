@@ -23,8 +23,6 @@ import utils.BrowserActions;
 import utils.BrowserFactory;
 import utils.PropertiesReader;
 import utils.ExcelFileManager;
-import utils.BrowserFactory.BrowserType;
-import utils.BrowserFactory.ExecutionType;
 
 @Epic("PHPTRAVELS")
 @Feature("GUI")
@@ -44,7 +42,7 @@ public class Gui_BoatsBooking_Test {
 		new File("src/test/resources/TestData/LiveProject_PhpTravels_BoatsBooking_TestData.xlsx"));
 	spreadSheet.switchToSheet("GUI");
 	apis = new PhpTravels_APIs();
-	driver = BrowserFactory.getBrowser(BrowserType.FROM_PROPERTIES, ExecutionType.FROM_PROPERTIES);
+	driver = BrowserFactory.getBrowser();
 	BrowserActions.navigateToUrl(driver, phptravelsBaseUrl
 		+ "/boats/sri-lanka/colombo/Speedboat-Bravo-410---2016-refit-2016-?date=01/01/2025&adults=2");
     }

@@ -20,8 +20,6 @@ import utils.BrowserActions;
 import utils.BrowserFactory;
 import utils.PropertiesReader;
 import utils.ExcelFileManager;
-import utils.BrowserFactory.BrowserType;
-import utils.BrowserFactory.ExecutionType;
 
 @Epic("PHPTRAVELS")
 @Feature("GUI")
@@ -36,7 +34,7 @@ public class Gui_ReservationBoatsSearch_Test {
 	spreadSheet = new ExcelFileManager(
 		new File("src/test/resources/TestData/LiveProject_PhpTravels_ReservationBoatsSearch_TestData.xlsx"));
 	spreadSheet.switchToSheet("GUI");
-	driver = BrowserFactory.getBrowser(BrowserType.FROM_PROPERTIES, ExecutionType.FROM_PROPERTIES);
+	driver = BrowserFactory.getBrowser();
 	BrowserActions.navigateToUrl(driver, phptravelsHomePageURL);
     }
 

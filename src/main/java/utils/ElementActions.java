@@ -13,6 +13,7 @@ import org.testng.Assert;
 import utils.Helper.ActionType;
 
 public class ElementActions {
+    //TODO: Add select action
     static WebDriver driver;
 
 //    @Step("Click on element: [{elementLocator}]")
@@ -31,9 +32,9 @@ public class ElementActions {
 	try {
 	    // Log element text if not empty. Else, log clicking
 	    if (!driver.findElement(elementLocator).getText().isBlank()) {
-		Logger.logStep("Clicking on: [" + driver.findElement(elementLocator).getText() + "] Button");
+		Logger.logStep("[Element Action] Click on [" + driver.findElement(elementLocator).getText() + "] Button");
 	    } else {
-		Logger.logStep("Clicking on element:" + elementLocator);
+		Logger.logStep("[Element Action] Click on element [" + elementLocator + "]");
 	    }
 	    // Now we click on the element! :D
 	    driver.findElement(elementLocator).click();
@@ -53,36 +54,35 @@ public class ElementActions {
 
     }
 
-    public static void type(WebDriver driver, By elementLocator, String data) {
-	type(driver, elementLocator, data, true);
+    public static void type(WebDriver driver, By elementLocator, String text) {
+	type(driver, elementLocator, text, true);
     }
 
 //    @Step("Type data: [{data}] on element: [{elementLocator}]")
-    public static void type(WebDriver driver, By elementLocator, String data, boolean clearBeforeTyping) {
+    public static void type(WebDriver driver, By elementLocator, String text, boolean clearBeforeTyping) {
 	locatingElementStrategy(driver, elementLocator);
 	// Type here!
 	try {
 	    // Clear before typing condition
 	    if (!driver.findElement(elementLocator).getAttribute("value").isBlank() && clearBeforeTyping) {
-		Logger.logMessage("Clearing the data from element: " + elementLocator);
+		Logger.logStep("[Element Action] Clear and Type [" + text + "] on element [" + elementLocator + "]");
 		driver.findElement(elementLocator).clear();
-		Logger.logStep("Typing: [" + data + "] on element: " + elementLocator);
 		// We type here! :D
-		driver.findElement(elementLocator).sendKeys(data);
+		driver.findElement(elementLocator).sendKeys(text);
 		// Type using JavascriptExecutor in case of the data is not typed successfully using the Selenium sendKeys method
-		if (!driver.findElement(elementLocator).getAttribute("value").equals(data)) {
-		    ((JavascriptExecutor) driver).executeScript("arguments[0].setAttribute('value', '" + data + "')",
+		if (!driver.findElement(elementLocator).getAttribute("value").equals(text)) {
+		    ((JavascriptExecutor) driver).executeScript("arguments[0].setAttribute('value', '" + text + "')",
 			    driver.findElement(elementLocator));
 		}
 	    } else {
-		Logger.logStep("Typing: [" + data + "] on element: " + elementLocator);
+		Logger.logStep("[Element Action] Type [" + text + "] on element [" + elementLocator + "]");
 		// We type here! :D
-		driver.findElement(elementLocator).sendKeys(data);
+		driver.findElement(elementLocator).sendKeys(text);
 		// Type using JavascriptExecutor in case of the data is not typed successfully using the Selenium sendKeys method
-		if (!driver.findElement(elementLocator).getAttribute("value").contains(data)) {
+		if (!driver.findElement(elementLocator).getAttribute("value").contains(text)) {
 		    String currentValue = driver.findElement(elementLocator).getAttribute("value");
 		    ((JavascriptExecutor) driver).executeScript(
-			    "arguments[0].setAttribute('value', '" + currentValue + data + "')",
+			    "arguments[0].setAttribute('value', '" + currentValue + text + "')",
 			    driver.findElement(elementLocator));
 		}
 	    }
@@ -90,8 +90,8 @@ public class ElementActions {
 	    Logger.logStep(e.getMessage());
 	}
 	// Make sure that the data is inserted correctly to the field
-	Assert.assertTrue(driver.findElement(elementLocator).getAttribute("value").contains(data),
-		"The data is not inserted successfully to the field, the inserted data should be: [" + data
+	Assert.assertTrue(driver.findElement(elementLocator).getAttribute("value").contains(text),
+		"The data is not inserted successfully to the field, the inserted data should be: [" + text
 			+ "]; But the current field value is: [" + driver.findElement(elementLocator).getAttribute("value") + "]");
     }
 
@@ -99,7 +99,7 @@ public class ElementActions {
     public static void clickKeyboardKey(WebDriver driver, By elementLocator, Keys key) {
 	locatingElementStrategy(driver, elementLocator);
 	try {
-	    Logger.logStep("Clicking a Keyboard key:[" + key.name() + "] on element: " + elementLocator);
+	    Logger.logStep("[Element Action] Click a Keyboard key [" + key.name() + "] on element [" + elementLocator + "]");
 	    // We click ENTER here! :D
 	    driver.findElement(elementLocator).sendKeys(key);
 	} catch (Exception e) {
@@ -112,7 +112,7 @@ public class ElementActions {
 	locatingElementStrategy(driver, elementLocator);
 	try {
 	    String text = driver.findElement(elementLocator).getText();
-	    Logger.logStep("Getting the Text of element: " + elementLocator + "; The Text is: " + text);
+	    Logger.logStep("[Element Action] Get the Text of element [" + elementLocator + "]; The Text is [" + text + "]");
 	    return text;
 	} catch (Exception e) {
 	    Logger.logStep(e.getMessage());

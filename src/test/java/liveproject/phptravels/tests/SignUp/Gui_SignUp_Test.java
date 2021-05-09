@@ -23,8 +23,6 @@ import utils.BrowserActions;
 import utils.BrowserFactory;
 import utils.PropertiesReader;
 import utils.ExcelFileManager;
-import utils.BrowserFactory.BrowserType;
-import utils.BrowserFactory.ExecutionType;
 
 @Epic("PHPTRAVELS")
 @Feature("GUI")
@@ -46,7 +44,7 @@ public class Gui_SignUp_Test {
 
     @BeforeMethod
     public void beforeMethod() {
-	driver = BrowserFactory.getBrowser(BrowserType.FROM_PROPERTIES, ExecutionType.FROM_PROPERTIES);
+	driver = BrowserFactory.getBrowser();
 	BrowserActions.navigateToUrl(driver, phptravelsHomePageURL);
     }
 

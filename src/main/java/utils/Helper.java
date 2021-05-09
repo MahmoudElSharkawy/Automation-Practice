@@ -11,6 +11,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Helper {
+    //TODO: Action to ElementActions class and Alert to BrowserActions class 
+    
     static WebDriverWait wait;
 
     static Alert alert;
@@ -20,7 +22,7 @@ public class Helper {
     }
 
     public enum CookieBuilderType {
-	ADD_COOKIE, DELETE_COOKIE;
+	ADD, DELETE;
     }
 
     public enum ConfirmAlerActionType {
@@ -55,10 +57,10 @@ public class Helper {
 	Cookie cookie = new Cookie.Builder(name, value).domain(domain).build();
 
 	switch (cookieBuilderType) {
-	case ADD_COOKIE:
+	case ADD:
 	    driver.manage().addCookie(cookie);
 	    break;
-	case DELETE_COOKIE:
+	case DELETE:
 	    driver.manage().deleteCookie(cookie);
 	    break;
 	}

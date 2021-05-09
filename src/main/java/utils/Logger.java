@@ -9,8 +9,6 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
-import com.aventstack.extentreports.markuputils.ExtentColor;
-import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.google.common.io.Files;
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
@@ -21,7 +19,7 @@ public class Logger {
     public static void logStep(String message) {
 	String timeStamp = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss.SSS a").format(new Date());
 	System.out.println("<" + timeStamp + "> " + message);
-	ExtentReport.info(MarkupHelper.createLabel(message, ExtentColor.BLUE));
+	ExtentReport.info(message);
     }
 
     public static void logMessage(String message) {
@@ -38,11 +36,6 @@ public class Logger {
 	} catch (IOException e) {
 	    return null;
 	}
-    }
-
-    @Step("The Test Case Failed; Attach A Screenshot.....")
-    public static void attachScreenshotInCaseOfFailure(WebDriver driver) {
-	attachScreenshot(driver);
     }
 
     @Attachment(value = "API Request", type = "text/json")

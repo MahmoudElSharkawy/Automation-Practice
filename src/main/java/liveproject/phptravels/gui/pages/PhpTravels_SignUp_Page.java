@@ -10,7 +10,6 @@ import com.aventstack.extentreports.markuputils.MarkupHelper;
 import io.qameta.allure.Step;
 import utils.ElementActions;
 import utils.ExtentReport;
-import utils.Logger;
 
 public class PhpTravels_SignUp_Page {
     private WebDriver driver;
@@ -80,9 +79,7 @@ public class PhpTravels_SignUp_Page {
 
     @Step("Get the text of the Alert message")
     public String getAlertMessage() {
-	String alertMessage = ElementActions.getText(driver, alert_text);
-	Logger.logMessage("The Alert message is: " + alertMessage);
-	return alertMessage;
+	return ElementActions.getText(driver, alert_text);
     }
 
 }
