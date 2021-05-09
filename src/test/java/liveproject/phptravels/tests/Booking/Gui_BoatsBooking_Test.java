@@ -5,9 +5,7 @@ import java.util.Date;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import io.qameta.allure.Description;
@@ -21,7 +19,6 @@ import io.qameta.allure.TmsLink;
 import liveproject.phptravels.apis.PhpTravels_APIs;
 import liveproject.phptravels.gui.pages.PhpTravels_BoatsDetails_Page;
 import liveproject.phptravels.gui.pages.PhpTravels_UserAccount_Page;
-import utils.Logger;
 import utils.BrowserActions;
 import utils.BrowserFactory;
 import utils.PropertiesReader;
@@ -82,13 +79,6 @@ public class Gui_BoatsBooking_Test {
 		.getBookingStatus();
 	Assert.assertEquals(profileBookingStatus, spreadSheet.getCellData("Expected Profile Status", 2));
 
-    }
-
-    @AfterMethod
-    public void AfterMethod(ITestResult result) {
-	if (result.getStatus() == ITestResult.FAILURE) {
-	    Logger.attachScreenshotInCaseOfFailure(driver);
-	}
     }
 
     @AfterClass

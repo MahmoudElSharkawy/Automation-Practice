@@ -19,7 +19,6 @@ import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import liveproject.phptravels.gui.pages.PhpTravels_Home_Page;
-import utils.Logger;
 import utils.BrowserActions;
 import utils.BrowserFactory;
 import utils.PropertiesReader;
@@ -118,9 +117,6 @@ public class Gui_SignUp_Test {
 
     @AfterMethod
     public void afterMethod(ITestResult result) {
-	if (result.getStatus() == ITestResult.FAILURE) {
-	    Logger.attachScreenshotInCaseOfFailure(driver);
-	}
 	BrowserActions.closeAllOpenedBrowserWindows(driver);
     }
 }

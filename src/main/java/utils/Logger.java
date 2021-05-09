@@ -30,7 +30,7 @@ public class Logger {
 	ExtentReport.info(message);
     }
 
-    @Attachment(value = "Page Screenshot", type = "image/png")
+    @Attachment(value = "Full Page Screenshot", type = "image/png")
     public static byte[] attachScreenshot(WebDriver driver) {
 	try {
 	    File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);

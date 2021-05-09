@@ -1,5 +1,6 @@
 package utils;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ISuite;
@@ -13,7 +14,6 @@ import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 
 public class TestngListener implements ISuiteListener, ITestListener, IInvokedMethodListener {
-
     ////////////////////////////////////////////////////
     ///////////////// ISuiteListener //////////////////
     //////////////////////////////////////////////////
@@ -61,6 +61,9 @@ public class TestngListener implements ISuiteListener, ITestListener, IInvokedMe
 
     @Override
     public void onTestFailure(ITestResult result) {
+	ITestContext context = result.getTestContext();
+	WebDriver driver = (WebDriver)context.getAttribute("driver");
+	Logger.attachScreenshotInCaseOfFailure(driver);
 //	ExtentReport.fail(result.getMethod().getMethodName() + " Failed");
 	ExtentReport.fail(MarkupHelper.createLabel(result.getMethod().getMethodName() + " Failed!", ExtentColor.RED));
 	if (result.getThrowable() != null) {

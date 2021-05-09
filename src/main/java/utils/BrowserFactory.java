@@ -11,6 +11,9 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.ITestContext;
+import org.testng.ITestResult;
+import org.testng.Reporter;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Step;
@@ -48,10 +51,12 @@ public class BrowserFactory {
 
     @Step("Open Browser")
     public static WebDriver getBrowser(BrowserType browserType, ExecutionType executionType) {
+    	ITestResult result = Reporter.getCurrentTestResult();
+	ITestContext context = result.getTestContext();
 	if (executionType == ExecutionType.REMOTE || (executionType == ExecutionType.FROM_PROPERTIES
 		&& executionTypeProperty.equalsIgnoreCase("remote"))) {
 	    /*
-	     * Steps to executo remotely with selenium grid and dockers VERY simpl steps:... 
+	     * Steps to execute remotely with selenium grid and dockers VERY simpl steps:... 
 	     * 1- Install docker 
 	     * 2- You need to have a .yml file to configure the network between the containers like that we have in the src/main/resource file "docker-compose_native.yml" 
 	     * 3- open a terminal on the project directory 
@@ -67,6 +72,7 @@ public class BrowserFactory {
 		try {
 		    driver = new RemoteWebDriver(new URL("http://" + host + ":" + port + "/wd/hub"),
 			    getChromeOptions());
+		    context.setAttribute("driver", driver);
 		    Helper.implicitWait(driver);
 		} catch (MalformedURLException e) {
 		    e.printStackTrace();
@@ -78,6 +84,7 @@ public class BrowserFactory {
 		try {
 		    driver = new RemoteWebDriver(new URL("http://" + host + ":" + port + "/wd/hub"),
 			    getFirefoxOptions());
+		    context.setAttribute("driver", driver);
 		    Helper.implicitWait(driver);
 		} catch (MalformedURLException e) {
 		    e.printStackTrace();
@@ -98,6 +105,7 @@ public class BrowserFactory {
 		Logger.logMessage("Opening [Google Chrome] Browser!....");
 		WebDriverManager.chromedriver().setup();
 		driver = new ChromeDriver();
+		context.setAttribute("driver", driver);
 		Helper.implicitWait(driver);
 		BrowserActions.maximizeWindow(driver);
 	    } else if (browserType == BrowserType.MOZILLA_FIREFOX || (browserType == BrowserType.FROM_PROPERTIES
@@ -105,6 +113,7 @@ public class BrowserFactory {
 		Logger.logMessage("Opening [Mozilla Firefox] Browser!....");
 		WebDriverManager.firefoxdriver().setup();
 		driver = new FirefoxDriver();
+		context.setAttribute("driver", driver);
 		Helper.implicitWait(driver);
 		BrowserActions.maximizeWindow(driver);
 	    } else {
@@ -123,6 +132,7 @@ public class BrowserFactory {
 		Logger.logMessage("Opening Headless [Google Chrome] Browser!....");
 		WebDriverManager.chromedriver().setup();
 		driver = new ChromeDriver(getChromeOptions());
+		context.setAttribute("driver", driver);
 		Helper.implicitWait(driver);
 //		BrowserActions.maximizeWindow(driver);
 	    } else if (browserType == BrowserType.MOZILLA_FIREFOX || (browserType == BrowserType.FROM_PROPERTIES
@@ -130,6 +140,7 @@ public class BrowserFactory {
 		Logger.logMessage("Opening Headless [Mozilla Firefox] Browser!....");
 		WebDriverManager.firefoxdriver().setup();
 		driver = new FirefoxDriver(getFirefoxOptions());
+		context.setAttribute("driver", driver);
 		Helper.implicitWait(driver);
 //		BrowserActions.maximizeWindow(driver);
 	    } else {
