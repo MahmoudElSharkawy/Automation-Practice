@@ -10,33 +10,70 @@ on:
 jobs:
   build:
     name: Test on Ubuntu
-    runs-on: ubuntu-latest
+    runs-on: [ubuntu-latest]
     
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 15
-      uses: actions/setup-java@v1.4.3
+      uses: actions/setup-java@v2
       with:
         java-version: 15
+        distribution: 'zulu'
     - name: Set up Native Selenium Grid with one hub and four Chrome nodes 
       run: docker-compose -f src/main/resources/docker-compose_native.yml up --scale chrome=4 --remove-orphans -d
     - name: Check running containers
       run: docker ps
     - name: Run liveproject tests - Chrome Headless
       run: mvn -Dtest=liveproject.phptravels.tests.SignUp.*_Test,liveproject.phptravels.tests.Login.*_Test test
+    - name: Get Allure history
+      uses: actions/checkout@v2
+      if: always()
+      continue-on-error: true
+      with:
+        ref: gh-pages
+        path: gh-pages
     - name: Generate Allure Report with history
-      uses: simple-elf/allure-report-action@v1.3
+      uses: simple-elf/allure-report-action@master
+      if: always()
+      id: allure-report
       with:
         allure_results: target/allure-results
-        allure_report: allure-report
-        allure_version: 2.13.8
         gh_pages: gh-pages
-        allure_history: allure-history
+        allure_report: target/allure-report
+        allure_history: target/allure-history
         subfolder: allure
-        github_run_num: ${{ github.run_number }}
-        github_run_id: ${{ github.run_id }}
-        github_repo: ${{ github.repository }}
-        github_repo_owner: ${{ github.repository_owner }}
+    - name: Deploy Allure report to Github Pages
+      uses: peaceiris/actions-gh-pages@v3.8.0
+      with:
+        personal_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: target/allure-history/allure
+        destination_dir: allure
+        publish_branch: gh-pages
+    - name: Post the link to the Allure report
+      if: always()
+      continue-on-error: true
+      uses: Sibz/github-status-action@v1.1.5
+      with: 
+          authToken: ${{secrets.GITHUB_TOKEN}}
+          context: 'Allure Test Execution Report'
+          state: 'success'
+          sha: ${{ github.event.pull_request.head.sha }}
+          target_url: https://github.com/MahmoudElSharkawy/Automation-Practice/allure/${{ github.run_number }}
+      
+      
+#    - name: Generate Allure Report with history
+#      uses: simple-elf/allure-report-action@v1.3
+#      with:
+#        allure_results: target/allure-results
+#        allure_report: allure-report
+#        allure_version: 2.13.8
+#        gh_pages: gh-pages
+#        allure_history: allure-history
+#        subfolder: allure
+#        github_run_num: ${{ github.run_number }}
+#        github_run_id: ${{ github.run_id }}
+#        github_repo: ${{ github.repository }}
+#        github_repo_owner: ${{ github.repository_owner }}
 #    - name: Deploy report to Github Pages
 #      uses: peaceiris/actions-gh-pages@v3.7.3
 #      with:
