@@ -35,7 +35,7 @@ jobs:
     - name: Generate Allure Report with history
       uses: simple-elf/allure-report-action@master
       if: always()
-      id: target/allure-report
+      id: allure-report
       with:
         allure_results: build/allure-results
         gh_pages: gh-pages
