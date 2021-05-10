@@ -1,5 +1,6 @@
 package utils;
 
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.fail;
 
 import org.openqa.selenium.By;
@@ -7,21 +8,25 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
-import utils.Helper.ActionType;
-
 public class ElementActions {
-    //TODO: Add select action
     static WebDriver driver;
+    
+    public enum SelectType {
+	TEXT, VALUE;
+    }
 
 //    @Step("Click on element: [{elementLocator}]")
     public static void click(WebDriver driver, By elementLocator) {
-	locatingElementStrategy(driver, elementLocator);
+	// Mouse hover on the element before clicking
+	mouseHover(driver, elementLocator);
 	try {
 	    // Mouse hover on the element before clicking
-	    Helper.actions(driver, elementLocator, ActionType.MOUSE_HOVER);
+//	    Helper.actions(driver, elementLocator, ActionType.MOUSE_HOVER);
 	    // wait for the element to be clickable
 	    Helper.getExplicitWait(driver).until(ExpectedConditions.elementToBeClickable(elementLocator));
 	} catch (TimeoutException toe) {
@@ -61,7 +66,6 @@ public class ElementActions {
 //    @Step("Type data: [{data}] on element: [{elementLocator}]")
     public static void type(WebDriver driver, By elementLocator, String text, boolean clearBeforeTyping) {
 	locatingElementStrategy(driver, elementLocator);
-	// Type here!
 	try {
 	    // Clear before typing condition
 	    if (!driver.findElement(elementLocator).getAttribute("value").isBlank() && clearBeforeTyping) {
@@ -94,9 +98,50 @@ public class ElementActions {
 		"The data is not inserted successfully to the field, the inserted data should be: [" + text
 			+ "]; But the current field value is: [" + driver.findElement(elementLocator).getAttribute("value") + "]");
     }
+    
+    public static void select(WebDriver driver, By elementLocator, SelectType selectType, String option) {
+	locatingElementStrategy(driver, elementLocator);
+	try {
+	    Select s = new Select(driver.findElement(elementLocator));
+	    Logger.logStep("[Element Action] Select [" + option + "] on element [" + elementLocator + "]");
+	    assertFalse(s.isMultiple());
+	    switch (selectType) {
+	    case TEXT:
+		s.selectByVisibleText(option);
+		break;
+	    case VALUE:
+		Helper.getExplicitWait(driver).until(ExpectedConditions.alertIsPresent());
+		s.selectByValue(option);
+		break;
+	    }
+	} catch (Exception e) {
+	    Logger.logStep(e.getMessage());
+	}
 
-//    @Step("Click a Keyboard Key on element: [{elementLocator}]")
-    public static void clickKeyboardKey(WebDriver driver, By elementLocator, Keys key) {
+    }
+    
+    public static void mouseHover(WebDriver driver, By elementLocator) {
+	locatingElementStrategy(driver, elementLocator);
+	try {
+	    Actions actions = new Actions(driver);
+	    actions.moveToElement(driver.findElement(elementLocator)).perform();
+	} catch (Exception e) {
+	    Logger.logStep(e.getMessage());
+	}
+    }
+
+    public static void doubleClick(WebDriver driver, By elementLocator) {
+	locatingElementStrategy(driver, elementLocator);
+	try {
+	    Actions actions = new Actions(driver);
+	    actions.doubleClick(driver.findElement(elementLocator)).perform();
+	} catch (Exception e) {
+	    Logger.logStep(e.getMessage());
+	}
+    }  
+
+//  @Step("Click a Keyboard Key on element: [{elementLocator}]")
+  public static void clickKeyboardKey(WebDriver driver, By elementLocator, Keys key) {
 	locatingElementStrategy(driver, elementLocator);
 	try {
 	    Logger.logStep("[Element Action] Click a Keyboard key [" + key.name() + "] on element [" + elementLocator + "]");
@@ -105,7 +150,7 @@ public class ElementActions {
 	} catch (Exception e) {
 	    Logger.logStep(e.getMessage());
 	}
-    }
+  }
 
 //    @Step("Get the Text of element: [{elementLocator}]")
     public static String getText(WebDriver driver, By elementLocator) {

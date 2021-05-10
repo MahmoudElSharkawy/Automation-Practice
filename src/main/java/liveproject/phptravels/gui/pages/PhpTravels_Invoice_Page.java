@@ -8,10 +8,11 @@ import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 
 import io.qameta.allure.Step;
+import utils.BrowserActions;
 import utils.ElementActions;
 import utils.ExtentReport;
 import utils.Helper;
-import utils.Helper.ConfirmAlerActionType;
+import utils.BrowserActions.ConfirmAlertType;
 
 public class PhpTravels_Invoice_Page {
     private WebDriver driver;
@@ -29,8 +30,9 @@ public class PhpTravels_Invoice_Page {
     @Step("Click on PAY ON ARRIVAL button and accept pay at arrival alert")
     public PhpTravels_Invoice_Page clickOnPayOnArrivalAndAcceptAlert() {
 	ExtentReport.info(MarkupHelper.createLabel("Click on PAY ON ARRIVAL button and accept pay at arrival alert", ExtentColor.BLUE));
+	
 	ElementActions.click(driver, payonarrival_button);
-	Helper.confirmAlert(driver, ConfirmAlerActionType.ACCEPT_ALERT);
+	BrowserActions.confirmAlert(driver, ConfirmAlertType.ACCEPT);
 	Helper.getExplicitWait(driver).until(
 		ExpectedConditions.invisibilityOfElementWithText(booking_status, "Your booking status is Unpaid"));
 	return this;

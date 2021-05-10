@@ -1,10 +1,21 @@
 package utils;
 
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class BrowserActions {
     static WebDriver driver;
+
+    public enum ConfirmAlertType {
+	ACCEPT, DISMISS;
+    }
+
+    public enum CookieBuilderType {
+	ADD, DELETE;
+    }
 
 //    @Step("Navigate to URL: [{url}]")
     public static void navigateToUrl(WebDriver driver, String url) {
@@ -32,6 +43,34 @@ public class BrowserActions {
 	    driver.manage().window().maximize();
 	} catch (Exception e) {
 	    Logger.logMessage(e.getMessage());
+	}
+    }
+
+    public static void confirmAlert(WebDriver driver, ConfirmAlertType confirmAlerType) {
+	Helper.getExplicitWait(driver).until(ExpectedConditions.alertIsPresent());
+	Alert alert = driver.switchTo().alert();
+	switch (confirmAlerType) {
+	case ACCEPT:
+	    alert.accept();
+	    break;
+	case DISMISS:
+	    Helper.getExplicitWait(driver).until(ExpectedConditions.alertIsPresent());
+	    alert.dismiss();
+	    break;
+	}
+    }
+
+    public static void cookieBuilder(WebDriver driver, CookieBuilderType cookieBuilderType, String name, String value,
+	    String domain) {
+	Cookie cookie = new Cookie.Builder(name, value).domain(domain).build();
+
+	switch (cookieBuilderType) {
+	case ADD:
+	    driver.manage().addCookie(cookie);
+	    break;
+	case DELETE:
+	    driver.manage().deleteCookie(cookie);
+	    break;
 	}
     }
 
