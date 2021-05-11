@@ -6,6 +6,8 @@ name: CI Live Project Tests on Ubuntu
 on:
   push:
     branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   build:
