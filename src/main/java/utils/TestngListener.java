@@ -93,7 +93,7 @@ public class TestngListener implements ISuiteListener, ITestListener, IInvokedMe
 	} else {
 	    ExtentReport.createTest(testResult.getName());
 	}
-	System.out.println("\n" + "===========================================================================================");
+	System.out.println("\n" + "============================================================================================");
 	if (method.isConfigurationMethod()) {
 	    System.out.println("Starting Configuration Method (Setup or Teardown): [" + testResult.getName() + "]");
 	    if (testMethod.getDescription() != null && !testMethod.getDescription().equals("")) {
@@ -105,7 +105,7 @@ public class TestngListener implements ISuiteListener, ITestListener, IInvokedMe
 	} else {
 	    System.out.println("Starting Test Case: [" + testResult.getName() + "]");
 	}
-	System.out.println("===========================================================================================" + "\n");
+	System.out.println("============================================================================================" + "\n");
     }
 
     @Override
