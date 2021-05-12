@@ -31,7 +31,7 @@ jobs:
     - name: ExtentReports HTML Test Report
       uses: actions/upload-artifact@v2
       with:
-        name: ExtentReports Report
+        name: ExtentReports HTML Test Report
         path: "ExtentReports.html"
 #    - name: Get Allure history
 #      uses: actions/checkout@v2
