@@ -9,6 +9,7 @@ import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.QueryableRequestSpecification;
 import io.restassured.specification.RequestSpecification;
@@ -16,23 +17,22 @@ import io.restassured.specification.ResponseSpecification;
 import io.restassured.specification.SpecificationQuerier;
 
 public class ApiActions {
-    //TODO: Enhance the logging and add anything that maybe missing from the request
+    // TODO: Enhance the logging and add anything that maybe missing from the
+    // request
     RequestSpecification request;
     Response response;
     QueryableRequestSpecification queryableRequestSpecs;
-    
+
     public enum RequestType {
 	POST, GET, PUT, DELETE, PATCH;
     }
 
     private RequestSpecification requestSpec = new RequestSpecBuilder()
 //	    .setBaseUri(baseURI)
-	    .log(LogDetail.ALL)
-	    .build();
+	    .log(LogDetail.ALL).build();
     private ResponseSpecification responseSpec = new ResponseSpecBuilder()
 //	    .expectStatusCode(200)
-	    .log(LogDetail.BODY)
-	    .build();
+	    .log(LogDetail.BODY).build();
 
     @Step("Perform API Request --> [{serviceName}]")
     /**
@@ -41,14 +41,16 @@ public class ApiActions {
      * @param serviceName
      * @param expectedStatusCode
      * @param headers
+     * @param contentType
      * @param formParams
      * @param queryParams
+     * @param body
      * @param cookies
      * @return Response
      */
     public Response performRequest(RequestType requestType, String serviceName, int expectedStatusCode,
-	    Map<String, Object> headers, Map<String, Object> formParams, Map<String, Object> queryParams,
-	    Map<String, String> cookies) {
+	    Map<String, Object> headers, ContentType contentType, Map<String, Object> formParams,
+	    Map<String, Object> queryParams, Object body, Map<String, String> cookies) {
 	ExtentReport.info("Perform API Request --> [" + serviceName + "]");
 
 	request = RestAssured.given().spec(requestSpec);
@@ -60,6 +62,13 @@ public class ApiActions {
 	    Logger.attachApiRequest(qHeaders.getBytes());
 	    ExtentReport.info(MarkupHelper.createCodeBlock("Headers: " + "\n" + qHeaders));
 
+	}
+
+	if (contentType != null) {
+	    request.contentType(contentType);
+	    String qContentType = queryableRequestSpecs.getContentType();
+	    Logger.attachApiRequest(qContentType.getBytes());
+	    ExtentReport.info(MarkupHelper.createCodeBlock("Content Type: " + "\n" + qContentType));
 	}
 
 	if (formParams != null) {
@@ -74,6 +83,13 @@ public class ApiActions {
 	    String qQueryParams = queryableRequestSpecs.getQueryParams().toString();
 	    Logger.attachApiRequest(qQueryParams.getBytes());
 	    ExtentReport.info(MarkupHelper.createCodeBlock("Query params: " + "\n" + qQueryParams));
+	}
+
+	if (body != null) {
+	    request.body(body);
+	    String qBody = queryableRequestSpecs.getBody().toString();
+	    Logger.attachApiRequest(qBody.getBytes());
+	    ExtentReport.info(MarkupHelper.createCodeBlock("Body: " + "\n" + qBody));
 	}
 
 	if (cookies != null) {
