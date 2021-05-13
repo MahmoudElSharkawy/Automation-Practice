@@ -27,7 +27,7 @@ jobs:
       run: docker ps
     - name: Run liveproject tests - Chrome Headless
       continue-on-error: true
-      run: mvn -Dtest=phptravels.tests.*_Test test
+      run: mvn -Dtest=phptravels.tests.*_Test,restfulbooker.tests.*_Test test
     - name: ExtentReports HTML Test Report
       uses: actions/upload-artifact@v2
       with:

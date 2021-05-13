@@ -46,7 +46,7 @@ public class Gui_SignUp_Test {
 	new PhpTravels_Home_Page(driver).navigateToHomePage();
     }
 
-    @Test(description = "GUI - Valid User Sign Up")
+    @Test(description = "PHPTRAVELS - GUI - Valid User Sign Up")
     @Description("When I enter valid data in the sign up form And click the signup button, Then I should be registered successfully And be navigated to the user account page And I can see my user data and Hi message")
     @Story("Sign Up")
     @Severity(SeverityLevel.CRITICAL)
@@ -67,7 +67,7 @@ public class Gui_SignUp_Test {
 	Assert.assertEquals(hiMessage, "Hi, " + firstName + " " + lastName, "Wrong Hi Message Names!");
     }
 
-    @Test(description = "GUI - Invalid User Sign Up - Email Already Exists", dependsOnMethods = { "testingValidUserSignUp" })
+    @Test(description = "PHPTRAVELS - GUI - Invalid User Sign Up - Email Already Exists", dependsOnMethods = { "testingValidUserSignUp" })
     @Description("Given i already signed up with an email, When I use the same email for new sign up , Then I should get an error message ")
     @Story("Sign Up")
     @Severity(SeverityLevel.CRITICAL)
@@ -89,7 +89,7 @@ public class Gui_SignUp_Test {
 		"No/Wrong Alert Message!;");
     }
 
-    @Test(description = "GUI - Invalid User Sign Up - Wrong Email Format")
+    @Test(description = "PHPTRAVELS - GUI - Invalid User Sign Up - Wrong Email Format")
     @Description("When I use a wrong email format on the sign up , Then I should get an error message ")
     @Story("Sign Up")
     @Severity(SeverityLevel.CRITICAL)

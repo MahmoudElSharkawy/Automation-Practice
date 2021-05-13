@@ -17,7 +17,7 @@ import io.restassured.specification.ResponseSpecification;
 import io.restassured.specification.SpecificationQuerier;
 
 public class ApiActions {
-    // TODO: Enhance the logging
+    // TODO: Enhance the logging & BASE URI should start from here as a constructor
     RequestSpecification request;
     Response response;
     QueryableRequestSpecification queryableRequestSpecs;

@@ -39,7 +39,7 @@ public class Api_Login_Test {
 
     }
 
-    @Test(description = "API - Valid User Login")
+    @Test(description = "PHPTRAVELS - API - Valid User Login")
     @Description("When I login with an already signed up user, Then I should login successfully")
     @Story("Login")
     @Severity(SeverityLevel.CRITICAL)
@@ -62,7 +62,7 @@ public class Api_Login_Test {
 
     }
 
-    @Test(description = "API - Invalid User Login")
+    @Test(description = "PHPTRAVELS - API - Invalid User Login")
     @Description("When I enter a not signed up user , Then I should get an error message ")
     @Story("Login")
     @Severity(SeverityLevel.CRITICAL)

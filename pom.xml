@@ -19,6 +19,7 @@
 		<commons-io.version>2.7</commons-io.version>
 		<aspectj.version>1.9.6</aspectj.version>
 		<slf4j.version>1.7.30</slf4j.version>
+		<json-simple.version>1.1</json-simple.version>
 		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
 		<maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
 	</properties>
@@ -64,7 +65,6 @@
 			<artifactId>extentreports</artifactId>
 			<version>${extentreports.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
@@ -79,6 +79,11 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
 			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>${json-simple.version}</version>
 		</dependency>
 	</dependencies>
 
@@ -112,16 +117,16 @@
 						<argLine>
 							-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
 						</argLine>
-							<properties>
-								<property>
-									<name>usedefaultlisteners</name>
-									<value>false</value> <!-- disabling default listeners is optional -->
-								</property>
-								<property>
-									<name>listener</name>
-									<value>utils.TestngListener</value>
-								</property>
-							</properties>
+						<properties>
+							<property>
+								<name>usedefaultlisteners</name>
+								<value>false</value> <!-- disabling default listeners is optional -->
+							</property>
+							<property>
+								<name>listener</name>
+								<value>utils.TestngListener</value>
+							</property>
+						</properties>
 					</configuration>
 
 					<dependencies>

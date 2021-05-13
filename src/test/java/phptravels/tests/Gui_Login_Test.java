@@ -48,7 +48,7 @@ public class Gui_Login_Test {
 	new PhpTravels_Home_Page(driver).navigateToHomePage();
     }
 
-    @Test(description = "GUI - Valid User Login")
+    @Test(description = "PHPTRAVELS - GUI - Valid User Login")
     @Description("When I login with an already signed up user, Then I should login successfully")
     @Story("Login")
     @Severity(SeverityLevel.CRITICAL)
@@ -71,7 +71,7 @@ public class Gui_Login_Test {
 	Assert.assertEquals(hiMessage, "Hi, " + firstName + " " + lastName, "No/Wrong Hi Message Names!;");
     }
     
-    @Test(description = "GUI - Invalid User Login")
+    @Test(description = "PHPTRAVELS - GUI - Invalid User Login")
     @Description("When I enter a not signed up user , Then I should get an error message ")
     @Story("Login")
     @Severity(SeverityLevel.CRITICAL)

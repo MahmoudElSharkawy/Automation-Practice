@@ -38,7 +38,7 @@ public class Api_SignUp_Test {
 	spreadSheet.switchToSheet("API");
     }
 
-    @Test(description = "API - Valid User Sign Up")
+    @Test(description = "PHPTRAVELS - API - Valid User Sign Up")
     @Description("When I enter valid data in the sign up form And click the signup button, Then I should be registered successfully And be navigated to the user account page And I can see my user data and Hi message")
     @Story("Sign Up")
     @Severity(SeverityLevel.CRITICAL)
@@ -60,7 +60,7 @@ public class Api_SignUp_Test {
 
     }
 
-    @Test(description = "API - Invalid User Sign Up - Email Already Exists", dependsOnMethods = { "testingValidUserSignUp" })
+    @Test(description = "PHPTRAVELS - API - Invalid User Sign Up - Email Already Exists", dependsOnMethods = { "testingValidUserSignUp" })
     @Description("Given i already signed up with an email, When I use the same email for new sign up , Then I should get an error message ")
     @Story("Sign Up")
     @Severity(SeverityLevel.CRITICAL)
@@ -80,7 +80,7 @@ public class Api_SignUp_Test {
 
     }
 
-    @Test(description = "API - Invalid User Sign Up - Wrong Email Format")
+    @Test(description = "PHPTRAVELS - API - Invalid User Sign Up - Wrong Email Format")
     @Description("When I use a wrong email format on the sign up , Then I should get an error message ")
     @Story("Sign Up")
     @Severity(SeverityLevel.CRITICAL)

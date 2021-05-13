@@ -35,7 +35,7 @@ public class Gui_ReservationHotelsSearch_Test {
 	new PhpTravels_Home_Page(driver).navigateToHomePage();
     }
 
-    @Test(description = "GUI - Validating the search function of the Hotels")
+    @Test(description = "PHPTRAVELS - GUI - Validating the search function of the Hotels")
     @Description("Given I'm on the PHPTravels home page; When I enter the data needed to search for hotels And click the search button; Then I should be navigated to the hotels search results page, Then I should get the search results related to the search value entered")
     @Story("Reservation Search")
     @Severity(SeverityLevel.CRITICAL)

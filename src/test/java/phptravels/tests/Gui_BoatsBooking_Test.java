@@ -46,7 +46,7 @@ public class Gui_BoatsBooking_Test {
 		"/boats/sri-lanka/colombo/Speedboat-Bravo-410---2016-refit-2016-?date=01/01/2025&adults=2");
     }
 
-    @Test(description = "GUI - Validating the booking function of the Boats - PAY ON ARRIVAL payment method")
+    @Test(description = "PHPTRAVELS - GUI - Validating the booking function of the Boats - PAY ON ARRIVAL payment method")
     @Description("When I book a boat, And confirm the booking request with PAY ON ARRIVAL payment method, Then the boat should be Reserved on my profile")
     @Story("Booking")
     @Severity(SeverityLevel.CRITICAL)
