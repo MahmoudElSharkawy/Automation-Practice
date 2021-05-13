@@ -3,6 +3,7 @@ package utils;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.markuputils.Markup;
+import com.aventstack.extentreports.model.Media;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 
@@ -55,6 +56,10 @@ public class ExtentReport {
 
     public static void fail(Throwable t) {
 	test.fail(t);
+    }
+    
+    public static void fail(Media media) {
+	test.fail(media);
     }
 
     public static void skip(String message) {

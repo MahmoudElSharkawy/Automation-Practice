@@ -62,9 +62,10 @@ public class TestngListener implements ISuiteListener, ITestListener, IInvokedMe
     @Override
     public void onTestFailure(ITestResult result) {
 	ITestContext context = result.getTestContext();
-	WebDriver driver = (WebDriver)context.getAttribute("driver");
+	WebDriver driver = (WebDriver) context.getAttribute("driver");
 	if (driver != null) {
-	    Logger.attachScreenshot(driver);
+	    Logger.attachScreenshotToAllureReport(driver);
+	    ExtentReport.fail(Logger.attachScreenshotToExtentReport(driver));
 	}
 //	ExtentReport.fail(result.getMethod().getMethodName() + " Failed");
 	ExtentReport.fail(MarkupHelper.createLabel(result.getMethod().getMethodName() + " Failed!", ExtentColor.RED));

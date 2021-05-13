@@ -1,15 +1,17 @@
 package utils;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
-import com.google.common.io.Files;
+import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.model.Media;
+
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 
@@ -29,13 +31,24 @@ public class Logger {
     }
 
     @Attachment(value = "Full Page Screenshot", type = "image/png")
-    public static byte[] attachScreenshot(WebDriver driver) {
-	try {
-	    File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-	    return Files.toByteArray(screenshot);
-	} catch (IOException e) {
-	    return null;
-	}
+    public static byte[] attachScreenshotToAllureReport(WebDriver driver) {
+	return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+    }
+
+    public static Media attachScreenshotToExtentReport(WebDriver driver) {
+	return MediaEntityBuilder.createScreenCaptureFromBase64String(
+		((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64), "Full Page Screenshot").build();
+    }
+
+    public static String getScreenshot(WebDriver driver, String screenshotName) throws Exception {
+	String dateName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+	TakesScreenshot ts = (TakesScreenshot) driver;
+	File source = ts.getScreenshotAs(OutputType.FILE);
+	String destination = System.getProperty("user.dir") + "/src/test/resources/TestsScreenshots/" + screenshotName + dateName
+		+ ".png";
+	File finalDestination = new File(destination);
+	FileUtils.copyFile(source, finalDestination);
+	return destination;
     }
 
     @Attachment(value = "API Request", type = "text/json")
