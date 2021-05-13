@@ -1,4 +1,4 @@
-package liveproject.phptravels.tests.Login;
+package phptravels.tests;
 
 import java.io.File;
 import java.util.Date;
@@ -17,7 +17,7 @@ import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import io.restassured.response.Response;
-import liveproject.phptravels.apis.PhpTravels_APIs;
+import phptravels.apis.PhpTravels_APIs;
 import utils.ExcelFileManager;
 
 @Epic("PHPTRAVELS")
@@ -39,7 +39,7 @@ public class Api_Login_Test {
 
     }
 
-    @Test(description = "Valid User Login")
+    @Test(description = "API - Valid User Login")
     @Description("When I login with an already signed up user, Then I should login successfully")
     @Story("Login")
     @Severity(SeverityLevel.CRITICAL)
@@ -62,7 +62,7 @@ public class Api_Login_Test {
 
     }
 
-    @Test(description = "Invalid User Login")
+    @Test(description = "API - Invalid User Login")
     @Description("When I enter a not signed up user , Then I should get an error message ")
     @Story("Login")
     @Severity(SeverityLevel.CRITICAL)

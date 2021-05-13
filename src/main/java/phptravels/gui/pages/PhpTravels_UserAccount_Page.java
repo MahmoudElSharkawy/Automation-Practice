@@ -1,10 +1,12 @@
-package liveproject.phptravels.gui.pages;
+package phptravels.gui.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import io.qameta.allure.Step;
+import utils.BrowserActions;
 import utils.ElementActions;
+import utils.PropertiesReader;
 
 public class PhpTravels_UserAccount_Page {
     private WebDriver driver;
@@ -19,6 +21,12 @@ public class PhpTravels_UserAccount_Page {
     private By booking_status = By.xpath("//div[@id='bookings']//h5");
 
     // Methods
+    public PhpTravels_UserAccount_Page navigateAccountPage() {
+	BrowserActions.navigateToUrl(driver,
+		PropertiesReader.getProperty("automationPractice.properties", "phptravels.baseuri") + "/account");
+	return this;
+    }
+    
     @Step("Get the text of the Hi message")
     public String getHiMessage() {
 	return ElementActions.getText(driver, hi_text);

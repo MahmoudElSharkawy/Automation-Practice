@@ -1,4 +1,4 @@
-package liveproject.phptravels.gui.pages;
+package phptravels.gui.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,11 +7,14 @@ import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 
 import io.qameta.allure.Step;
+import utils.BrowserActions;
 import utils.ElementActions;
 import utils.ExtentReport;
+import utils.PropertiesReader;
 
 public class PhpTravels_Home_Page {
     private WebDriver driver;
+    String phptravelsHomePageURL = PropertiesReader.getProperty("automationPractice.properties", "phptravels.home.url");
 
     // Constructor
     public PhpTravels_Home_Page(WebDriver driver) {
@@ -53,6 +56,11 @@ public class PhpTravels_Home_Page {
     }
 
     // Methods
+    public PhpTravels_Home_Page navigateToHomePage() {
+	BrowserActions.navigateToUrl(driver, phptravelsHomePageURL);
+	return this;
+    }
+    
     public PhpTravels_Home_Page dismissCookieBar() {
 	ElementActions.click(driver, gotit_cookie_button);
 	return this;

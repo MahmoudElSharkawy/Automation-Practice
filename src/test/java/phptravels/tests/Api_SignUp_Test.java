@@ -1,4 +1,4 @@
-package liveproject.phptravels.tests.SignUp;
+package phptravels.tests;
 
 import java.io.File;
 import java.util.Date;
@@ -17,7 +17,7 @@ import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import io.restassured.response.Response;
-import liveproject.phptravels.apis.PhpTravels_APIs;
+import phptravels.apis.PhpTravels_APIs;
 import utils.ExcelFileManager;
 
 @Epic("PHPTRAVELS")
@@ -38,7 +38,7 @@ public class Api_SignUp_Test {
 	spreadSheet.switchToSheet("API");
     }
 
-    @Test(description = "Valid User Sign Up")
+    @Test(description = "API - Valid User Sign Up")
     @Description("When I enter valid data in the sign up form And click the signup button, Then I should be registered successfully And be navigated to the user account page And I can see my user data and Hi message")
     @Story("Sign Up")
     @Severity(SeverityLevel.CRITICAL)
@@ -60,7 +60,7 @@ public class Api_SignUp_Test {
 
     }
 
-    @Test(description = "Invalid User Sign Up - Email Already Exists", dependsOnMethods = { "testingValidUserSignUp" })
+    @Test(description = "API - Invalid User Sign Up - Email Already Exists", dependsOnMethods = { "testingValidUserSignUp" })
     @Description("Given i already signed up with an email, When I use the same email for new sign up , Then I should get an error message ")
     @Story("Sign Up")
     @Severity(SeverityLevel.CRITICAL)
@@ -80,7 +80,7 @@ public class Api_SignUp_Test {
 
     }
 
-    @Test(description = "Invalid User Sign Up - Wrong Email Format")
+    @Test(description = "API - Invalid User Sign Up - Wrong Email Format")
     @Description("When I use a wrong email format on the sign up , Then I should get an error message ")
     @Story("Sign Up")
     @Severity(SeverityLevel.CRITICAL)

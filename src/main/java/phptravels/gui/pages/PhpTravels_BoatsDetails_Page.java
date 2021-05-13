@@ -1,10 +1,12 @@
-package liveproject.phptravels.gui.pages;
+package phptravels.gui.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import io.qameta.allure.Step;
+import utils.BrowserActions;
 import utils.ElementActions;
+import utils.PropertiesReader;
 
 public class PhpTravels_BoatsDetails_Page {
     private WebDriver driver;
@@ -20,6 +22,12 @@ public class PhpTravels_BoatsDetails_Page {
     private By booknow_button = By.xpath("//div[@class='booking-selection-box']//button[contains(.,'Book Now')]");
 
     // Methods
+    public PhpTravels_BoatsDetails_Page navigateBoatPage(String boatUrl) {
+	BrowserActions.navigateToUrl(driver,
+		PropertiesReader.getProperty("automationPractice.properties", "phptravels.baseuri") + boatUrl);
+	return this;
+    }
+    
     public PhpTravels_BoatsDetails_Page dismissCookieBar() {
 	ElementActions.click(driver, gotit_cookie_button);
 	return this;

@@ -1,4 +1,4 @@
-package liveproject.phptravels.tests.Login;
+package phptravels.tests;
 
 import java.io.File;
 import java.util.Date;
@@ -17,11 +17,10 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
-import liveproject.phptravels.apis.PhpTravels_APIs;
-import liveproject.phptravels.gui.pages.PhpTravels_Home_Page;
+import phptravels.apis.PhpTravels_APIs;
+import phptravels.gui.pages.PhpTravels_Home_Page;
 import utils.BrowserActions;
 import utils.BrowserFactory;
-import utils.PropertiesReader;
 import utils.ExcelFileManager;
 
 @Epic("PHPTRAVELS")
@@ -30,7 +29,6 @@ public class Gui_Login_Test {
     WebDriver driver;
     ExcelFileManager spreadSheet;
     PhpTravels_APIs apis;
-    String phptravelsHomePageURL = PropertiesReader.getProperty("liveproject.properties", "phptravels.home.url");
     Date date = new Date();
     
     String firstName, lastName, mobileNumber, email, password;
@@ -47,10 +45,10 @@ public class Gui_Login_Test {
     @BeforeMethod
     public void beforeMethod() {
 	driver = BrowserFactory.getBrowser();
-	BrowserActions.navigateToUrl(driver, phptravelsHomePageURL);
+	new PhpTravels_Home_Page(driver).navigateToHomePage();
     }
 
-    @Test(description = "Valid User Login")
+    @Test(description = "GUI - Valid User Login")
     @Description("When I login with an already signed up user, Then I should login successfully")
     @Story("Login")
     @Severity(SeverityLevel.CRITICAL)
@@ -73,7 +71,7 @@ public class Gui_Login_Test {
 	Assert.assertEquals(hiMessage, "Hi, " + firstName + " " + lastName, "No/Wrong Hi Message Names!;");
     }
     
-    @Test(description = "Invalid User Login")
+    @Test(description = "GUI - Invalid User Login")
     @Description("When I enter a not signed up user , Then I should get an error message ")
     @Story("Login")
     @Severity(SeverityLevel.CRITICAL)

@@ -1,4 +1,4 @@
-package liveproject.phptravels.apis;
+package phptravels.apis;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +15,7 @@ import utils.ApiActions.RequestType;
 
 public class PhpTravels_APIs {
     ApiActions api = new ApiActions();
-    String baseURI = PropertiesReader.getProperty("liveproject.properties", "phptravels.baseuri");
+    String baseURI = PropertiesReader.getProperty("automationPractice.properties", "phptravels.baseuri");
     
     // Expected status codes
     private static final int successStatusCode = 200;

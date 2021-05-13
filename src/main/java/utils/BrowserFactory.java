@@ -20,11 +20,11 @@ import io.qameta.allure.Step;
 
 public class BrowserFactory {
     private static WebDriver driver;
-    private static String browserTypeProperty = PropertiesReader.getProperty("liveproject.properties", "browser.type");
-    private static String executionTypeProperty = PropertiesReader.getProperty("liveproject.properties",
-	    "execution.type");
-    private static String host = PropertiesReader.getProperty("liveproject.properties", "remote.execution.host");
-    private static String port = PropertiesReader.getProperty("liveproject.properties", "remote.execution.port");
+    private static String propertiesFileName = "automationPractice.properties";
+    private static String browserTypeProperty = PropertiesReader.getProperty(propertiesFileName, "browser.type");
+    private static String executionTypeProperty = PropertiesReader.getProperty(propertiesFileName, "execution.type");
+    private static String host = PropertiesReader.getProperty(propertiesFileName, "remote.execution.host");
+    private static String port = PropertiesReader.getProperty(propertiesFileName, "remote.execution.port");
 
     public enum BrowserType {
 	MOZILLA_FIREFOX("Mozilla Firefox"), GOOGLE_CHROME("Google Chrome"), FROM_PROPERTIES(browserTypeProperty);

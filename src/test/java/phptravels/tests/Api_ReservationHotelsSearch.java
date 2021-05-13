@@ -1,4 +1,4 @@
-package liveproject.phptravels.tests.ReservationSearch;
+package phptravels.tests;
 
 import java.io.File;
 
@@ -15,12 +15,12 @@ import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import io.restassured.response.Response;
-import liveproject.phptravels.apis.PhpTravels_APIs;
+import phptravels.apis.PhpTravels_APIs;
 import utils.ExcelFileManager;
 
 @Epic("PHPTRAVELS")
 @Feature("API")
-public class Api_ReservationHotelsSearch_Test {
+public class Api_ReservationHotelsSearch {
     PhpTravels_APIs apis;
     ExcelFileManager spreadSheet;
 
@@ -32,7 +32,7 @@ public class Api_ReservationHotelsSearch_Test {
 	spreadSheet.switchToSheet("API");
     }
 
-    @Test(description = "Validating the search function of the Hotels")
+    @Test(description = "API - Validating the search function of the Hotels")
     @Description("Given I'm on the PHPTravels home page; When I Enter the data needed to search for hotels And click the search button; Then I should be navigated to the hotels search results page, Then I should get the search results related to the search value entered")
     @Story("Reservation Search")
     @Severity(SeverityLevel.CRITICAL)

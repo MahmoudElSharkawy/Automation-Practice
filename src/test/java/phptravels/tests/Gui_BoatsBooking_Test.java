@@ -1,4 +1,4 @@
-package liveproject.phptravels.tests.Booking;
+package phptravels.tests;
 
 import java.io.File;
 import java.util.Date;
@@ -16,12 +16,11 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
-import liveproject.phptravels.apis.PhpTravels_APIs;
-import liveproject.phptravels.gui.pages.PhpTravels_BoatsDetails_Page;
-import liveproject.phptravels.gui.pages.PhpTravels_UserAccount_Page;
+import phptravels.apis.PhpTravels_APIs;
+import phptravels.gui.pages.PhpTravels_BoatsDetails_Page;
+import phptravels.gui.pages.PhpTravels_UserAccount_Page;
 import utils.BrowserActions;
 import utils.BrowserFactory;
-import utils.PropertiesReader;
 import utils.ExcelFileManager;
 
 @Epic("PHPTRAVELS")
@@ -30,7 +29,6 @@ public class Gui_BoatsBooking_Test {
     WebDriver driver;
     ExcelFileManager spreadSheet;
     PhpTravels_APIs apis;
-    String phptravelsBaseUrl = PropertiesReader.getProperty("liveproject.properties", "phptravels.baseuri");
 
     Date date = new Date();
     String firstName, lastName, mobileNumber, email, password;
@@ -43,11 +41,12 @@ public class Gui_BoatsBooking_Test {
 	spreadSheet.switchToSheet("GUI");
 	apis = new PhpTravels_APIs();
 	driver = BrowserFactory.getBrowser();
-	BrowserActions.navigateToUrl(driver, phptravelsBaseUrl
-		+ "/boats/sri-lanka/colombo/Speedboat-Bravo-410---2016-refit-2016-?date=01/01/2025&adults=2");
+
+	new PhpTravels_BoatsDetails_Page(driver).navigateBoatPage(
+		"/boats/sri-lanka/colombo/Speedboat-Bravo-410---2016-refit-2016-?date=01/01/2025&adults=2");
     }
 
-    @Test(description = "Validating the booking function of the Boats - PAY ON ARRIVAL payment method")
+    @Test(description = "GUI - Validating the booking function of the Boats - PAY ON ARRIVAL payment method")
     @Description("When I book a boat, And confirm the booking request with PAY ON ARRIVAL payment method, Then the boat should be Reserved on my profile")
     @Story("Booking")
     @Severity(SeverityLevel.CRITICAL)
@@ -72,10 +71,8 @@ public class Gui_BoatsBooking_Test {
 		.getInvoiceStatus();
 	Assert.assertEquals(invoiceStatus, spreadSheet.getCellData("Expected Invoice Status", 2));
 	
-	BrowserActions.navigateToUrl(driver, phptravelsBaseUrl + "/account");
-	String profileBookingStatus = new PhpTravels_UserAccount_Page(driver)
-		.getBookingStatus();
-	Assert.assertEquals(profileBookingStatus, spreadSheet.getCellData("Expected Profile Status", 2));
+	Assert.assertEquals(new PhpTravels_UserAccount_Page(driver).navigateAccountPage().getBookingStatus(),
+		spreadSheet.getCellData("Expected Profile Status", 2));
 
     }
 

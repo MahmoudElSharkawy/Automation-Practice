@@ -1,4 +1,4 @@
-package liveproject.phptravels.tests.Booking;
+package phptravels.tests;
 
 import java.io.File;
 import java.util.Date;
@@ -17,7 +17,7 @@ import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import io.restassured.response.Response;
-import liveproject.phptravels.apis.PhpTravels_APIs;
+import phptravels.apis.PhpTravels_APIs;
 import utils.ExcelFileManager;
 
 @Epic("PHPTRAVELS")
@@ -38,7 +38,7 @@ public class Api_BoatsBooking_Test {
 	spreadSheet.switchToSheet("API");
     }
 
-    @Test(description = "Validating the booking function of the Boats without applying any payment method")
+    @Test(description = "API - Validating the booking function of the Boats without applying any payment method")
     @Description("When I book a boat without confirming any payment methods, Then the boat booking should has Unpaid status on my accpunt profile")
     @Story("Booking")
     @Severity(SeverityLevel.CRITICAL)

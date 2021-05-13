@@ -1,4 +1,4 @@
-package liveproject.phptravels.gui.pages;
+package phptravels.gui.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;

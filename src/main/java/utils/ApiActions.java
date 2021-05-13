@@ -17,8 +17,7 @@ import io.restassured.specification.ResponseSpecification;
 import io.restassured.specification.SpecificationQuerier;
 
 public class ApiActions {
-    // TODO: Enhance the logging and add anything that maybe missing from the
-    // request
+    // TODO: Enhance the logging
     RequestSpecification request;
     Response response;
     QueryableRequestSpecification queryableRequestSpecs;

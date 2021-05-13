@@ -1,4 +1,4 @@
-package liveproject.phptravels.gui.pages;
+package phptravels.gui.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -43,7 +43,6 @@ public class PhpTravels_SignUp_Page {
 	return new PhpTravels_UserAccount_Page(driver);
     }
     
-    @Step("User Invalid Sign up")
     public PhpTravels_SignUp_Page invalidUserSignUp(String firstName, String lastName, String phone, String email,
 	    String password) {
 	userSignUp(firstName, lastName, phone, email, password);
