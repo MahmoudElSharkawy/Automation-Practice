@@ -25,8 +25,6 @@ public class ElementActions {
 	// Mouse hover on the element before clicking
 	mouseHover(driver, elementLocator);
 	try {
-	    // Mouse hover on the element before clicking
-//	    Helper.actions(driver, elementLocator, ActionType.MOUSE_HOVER);
 	    // wait for the element to be clickable
 	    Helper.getExplicitWait(driver).until(ExpectedConditions.elementToBeClickable(elementLocator));
 	} catch (TimeoutException toe) {
@@ -58,7 +56,6 @@ public class ElementActions {
 		fail("Couldn't click on the element:" + elementLocator, rootCauseException);
 	    }
 	}
-
     }
 
     public static void type(WebDriver driver, By elementLocator, String text) {
@@ -121,7 +118,6 @@ public class ElementActions {
 	    Logger.logStep(e.getMessage());
 	    fail(e.getMessage());
 	}
-
     }
 
     public static void mouseHover(WebDriver driver, By elementLocator) {
