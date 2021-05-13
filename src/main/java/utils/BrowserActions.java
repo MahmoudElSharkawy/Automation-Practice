@@ -1,5 +1,7 @@
 package utils;
 
+import static org.testng.Assert.fail;
+
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
@@ -24,7 +26,8 @@ public class BrowserActions {
 	    driver.get(url);
 	    ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
 	} catch (Exception e) {
-	    Logger.logMessage(e.getMessage());
+	    Logger.logStep(e.getMessage());
+	    fail(e.getMessage());
 	}
     }
 

@@ -30,9 +30,11 @@ public class ElementActions {
 	    // wait for the element to be clickable
 	    Helper.getExplicitWait(driver).until(ExpectedConditions.elementToBeClickable(elementLocator));
 	} catch (TimeoutException toe) {
-	    Logger.logStep("The element is not Clickable...." + toe.getMessage());
+	    Logger.logStep(toe.getMessage());
+	    fail(toe.getMessage());
 	} catch (Exception e) {
 	    Logger.logStep(e.getMessage());
+	    fail(e.getMessage());
 	}
 	try {
 	    // Log element text if not empty. Else, log clicking
@@ -92,6 +94,7 @@ public class ElementActions {
 	    }
 	} catch (Exception e) {
 	    Logger.logStep(e.getMessage());
+	    fail(e.getMessage());
 	}
 	// Make sure that the data is inserted correctly to the field
 	Assert.assertTrue(driver.findElement(elementLocator).getAttribute("value").contains(text),
@@ -116,10 +119,11 @@ public class ElementActions {
 	    }
 	} catch (Exception e) {
 	    Logger.logStep(e.getMessage());
+	    fail(e.getMessage());
 	}
 
     }
-    
+
     public static void mouseHover(WebDriver driver, By elementLocator) {
 	locatingElementStrategy(driver, elementLocator);
 	try {
@@ -127,6 +131,7 @@ public class ElementActions {
 	    actions.moveToElement(driver.findElement(elementLocator)).perform();
 	} catch (Exception e) {
 	    Logger.logStep(e.getMessage());
+	    fail(e.getMessage());
 	}
     }
 
@@ -137,6 +142,7 @@ public class ElementActions {
 	    actions.doubleClick(driver.findElement(elementLocator)).perform();
 	} catch (Exception e) {
 	    Logger.logStep(e.getMessage());
+	    fail(e.getMessage());
 	}
     }  
 
@@ -177,9 +183,11 @@ public class ElementActions {
 	    // Check if the element is displayed
 	    driver.findElement(elementLocator).isDisplayed();
 	} catch (TimeoutException toe) {
-	    Logger.logStep("The element is not Visible...." + toe.getMessage());
+	    Logger.logStep(toe.getMessage());
+	    fail(toe.getMessage());
 	} catch (Exception e) {
 	    Logger.logStep(e.getMessage());
+	    fail(e.getMessage());
 	}
     }
 
