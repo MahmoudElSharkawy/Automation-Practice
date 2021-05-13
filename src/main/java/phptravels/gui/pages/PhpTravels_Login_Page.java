@@ -34,9 +34,7 @@ public class PhpTravels_Login_Page {
 	return new PhpTravels_UserAccount_Page(driver);
     }
 
-    @Step("User Invalid Login")
     public PhpTravels_Login_Page invalidUserLogin(String email, String password) {
-	ExtentReport.info(MarkupHelper.createLabel("User Invalid Login", ExtentColor.BLUE));
 	userLogin(email, password);
 	return this;
     }
