@@ -34,17 +34,16 @@ public class RestfulBookerApisBooking {
 	ExtentReport.info(MarkupHelper.createLabel("Get Booking Ids", ExtentColor.BLUE));
 
 	return apiObject.performRequest(RequestType.GET,
-		RestfulBookerApis.BASE_URL + booking_endpoint + "?firstname=" + firstName + "&lastname=" + lastName,
-		Status.SUCCESS.getCode(), null, null, null, null, null, null);
+		booking_endpoint + "?firstname=" + firstName + "&lastname=" + lastName, Status.SUCCESS.getCode(), null,
+		null, null, null, null, null);
     }
-    
+
     @Step("Get Booking")
     public Response getBooking(String bookingId) {
 	ExtentReport.info(MarkupHelper.createLabel("Get Booking", ExtentColor.BLUE));
 
-	return apiObject.performRequest(RequestType.GET,
-		RestfulBookerApis.BASE_URL + booking_endpoint + "/" + bookingId, Status.SUCCESS.getCode(), null, null,
-		null, null, null, null);
+	return apiObject.performRequest(RequestType.GET, booking_endpoint + "/" + bookingId, Status.SUCCESS.getCode(),
+		null, null, null, null, null, null);
     }
 
     @Step("Create Booking")
@@ -52,7 +51,7 @@ public class RestfulBookerApisBooking {
 	    String checkIn, String checkOut, String additionalNeeds) {
 	ExtentReport.info(MarkupHelper.createLabel("Create Booking", ExtentColor.BLUE));
 
-	return apiObject.performRequest(RequestType.POST, RestfulBookerApis.BASE_URL + booking_endpoint, Status.SUCCESS.getCode(), null,
+	return apiObject.performRequest(RequestType.POST, booking_endpoint, Status.SUCCESS.getCode(), null,
 		ContentType.JSON, null, null,
 		createBookingBody(firstName, lastName, totalPrice, depositePaid, checkIn, checkOut, additionalNeeds),
 		null);
@@ -65,9 +64,8 @@ public class RestfulBookerApisBooking {
 	Map<String, Object> headers = new HashMap<>();
 	headers.put("Cookie", "token=" + accessToken);
 
-	return apiObject.performRequest(RequestType.DELETE,
-		RestfulBookerApis.BASE_URL + booking_endpoint + "/" + bookigId, Status.SUCCESS_DELETE.getCode(),
-		headers, null, null, null, null, null);
+	return apiObject.performRequest(RequestType.DELETE, booking_endpoint + "/" + bookigId,
+		Status.SUCCESS_DELETE.getCode(), headers, null, null, null, null, null);
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////
@@ -85,7 +83,7 @@ public class RestfulBookerApisBooking {
 	bookingDates.put("checkout", checkOut);
 	createBookingBody.put("bookingdates", bookingDates);
 	createBookingBody.put("additionalneeds", additionalNeeds);
-	
+
 	return createBookingBody;
     }
 }

@@ -27,7 +27,7 @@ public class restfulbooker_Test {
 
     @BeforeClass
     public void beforeClass() {
-	apiObject = new ApiActions();
+	apiObject = new ApiActions(RestfulBookerApis.BASE_URL);
 	restfulBookerApis = new RestfulBookerApis(apiObject);
 	String accessToken = restfulBookerApis.getAccessToken("admin", "password123");
 	restfulBookerApisBooking = new RestfulBookerApisBooking(apiObject, accessToken);

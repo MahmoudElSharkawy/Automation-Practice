@@ -18,12 +18,27 @@ import io.restassured.specification.SpecificationQuerier;
 
 public class ApiActions {
     // TODO: Enhance the logging & BASE URI should start from here as a constructor
-    RequestSpecification request;
-    Response response;
-    QueryableRequestSpecification queryableRequestSpecs;
+    private RequestSpecification request;
+    private Response response;
+    private QueryableRequestSpecification queryableRequestSpecs;
+    private String baseUrl;
 
     public enum RequestType {
-	POST, GET, PUT, DELETE, PATCH;
+	POST("POST"), GET("GET"), PUT("PUT"), DELETE("DELETE"), PATCH("PATCH");
+
+	private String value;
+
+	RequestType(String type) {
+	    this.value = type;
+	}
+
+	protected String getValue() {
+	    return value;
+	}
+    }
+
+    public ApiActions(String baseUrl) {
+	this.baseUrl = baseUrl;
     }
 
     private RequestSpecification requestSpec = new RequestSpecBuilder()
@@ -33,7 +48,7 @@ public class ApiActions {
 //	    .expectStatusCode(200)
 	    .log(LogDetail.BODY).build();
 
-    @Step("Perform API Request --> [{serviceName}]")
+    @Step("Perform API Request for Service Name: [{serviceName}]")
     /**
      * 
      * @param requestType
@@ -50,52 +65,55 @@ public class ApiActions {
     public Response performRequest(RequestType requestType, String serviceName, int expectedStatusCode,
 	    Map<String, Object> headers, ContentType contentType, Map<String, Object> formParams,
 	    Map<String, Object> queryParams, Object body, Map<String, String> cookies) {
-	ExtentReport.info("Perform API Request --> [" + serviceName + "]");
+	serviceName = baseUrl + serviceName;
 
 	request = RestAssured.given().spec(requestSpec);
 	queryableRequestSpecs = SpecificationQuerier.query(request);
 
+	Logger.logStep("Request URL: [" + serviceName + "] | Request Method: [" + requestType.getValue()
+		+ "] | Expected Status Code: [" + expectedStatusCode + "]");
+
 	if (headers != null) {
 	    request.headers(headers);
 	    String qHeaders = queryableRequestSpecs.getHeaders().toString();
-	    Logger.attachApiRequest(qHeaders.getBytes());
-	    ExtentReport.info(MarkupHelper.createCodeBlock("Headers: " + "\n" + qHeaders));
+	    Logger.attachApiRequest("Headers", qHeaders.getBytes());
+	    ExtentReport.info(MarkupHelper.createCodeBlock("Request Headers: " + "\n" + qHeaders));
 
 	}
 
 	if (contentType != null) {
 	    request.contentType(contentType);
 	    String qContentType = queryableRequestSpecs.getContentType();
-	    Logger.attachApiRequest(qContentType.getBytes());
-	    ExtentReport.info(MarkupHelper.createCodeBlock("Content Type: " + "\n" + qContentType));
+	    Logger.attachApiRequest("Content Type", qContentType.getBytes());
+	    ExtentReport.info(MarkupHelper.createCodeBlock("Request Content Type: " + qContentType));
 	}
 
 	if (formParams != null) {
 	    request.formParams(formParams);
 	    String qFormParams = queryableRequestSpecs.getFormParams().toString();
-	    Logger.attachApiRequest(qFormParams.getBytes());
-	    ExtentReport.info(MarkupHelper.createCodeBlock("Form params: " + "\n" + qFormParams));
+	    Logger.attachApiRequest("Form params", qFormParams.getBytes());
+	    ExtentReport.info(MarkupHelper.createCodeBlock("Request Form params: " + "\n" + qFormParams));
 	}
 
 	if (queryParams != null) {
 	    request.queryParams(queryParams);
 	    String qQueryParams = queryableRequestSpecs.getQueryParams().toString();
-	    Logger.attachApiRequest(qQueryParams.getBytes());
-	    ExtentReport.info(MarkupHelper.createCodeBlock("Query params: " + "\n" + qQueryParams));
+	    Logger.attachApiRequest("Query params", qQueryParams.getBytes());
+	    ExtentReport.info(MarkupHelper.createCodeBlock("Request Query params: " + "\n" + qQueryParams));
 	}
 
 	if (body != null) {
 	    request.body(body);
 	    String qBody = queryableRequestSpecs.getBody().toString();
-	    Logger.attachApiRequest(qBody.getBytes());
-	    ExtentReport.info(MarkupHelper.createCodeBlock("Body: " + "\n" + qBody));
+	    Logger.attachApiRequest("Body", qBody.getBytes());
+	    ExtentReport.info(MarkupHelper.createCodeBlock("Request Body: " + "\n" + qBody));
 	}
 
 	if (cookies != null) {
 	    request.cookies(cookies);
 	    String qCookies = queryableRequestSpecs.getCookies().toString();
-	    Logger.attachApiRequest(qCookies.getBytes());
-	    ExtentReport.info(MarkupHelper.createCodeBlock("Cookies: " + "\n" + qCookies));
+	    Logger.attachApiRequest("Cookies", qCookies.getBytes());
+	    ExtentReport.info(MarkupHelper.createCodeBlock("Request Cookies: " + "\n" + qCookies));
 	}
 
 	switch (requestType) {
@@ -115,10 +133,7 @@ public class ApiActions {
 	    response = request.patch(serviceName);
 	    break;
 	}
-
-	Logger.attachApiRequest(queryableRequestSpecs.getMethod().getBytes());
-	ExtentReport.info(MarkupHelper.createCodeBlock("Request method: " + queryableRequestSpecs.getMethod()));
-
+	
 	response.then().spec(responseSpec).statusCode(expectedStatusCode);
 
 	Logger.attachApiResponse(response.asByteArray());

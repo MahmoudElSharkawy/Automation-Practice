@@ -51,8 +51,8 @@ public class Logger {
 	return destination;
     }
 
-    @Attachment(value = "API Request", type = "text/json")
-    public static byte[] attachApiRequest(byte[] b) {
+    @Attachment(value = "API Request - {type}", type = "text/json")
+    public static byte[] attachApiRequest(String type, byte[] b) {
 	return attachTextJson(b);
     }
 
