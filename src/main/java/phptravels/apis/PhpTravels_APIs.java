@@ -16,6 +16,7 @@ import utils.ApiActions.RequestType;
 public class PhpTravels_APIs {
     String baseUrl = PropertiesReader.getProperty("automationPractice.properties", "phptravels.baseuri");
     ApiActions api = new ApiActions(baseUrl);
+    String nashwa;
 
     // Expected status codes
     private static final int successStatusCode = 200;
