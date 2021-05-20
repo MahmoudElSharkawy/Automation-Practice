@@ -1,7 +1,6 @@
 package phptravels.tests;
 
 import java.io.File;
-import java.util.Date;
 import java.util.Map;
 
 import org.testng.Assert;
@@ -19,16 +18,16 @@ import io.qameta.allure.TmsLink;
 import io.restassured.response.Response;
 import phptravels.apis.PhpTravels_APIs;
 import utils.ExcelFileManager;
+import utils.Helper;
 
 @Epic("PHPTRAVELS")
 @Feature("API")
 public class Api_SignUp_Test {
     PhpTravels_APIs apis;
     ExcelFileManager spreadSheet;
-    Date date = new Date();
 
     String firstName, lastName, mobileNumber, email, password;
-    String currentTime = date.getTime() + "";
+    String currentTime = Helper.getCurrentTime("yyyyMMddhhmmss");
 
     @BeforeClass
     public void beforeClass() {

@@ -1,5 +1,7 @@
 package utils;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -15,6 +17,10 @@ public class Helper {
 
     public static void implicitWait(WebDriver driver) {
 	driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
+    }
+
+    public static String getCurrentTime(String dateFormat) {
+	return new SimpleDateFormat(dateFormat).format(new Date());
     }
 
 }
