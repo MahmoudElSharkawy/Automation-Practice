@@ -1,7 +1,6 @@
 package phptravels.tests;
 
 import java.io.File;
-import java.util.Date;
 import java.util.Map;
 
 import org.testng.Assert;
@@ -30,9 +29,7 @@ public class Api_Login_Test {
     private ExcelFileManager spreadSheet;
 
     String firstName, lastName, mobileNumber, email, password;
-//    String currentTime = Helper.getCurrentTime("yyyyMMddhhmmss");
-    Date date = new Date();
-    private String currentTime = date.getTime() + "";
+    String currentTime = Helper.getCurrentTime("yyyyMMddhhmmss");
 
     @BeforeClass
     public void beforeClass() {

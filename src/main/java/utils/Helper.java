@@ -19,8 +19,8 @@ public class Helper {
 	driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
     }
 
-//    public static String getCurrentTime(String dateFormat) {
-//	return new SimpleDateFormat(dateFormat).format(new Date());
-//    }
+    public static String getCurrentTime(String dateFormat) {
+	return new SimpleDateFormat(dateFormat).format(new Date());
+    }
 
 }
