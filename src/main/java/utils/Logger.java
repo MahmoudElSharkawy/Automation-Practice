@@ -2,6 +2,8 @@ package utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -18,12 +20,16 @@ public class Logger {
 
     @Step("{message}")
     public static void logStep(String message) {
-	System.out.println("<" + Helper.getCurrentTime("dd-MM-yyyy HH:mm:ss.SSS a") + "> " + message);
+	String timeStamp = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss.SSS a").format(new Date());
+	System.out.println("<" + timeStamp + "> " + message);
+//	System.out.println("<" + Helper.getCurrentTime("dd-MM-yyyy HH:mm:ss.SSS a") + "> " + message);
 	ExtentReport.info(message);
     }
 
     public static void logMessage(String message) {
-	System.out.println("<" + Helper.getCurrentTime("dd-MM-yyyy HH:mm:ss.SSS a") + "> " + message);
+	String timeStamp = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss.SSS a").format(new Date());
+	System.out.println("<" + timeStamp + "> " + message);
+//	System.out.println("<" + Helper.getCurrentTime("dd-MM-yyyy HH:mm:ss.SSS a") + "> " + message);
 	ExtentReport.info(message);
     }
 
@@ -37,18 +43,15 @@ public class Logger {
 		((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64), "Full Page Screenshot").build();
     }
 
-    public static String getScreenshot(WebDriver driver, String screenshotName) {
-	String dateName = Helper.getCurrentTime("yyyyMMddhhmmss");
+    public static String getScreenshot(WebDriver driver, String screenshotName) throws Exception {
+	String dateName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
 	TakesScreenshot ts = (TakesScreenshot) driver;
 	File source = ts.getScreenshotAs(OutputType.FILE);
 	String destination = System.getProperty("user.dir") + "/src/test/resources/TestsScreenshots/" + screenshotName
 		+ dateName + ".png";
 	File finalDestination = new File(destination);
-	try {
-	    FileUtils.copyFile(source, finalDestination);
-	} catch (IOException e) {
-	    e.printStackTrace();
-	}
+	FileUtils.copyFile(source, finalDestination);
+
 	return destination;
     }
 

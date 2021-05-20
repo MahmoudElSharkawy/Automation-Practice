@@ -1,6 +1,7 @@
 package phptravels.tests;
 
 import java.io.File;
+import java.util.Date;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -33,7 +34,9 @@ public class Gui_BoatsBooking_Test {
     private ExcelFileManager spreadSheet;
 
     String firstName, lastName, mobileNumber, email, password;
-    String currentTime = Helper.getCurrentTime("yyyyMMddhhmmss");
+//    String currentTime = Helper.getCurrentTime("yyyyMMddhhmmss");
+    Date date = new Date();
+    String currentTime = date.getTime() + "";
 
     @BeforeClass
     public void setUp() {
