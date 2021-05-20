@@ -25,7 +25,7 @@ jobs:
       run: docker-compose -f src/main/resources/docker-compose_native.yml up --scale chrome=4 --remove-orphans -d
     - name: Check running containers
       run: docker ps
-    - name: Run liveproject tests - Chrome Headless
+    - name: Run tests - Chrome Headless
       continue-on-error: true
       run: mvn -Dtest=phptravels.tests.*_Test,restfulbooker.tests.*_Test test
     - name: ExtentReports HTML Test Report
