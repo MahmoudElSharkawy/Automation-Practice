@@ -16,25 +16,29 @@ import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import io.restassured.response.Response;
-import phptravels.apis.PhpTravels_APIs;
+import phptravels.apis.PhptravelsApis;
+import utils.ApiActions;
 import utils.ExcelFileManager;
 import utils.Helper;
 
 @Epic("PHPTRAVELS")
 @Feature("API")
 public class Api_BoatsBooking_Test {
-    PhpTravels_APIs apis;
-    ExcelFileManager spreadSheet;
+    private ApiActions apiObject;
+    private PhptravelsApis phptravelsApis;
+    private ExcelFileManager spreadSheet;
 
-    String firstName, lastName, mobileNumber, email, password;
-    String currentTime = Helper.getCurrentTime("yyyyMMddhhmmss");
+    private String firstName, lastName, mobileNumber, email, password;
+    private String currentTime = Helper.getCurrentTime("yyyyMMddhhmmss");
 
     @BeforeClass
     public void beforeClass() {
-	apis = new PhpTravels_APIs();
 	spreadSheet = new ExcelFileManager(
 		new File("src/test/resources/TestData/LiveProject_PhpTravels_BoatsBooking_TestData.xlsx"));
 	spreadSheet.switchToSheet("API");
+	
+	apiObject = new ApiActions(PhptravelsApis.BASE_URL);
+	phptravelsApis = new PhptravelsApis(apiObject);
     }
 
     @Test(description = "PHPTRAVELS - API - Validating the booking function of the Boats without applying any payment method")
@@ -49,13 +53,13 @@ public class Api_BoatsBooking_Test {
 	mobileNumber = spreadSheet.getCellData("Mobile Number", 2);
 	email = spreadSheet.getCellData("Email", 2) + currentTime + "@test.com";
 	password = spreadSheet.getCellData("Password", 2);
-	Response signUp = apis.userSignUp(firstName, lastName, mobileNumber, email, password);
+	Response signUp = phptravelsApis.userSignUp(firstName, lastName, mobileNumber, email, password);
 
 	Map<String, String> cookies = signUp.getCookies();
-	apis.processBookingLogged(cookies, "", spreadSheet.getCellData("Item ID", 2),
+	phptravelsApis.processBookingLogged(cookies, "", spreadSheet.getCellData("Item ID", 2),
 		spreadSheet.getCellData("Adults Count", 2), spreadSheet.getCellData("CheckIn Date", 2), "boats", "",
 		"");
-	Response account = apis.getUserAccount(cookies);
+	Response account = phptravelsApis.getUserAccount(cookies);
 	Assert.assertTrue(account.getBody().asString().contains(spreadSheet.getCellData("Expected Profile Status", 2)),
 		"No/Wrong Booking Status!; The Account response doesn't contain the expected booking status: " + "["
 			+ spreadSheet.getCellData("Expected Profile Status", 2) + "]");

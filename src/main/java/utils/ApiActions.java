@@ -17,7 +17,7 @@ import io.restassured.specification.ResponseSpecification;
 import io.restassured.specification.SpecificationQuerier;
 
 public class ApiActions {
-    // TODO: Enhance the logging & BASE URI should start from here as a constructor
+    // TODO: implement getResponseJSONPath and getBody methods
     private RequestSpecification request;
     private Response response;
     private QueryableRequestSpecification queryableRequestSpecs;
@@ -65,12 +65,12 @@ public class ApiActions {
     public Response performRequest(RequestType requestType, String serviceName, int expectedStatusCode,
 	    Map<String, Object> headers, ContentType contentType, Map<String, Object> formParams,
 	    Map<String, Object> queryParams, Object body, Map<String, String> cookies) {
-	serviceName = baseUrl + serviceName;
+	String requestUrl = baseUrl + serviceName;
 
 	request = RestAssured.given().spec(requestSpec);
 	queryableRequestSpecs = SpecificationQuerier.query(request);
 
-	Logger.logStep("Request URL: [" + serviceName + "] | Request Method: [" + requestType.getValue()
+	Logger.logStep("Request URL: [" + requestUrl + "] | Request Method: [" + requestType.getValue()
 		+ "] | Expected Status Code: [" + expectedStatusCode + "]");
 
 	if (headers != null) {
@@ -118,19 +118,19 @@ public class ApiActions {
 
 	switch (requestType) {
 	case POST:
-	    response = request.post(serviceName);
+	    response = request.post(requestUrl);
 	    break;
 	case GET:
-	    response = request.get(serviceName);
+	    response = request.get(requestUrl);
 	    break;
 	case PUT:
-	    response = request.put(serviceName);
+	    response = request.put(requestUrl);
 	    break;
 	case DELETE:
-	    response = request.delete(serviceName);
+	    response = request.delete(requestUrl);
 	    break;
 	case PATCH:
-	    response = request.patch(serviceName);
+	    response = request.patch(requestUrl);
 	    break;
 	}
 	

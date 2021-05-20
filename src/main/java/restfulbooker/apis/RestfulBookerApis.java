@@ -34,7 +34,7 @@ public class RestfulBookerApis {
     }
 
     // End Points
-    private String auth_endpoint = "auth";
+    private String auth_serviceName = "auth";
 
     // Constructor
     public RestfulBookerApis(ApiActions apiObject) {
@@ -50,7 +50,7 @@ public class RestfulBookerApis {
 	authentication.put("username", username);
 	authentication.put("password", password);
 
-	Response getToken = apiObject.performRequest(RequestType.POST, auth_endpoint, Status.SUCCESS.getCode(), null,
+	Response getToken = apiObject.performRequest(RequestType.POST, auth_serviceName, Status.SUCCESS.getCode(), null,
 		ContentType.JSON, null, null, authentication, null);
 	return getToken.jsonPath().get("token").toString();
     }

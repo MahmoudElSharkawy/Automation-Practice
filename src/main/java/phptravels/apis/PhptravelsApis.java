@@ -13,20 +13,38 @@ import utils.ExtentReport;
 import utils.PropertiesReader;
 import utils.ApiActions.RequestType;
 
-public class PhpTravels_APIs {
-    String baseUrl = PropertiesReader.getProperty("automationPractice.properties", "phptravels.baseuri");
-    ApiActions api = new ApiActions(baseUrl);
+public class PhptravelsApis {
+    private ApiActions apiObject;
+    public static final String BASE_URL = PropertiesReader.getProperty("automationPractice.properties",
+	    "phptravels.baseuri");
 
     // Expected status codes
-    private static final int successStatusCode = 200;
+    public enum Status {
+	SUCCESS(200);
+
+	private int code;
+
+	Status(int code) {
+	    this.code = code;
+	}
+
+	protected int getCode() {
+	    return code;
+	}
+    }
 
     // End Points
-    private String account_endpoint = "account/";
-    private String login_endpoint = "account/login";
-    private String signup_endpoint = "account/signup";
-    private String hotelsdetails_endpoint = "hotels/detail";
-    private String boats_endpoint = "boats";
-    private String processbookinglogged_endpoint = "admin/ajaxcalls/processBookinglogged";
+    private String account_serviceName = "account/";
+    private String login_serviceName = "account/login";
+    private String signup_serviceName = "account/signup";
+    private String hotelsDetails_serviceName = "hotels/detail";
+    private String boats_serviceName = "boats";
+    private String processBookingLogged_serviceName = "admin/ajaxcalls/processBookinglogged";
+
+    // Constructor
+    public PhptravelsApis(ApiActions apiObject) {
+	this.apiObject = apiObject;
+    }
 
     @Step("User Sign up with Data --> First Name: [{firstName}], Last Name: [{lastName}], Mobile Number: [{mobileNumber}], Email: [{email}] and Password: [{password}]")
     public Response userSignUp(String firstName, String lastName, String mobileNumber, String email, String password) {
@@ -40,8 +58,8 @@ public class PhpTravels_APIs {
 	formParams.put("password", password);
 	formParams.put("confirmpassword", password);
 
-	return api.performRequest(RequestType.POST, signup_endpoint, successStatusCode, null, null, formParams, null,
-		null, null);
+	return apiObject.performRequest(RequestType.POST, signup_serviceName, Status.SUCCESS.getCode(), null, null,
+		formParams, null, null, null);
 
     }
 
@@ -56,8 +74,8 @@ public class PhpTravels_APIs {
 	formParams.put("username", email);
 	formParams.put("password", password);
 
-	return api.performRequest(RequestType.POST, login_endpoint, successStatusCode, headers, null, formParams, null,
-		null, null);
+	return apiObject.performRequest(RequestType.POST, login_serviceName, Status.SUCCESS.getCode(), headers, null,
+		formParams, null, null, null);
 
     }
 
@@ -65,8 +83,8 @@ public class PhpTravels_APIs {
     public Response getUserAccount(Map<String, String> cookies) {
 	ExtentReport.info(MarkupHelper.createLabel("Get User Account", ExtentColor.BLUE));
 
-	return api.performRequest(RequestType.GET, account_endpoint, successStatusCode, null, null, null, null, null,
-		cookies);
+	return apiObject.performRequest(RequestType.GET, account_serviceName, Status.SUCCESS.getCode(), null, null,
+		null, null, null, cookies);
 
     }
 
@@ -75,10 +93,10 @@ public class PhpTravels_APIs {
 	    String adultsCount, String childCount) {
 	ExtentReport.info(MarkupHelper.createLabel("Get Hotel Details", ExtentColor.BLUE));
 
-	return api.performRequest(
-		RequestType.POST, hotelsdetails_endpoint + "/" + cityName + "/" + hotelName + "/" + checkInDate + "/"
-			+ checkOutDate + "/" + adultsCount + "/" + childCount,
-		successStatusCode, null, null, null, null, null, null);
+	return apiObject.performRequest(RequestType.POST,
+		hotelsDetails_serviceName + "/" + cityName + "/" + hotelName + "/" + checkInDate + "/" + checkOutDate
+			+ "/" + adultsCount + "/" + childCount,
+		Status.SUCCESS.getCode(), null, null, null, null, null, null);
 
     }
 
@@ -91,9 +109,9 @@ public class PhpTravels_APIs {
 	queryParams.put("date", boatDate);
 	queryParams.put("adults", adultsCount);
 
-	return api.performRequest(RequestType.POST,
-		boats_endpoint + "/" + countryName + "/" + cityName + "/" + boatName, successStatusCode, null, null,
-		null, queryParams, null, null);
+	return apiObject.performRequest(RequestType.POST,
+		boats_serviceName + "/" + countryName + "/" + cityName + "/" + boatName, Status.SUCCESS.getCode(), null,
+		null, null, queryParams, null, null);
 
     }
 
@@ -121,8 +139,8 @@ public class PhpTravels_APIs {
 	formParams.put("passport[2][passportnumber]", "");
 	formParams.put("passport[2][age]", "");
 
-	return api.performRequest(RequestType.POST, processbookinglogged_endpoint, successStatusCode, null, null,
-		formParams, null, null, cookies);
+	return apiObject.performRequest(RequestType.POST, processBookingLogged_serviceName, Status.SUCCESS.getCode(),
+		null, null, formParams, null, null, cookies);
 
     }
 

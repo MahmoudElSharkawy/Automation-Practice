@@ -23,8 +23,8 @@ import utils.ExcelFileManager;
 @Epic("PHPTRAVELS")
 @Feature("GUI")
 public class Gui_ReservationBoatsSearch_Test {
-    WebDriver driver;
-    ExcelFileManager spreadSheet;
+    private WebDriver driver;
+    private ExcelFileManager spreadSheet;
 
     @BeforeClass
     public void setUp() {

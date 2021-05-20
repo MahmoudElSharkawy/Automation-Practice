@@ -15,9 +15,10 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
-import phptravels.apis.PhpTravels_APIs;
+import phptravels.apis.PhptravelsApis;
 import phptravels.gui.pages.PhpTravels_BoatsDetails_Page;
 import phptravels.gui.pages.PhpTravels_UserAccount_Page;
+import utils.ApiActions;
 import utils.BrowserActions;
 import utils.BrowserFactory;
 import utils.ExcelFileManager;
@@ -26,9 +27,10 @@ import utils.Helper;
 @Epic("PHPTRAVELS")
 @Feature("GUI")
 public class Gui_BoatsBooking_Test {
-    WebDriver driver;
-    ExcelFileManager spreadSheet;
-    PhpTravels_APIs apis;
+    private WebDriver driver;
+    private ApiActions apiObject;
+    private PhptravelsApis phptravelsApis;
+    private ExcelFileManager spreadSheet;
 
     String firstName, lastName, mobileNumber, email, password;
     String currentTime = Helper.getCurrentTime("yyyyMMddhhmmss");
@@ -38,7 +40,8 @@ public class Gui_BoatsBooking_Test {
 	spreadSheet = new ExcelFileManager(
 		new File("src/test/resources/TestData/LiveProject_PhpTravels_BoatsBooking_TestData.xlsx"));
 	spreadSheet.switchToSheet("GUI");
-	apis = new PhpTravels_APIs();
+	apiObject = new ApiActions(PhptravelsApis.BASE_URL);
+	phptravelsApis = new PhptravelsApis(apiObject);
 	driver = BrowserFactory.getBrowser();
 
 	new PhpTravels_BoatsDetails_Page(driver).navigateBoatPage(
@@ -58,7 +61,7 @@ public class Gui_BoatsBooking_Test {
 	email = spreadSheet.getCellData("Email", 2) + currentTime + "@test.com";
 	password = spreadSheet.getCellData("Password", 2);
 	//sign up using api
-	apis.userSignUp(firstName, lastName, mobileNumber, email, password);
+	phptravelsApis.userSignUp(firstName, lastName, mobileNumber, email, password);
 	
 	String invoiceStatus = new PhpTravels_BoatsDetails_Page(driver)
 		.dismissCookieBar()

@@ -15,21 +15,25 @@ import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import io.restassured.response.Response;
-import phptravels.apis.PhpTravels_APIs;
+import phptravels.apis.PhptravelsApis;
+import utils.ApiActions;
 import utils.ExcelFileManager;
 
 @Epic("PHPTRAVELS")
 @Feature("API")
 public class Api_ReservationHotelsSearch {
-    PhpTravels_APIs apis;
-    ExcelFileManager spreadSheet;
+    private ApiActions apiObject;
+    private PhptravelsApis phptravelsApis;
+    private ExcelFileManager spreadSheet;
 
     @BeforeClass
     public void beforeClass() {
-	apis = new PhpTravels_APIs();
 	spreadSheet = new ExcelFileManager(
 		new File("src/test/resources/TestData/LiveProject_PhpTravels_ReservationHotelsSearch_TestData.xlsx"));
 	spreadSheet.switchToSheet("API");
+	
+	apiObject = new ApiActions(PhptravelsApis.BASE_URL);
+	phptravelsApis = new PhptravelsApis(apiObject);
     }
 
     @Test(description = "PHPTRAVELS - API - Validating the search function of the Hotels")
@@ -39,7 +43,7 @@ public class Api_ReservationHotelsSearch {
     @TmsLink("Test_case")
     @Issue("Software_bug")
     public void testingHotelsSearch() {
-	Response hotel = apis.hotelsSearch(spreadSheet.getCellData("City Name", 2),
+	Response hotel = phptravelsApis.hotelsSearch(spreadSheet.getCellData("City Name", 2),
 		spreadSheet.getCellData("Hotel Name", 2), spreadSheet.getCellData("Check In Date", 2),
 		spreadSheet.getCellData("Check Out Date", 2), spreadSheet.getCellData("Adults Count", 2),
 		spreadSheet.getCellData("Child Count", 2));

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Live Project">
+<suite name="Automation Practice">
   
   <test name="PHPTRAVELS - GUI">
     <classes>
@@ -20,4 +20,10 @@
     </classes>
   </test> <!-- PHPTRAVELS - API -->
   
-</suite> <!-- Live Project -->
+    <test name="RestfulBooker - API">
+    <classes>
+      <class name="restfulbooker.tests.restfulbooker_Test"/>
+    </classes>
+  </test> <!-- RestfulBooker - API-->
+  
+</suite> <!-- Automation Practice -->

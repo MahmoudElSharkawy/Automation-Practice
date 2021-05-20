@@ -21,7 +21,7 @@ public class RestfulBookerApisBooking {
     private String accessToken;
 
     // End Points
-    private String booking_endpoint = "booking";
+    private String booking_serviceName = "booking";
 
     // Constructor
     public RestfulBookerApisBooking(ApiActions apiObject, String accessToken) {
@@ -34,7 +34,7 @@ public class RestfulBookerApisBooking {
 	ExtentReport.info(MarkupHelper.createLabel("Get Booking Ids", ExtentColor.BLUE));
 
 	return apiObject.performRequest(RequestType.GET,
-		booking_endpoint + "?firstname=" + firstName + "&lastname=" + lastName, Status.SUCCESS.getCode(), null,
+		booking_serviceName + "?firstname=" + firstName + "&lastname=" + lastName, Status.SUCCESS.getCode(), null,
 		null, null, null, null, null);
     }
 
@@ -42,7 +42,7 @@ public class RestfulBookerApisBooking {
     public Response getBooking(String bookingId) {
 	ExtentReport.info(MarkupHelper.createLabel("Get Booking", ExtentColor.BLUE));
 
-	return apiObject.performRequest(RequestType.GET, booking_endpoint + "/" + bookingId, Status.SUCCESS.getCode(),
+	return apiObject.performRequest(RequestType.GET, booking_serviceName + "/" + bookingId, Status.SUCCESS.getCode(),
 		null, null, null, null, null, null);
     }
 
@@ -51,7 +51,7 @@ public class RestfulBookerApisBooking {
 	    String checkIn, String checkOut, String additionalNeeds) {
 	ExtentReport.info(MarkupHelper.createLabel("Create Booking", ExtentColor.BLUE));
 
-	return apiObject.performRequest(RequestType.POST, booking_endpoint, Status.SUCCESS.getCode(), null,
+	return apiObject.performRequest(RequestType.POST, booking_serviceName, Status.SUCCESS.getCode(), null,
 		ContentType.JSON, null, null,
 		createBookingBody(firstName, lastName, totalPrice, depositePaid, checkIn, checkOut, additionalNeeds),
 		null);
@@ -64,7 +64,7 @@ public class RestfulBookerApisBooking {
 	Map<String, Object> headers = new HashMap<>();
 	headers.put("Cookie", "token=" + accessToken);
 
-	return apiObject.performRequest(RequestType.DELETE, booking_endpoint + "/" + bookigId,
+	return apiObject.performRequest(RequestType.DELETE, booking_serviceName + "/" + bookigId,
 		Status.SUCCESS_DELETE.getCode(), headers, null, null, null, null, null);
     }
 

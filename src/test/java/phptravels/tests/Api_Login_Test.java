@@ -16,26 +16,29 @@ import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import io.restassured.response.Response;
-import phptravels.apis.PhpTravels_APIs;
+import phptravels.apis.PhptravelsApis;
+import utils.ApiActions;
 import utils.ExcelFileManager;
 import utils.Helper;
 
 @Epic("PHPTRAVELS")
 @Feature("API")
 public class Api_Login_Test {
-    PhpTravels_APIs apis;
-    ExcelFileManager spreadSheet;
+    private ApiActions apiObject;
+    private PhptravelsApis phptravelsApis;
+    private ExcelFileManager spreadSheet;
 
     String firstName, lastName, mobileNumber, email, password;
     String currentTime = Helper.getCurrentTime("yyyyMMddhhmmss");
 
     @BeforeClass
     public void beforeClass() {
-	apis = new PhpTravels_APIs();
 	spreadSheet = new ExcelFileManager(
 		new File("src/test/resources/TestData/LiveProject_PhpTravels_Login_TestData.xlsx"));
 	spreadSheet.switchToSheet("API");
-
+	
+	apiObject = new ApiActions(PhptravelsApis.BASE_URL);
+	phptravelsApis = new PhptravelsApis(apiObject);
     }
 
     @Test(description = "PHPTRAVELS - API - Valid User Login")
@@ -50,11 +53,11 @@ public class Api_Login_Test {
 	mobileNumber = spreadSheet.getCellData("Mobile Number", 2);
 	email = spreadSheet.getCellData("Email", 2) + currentTime + "@test.com";
 	password = spreadSheet.getCellData("Password", 2);
-	apis.userSignUp(firstName, lastName, mobileNumber, email, password);
+	phptravelsApis.userSignUp(firstName, lastName, mobileNumber, email, password);
 
-	Response login = apis.userLogin(email, password);
+	Response login = phptravelsApis.userLogin(email, password);
 	Map<String, String> cookies = login.getCookies();
-	Response account = apis.getUserAccount(cookies);
+	Response account = phptravelsApis.getUserAccount(cookies);
 	Assert.assertTrue(account.getBody().asString().contains("Hi, " + firstName + " " + lastName),
 		"No/Wrong Hi Message!; The Account response doesn't contain the expected message: " + "[Hi, "
 			+ firstName + " " + lastName + "]");
@@ -71,7 +74,7 @@ public class Api_Login_Test {
 	email = spreadSheet.getCellData("Email", 3) + "@test.com";
 	password = spreadSheet.getCellData("Password", 3);
 
-	Response login = apis.userLogin(email, password);
+	Response login = phptravelsApis.userLogin(email, password);
 	Assert.assertTrue(login.getBody().asString().contains(spreadSheet.getCellData("Expected Alert Message", 3)),
 		"No/Wrong Error Message!; The message should be: ["
 			+ spreadSheet.getCellData("Expected Alert Message", 3) + "]");

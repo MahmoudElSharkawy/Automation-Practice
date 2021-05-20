@@ -26,11 +26,11 @@ import utils.Helper;
 @Epic("PHPTRAVELS")
 @Feature("GUI")
 public class Gui_SignUp_Test {
-    WebDriver driver;
-    ExcelFileManager spreadSheet;
+    private WebDriver driver;
+    private ExcelFileManager spreadSheet;
 
-    String firstName, lastName, mobileNumber, email, password;
-    String currentTime = Helper.getCurrentTime("yyyyMMddhhmmss");
+    private String firstName, lastName, mobileNumber, email, password;
+    private String currentTime = Helper.getCurrentTime("yyyyMMddhhmmss");
 
     @BeforeClass
     public void setUp() {
