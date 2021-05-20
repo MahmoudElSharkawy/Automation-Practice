@@ -36,7 +36,7 @@ public class Gui_Login_Test {
     private String firstName, lastName, mobileNumber, email, password;
 //    private String currentTime = Helper.getCurrentTime("yyyyMMddhhmmss");
     Date date = new Date();
-    String currentTime = date.getTime() + "";
+    private String currentTime = date.getTime() + "";
 
     @BeforeClass
     public void setUp() {

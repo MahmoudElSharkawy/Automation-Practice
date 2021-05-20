@@ -32,7 +32,7 @@ public class Api_Login_Test {
     String firstName, lastName, mobileNumber, email, password;
 //    String currentTime = Helper.getCurrentTime("yyyyMMddhhmmss");
     Date date = new Date();
-    String currentTime = date.getTime() + "";
+    private String currentTime = date.getTime() + "";
 
     @BeforeClass
     public void beforeClass() {
