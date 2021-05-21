@@ -1,7 +1,6 @@
 package phptravels.tests;
 
 import java.io.File;
-import java.util.Date;
 import java.util.Map;
 
 import org.testng.Assert;
@@ -20,6 +19,7 @@ import io.restassured.response.Response;
 import phptravels.apis.PhptravelsApis;
 import utils.ApiActions;
 import utils.ExcelFileManager;
+import utils.Helper;
 
 @Epic("PHPTRAVELS")
 @Feature("API")
@@ -29,9 +29,7 @@ public class Api_Login_Test {
     private ExcelFileManager spreadSheet;
 
     private String firstName, lastName, mobileNumber, email, password;
-//    private String currentTime = Helper.getCurrentTime("yyyyMMddhhmmss");
-    Date date = new Date();
-    private String currentTime = date.getTime() + "";
+    private String currentTime = Helper.getCurrentTime("yyyyMMddhhmmss");
 
     @BeforeClass
     public void beforeClass() {

@@ -1,7 +1,6 @@
 package phptravels.tests;
 
 import java.io.File;
-import java.util.Date;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -23,6 +22,7 @@ import utils.ApiActions;
 import utils.BrowserActions;
 import utils.BrowserFactory;
 import utils.ExcelFileManager;
+import utils.Helper;
 
 @Epic("PHPTRAVELS")
 @Feature("GUI")
@@ -33,9 +33,7 @@ public class Gui_BoatsBooking_Test {
     private ExcelFileManager spreadSheet;
 
     private String firstName, lastName, mobileNumber, email, password;
-//    private String currentTime = Helper.getCurrentTime("yyyyMMddhhmmss");
-    Date date = new Date();
-    private String currentTime = date.getTime() + "";
+    private String currentTime = Helper.getCurrentTime("yyyyMMddhhmmss");
 
     @BeforeClass
     public void setUp() {
