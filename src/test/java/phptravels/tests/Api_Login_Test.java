@@ -1,6 +1,7 @@
 package phptravels.tests;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
@@ -31,7 +32,7 @@ public class Api_Login_Test {
     private String firstName, lastName, mobileNumber, email, password;
 //    private String currentTime = Helper.getCurrentTime("yyyyMMddhhmmss");
     Date date = new Date();
-    private String currentTime = date.getTime() + "";
+    private String currentTime = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
 
     @BeforeClass
     public void beforeClass() {
