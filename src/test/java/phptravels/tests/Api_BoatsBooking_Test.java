@@ -1,7 +1,6 @@
 package phptravels.tests;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
@@ -31,8 +30,7 @@ public class Api_BoatsBooking_Test {
     
     private String firstName, lastName, mobileNumber, email, password;
 //    private String currentTime = Helper.getCurrentTime("yyyyMMddhhmmss");
-    Date date = new Date();
-    private String currentTime = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+    private String currentTime = new Date().getTime() + "";
 
     @BeforeClass
     public void beforeClass() {

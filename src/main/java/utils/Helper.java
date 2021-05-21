@@ -20,7 +20,7 @@ public class Helper {
     }
 
     public static String getCurrentTime(String dateFormat) {
-	return (new SimpleDateFormat(dateFormat)).format(new Date(System.currentTimeMillis()));
+	return new SimpleDateFormat(dateFormat).format(new Date());
     }
 
 }

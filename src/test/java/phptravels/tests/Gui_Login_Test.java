@@ -1,7 +1,6 @@
 package phptravels.tests;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.openqa.selenium.WebDriver;
@@ -35,8 +34,7 @@ public class Gui_Login_Test {
     
     private String firstName, lastName, mobileNumber, email, password;
 //    private String currentTime = Helper.getCurrentTime("yyyyMMddhhmmss");
-    Date date = new Date();
-    private String currentTime = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+    private String currentTime = new Date().getTime() + "";
 
     @BeforeClass
     public void setUp() {
