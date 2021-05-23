@@ -20,7 +20,7 @@ public class RestfulBookerApisBooking {
     private ApiActions apiObject;
     private String accessToken;
 
-    // End Points
+    // Services Names
     private String booking_serviceName = "booking";
 
     // Constructor
@@ -29,21 +29,24 @@ public class RestfulBookerApisBooking {
 	this.accessToken = accessToken;
     }
 
+    //////////////////////////////////////////////////////////////////
+    //////////////////////////// Actions ////////////////////////////
+
     @Step("Get Booking Ids with --> First Name: [{firstName}] and Last Name: [{lastName}]")
     public Response getBookingIds(String firstName, String lastName) {
 	ExtentReport.info(MarkupHelper.createLabel("Get Booking Ids", ExtentColor.BLUE));
 
 	return apiObject.performRequest(RequestType.GET,
-		booking_serviceName + "?firstname=" + firstName + "&lastname=" + lastName, Status.SUCCESS.getCode(), null,
-		null, null, null, null, null);
+		booking_serviceName + "?firstname=" + firstName + "&lastname=" + lastName, Status.SUCCESS.getCode(),
+		null, null, null, null, null, null);
     }
 
     @Step("Get Booking")
     public Response getBooking(String bookingId) {
 	ExtentReport.info(MarkupHelper.createLabel("Get Booking", ExtentColor.BLUE));
 
-	return apiObject.performRequest(RequestType.GET, booking_serviceName + "/" + bookingId, Status.SUCCESS.getCode(),
-		null, null, null, null, null, null);
+	return apiObject.performRequest(RequestType.GET, booking_serviceName + "/" + bookingId,
+		Status.SUCCESS.getCode(), null, null, null, null, null, null);
     }
 
     @Step("Create Booking")

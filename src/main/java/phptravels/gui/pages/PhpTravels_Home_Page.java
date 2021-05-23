@@ -14,14 +14,10 @@ import utils.PropertiesReader;
 
 public class PhpTravels_Home_Page {
     private WebDriver driver;
-    String phptravelsHomePageURL = PropertiesReader.getProperty("automationPractice.properties", "phptravels.home.url");
+    private String phptravelsHomePageURL = PropertiesReader.getProperty("automationPractice.properties",
+	    "phptravels.home.url");
 
-    // Constructor
-    public PhpTravels_Home_Page(WebDriver driver) {
-	this.driver = driver;
-    }
-
-    // Elements
+    // Elements Locators
     private By gotit_cookie_button = By.xpath("//button[@aria-label='dismiss cookie message']");
     private By myaccount_link = By.linkText("MY ACCOUNT");
     private By signup_link = By.linkText("Sign Up");
@@ -51,21 +47,29 @@ public class PhpTravels_Home_Page {
     private By search_results(String searchresult) {
 	return By.xpath("//div[contains(text(),'" + searchresult + "')]");
     }
+
     private By boattype_results(String searchresult) {
 	return By.xpath("//li[contains(text(),'" + searchresult + "')]");
     }
+    
+    // Constructor
+    public PhpTravels_Home_Page(WebDriver driver) {
+	this.driver = driver;
+    }
 
-    // Methods
+    //////////////////////////////////////////////////////////////////
+    //////////////////////////// Actions ////////////////////////////
+
     public PhpTravels_Home_Page navigateToHomePage() {
 	BrowserActions.navigateToUrl(driver, phptravelsHomePageURL);
 	return this;
     }
-    
+
     public PhpTravels_Home_Page dismissCookieBar() {
 	ElementActions.click(driver, gotit_cookie_button);
 	return this;
     }
-    
+
     @Step("Navigate to Login page")
     public PhpTravels_Login_Page navigateToLoginPage() {
 	ExtentReport.info(MarkupHelper.createLabel("Navigate to Login page", ExtentColor.BLUE));

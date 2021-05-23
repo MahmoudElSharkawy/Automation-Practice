@@ -14,17 +14,19 @@ import utils.ExtentReport;
 public class PhpTravels_Login_Page {
     private WebDriver driver;
 
+    // Elements Locators
+    private By email_field = By.name("username");
+    private By password_field = By.name("password");
+    private By alert_text = By.xpath("//div[contains(@class, 'alert')]");
+
     // Constructor
     public PhpTravels_Login_Page(WebDriver driver) {
 	this.driver = driver;
     }
 
-    // Elements
-    private By email_field = By.name("username");
-    private By password_field = By.name("password");
-    private By alert_text = By.xpath("//div[contains(@class, 'alert')]");
+    //////////////////////////////////////////////////////////////////
+    //////////////////////////// Actions ////////////////////////////
 
-    // Methods
     @Step("User Login with Data --> Email: [{email}] and Password: [{password}]")
     public PhpTravels_UserAccount_Page userLogin(String email, String password) {
 	ExtentReport.info(MarkupHelper.createLabel("User Login", ExtentColor.BLUE));

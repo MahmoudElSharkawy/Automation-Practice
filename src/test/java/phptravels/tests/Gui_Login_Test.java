@@ -40,9 +40,10 @@ public class Gui_Login_Test {
 	spreadSheet = new ExcelFileManager(
 		new File("src/test/resources/TestData/LiveProject_PhpTravels_Login_TestData.xlsx"));
 	spreadSheet.switchToSheet("GUI");
-	
+
 	apiObject = new ApiActions(PhptravelsApis.BASE_URL);
-	phptravelsApis = new PhptravelsApis(apiObject);    }
+	phptravelsApis = new PhptravelsApis(apiObject);
+    }
 
     @BeforeMethod
     public void beforeMethod() {

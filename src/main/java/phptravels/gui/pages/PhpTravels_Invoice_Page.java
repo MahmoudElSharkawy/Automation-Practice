@@ -17,20 +17,23 @@ import utils.BrowserActions.ConfirmAlertType;
 public class PhpTravels_Invoice_Page {
     private WebDriver driver;
 
+    // Elements locators
+    private By payonarrival_button = By.xpath("//button[contains(.,'Pay on Arrival')]");
+    private By booking_status = By.xpath("//div[@class='content']//h4");
+
     // Constructor
     public PhpTravels_Invoice_Page(WebDriver driver) {
 	this.driver = driver;
     }
 
-    // Elements
-    private By payonarrival_button = By.xpath("//button[contains(.,'Pay on Arrival')]");
-    private By booking_status = By.xpath("//div[@class='content']//h4");
+    //////////////////////////////////////////////////////////////////
+    //////////////////////////// Actions ////////////////////////////
 
-    // Methods
     @Step("Click on PAY ON ARRIVAL button and accept pay at arrival alert")
     public PhpTravels_Invoice_Page clickOnPayOnArrivalAndAcceptAlert() {
-	ExtentReport.info(MarkupHelper.createLabel("Click on PAY ON ARRIVAL button and accept pay at arrival alert", ExtentColor.BLUE));
-	
+	ExtentReport.info(MarkupHelper.createLabel("Click on PAY ON ARRIVAL button and accept pay at arrival alert",
+		ExtentColor.BLUE));
+
 	ElementActions.click(driver, payonarrival_button);
 	BrowserActions.confirmAlert(driver, ConfirmAlertType.ACCEPT);
 	Helper.getExplicitWait(driver).until(

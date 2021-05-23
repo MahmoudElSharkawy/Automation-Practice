@@ -9,18 +9,20 @@ import utils.ElementActions;
 public class PhpTravels_HotelsDetails_Page {
     private WebDriver driver;
 
+    // Elements Locators
+    private By hotelName_title = By.id("detail-content-sticky-nav-00");
+
     // Constructor
     public PhpTravels_HotelsDetails_Page(WebDriver driver) {
 	this.driver = driver;
     }
 
-    // Elements
-    private By hotelName_title = By.id("detail-content-sticky-nav-00");
+    //////////////////////////////////////////////////////////////////
+    //////////////////////////// Actions ////////////////////////////
 
-    // Methods
     @Step("Get the text of the Hotel Name")
     public String getHotelNameText() {
 	return ElementActions.getText(driver, hotelName_title);
     }
-    
+
 }

@@ -33,13 +33,16 @@ public class RestfulBookerApis {
 	}
     }
 
-    // End Points
+    // Services Names
     private String auth_serviceName = "auth";
 
     // Constructor
     public RestfulBookerApis(ApiActions apiObject) {
 	this.apiObject = apiObject;
     }
+    
+    //////////////////////////////////////////////////////////////////
+    //////////////////////////// Actions ////////////////////////////
 
     @SuppressWarnings("unchecked")
     @Step("Get Access Token with Data --> Username: [{username}] and Password: [{password}]")

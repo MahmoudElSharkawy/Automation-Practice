@@ -33,7 +33,7 @@ public class PhptravelsApis {
 	}
     }
 
-    // End Points
+    // Services Names
     private String account_serviceName = "account/";
     private String login_serviceName = "account/login";
     private String signup_serviceName = "account/signup";

@@ -11,17 +11,19 @@ import utils.PropertiesReader;
 public class PhpTravels_BoatsDetails_Page {
     private WebDriver driver;
 
+    // Elements Locators
+    private By gotit_cookie_button = By.xpath("//button[@aria-label='dismiss cookie message']");
+    private By boatName_title = By.id("detail-content-sticky-nav-00");
+    private By bookNow_button = By.xpath("//div[@class='booking-selection-box']//button[contains(.,'Book Now')]");
+
     // Constructor
     public PhpTravels_BoatsDetails_Page(WebDriver driver) {
 	this.driver = driver;
     }
-
-    // Elements
-    private By gotit_cookie_button = By.xpath("//button[@aria-label='dismiss cookie message']");
-    private By boatName_title = By.id("detail-content-sticky-nav-00");
-    private By booknow_button = By.xpath("//div[@class='booking-selection-box']//button[contains(.,'Book Now')]");
-
-    // Methods
+    
+    //////////////////////////////////////////////////////////////////
+    //////////////////////////// Actions ////////////////////////////
+    
     public PhpTravels_BoatsDetails_Page navigateBoatPage(String boatUrl) {
 	BrowserActions.navigateToUrl(driver,
 		PropertiesReader.getProperty("automationPractice.properties", "phptravels.baseuri") + boatUrl);
@@ -40,7 +42,7 @@ public class PhpTravels_BoatsDetails_Page {
     
     @Step("Click on BOOK NOW button")
     public PhpTravels_BoatsBook_Page clickOnBookNow() {
-	ElementActions.click(driver, booknow_button);
+	ElementActions.click(driver, bookNow_button);
 	return new PhpTravels_BoatsBook_Page(driver);
     } 
 
