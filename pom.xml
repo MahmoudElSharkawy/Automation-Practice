@@ -11,7 +11,7 @@
 		<webdrivermanager.version>3.6.2</webdrivermanager.version>
 		<testng.version>7.4.0</testng.version>
 		<rest-assured.version>4.3.3</rest-assured.version>
-		<allure-testng.version>2.13.8</allure-testng.version>
+		<allure-testng.version>2.14.0</allure-testng.version>
 		<allure-maven.version>2.10.0</allure-maven.version>
 		<allure-maven-report.version>2.10.0</allure-maven-report.version>
 		<extentreports.version>5.0.6</extentreports.version>
