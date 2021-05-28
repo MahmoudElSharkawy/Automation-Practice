@@ -45,7 +45,7 @@ public class Gui_BoatsBooking_Test {
 	driver = BrowserFactory.getBrowser();
 
 	new PhpTravels_BoatsDetails_Page(driver).navigateBoatPage(
-		"/boats/sri-lanka/colombo/Speedboat-Bravo-410---2016-refit-2016-?date=01/01/2025&adults=2");
+		"boats/sri-lanka/colombo/Speedboat-Bravo-410---2016-refit-2016-?date=01/01/2025&adults=2");
     }
 
     @Test(description = "PHPTRAVELS - GUI - Validating the booking function of the Boats - PAY ON ARRIVAL payment method")
