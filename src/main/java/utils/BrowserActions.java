@@ -6,6 +6,7 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class BrowserActions {
@@ -35,7 +36,11 @@ public class BrowserActions {
     public static void closeAllOpenedBrowserWindows(WebDriver driver) {
 	Logger.logStep("[Browser Action] Close all Opened Browser Windows");
 	if (driver != null) {
-	    driver.quit();
+	    try {
+		driver.quit();
+	    } catch (WebDriverException rootCauseException) {
+		Logger.logMessage(rootCauseException.getMessage());
+	    }
 	}
     }
 
