@@ -40,7 +40,11 @@ public class BrowserActions {
 		driver.quit();
 	    } catch (WebDriverException rootCauseException) {
 		Logger.logMessage(rootCauseException.getMessage());
+	    } finally {
+		driver = null;
 	    }
+	} else {
+	    Logger.logMessage("Windows are already closed and the driver object is null.");
 	}
     }
 
