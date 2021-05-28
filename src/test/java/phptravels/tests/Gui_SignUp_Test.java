@@ -5,7 +5,6 @@ import java.util.Date;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -111,7 +110,7 @@ public class Gui_SignUp_Test {
     }
 
     @AfterMethod
-    public void afterMethod(ITestResult result) {
+    public void afterMethod() {
 	BrowserActions.closeAllOpenedBrowserWindows(driver);
     }
 }
