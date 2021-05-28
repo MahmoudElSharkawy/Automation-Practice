@@ -14,10 +14,14 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 public class ElementActions {
-    static WebDriver driver;
-    
+    private WebDriver driver;
+
     public enum SelectType {
 	TEXT, VALUE;
+    }
+
+    public ElementActions(WebDriver driver) {
+	this.driver = driver;
     }
 
 //    @Step("Click on element: [{elementLocator}]")
@@ -37,14 +41,16 @@ public class ElementActions {
 	try {
 	    // Log element text if not empty. Else, log clicking
 	    if (!driver.findElement(elementLocator).getText().isBlank()) {
-		Logger.logStep("[Element Action] Click on [" + driver.findElement(elementLocator).getText() + "] Button");
+		Logger.logStep(
+			"[Element Action] Click on [" + driver.findElement(elementLocator).getText() + "] Button");
 	    } else {
 		Logger.logStep("[Element Action] Click on element [" + elementLocator + "]");
 	    }
 	    // Now we click on the element! :D
 	    driver.findElement(elementLocator).click();
 	} catch (Exception exception) {
-	 // Click using JavascriptExecutor in case of the click is not performed successfully and got an exception using the Selenium click method
+	    // Click using JavascriptExecutor in case of the click is not performed
+	    // successfully and got an exception using the Selenium click method
 	    try {
 		((JavascriptExecutor) driver).executeScript("arguments[arguments.length - 1].click();",
 			driver.findElement(elementLocator));
@@ -56,6 +62,11 @@ public class ElementActions {
 		fail("Couldn't click on the element:" + elementLocator, rootCauseException);
 	    }
 	}
+    }
+
+    public ElementActions click(By elementLocator) {
+	click(driver, elementLocator);
+	return this;
     }
 
     public static void type(WebDriver driver, By elementLocator, String text) {
@@ -72,7 +83,8 @@ public class ElementActions {
 		driver.findElement(elementLocator).clear();
 		// We type here! :D
 		driver.findElement(elementLocator).sendKeys(text);
-		// Type using JavascriptExecutor in case of the data is not typed successfully using the Selenium sendKeys method
+		// Type using JavascriptExecutor in case of the data is not typed successfully
+		// using the Selenium sendKeys method
 		if (!driver.findElement(elementLocator).getAttribute("value").equals(text)) {
 		    ((JavascriptExecutor) driver).executeScript("arguments[0].setAttribute('value', '" + text + "')",
 			    driver.findElement(elementLocator));
@@ -81,7 +93,8 @@ public class ElementActions {
 		Logger.logStep("[Element Action] Type [" + text + "] on element [" + elementLocator + "]");
 		// We type here! :D
 		driver.findElement(elementLocator).sendKeys(text);
-		// Type using JavascriptExecutor in case of the data is not typed successfully using the Selenium sendKeys method
+		// Type using JavascriptExecutor in case of the data is not typed successfully
+		// using the Selenium sendKeys method
 		if (!driver.findElement(elementLocator).getAttribute("value").contains(text)) {
 		    String currentValue = driver.findElement(elementLocator).getAttribute("value");
 		    ((JavascriptExecutor) driver).executeScript(
@@ -96,9 +109,20 @@ public class ElementActions {
 	// Make sure that the data is inserted correctly to the field
 	Assert.assertTrue(driver.findElement(elementLocator).getAttribute("value").contains(text),
 		"The data is not inserted successfully to the field, the inserted data should be: [" + text
-			+ "]; But the current field value is: [" + driver.findElement(elementLocator).getAttribute("value") + "]");
+			+ "]; But the current field value is: ["
+			+ driver.findElement(elementLocator).getAttribute("value") + "]");
     }
-    
+
+    public ElementActions type(By elementLocator, String text) {
+	type(driver, elementLocator, text, true);
+	return this;
+    }
+
+    public ElementActions type(By elementLocator, String text, boolean clearBeforeTyping) {
+	type(driver, elementLocator, text, clearBeforeTyping);
+	return this;
+    }
+
     public static void select(WebDriver driver, By elementLocator, SelectType selectType, String option) {
 	locatingElementStrategy(driver, elementLocator);
 	try {
@@ -120,6 +144,11 @@ public class ElementActions {
 	}
     }
 
+    public ElementActions select(By elementLocator, SelectType selectType, String option) {
+	select(driver, elementLocator, selectType, option);
+	return this;
+    }
+
     public static void mouseHover(WebDriver driver, By elementLocator) {
 	locatingElementStrategy(driver, elementLocator);
 	try {
@@ -131,6 +160,11 @@ public class ElementActions {
 	}
     }
 
+    public ElementActions mouseHover(By elementLocator) {
+	mouseHover(driver, elementLocator);
+	return this;
+    }
+
     public static void doubleClick(WebDriver driver, By elementLocator) {
 	locatingElementStrategy(driver, elementLocator);
 	try {
@@ -140,31 +174,48 @@ public class ElementActions {
 	    Logger.logStep(e.getMessage());
 	    fail(e.getMessage());
 	}
-    }  
+    }
+
+    public ElementActions doubleClick(By elementLocator) {
+	doubleClick(driver, elementLocator);
+	return this;
+    }
 
 //  @Step("Click a Keyboard Key on element: [{elementLocator}]")
-  public static void clickKeyboardKey(WebDriver driver, By elementLocator, Keys key) {
+    public static void clickKeyboardKey(WebDriver driver, By elementLocator, Keys key) {
 	locatingElementStrategy(driver, elementLocator);
 	try {
-	    Logger.logStep("[Element Action] Click a Keyboard key [" + key.name() + "] on element [" + elementLocator + "]");
+	    Logger.logStep(
+		    "[Element Action] Click a Keyboard key [" + key.name() + "] on element [" + elementLocator + "]");
 	    // We click ENTER here! :D
 	    driver.findElement(elementLocator).sendKeys(key);
 	} catch (Exception e) {
 	    Logger.logStep(e.getMessage());
 	}
-  }
+    }
+
+    public ElementActions clickKeyboardKey(By elementLocator, Keys key) {
+	clickKeyboardKey(driver, elementLocator, key);
+	return this;
+    }
 
 //    @Step("Get the Text of element: [{elementLocator}]")
     public static String getText(WebDriver driver, By elementLocator) {
 	locatingElementStrategy(driver, elementLocator);
 	try {
 	    String text = driver.findElement(elementLocator).getText();
-	    Logger.logStep("[Element Action] Get the Text of element [" + elementLocator + "]; The Text is [" + text + "]");
+	    Logger.logStep(
+		    "[Element Action] Get the Text of element [" + elementLocator + "]; The Text is [" + text + "]");
 	    return text;
 	} catch (Exception e) {
 	    Logger.logStep(e.getMessage());
 	}
 	return null;
+    }
+
+    public ElementActions getText(By elementLocator) {
+	getText(driver, elementLocator);
+	return this;
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -175,7 +226,8 @@ public class ElementActions {
 	    // Wait for the element to be visible
 	    Helper.getExplicitWait(driver).until(ExpectedConditions.visibilityOfElementLocated(elementLocator));
 	    // Scroll the element into view to handle some browsers cases
-	    ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", driver.findElement(elementLocator));
+	    ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);",
+		    driver.findElement(elementLocator));
 	    // Check if the element is displayed
 	    driver.findElement(elementLocator).isDisplayed();
 	} catch (TimeoutException toe) {
