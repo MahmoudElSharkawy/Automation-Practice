@@ -1,7 +1,6 @@
 package phptravels.tests;
 
 import java.io.File;
-import java.util.Date;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -30,7 +29,6 @@ public class Gui_SignUp_Test {
     private ExcelFileManager spreadSheet;
 
     private String firstName, lastName, mobileNumber, email, password;
-//    private String currentTime = new Date().getTime() + "";
     private String currentTime = Helper.getCurrentTime("ddMMyyyyHHmmss");
 
     @BeforeClass
