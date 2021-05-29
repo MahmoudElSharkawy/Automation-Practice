@@ -25,7 +25,7 @@ public class PhpTravels_UserAccount_Page {
 
     public PhpTravels_UserAccount_Page navigateAccountPage() {
 	BrowserActions.navigateToUrl(driver,
-		PropertiesReader.getProperty("automationPractice.properties", "phptravels.baseuri") + "/account");
+		PropertiesReader.getProperty("automationPractice.properties", "phptravels.baseuri") + "account");
 	return this;
     }
 
