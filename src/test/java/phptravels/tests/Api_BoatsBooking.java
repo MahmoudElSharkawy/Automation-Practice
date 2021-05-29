@@ -23,61 +23,48 @@ import utils.ExcelFileManager;
 
 @Epic("PHPTRAVELS")
 @Feature("API")
-public class Api_Login_Test {
+public class Api_BoatsBooking {
     private ApiActions apiObject;
     private PhptravelsApis phptravelsApis;
     private ExcelFileManager spreadSheet;
-
+    
     private String firstName, lastName, mobileNumber, email, password;
     private String currentTime = new Date().getTime() + "";
+
 
     @BeforeClass
     public void beforeClass() {
 	spreadSheet = new ExcelFileManager(
-		new File("src/test/resources/TestData/LiveProject_PhpTravels_Login_TestData.xlsx"));
+		new File("src/test/resources/TestData/LiveProject_PhpTravels_BoatsBooking_TestData.xlsx"));
 	spreadSheet.switchToSheet("API");
 	
 	apiObject = new ApiActions(PhptravelsApis.BASE_URL);
 	phptravelsApis = new PhptravelsApis(apiObject);
     }
 
-    @Test(description = "PHPTRAVELS - API - Valid User Login")
-    @Description("When I login with an already signed up user, Then I should login successfully")
-    @Story("Login")
+    @Test(description = "PHPTRAVELS - API - Validating the booking function of the Boats without applying any payment method")
+    @Description("When I book a boat without confirming any payment methods, Then the boat booking should has Unpaid status on my accpunt profile")
+    @Story("Booking")
     @Severity(SeverityLevel.CRITICAL)
     @TmsLink("Test_case")
     @Issue("Software_bug")
-    public void testingValidUserLogin() {
+    public void testingBoatsBooking_noPaymentMethod() {
 	firstName = spreadSheet.getCellData("FirstName", 2);
 	lastName = spreadSheet.getCellData("LastName", 2);
 	mobileNumber = spreadSheet.getCellData("Mobile Number", 2);
 	email = spreadSheet.getCellData("Email", 2) + currentTime + "@test.com";
 	password = spreadSheet.getCellData("Password", 2);
-	phptravelsApis.userSignUp(firstName, lastName, mobileNumber, email, password);
+	Response signUp = phptravelsApis.userSignUp(firstName, lastName, mobileNumber, email, password);
 
-	Response login = phptravelsApis.userLogin(email, password);
-	Map<String, String> cookies = login.getCookies();
+	Map<String, String> cookies = signUp.getCookies();
+	phptravelsApis.processBookingLogged(cookies, "", spreadSheet.getCellData("Item ID", 2),
+		spreadSheet.getCellData("Adults Count", 2), spreadSheet.getCellData("CheckIn Date", 2), "boats", "",
+		"");
 	Response account = phptravelsApis.getUserAccount(cookies);
-	Assert.assertTrue(account.getBody().asString().contains("Hi, " + firstName + " " + lastName),
-		"No/Wrong Hi Message!; The Account response doesn't contain the expected message: " + "[Hi, "
-			+ firstName + " " + lastName + "]");
+	Assert.assertTrue(account.getBody().asString().contains(spreadSheet.getCellData("Expected Profile Status", 2)),
+		"No/Wrong Booking Status!; The Account response doesn't contain the expected booking status: " + "["
+			+ spreadSheet.getCellData("Expected Profile Status", 2) + "]");
 
     }
 
-    @Test(description = "PHPTRAVELS - API - Invalid User Login")
-    @Description("When I enter a not signed up user , Then I should get an error message ")
-    @Story("Login")
-    @Severity(SeverityLevel.CRITICAL)
-    @TmsLink("Test_case")
-    @Issue("Software_bug")
-    public void testingInvalidUserLogin() {
-	email = spreadSheet.getCellData("Email", 3) + "@test.com";
-	password = spreadSheet.getCellData("Password", 3);
-
-	Response login = phptravelsApis.userLogin(email, password);
-	Assert.assertTrue(login.getBody().asString().contains(spreadSheet.getCellData("Expected Alert Message", 3)),
-		"No/Wrong Error Message!; The message should be: ["
-			+ spreadSheet.getCellData("Expected Alert Message", 3) + "]");
-
-    }
 }

@@ -12,14 +12,6 @@
     </classes>
   </test> <!-- PHPTRAVELS - GUI -->
   
-  <test name="PHPTRAVELS - API">
-    <classes>
-      <class name="phptravels.tests.Api_SignUp_Test"/>
-      <class name="phptravels.tests.Api_Login_Test"/>
-	  <class name="phptravels.tests.Api_BoatsBooking_Test"/>
-    </classes>
-  </test> <!-- PHPTRAVELS - API -->
-  
     <test name="RestfulBooker - API">
     <classes>
       <class name="restfulbooker.tests.restfulbooker_Test"/>

@@ -34,6 +34,12 @@ public class Logger {
     @Attachment(value = "Full Page Screenshot", type = "image/png")
     public static byte[] attachScreenshotToAllureReport(WebDriver driver) {
 	return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+//	try {
+//	    File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+//	    return Files.toByteArray(screenshot);
+//	} catch (IOException e) {
+//	    return null;
+//	}
     }
 
     public static Media attachScreenshotToExtentReport(WebDriver driver) {

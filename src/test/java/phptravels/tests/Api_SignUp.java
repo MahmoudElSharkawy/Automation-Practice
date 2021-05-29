@@ -23,7 +23,7 @@ import utils.ExcelFileManager;
 
 @Epic("PHPTRAVELS")
 @Feature("API")
-public class Api_SignUp_Test {
+public class Api_SignUp {
     private ApiActions apiObject;
     private PhptravelsApis phptravelsApis;
     private ExcelFileManager spreadSheet;
