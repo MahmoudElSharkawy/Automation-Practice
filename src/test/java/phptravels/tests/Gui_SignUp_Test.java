@@ -21,6 +21,7 @@ import phptravels.gui.pages.PhpTravels_Home_Page;
 import utils.BrowserActions;
 import utils.BrowserFactory;
 import utils.ExcelFileManager;
+import utils.Helper;
 
 @Epic("PHPTRAVELS")
 @Feature("GUI")
@@ -29,7 +30,8 @@ public class Gui_SignUp_Test {
     private ExcelFileManager spreadSheet;
 
     private String firstName, lastName, mobileNumber, email, password;
-    private String currentTime = new Date().getTime() + "";
+//    private String currentTime = new Date().getTime() + "";
+    private String currentTime = Helper.getCurrentTime("ddMMyyyyHHmmss");
 
     @BeforeClass
     public void setUp() {
@@ -97,7 +99,7 @@ public class Gui_SignUp_Test {
 	firstName = spreadSheet.getCellData("FirstName", 4);
 	lastName = spreadSheet.getCellData("LastName", 4);
 	mobileNumber = spreadSheet.getCellData("Mobile Number", 4);
-	email = spreadSheet.getCellData("Email", 4) + currentTime;
+	email = spreadSheet.getCellData("Email", 4);
 	password = spreadSheet.getCellData("Password", 4);
 
 	String alertMessage = new PhpTravels_Home_Page(driver)

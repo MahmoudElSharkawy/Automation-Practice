@@ -23,6 +23,7 @@ import utils.ApiActions;
 import utils.BrowserActions;
 import utils.BrowserFactory;
 import utils.ExcelFileManager;
+import utils.Helper;
 
 @Epic("PHPTRAVELS")
 @Feature("GUI")
@@ -33,7 +34,8 @@ public class Gui_Login_Test {
     private ExcelFileManager spreadSheet;
     
     private String firstName, lastName, mobileNumber, email, password;
-    private String currentTime = new Date().getTime() + "";
+//    private String currentTime = new Date().getTime() + "";
+    private String currentTime = Helper.getCurrentTime("ddMMyyyyHHmmss");
 
     @BeforeClass
     public void setUp() {
