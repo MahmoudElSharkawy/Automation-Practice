@@ -128,15 +128,6 @@
 							</property>
 						</properties>
 					</configuration>
-
-					<dependencies>
-						<dependency>
-							<groupId>org.aspectj</groupId>
-							<artifactId>aspectjweaver</artifactId>
-							<version>${aspectj.version}</version>
-						</dependency>
-					</dependencies>
-
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -144,19 +135,19 @@
 
 	<profiles>
 		<profile>
-			<id>liveproject</id>
+			<id>automationPractice</id>
 			<properties>
-				<testNGSuite>src\test\resources\TestSuits\liveproject.xml</testNGSuite>
+				<testNGSuite>src\test\resources\TestSuits\automationPractice.xml</testNGSuite>
 			</properties>
 		</profile>
 		<profile>
-			<id>testng-groups</id>
+			<id>testngGroups</id>
 			<properties>
 				<testNGSuite>src\test\resources\TestSuits\testgroups.xml</testNGSuite>
 			</properties>
 		</profile>
 		<profile>
-			<id>xbrowser</id>
+			<id>xBrowser</id>
 			<properties>
 				<testNGSuite>src\test\resources\TestSuits\Xbrowser.xml</testNGSuite>
 			</properties>
