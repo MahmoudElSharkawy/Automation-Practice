@@ -28,10 +28,17 @@ jobs:
     - name: Run tests - Chrome Headless
       continue-on-error: true
       run: mvn -Dtest=phptravels.tests.*_Test,restfulbooker.tests.*_Test test
-    - name: ExtentReports HTML Test Report
+    - name: Generate Allure report
+      run: mvn allure:report
+    - name: Upload Allure Report
       uses: actions/upload-artifact@v2
       with:
-        name: ExtentReports HTML Test Report
+        name: Allure Report
+        path: "target/site/allure-maven-plugin"
+    - name: Upload Extent Report
+      uses: actions/upload-artifact@v2
+      with:
+        name: Extent Report
         path: "ExtentReports.html"
 #    - name: Get Allure history
 #      uses: actions/checkout@v2
