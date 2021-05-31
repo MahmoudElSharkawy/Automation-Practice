@@ -10,14 +10,24 @@ This is where I practice Test Automation!
 * Apachi POI
 
 
-### Design implementation:
+### Project Design:
 * Page Object Model (POM) design pattern
 * Data Driven framework
 * Fluent design approach (method chaining)
 * Have a supporting Utilities package in *src/main/java* file path, named ***"Utils"*** that includes many wrapper methods in static classes which services as a core engine for the project 
 * Implementing the ***Test Automation Pyramid*** by have 2 different test automation levels which are SERVICE and GUI layers
 
-### How to run the project main test cases:
+
+### How to check the execution logs and open the latest execution reports from GitHub Actions:
+* You need to be logged-in to the GitHub as a prerequisite
+* Open the GitHub Actions tab
+* Open the latest workflow run from the list
+* To check the execution logs, click on "Test on Ubuntu" job and open the "Run Tests - Chrome Headless" step and then you can see and check the execution logs
+* To open the Allure report, in the *Artifacts* section, Click on the "Allure Report" and then unzip the archive file and then open the "index.html" file (If you are on Windows and the report opened with empty data, you need to open the "allow-file-access_open-report_chrome_windows.bat" file to be able to see the report data)
+* To open the Extent report, in the *Artifacts* section, Click on the "Extent Report" and then unzip the archive file and then open the "ExtentReports.html" file
+
+
+### How to run the project main test cases locally:
 * A properties file ***"automationPractice.properties"*** can be found it *src/main/resources* file path including all the configurations needed in the execution
 * Can find the test cases in the *src/test/java* folder mainly in the *phptravels.tests* and *restfulbooker.tests* packages
 * Can find the test suite for all the main practice test cases in the *src/test/resources/TestSuits* folder in the *automationPractice.xml* file
