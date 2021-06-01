@@ -27,7 +27,7 @@ jobs:
       run: docker ps
     - name: Run tests - Chrome Headless
       continue-on-error: true
-      run: mvn -Dtest=phptravels.tests.*_Test,restfulbooker.tests.*_Test test
+      run: mvn test -Dtest=phptravels.tests.*_Test,restfulbooker.tests.*_Test
     - name: Generate Allure report
       run: mvn allure:report
     - name: Copy patch file to allure-maven-plugin folder

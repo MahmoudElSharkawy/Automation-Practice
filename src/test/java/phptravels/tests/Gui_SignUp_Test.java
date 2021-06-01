@@ -29,7 +29,7 @@ public class Gui_SignUp_Test {
     private ExcelFileManager spreadSheet;
 
     private String firstName, lastName, mobileNumber, email, password;
-    private String currentTime = Helper.getCurrentTime("ddMMyyyyHHmmss");
+    private String currentTime = Helper.getCurrentTime("ddMMyyyyHHmmssSSS");
 
     @BeforeClass
     public void setUp() {
