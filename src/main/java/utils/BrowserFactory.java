@@ -19,7 +19,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Step;
 
 public class BrowserFactory {
-    private static WebDriver driver;
+//    private static WebDriver driver;
+    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     private static String propertiesFileName = "automationPractice.properties";
     private static String browserTypeProperty = PropertiesReader.getProperty(propertiesFileName, "browser.type");
     private static String executionTypeProperty = PropertiesReader.getProperty(propertiesFileName, "execution.type");
@@ -59,7 +60,7 @@ public class BrowserFactory {
     }
 
     @Step("Initializing a new Web GUI Browser!.....")
-    public static WebDriver getBrowser(BrowserType browserType, ExecutionType executionType) {
+    public static synchronized WebDriver getBrowser(BrowserType browserType, ExecutionType executionType) {
 	Logger.logStep("Initialize [" + browserType.getValue() + "] Browser and the Execution Type is ["
 		+ executionType.getValue() + "]");
     	ITestResult result = Reporter.getCurrentTestResult();
@@ -68,7 +69,7 @@ public class BrowserFactory {
 	if (executionType == ExecutionType.REMOTE || (executionType == ExecutionType.FROM_PROPERTIES
 		&& executionTypeProperty.equalsIgnoreCase("remote"))) {
 	    /*
-	     * Steps to execute remotely with selenium grid and dockers VERY simpl steps:... 
+	     * Steps to execute remotely with selenium grid and dockers VERY simple steps:... 
 	     * 1- Install docker 
 	     * 2- You need to have a .yml file to configure the network between the containers like that we have in the src/main/resource file "docker-compose_native.yml" 
 	     * 3- open a terminal on the .yml file directory 
@@ -81,10 +82,10 @@ public class BrowserFactory {
 	    if (browserType == BrowserType.GOOGLE_CHROME
 		    || (browserType == BrowserType.FROM_PROPERTIES && browserTypeProperty.equalsIgnoreCase("google chrome"))) {
 		try {
-		    driver = new RemoteWebDriver(new URL("http://" + host + ":" + port + "/wd/hub"),
-			    getChromeOptions());
-		    context.setAttribute("driver", driver);
-		    Helper.implicitWait(driver);
+		    driver.set(new RemoteWebDriver(new URL("http://" + host + ":" + port + "/wd/hub"),
+			    getChromeOptions()));
+		    context.setAttribute("driver", driver.get());
+		    Helper.implicitWait(driver.get());
 		} catch (MalformedURLException e) {
 		    e.printStackTrace();
 		}
@@ -92,10 +93,10 @@ public class BrowserFactory {
 	    } else if (browserType == BrowserType.MOZILLA_FIREFOX || (browserType == BrowserType.FROM_PROPERTIES
 		    && browserTypeProperty.equalsIgnoreCase("mozilla firefox"))) {
 		try {
-		    driver = new RemoteWebDriver(new URL("http://" + host + ":" + port + "/wd/hub"),
-			    getFirefoxOptions());
-		    context.setAttribute("driver", driver);
-		    Helper.implicitWait(driver);
+		    driver.set(new RemoteWebDriver(new URL("http://" + host + ":" + port + "/wd/hub"),
+			    getFirefoxOptions()));
+		    context.setAttribute("driver", driver.get());
+		    Helper.implicitWait(driver.get());
 		} catch (MalformedURLException e) {
 		    e.printStackTrace();
 		}
@@ -113,17 +114,17 @@ public class BrowserFactory {
 	    if (browserType == BrowserType.GOOGLE_CHROME
 		    || (browserType == BrowserType.FROM_PROPERTIES && browserTypeProperty.equalsIgnoreCase("google chrome"))) {
 		WebDriverManager.chromedriver().setup();
-		driver = new ChromeDriver();
-		context.setAttribute("driver", driver);
-		Helper.implicitWait(driver);
-		BrowserActions.maximizeWindow(driver);
+		driver.set(new ChromeDriver());
+		context.setAttribute("driver", driver.get());
+		Helper.implicitWait(driver.get());
+		BrowserActions.maximizeWindow(driver.get());
 	    } else if (browserType == BrowserType.MOZILLA_FIREFOX || (browserType == BrowserType.FROM_PROPERTIES
 		    && browserTypeProperty.equalsIgnoreCase("mozilla firefox"))) {
 		WebDriverManager.firefoxdriver().setup();
-		driver = new FirefoxDriver();
-		context.setAttribute("driver", driver);
-		Helper.implicitWait(driver);
-		BrowserActions.maximizeWindow(driver);
+		driver.set(new FirefoxDriver());
+		context.setAttribute("driver", driver.get());
+		Helper.implicitWait(driver.get());
+		BrowserActions.maximizeWindow(driver.get());
 	    } else {
 		String warningMsg = "The driver is null! because the browser type [" + browserTypeProperty
 			+ "] is not valid/supported; Please choose a valid browser type from the given choices in the properties file";
@@ -138,16 +139,16 @@ public class BrowserFactory {
 	    if (browserType == BrowserType.GOOGLE_CHROME
 		    || (browserType == BrowserType.FROM_PROPERTIES && browserTypeProperty.equalsIgnoreCase("google chrome"))) {
 		WebDriverManager.chromedriver().setup();
-		driver = new ChromeDriver(getChromeOptions());
-		context.setAttribute("driver", driver);
-		Helper.implicitWait(driver);
+		driver.set(new ChromeDriver(getChromeOptions()));
+		context.setAttribute("driver", driver.get());
+		Helper.implicitWait(driver.get());
 //		BrowserActions.maximizeWindow(driver);
 	    } else if (browserType == BrowserType.MOZILLA_FIREFOX || (browserType == BrowserType.FROM_PROPERTIES
 		    && browserTypeProperty.equalsIgnoreCase("mozilla firefox"))) {
 		WebDriverManager.firefoxdriver().setup();
-		driver = new FirefoxDriver(getFirefoxOptions());
-		context.setAttribute("driver", driver);
-		Helper.implicitWait(driver);
+		driver.set(new FirefoxDriver(getFirefoxOptions()));
+		context.setAttribute("driver", driver.get());
+		Helper.implicitWait(driver.get());
 //		BrowserActions.maximizeWindow(driver);
 	    } else {
 		String warningMsg = "The driver is null! because the browser type [" + browserTypeProperty
@@ -163,7 +164,7 @@ public class BrowserFactory {
 	    fail(warningMsg);
 //	    throw new NullPointerException(warningMsg);
 	}
-	return driver;
+	return driver.get();
     }
 
     ////////////////////////////////////////////////////////////////////////
