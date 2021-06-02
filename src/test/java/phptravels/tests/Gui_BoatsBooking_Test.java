@@ -38,7 +38,7 @@ public class Gui_BoatsBooking_Test {
     @BeforeClass
     public void setUp() {
 	spreadSheet = new ExcelFileManager(
-		new File("src/test/resources/TestData/LiveProject_PhpTravels_BoatsBooking_TestData.xlsx"));
+		new File("src/test/resources/TestData/PhpTravels_BoatsBooking_TestData.xlsx"));
 	spreadSheet.switchToSheet("GUI");
 	apiObject = new ApiActions(PhptravelsApis.BASE_URL);
 	phptravelsApis = new PhptravelsApis(apiObject);

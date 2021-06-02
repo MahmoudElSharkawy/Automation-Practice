@@ -130,13 +130,9 @@ public class ElementActions {
 	    Logger.logStep("[Element Action] Select [" + option + "] on element [" + elementLocator + "]");
 	    assertFalse(s.isMultiple());
 	    switch (selectType) {
-	    case TEXT:
-		s.selectByVisibleText(option);
-		break;
-	    case VALUE:
-		Helper.getExplicitWait(driver).until(ExpectedConditions.alertIsPresent());
-		s.selectByValue(option);
-		break;
+	    case TEXT -> s.selectByVisibleText(option);
+	    case VALUE -> s.selectByValue(option);
+	    default -> Logger.logMessage("Unexpected value: " + selectType);
 	    }
 	} catch (Exception e) {
 	    Logger.logStep(e.getMessage());

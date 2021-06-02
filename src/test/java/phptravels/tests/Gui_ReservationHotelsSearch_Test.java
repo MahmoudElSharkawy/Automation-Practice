@@ -29,7 +29,7 @@ public class Gui_ReservationHotelsSearch_Test {
     @BeforeClass
     public void setUp() {
 	spreadSheet = new ExcelFileManager(
-		new File("src/test/resources/TestData/LiveProject_PhpTravels_ReservationHotelsSearch_TestData.xlsx"));
+		new File("src/test/resources/TestData/PhpTravels_ReservationHotelsSearch_TestData.xlsx"));
 	spreadSheet.switchToSheet("GUI");
 	driver = BrowserFactory.getBrowser();
 	new PhpTravels_Home_Page(driver).navigateToHomePage();

@@ -38,19 +38,10 @@ public class ExcelFileManager {
     }
 
     private String getCellDataAsString(Cell cell) {
-//	return switch (cell.getCellType()) {
-//	case STRING -> cell.getStringCellValue();
-//	case NUMERIC -> String.valueOf((int) cell.getNumericCellValue());
-//	default -> "";
-//	};
-	switch (cell.getCellType()) {
-	case STRING:
-	    return cell.getStringCellValue();
-	case NUMERIC:
-	    return String.valueOf((int) cell.getNumericCellValue());
-	default:
-	    return null;
-	}
-
+	return switch (cell.getCellType()) {
+	case STRING -> cell.getStringCellValue();
+	case NUMERIC -> String.valueOf((int) cell.getNumericCellValue());
+	default -> "";
+	};
     }
 }

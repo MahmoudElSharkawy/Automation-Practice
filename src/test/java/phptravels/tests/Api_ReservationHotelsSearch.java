@@ -29,7 +29,7 @@ public class Api_ReservationHotelsSearch {
     @BeforeClass
     public void beforeClass() {
 	spreadSheet = new ExcelFileManager(
-		new File("src/test/resources/TestData/LiveProject_PhpTravels_ReservationHotelsSearch_TestData.xlsx"));
+		new File("src/test/resources/TestData/PhpTravels_ReservationHotelsSearch_TestData.xlsx"));
 	spreadSheet.switchToSheet("API");
 	
 	apiObject = new ApiActions(PhptravelsApis.BASE_URL);

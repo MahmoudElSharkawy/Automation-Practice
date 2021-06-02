@@ -33,7 +33,7 @@ public class Api_Login_Test {
     @BeforeClass
     public void beforeClass() {
 	spreadSheet = new ExcelFileManager(
-		new File("src/test/resources/TestData/LiveProject_PhpTravels_Login_TestData.xlsx"));
+		new File("src/test/resources/TestData/PhpTravels_Login_TestData.xlsx"));
 	spreadSheet.switchToSheet("API");
 	
 	apiObject = new ApiActions(PhptravelsApis.BASE_URL);
