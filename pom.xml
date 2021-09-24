@@ -14,7 +14,7 @@
 		<allure-testng.version>2.13.9</allure-testng.version>
 		<allure-maven.version>2.10.0</allure-maven.version>
 		<allure-maven-report.version>2.10.0</allure-maven-report.version>
-		<extentreports.version>5.0.8</extentreports.version>
+		<extentreports.version>5.0.9</extentreports.version>
 		<poi-ooxml.version>5.0.0</poi-ooxml.version>
 		<commons-io.version>2.9.0</commons-io.version>
 		<aspectj.version>1.9.6</aspectj.version>
