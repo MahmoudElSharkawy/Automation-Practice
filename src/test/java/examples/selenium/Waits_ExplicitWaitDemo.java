@@ -1,5 +1,7 @@
 package examples.selenium;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -29,7 +31,7 @@ public class Waits_ExplicitWaitDemo {
 	driver.findElement(By.linkText("Example 1: Element on page that is hidden")).click();
 	driver.findElement(By.cssSelector("#start button")).click();
 
-	WebDriverWait wait = new WebDriverWait(driver, 5);
+	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
 	wait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.id("loading"))));
 

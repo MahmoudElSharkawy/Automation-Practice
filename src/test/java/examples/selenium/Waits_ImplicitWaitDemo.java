@@ -2,7 +2,7 @@ package examples.selenium;
 
 import static org.testng.Assert.assertTrue;
 
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -24,7 +24,7 @@ public class Waits_ImplicitWaitDemo {
 	driver.manage().window().maximize();
 
 	driver.get("http://cookbook.seleniumacademy.com/AjaxDemo.html");
-	driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
     }
 
     @Test

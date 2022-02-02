@@ -2,23 +2,21 @@ package pom.fluent;
 
 import static org.testng.Assert.assertEquals;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import utils.SeleniumEventReporter;
 
 public class GoogleSearchTest {
-    EventFiringWebDriver driver;
+    WebDriver driver;
 
     @BeforeClass
     public void setup() {
 	WebDriverManager.chromedriver().setup();
-	driver = new EventFiringWebDriver(new ChromeDriver());
-	driver.register(new SeleniumEventReporter());
+	driver = new ChromeDriver();
 	driver.manage().window().maximize();
 	new GoogleHomePage(driver).openURL();
 

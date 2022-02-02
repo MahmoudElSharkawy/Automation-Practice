@@ -13,6 +13,7 @@ import utils.BrowserFactory;
 import static io.restassured.RestAssured.given;
 import static org.testng.Assert.assertEquals;
 
+import java.time.Duration;
 import java.util.Date;
 
 public class SeamsDemo {
@@ -55,7 +56,7 @@ public class SeamsDemo {
 	driver.findElement(By.name("password")).sendKeys(password);
 	driver.findElement(By.xpath("//button[contains(text() ,'Login')]")).click();
 
-	WebDriverWait wait = new WebDriverWait(driver, 20);
+	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 	wait.until(ExpectedConditions.titleContains("My Account"));
 	System.out.println(driver.getTitle());
 

@@ -2,8 +2,8 @@ package demos.testautomation.foundation;
 
 import static org.testng.Assert.assertEquals;
 
+import java.time.Duration;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -32,7 +32,7 @@ public class GUIDemo {
 	email = "test" + date.getTime() + "@test.com";
 	System.out.println(email);
 	driver = BrowserFactory.getBrowser();
-	driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 	driver.get("https://www.phptravels.net/");
     }
 
@@ -49,7 +49,7 @@ public class GUIDemo {
 	driver.findElement(By.name("confirmpassword")).sendKeys(password);
 	driver.findElement(By.xpath("//button[@type='submit' and contains (class, signupbtn) and contains(text() ,'Sign Up')]")).click();
 
-	WebDriverWait wait = new WebDriverWait(driver, 20);
+	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 	wait.until(ExpectedConditions.titleContains("My Account"));
 	System.out.println(driver.getTitle());
 
@@ -68,7 +68,7 @@ public class GUIDemo {
 	driver.findElement(
 		By.xpath("//button[contains(text() ,'Login')]")).click();
 
-	WebDriverWait wait = new WebDriverWait(driver, 20);
+	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 	wait.until(ExpectedConditions.titleContains("My Account"));
 	System.out.println(driver.getTitle());
 
