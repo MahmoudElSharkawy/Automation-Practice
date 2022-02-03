@@ -1,4 +1,4 @@
-package utils;
+package utilities;
 
 import static org.testng.Assert.fail;
 

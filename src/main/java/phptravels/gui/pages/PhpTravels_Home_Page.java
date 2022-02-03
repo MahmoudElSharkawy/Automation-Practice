@@ -7,10 +7,10 @@ import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 
 import io.qameta.allure.Step;
-import utils.BrowserActions;
-import utils.ElementActions;
-import utils.ExtentReport;
-import utils.PropertiesReader;
+import utilities.BrowserActions;
+import utilities.ElementActions;
+import utilities.ExtentReport;
+import utilities.PropertiesReader;
 
 public class PhpTravels_Home_Page {
     private WebDriver driver;

@@ -12,9 +12,9 @@ import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import restfulbooker.apis.RestfulBookerApis.Status;
-import utils.ApiActions;
-import utils.ApiActions.RequestType;
-import utils.ExtentReport;
+import utilities.ApiActions;
+import utilities.ExtentReport;
+import utilities.ApiActions.RequestType;
 
 public class RestfulBookerApisBooking {
     private ApiActions apiObject;

@@ -8,8 +8,8 @@ import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 
 import io.qameta.allure.Step;
-import utils.ElementActions;
-import utils.ExtentReport;
+import utilities.ElementActions;
+import utilities.ExtentReport;
 
 public class PhpTravels_SignUp_Page {
     private WebDriver driver;

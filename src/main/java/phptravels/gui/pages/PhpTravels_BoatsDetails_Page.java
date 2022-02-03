@@ -4,9 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import io.qameta.allure.Step;
-import utils.BrowserActions;
-import utils.ElementActions;
-import utils.PropertiesReader;
+import utilities.BrowserActions;
+import utilities.ElementActions;
+import utilities.PropertiesReader;
 
 public class PhpTravels_BoatsDetails_Page {
     private WebDriver driver;

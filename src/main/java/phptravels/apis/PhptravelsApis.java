@@ -8,10 +8,10 @@ import com.aventstack.extentreports.markuputils.MarkupHelper;
 
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
-import utils.ApiActions;
-import utils.ExtentReport;
-import utils.PropertiesReader;
-import utils.ApiActions.RequestType;
+import utilities.ApiActions;
+import utilities.ExtentReport;
+import utilities.PropertiesReader;
+import utilities.ApiActions.RequestType;
 
 public class PhptravelsApis {
     private ApiActions apiObject;

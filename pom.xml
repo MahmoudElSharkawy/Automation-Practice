@@ -166,7 +166,7 @@
 							</property>
 							<property>
 								<name>listener</name>
-								<value>utils.TestngListener</value>
+								<value>utilities.TestngListener</value>
 							</property>
 						</properties>
 					</configuration>

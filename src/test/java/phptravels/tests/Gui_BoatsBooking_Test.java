@@ -18,11 +18,11 @@ import io.qameta.allure.TmsLink;
 import phptravels.apis.PhptravelsApis;
 import phptravels.gui.pages.PhpTravels_BoatsDetails_Page;
 import phptravels.gui.pages.PhpTravels_UserAccount_Page;
-import utils.ApiActions;
-import utils.BrowserActions;
-import utils.BrowserFactory;
-import utils.ExcelFileManager;
-import utils.Helper;
+import utilities.ApiActions;
+import utilities.BrowserActions;
+import utilities.BrowserFactory;
+import utilities.ExcelFileManager;
+import utilities.Helper;
 
 @Epic("PHPTRAVELS")
 @Feature("GUI")
