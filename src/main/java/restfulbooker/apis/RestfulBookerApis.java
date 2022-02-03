@@ -8,10 +8,10 @@ import com.aventstack.extentreports.markuputils.MarkupHelper;
 import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import utilities.ApiActions;
-import utilities.ExtentReport;
-import utilities.PropertiesReader;
-import utilities.ApiActions.RequestType;
+import utils.ApiActions;
+import utils.ExtentReport;
+import utils.PropertiesReader;
+import utils.ApiActions.RequestType;
 
 public class RestfulBookerApis {
     private ApiActions apiObject;

@@ -1,4 +1,4 @@
-package utilities;
+package utils;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.IInvokedMethod;

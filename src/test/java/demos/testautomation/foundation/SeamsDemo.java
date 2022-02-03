@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import utilities.BrowserFactory;
+import utils.BrowserFactory;
 
 import static io.restassured.RestAssured.given;
 import static org.testng.Assert.assertEquals;

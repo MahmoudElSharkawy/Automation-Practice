@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import io.qameta.allure.Step;
-import utilities.ElementActions;
+import utils.ElementActions;
 
 public class PhpTravels_HotelsDetails_Page {
     private WebDriver driver;

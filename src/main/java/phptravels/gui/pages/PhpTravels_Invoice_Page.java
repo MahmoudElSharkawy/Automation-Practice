@@ -8,11 +8,11 @@ import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 
 import io.qameta.allure.Step;
-import utilities.BrowserActions;
-import utilities.ElementActions;
-import utilities.ExtentReport;
-import utilities.Helper;
-import utilities.BrowserActions.ConfirmAlertType;
+import utils.BrowserActions;
+import utils.ElementActions;
+import utils.ExtentReport;
+import utils.Helper;
+import utils.BrowserActions.ConfirmAlertType;
 
 public class PhpTravels_Invoice_Page {
     private WebDriver driver;

@@ -16,7 +16,7 @@ import io.qameta.allure.TmsLink;
 import io.restassured.response.Response;
 import restfulbooker.apis.RestfulBookerApis;
 import restfulbooker.apis.RestfulBookerApisBooking;
-import utilities.ApiActions;
+import utils.ApiActions;
 
 @Epic("Restful-Booker")
 @Feature("API")

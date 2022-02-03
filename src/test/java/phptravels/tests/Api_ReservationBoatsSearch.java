@@ -16,8 +16,8 @@ import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import io.restassured.response.Response;
 import phptravels.apis.PhptravelsApis;
-import utilities.ApiActions;
-import utilities.ExcelFileManager;
+import utils.ApiActions;
+import utils.ExcelFileManager;
 
 @Epic("PHPTRAVELS")
 @Feature("API")

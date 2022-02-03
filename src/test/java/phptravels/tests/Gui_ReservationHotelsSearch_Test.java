@@ -16,9 +16,9 @@ import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import phptravels.gui.pages.PhpTravels_Home_Page;
-import utilities.BrowserActions;
-import utilities.BrowserFactory;
-import utilities.ExcelFileManager;
+import utils.BrowserActions;
+import utils.BrowserFactory;
+import utils.ExcelFileManager;
 
 @Epic("PHPTRAVELS")
 @Feature("GUI")
