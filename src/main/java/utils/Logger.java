@@ -54,12 +54,12 @@ public class Logger {
     }
 
     @Attachment(value = "API Request - {type}", type = "text/json")
-    public static byte[] attachApiRequest(String type, byte[] b) {
+    public static byte[] attachApiRequestToAllureReport(String type, byte[] b) {
 	return attachTextJson(b);
     }
 
     @Attachment(value = "API Response", type = "text/json")
-    public static byte[] attachApiResponse(byte[] b) {
+    public static byte[] attachApiResponseToAllureReport(byte[] b) {
 	return attachTextJson(b);
     }
 

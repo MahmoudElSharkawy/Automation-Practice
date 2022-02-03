@@ -20,7 +20,7 @@ import utils.ApiActions;
 
 @Epic("Restful-Booker")
 @Feature("API")
-public class restfulbooker_Test {
+public class RestfulbookerTests {
     private ApiActions apiObject;
     private RestfulBookerApis restfulBookerApis;
     private RestfulBookerApisBooking restfulBookerApisBooking;
@@ -42,12 +42,12 @@ public class restfulbooker_Test {
     public void createBooking() {
 	Response createBooking = restfulBookerApisBooking.createBooking("Mahmoud", "ElSharkawy", 2000, true,
 		"2021-01-01", "2022-01-01", "Cream Caramel");
-	String bookingId = createBooking.jsonPath().get("bookingid").toString();
+	String bookingId = ApiActions.getResponseJsonValue(createBooking, "bookingid");
 	Response getBooking = restfulBookerApisBooking.getBooking(bookingId);
-	assertEquals(getBooking.jsonPath().get("firstname").toString(), "Mahmoud");
-	assertEquals(getBooking.jsonPath().get("lastname").toString(), "ElSharkawy");
-	assertEquals(getBooking.jsonPath().get("bookingdates.checkout").toString(), "2022-01-01");
-	assertEquals(getBooking.jsonPath().get("additionalneeds").toString(), "Cream Caramel");
+	assertEquals(ApiActions.getResponseJsonValue(getBooking, "firstname"), "Mahmoud");
+	assertEquals(ApiActions.getResponseJsonValue(getBooking, "lastname"), "ElSharkawy");
+	assertEquals(ApiActions.getResponseJsonValue(getBooking, "bookingdates.checkout"), "2022-01-01");
+	assertEquals(ApiActions.getResponseJsonValue(getBooking, "additionalneeds"), "Cream Caramel");
     }
 
     @Test(description = "Restful-Booker - API - Delete Booking", dependsOnMethods = {"createBooking"})
@@ -58,9 +58,9 @@ public class restfulbooker_Test {
     @Issue("Software_bug")
     public void deleteBooking() {
 	Response bookingIds = restfulBookerApisBooking.getBookingIds("Mahmoud", "ElSharkawy");
-	String firstBookingId = bookingIds.jsonPath().get("bookingid[0]").toString();
+	String firstBookingId = ApiActions.getResponseJsonValue(bookingIds, "bookingid[0]");
 	
 	Response deleteBooking = restfulBookerApisBooking.deleteBooking(firstBookingId);
-	assertEquals(deleteBooking.getBody().asString(), "Created");
+	assertEquals(ApiActions.getResponseBody(deleteBooking), "Created");
     }
 }

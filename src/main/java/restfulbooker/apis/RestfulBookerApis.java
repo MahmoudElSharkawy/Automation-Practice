@@ -55,6 +55,6 @@ public class RestfulBookerApis {
 
 	Response getToken = apiObject.performRequest(RequestType.POST, auth_serviceName, Status.SUCCESS.getCode(), null,
 		ContentType.JSON, null, null, authentication, null);
-	return getToken.jsonPath().get("token").toString();
+	return ApiActions.getResponseJsonValue(getToken, "token");
     }
 }
