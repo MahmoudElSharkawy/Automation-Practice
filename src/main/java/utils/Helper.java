@@ -1,5 +1,7 @@
 package utils;
 
+import static org.testng.Assert.fail;
+
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
@@ -20,7 +22,18 @@ public class Helper {
     }
 
     public static String getCurrentTime(String dateFormat) {
-	return new SimpleDateFormat(dateFormat).format(new Date());
+	String currentTime = "";
+	try {
+	    currentTime = new SimpleDateFormat(dateFormat).format(new Date());
+	} catch (IllegalArgumentException e) {
+	    Logger.logStep(e.getMessage());
+	    fail(e.getMessage());
+	}
+	return currentTime;
+    }
+
+    public static String getCurrentTime() {
+	return getCurrentTime("ddMMyyyyHHmmssSSS");
     }
 
 }
