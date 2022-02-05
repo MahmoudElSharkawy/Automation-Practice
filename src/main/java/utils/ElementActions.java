@@ -225,7 +225,10 @@ public class ElementActions {
 	    ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);",
 		    driver.findElement(elementLocator));
 	    // Check if the element is displayed
-	    driver.findElement(elementLocator).isDisplayed();
+	    if (!driver.findElement(elementLocator).isDisplayed()) {
+		Logger.logStep("The element [" + elementLocator.toString() + "] is not Displayed");
+		fail("The element [" + elementLocator.toString() + "] is not Displayed");
+	    }
 	} catch (TimeoutException toe) {
 	    Logger.logStep(toe.getMessage());
 	    fail(toe.getMessage());
