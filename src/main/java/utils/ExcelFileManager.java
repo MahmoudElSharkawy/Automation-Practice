@@ -6,6 +6,8 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
+import static org.testng.Assert.fail;
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,13 +30,18 @@ public class ExcelFileManager {
 		columns.put(cell.getStringCellValue(), cell.getColumnIndex());
 	    });
 	} catch (Exception e) {
-	    e.printStackTrace();
+	    Logger.logStep(e.getMessage());
+	    fail(e.getMessage());
 	}
     }
 
     public String getCellData(String column, int row) {
 	Row dataRow = currentSheet.getRow(row - 1);
 	return getCellDataAsString(dataRow.getCell(columns.get(column)));
+    }
+    
+    public String getCellData(String column) {
+	return getCellData(column, 2);
     }
 
     private String getCellDataAsString(Cell cell) {
