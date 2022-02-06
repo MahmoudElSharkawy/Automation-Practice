@@ -4,6 +4,7 @@ import static org.testng.Assert.fail;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -53,6 +54,19 @@ public class BrowserActions {
 	try {
 	    Logger.logStep("[Browser Action] Maximize the Browser Window");
 	    driver.manage().window().maximize();
+	} catch (Exception e) {
+	    Logger.logMessage(e.getMessage());
+	}
+    }
+    
+    public static void setWindowResolution(WebDriver driver) {
+	String width = PropertiesReader.getProperty("automationPractice.properties", "width");
+	String height = PropertiesReader.getProperty("automationPractice.properties", "height");
+	try {
+	    Logger.logStep(
+		    "[Browser Action] Set Window Resolution as Width [" + width + "] and Height [" + height + "]");
+	    Dimension dimension = new Dimension(Integer.parseInt(width), Integer.parseInt(height));
+	    driver.manage().window().setSize(dimension);
 	} catch (Exception e) {
 	    Logger.logMessage(e.getMessage());
 	}

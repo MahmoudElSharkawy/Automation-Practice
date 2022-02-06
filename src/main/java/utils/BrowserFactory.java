@@ -117,14 +117,22 @@ public class BrowserFactory {
 		driver.set(new ChromeDriver());
 		context.setAttribute("driver", driver.get());
 		Helper.implicitWait(driver.get());
-		BrowserActions.maximizeWindow(driver.get());
+		if (PropertiesReader.getProperty(propertiesFileName, "maximize").equalsIgnoreCase("true")) {
+		    BrowserActions.maximizeWindow(driver.get());
+		} else {
+		    BrowserActions.setWindowResolution(driver.get());
+		}
 	    } else if (browserType == BrowserType.MOZILLA_FIREFOX || (browserType == BrowserType.FROM_PROPERTIES
 		    && browserTypeProperty.equalsIgnoreCase("mozilla firefox"))) {
 		WebDriverManager.firefoxdriver().setup();
 		driver.set(new FirefoxDriver());
 		context.setAttribute("driver", driver.get());
 		Helper.implicitWait(driver.get());
-		BrowserActions.maximizeWindow(driver.get());
+		if (PropertiesReader.getProperty(propertiesFileName, "maximize").equalsIgnoreCase("true")) {
+		    BrowserActions.maximizeWindow(driver.get());
+		} else {
+		    BrowserActions.setWindowResolution(driver.get());
+		}
 	    } else {
 		String warningMsg = "The driver is null! because the browser type [" + browserTypeProperty
 			+ "] is not valid/supported; Please choose a valid browser type from the given choices in the properties file";
