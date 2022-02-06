@@ -208,10 +208,18 @@ public class ElementActions {
 	}
 	return null;
     }
-
-    public ElementActions getText(By elementLocator) {
-	getText(driver, elementLocator);
-	return this;
+    
+    public static String getAttributeValue(WebDriver driver, By elementLocator, String attributeName) {
+	locatingElementStrategy(driver, elementLocator);
+	try {
+	    String attributeValue = driver.findElement(elementLocator).getAttribute(attributeName);
+	    Logger.logStep(
+		    "[Element Action] Get the Attribute [" + attributeName + "] Value of element [" + elementLocator + "]; The Value is [" + attributeValue + "]");
+	    return attributeValue;
+	} catch (Exception e) {
+	    Logger.logStep(e.getMessage());
+	}
+	return null;
     }
 
     ////////////////////////////////////////////////////////////////////////
