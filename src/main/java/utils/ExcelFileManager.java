@@ -36,8 +36,17 @@ public class ExcelFileManager {
     }
 
     public String getCellData(String column, int row) {
-	Row dataRow = currentSheet.getRow(row - 1);
-	return getCellDataAsString(dataRow.getCell(columns.get(column)));
+	try {
+	    Row dataRow = currentSheet.getRow(row - 1);
+	    return getCellDataAsString(dataRow.getCell(columns.get(column)));
+	} catch (NullPointerException e) {
+	    Logger.logStep("Can't find the column name [" + column + "]........" + e.getMessage());
+	    fail("Can't find the column name [" + column + "]........" + e.getMessage());
+	} catch (Exception e) {
+	    Logger.logStep(e.getMessage());
+	    fail(e.getMessage());
+	}
+	return null;
     }
     
     public String getCellData(String column) {
