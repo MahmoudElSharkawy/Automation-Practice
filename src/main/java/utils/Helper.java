@@ -5,6 +5,7 @@ import static org.testng.Assert.fail;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
+import java.util.Random;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -34,6 +35,14 @@ public class Helper {
 
     public static String getCurrentTime() {
 	return getCurrentTime("ddMMyyyyHHmmssSSS");
+    }
+
+    public static int getRandomNumberBetweenTwoValues(int lowValue, int highValue) {
+	return new Random().nextInt(highValue - lowValue) + lowValue;
+    }
+
+    public static String getRandomNumberBetweenTwoValuesAsString(int lowValue, int highValue) {
+	return Integer.toString(getRandomNumberBetweenTwoValues(lowValue, highValue));
     }
 
 }
