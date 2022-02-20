@@ -17,6 +17,7 @@ import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 
 public class Logger {
+    // TODO: Use log4j for logging instead of Sysout
 
     @Step("{message}")
     public static void logStep(String message) {
