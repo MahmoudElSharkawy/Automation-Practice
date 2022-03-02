@@ -15,7 +15,7 @@ jobs:
     runs-on: [ubuntu-latest]
     
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Set up JDK 15
       uses: actions/setup-java@v2
       with:
@@ -45,7 +45,7 @@ jobs:
         name: Extent Report
         path: "ExtentReports.html"
 #    - name: Get Allure history
-#      uses: actions/checkout@v2
+#      uses: actions/checkout@v3
 #      if: always()
 #      continue-on-error: true
 #      with:
