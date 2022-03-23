@@ -11,7 +11,9 @@ import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
+import io.restassured.filter.cookie.CookieFilter;
 import io.restassured.filter.log.LogDetail;
+import io.restassured.filter.session.SessionFilter;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.exception.JsonPathException;
 import io.restassured.response.Response;
@@ -21,10 +23,11 @@ import io.restassured.specification.ResponseSpecification;
 import io.restassured.specification.SpecificationQuerier;
 
 public class ApiActions {
-    // TODO: implement getResponseJSONPath and getBody methods
     private RequestSpecification request;
     private Response response;
     private QueryableRequestSpecification queryableRequestSpecs;
+    private SessionFilter sessionFilter;
+    private CookieFilter cookieFilter;
     private String baseUrl;
 
     public enum RequestType {
@@ -43,6 +46,8 @@ public class ApiActions {
 
     public ApiActions(String baseUrl) {
 	this.baseUrl = baseUrl;
+	sessionFilter = new SessionFilter();
+	cookieFilter = new CookieFilter();
     }
 
     private RequestSpecification requestSpec = new RequestSpecBuilder()
@@ -121,6 +126,9 @@ public class ApiActions {
 		Logger.attachApiRequestToAllureReport("Cookies", qCookies.getBytes());
 		ExtentReport.info(MarkupHelper.createCodeBlock("Request Cookies: " + "\n" + qCookies));
 	    }
+
+	    request.filter(sessionFilter);
+	    request.filter(cookieFilter);
 
 	    switch (requestType) {
 	    case POST:
