@@ -5,7 +5,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 
 	<properties>
-		<selenium.version>4.1.2</selenium.version>
+		<selenium.version>4.1.4</selenium.version>
 		<webdrivermanager.version>5.1.0</webdrivermanager.version>
 		<testng.version>7.5</testng.version>
 		<rest-assured.version>4.5.1</rest-assured.version>
