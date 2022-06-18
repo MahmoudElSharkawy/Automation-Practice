@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.DevTools;
-import org.openqa.selenium.devtools.v96.emulation.Emulation;
+import org.openqa.selenium.devtools.v102.emulation.Emulation;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
