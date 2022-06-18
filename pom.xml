@@ -8,7 +8,7 @@
 		<selenium.version>4.1.2</selenium.version>
 		<webdrivermanager.version>5.1.1</webdrivermanager.version>
 		<testng.version>7.6.0</testng.version>
-		<rest-assured.version>4.5.1</rest-assured.version>
+		<rest-assured.version>5.1.1</rest-assured.version>
 		<allure-testng.version>2.18.1</allure-testng.version>
 		<allure-maven.version>2.11.2</allure-maven.version>
 		<allure-maven-report.version>2.10.0</allure-maven-report.version>
