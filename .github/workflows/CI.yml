@@ -35,12 +35,12 @@ jobs:
     - name: Check files in the allure-maven-plugin folder
       run: ls target/site/allure-maven-plugin
     - name: Upload Allure Report
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: Allure Report
         path: "target/site/allure-maven-plugin"
     - name: Upload Extent Report
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: Extent Report
         path: "ExtentReports.html"
