@@ -5,21 +5,21 @@
 	<version>0.0.1-SNAPSHOT</version>
 
 	<properties>
-		<selenium.version>4.1.2</selenium.version>
-		<webdrivermanager.version>5.2.0</webdrivermanager.version>
-		<testng.version>7.5</testng.version>
-		<rest-assured.version>4.5.1</rest-assured.version>
-		<allure-testng.version>2.17.3</allure-testng.version>
+		<selenium.version>4.2.2</selenium.version>
+    <webdrivermanager.version>5.2.0</webdrivermanager.version>
+		<testng.version>7.6.0</testng.version>
+		<rest-assured.version>5.1.1</rest-assured.version>
+		<allure-testng.version>2.18.1</allure-testng.version>
 		<allure-maven.version>2.11.2</allure-maven.version>
 		<allure-maven-report.version>2.10.0</allure-maven-report.version>
 		<extentreports.version>5.0.9</extentreports.version>
-		<poi-ooxml.version>5.2.1</poi-ooxml.version>
+		<poi-ooxml.version>5.2.2</poi-ooxml.version>
 		<commons-io.version>2.11.0</commons-io.version>
-		<aspectj.version>1.9.8</aspectj.version>
+		<aspectj.version>1.9.9.1</aspectj.version>
 		<slf4j.version>1.7.36</slf4j.version>
 		<json-simple.version>1.1.1</json-simple.version>
 		<maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
-		<maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
+		<maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
 	</properties>
 
 	<dependencies>
