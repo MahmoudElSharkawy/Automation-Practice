@@ -55,7 +55,6 @@ public class TestngListener implements ISuiteListener, ITestListener, IInvokedMe
 
     @Override
     public void onTestSuccess(ITestResult result) {
-//	ExtentReport.pass(result.getMethod().getMethodName() + " Passed");
 	ExtentReport.pass(MarkupHelper.createLabel(result.getMethod().getMethodName() + " Passed!", ExtentColor.GREEN));
     }
 
@@ -64,10 +63,9 @@ public class TestngListener implements ISuiteListener, ITestListener, IInvokedMe
 	ITestContext context = result.getTestContext();
 	WebDriver driver = (WebDriver) context.getAttribute("driver");
 	if (driver != null) {
-	    Logger.attachScreenshotToAllureReport(driver);
+//	    Logger.attachScreenshotToAllureReport(driver);
 	    ExtentReport.fail(Logger.attachScreenshotToExtentReport(driver));
 	}
-//	ExtentReport.fail(result.getMethod().getMethodName() + " Failed");
 	ExtentReport.fail(MarkupHelper.createLabel(result.getMethod().getMethodName() + " Failed!", ExtentColor.RED));
 	if (result.getThrowable() != null) {
 	    ExtentReport.fail(result.getThrowable());
@@ -76,7 +74,6 @@ public class TestngListener implements ISuiteListener, ITestListener, IInvokedMe
 
     @Override
     public void onTestSkipped(ITestResult result) {
-//	ExtentReport.skip(result.getMethod().getMethodName() + " Skipped");
 	ExtentReport.skip(MarkupHelper.createLabel(result.getMethod().getMethodName() + " Skipped!", ExtentColor.YELLOW));
 	if (result.getThrowable() != null) {
 	    ExtentReport.skip(result.getThrowable());
@@ -102,7 +99,6 @@ public class TestngListener implements ISuiteListener, ITestListener, IInvokedMe
 	    } else {
 		ExtentReport.removeTest(testResult.getName());
 	    }
-//	    ExtentReport.removeTest(testResult.getName());
 	} else {
 	    System.out.println("Starting Test Case: [" + testResult.getName() + "]");
 	}
@@ -111,6 +107,13 @@ public class TestngListener implements ISuiteListener, ITestListener, IInvokedMe
 
     @Override
     public void afterInvocation(IInvokedMethod method, ITestResult testResult) {
+	// prevent the ERROR io.qameta.allure.AllureLifecycle - Could not add attachment: no test is running
+	ITestContext context = testResult.getTestContext();
+	WebDriver driver = (WebDriver) context.getAttribute("driver");
+	if (ITestResult.FAILURE == testResult.getStatus() && driver != null) {
+	    Logger.attachScreenshotToAllureReport(driver);
+	}
+	
 	System.out.println("\n" + "===========================================================================================");
 	if (method.isConfigurationMethod()) {
 	    System.out.println("Finished Configuration Method (Setup or Teardown): [" + testResult.getName() + "]");

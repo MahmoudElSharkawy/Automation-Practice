@@ -21,13 +21,11 @@ public class Logger {
 
     @Step("{message}")
     public static void logStep(String message) {
-//	String timeStamp = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss.SSS a").format(new Date());
 	System.out.println("<" + Helper.getCurrentTime("dd-MM-yyyy HH:mm:ss.SSS a") + "> " + message);
 	ExtentReport.info(message);
     }
 
     public static void logMessage(String message) {
-//	String timeStamp = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss.SSS a").format(new Date());
 	System.out.println("<" + Helper.getCurrentTime("dd-MM-yyyy HH:mm:ss.SSS a") + "> " + message);
 	ExtentReport.info(message);
     }
@@ -35,6 +33,8 @@ public class Logger {
     @Attachment(value = "Full Page Screenshot", type = "image/png")
     public static byte[] attachScreenshotToAllureReport(WebDriver driver) {
 	return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+//	Allure.addAttachment("Full Page Screenshot", "image/png",
+//		new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)), ".png");
     }
 
     public static Media attachScreenshotToExtentReport(WebDriver driver) {
