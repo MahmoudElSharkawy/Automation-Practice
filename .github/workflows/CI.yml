@@ -16,10 +16,10 @@ jobs:
     
     steps:
     - uses: actions/checkout@v3
-    - name: Set up JDK 15
+    - name: Setup JDK 17
       uses: actions/setup-java@v3
       with:
-        java-version: 15
+        java-version: '17'
         distribution: 'zulu'
     - name: Set up Native Selenium Grid with one hub and four Chrome nodes 
       run: docker-compose -f src/main/resources/docker-compose_native.yml up --scale chrome=4 --remove-orphans -d
