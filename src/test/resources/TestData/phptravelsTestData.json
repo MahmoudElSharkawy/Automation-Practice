@@ -1,0 +1,18 @@
+{
+	"user": {
+		"firstName": "Mahmoud",
+		"lastName": "ElSharkawy",
+		"phoneNumber": "01155150745",
+		"email": "test",
+		"notRegisteredEmail": "notRegisteredEmailTest",
+		"emailDomain": "gmail.com",
+		"password": "12345678",
+		"accountType": "Supplier"
+	},
+	"messages": {
+		"emailExists": "Email already exist!",
+		"emailWrongFormat": "Wrong Email Format!",
+		"successfulSignup": "Signup successfull please login." , 
+		"wrongCredentials": "Wrong credentials. try again!"
+	}
+}
