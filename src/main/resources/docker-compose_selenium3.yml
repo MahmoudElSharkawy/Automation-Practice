@@ -1,8 +1,8 @@
 # This file can be used to quickly setup a selenium grid with one hub and two nodes
 # https://github.com/SeleniumHQ/docker-selenium
-# docker-compose -f docker-compose_native.yml up --scale chrome=4 --remove-orphans -d
+# docker-compose -f docker-compose_selenium3.yml up --scale chrome=4 --remove-orphans -d
 # add '-d' option for detached execution
-# docker-compose -f docker-compose_native.yml down --remove-orphans
+# docker-compose -f docker-compose_selenium3.yml down --remove-orphans
 # http://localhost:4444/grid/console
 version: '3'
 services:
