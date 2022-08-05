@@ -6,7 +6,7 @@
 
 	<properties>
 		<selenium.version>4.3.0</selenium.version>
-    	<webdrivermanager.version>5.2.1</webdrivermanager.version>
+    	<webdrivermanager.version>5.2.3</webdrivermanager.version>
 		<testng.version>7.6.1</testng.version>
 		<rest-assured.version>5.1.1</rest-assured.version>
 		<allure-testng.version>2.18.1</allure-testng.version>
