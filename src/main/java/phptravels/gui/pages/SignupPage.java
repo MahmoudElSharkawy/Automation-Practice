@@ -17,7 +17,7 @@ import utils.PropertiesReader;
 
 public class SignupPage {
     private WebDriver driver;
-    private String voidUrl = PropertiesReader.getProperty("environment.properties", "phptravels.baseurl")
+    private String signUpPageUrl = PropertiesReader.getProperty("automationPractice.properties", "phptravels.home.url")
 	    + "/signup";
 
     // Elements Locators
@@ -40,7 +40,7 @@ public class SignupPage {
     //////////////////////////////// Actions ////////////////////////////////
 
     public void navigateToSignupPage() {
-	BrowserActions.navigateToUrl(driver, voidUrl);
+	BrowserActions.navigateToUrl(driver, signUpPageUrl);
     }
 
     @Step("User Sign up with Data --> First Name: [{firstName}], Last Name: [{lastName}], Mobile Number: [{phoneNumber}], Email: [{email}] and Password: [{password}]")

@@ -17,7 +17,7 @@ import utils.PropertiesReader;
 
 public class SigninPage {
     private WebDriver driver;
-    private String loginPageUrl = PropertiesReader.getProperty("environment.properties", "phptravels.baseurl")
+    private String loginPageUrl = PropertiesReader.getProperty("automationPractice.properties", "phptravels.home.url")
 	    + "/login";
 
     // Elements Locators
