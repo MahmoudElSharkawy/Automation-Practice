@@ -23,7 +23,7 @@ public class FileDownloadWithChromeOptionsDemo {
 	chromePrefs.put("profile.default.content_settings.popups", 0);
 	chromePrefs.put("download.default_directory", downloadPath);
 	options.setExperimentalOption("prefs", chromePrefs);
-	options.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+	options.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
 	return options;
     }
 
