@@ -11,15 +11,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Helper {
-    private static final int TIMEOUT = Integer
-	    .parseInt(System.getProperty("webdriver.wait"));
+    
+    private static int getTimeout() {
+	return Integer.parseInt(System.getProperty("webdriver.wait"));
+    }
 
     public static WebDriverWait getExplicitWait(WebDriver driver) {
-	return new WebDriverWait(driver, Duration.ofSeconds(TIMEOUT));
+	return new WebDriverWait(driver, Duration.ofSeconds(getTimeout()));
     }
 
     public static void implicitWait(WebDriver driver) {
-	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(TIMEOUT));
+	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(getTimeout()));
     }
 
     public static String getCurrentTime(String dateFormat) {
