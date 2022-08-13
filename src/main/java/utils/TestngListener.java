@@ -22,6 +22,7 @@ public class TestngListener implements ISuiteListener, ITestListener, IInvokedMe
 	System.out.println("\n" + "**********************************************");
 	System.out.println("Starting Test Suite; By Mahmoud ElSharkawy! *");
 	System.out.println("**********************************************" + "\n");
+	PropertiesReader.loadProperties();
 	ExtentReport.initReports();
     }
 

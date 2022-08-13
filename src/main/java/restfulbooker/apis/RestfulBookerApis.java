@@ -10,13 +10,11 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import utils.ApiActions;
 import utils.ExtentReport;
-import utils.PropertiesReader;
 import utils.ApiActions.RequestType;
 
 public class RestfulBookerApis {
     private ApiActions apiObject;
-    public static final String BASE_URL = PropertiesReader.getProperty("automationPractice.properties",
-	    "restfulbooker.baseUri");
+    public static final String BASE_URL = System.getProperty("restfulbooker.baseUri");
 
     // Expected status codes
     public enum Status {

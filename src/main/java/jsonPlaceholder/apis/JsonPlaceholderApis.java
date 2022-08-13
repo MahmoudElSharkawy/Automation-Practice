@@ -1,11 +1,8 @@
 package jsonPlaceholder.apis;
 
-import utils.PropertiesReader;
-
 public class JsonPlaceholderApis {
 //    private ApiActions apiObject;
-    public static final String BASE_URL = PropertiesReader.getProperty("jsonplaceholder.properties",
-	    "baseUrl");
+    public static final String BASE_URL = System.getProperty("baseUrl");
 
     // Expected status codes
     protected enum Status {

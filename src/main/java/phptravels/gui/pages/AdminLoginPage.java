@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 import io.qameta.allure.Step;
 import utils.BrowserActions;
 import utils.ElementActions;
-import utils.PropertiesReader;
 
 public class AdminLoginPage {
     private WebDriver driver;
@@ -40,8 +39,7 @@ public class AdminLoginPage {
 
     @Step("Login as default Admin User")
     public void loginAsDefaultAdminUser() {
-	loginAsAdminUser(PropertiesReader.getProperty("phptravels.properties", "defaultAdminUserEmail"),
-		PropertiesReader.getProperty("phptravels.properties", "defaultAdminUserPassword"));
+	loginAsAdminUser(System.getProperty("defaultAdminUserEmail"), System.getProperty("defaultAdminUserPassword"));
     }
 
 }

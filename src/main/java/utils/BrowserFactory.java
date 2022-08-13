@@ -21,11 +21,10 @@ import io.qameta.allure.Step;
 public class BrowserFactory {
 //    private static WebDriver driver;
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
-    private static String propertiesFileName = "automationPractice.properties";
-    private static String browserTypeProperty = PropertiesReader.getProperty(propertiesFileName, "browser.type");
-    private static String executionTypeProperty = PropertiesReader.getProperty(propertiesFileName, "execution.type");
-    private static String host = PropertiesReader.getProperty(propertiesFileName, "remote.execution.host");
-    private static String port = PropertiesReader.getProperty(propertiesFileName, "remote.execution.port");
+    private static String browserTypeProperty = System.getProperty("browser.type");
+    private static String executionTypeProperty = System.getProperty("execution.type");
+    private static String host = System.getProperty("remote.execution.host");
+    private static String port = System.getProperty("remote.execution.port");
 
     public enum BrowserType {
 	MOZILLA_FIREFOX("Mozilla Firefox"), GOOGLE_CHROME("Google Chrome"), FROM_PROPERTIES(browserTypeProperty);
@@ -117,7 +116,7 @@ public class BrowserFactory {
 		driver.set(new ChromeDriver());
 		context.setAttribute("driver", driver.get());
 		Helper.implicitWait(driver.get());
-		if (PropertiesReader.getProperty(propertiesFileName, "maximize").equalsIgnoreCase("true")) {
+		if (System.getProperty("maximize").equalsIgnoreCase("true")) {
 		    BrowserActions.maximizeWindow(driver.get());
 		} else {
 		    BrowserActions.setWindowResolution(driver.get());
@@ -128,7 +127,7 @@ public class BrowserFactory {
 		driver.set(new FirefoxDriver());
 		context.setAttribute("driver", driver.get());
 		Helper.implicitWait(driver.get());
-		if (PropertiesReader.getProperty(propertiesFileName, "maximize").equalsIgnoreCase("true")) {
+		if (System.getProperty("maximize").equalsIgnoreCase("true")) {
 		    BrowserActions.maximizeWindow(driver.get());
 		} else {
 		    BrowserActions.setWindowResolution(driver.get());

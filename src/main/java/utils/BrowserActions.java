@@ -60,8 +60,8 @@ public class BrowserActions {
     }
     
     public static void setWindowResolution(WebDriver driver) {
-	String width = PropertiesReader.getProperty("automationPractice.properties", "width");
-	String height = PropertiesReader.getProperty("automationPractice.properties", "height");
+	String width = System.getProperty("width");
+	String height = System.getProperty("height");
 	try {
 	    Logger.logStep(
 		    "[Browser Action] Set Window Resolution as Width [" + width + "] and Height [" + height + "]");

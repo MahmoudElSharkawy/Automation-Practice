@@ -10,13 +10,11 @@ import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import utils.ApiActions;
 import utils.ExtentReport;
-import utils.PropertiesReader;
 import utils.ApiActions.RequestType;
 
 public class PhptravelsApisOld {
     private ApiActions apiObject;
-    public static final String BASE_URL = PropertiesReader.getProperty("automationPractice.properties",
-	    "phptravels.baseuri");
+    public static final String BASE_URL = System.getProperty("phptravels.baseuri");
 
     // Expected status codes
     public enum Status {

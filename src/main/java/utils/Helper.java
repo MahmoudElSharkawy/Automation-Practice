@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Helper {
     private static final int TIMEOUT = Integer
-	    .parseInt(PropertiesReader.getProperty("automationPractice.properties", "webdriver.wait"));
+	    .parseInt(System.getProperty("webdriver.wait"));
 
     public static WebDriverWait getExplicitWait(WebDriver driver) {
 	return new WebDriverWait(driver, Duration.ofSeconds(TIMEOUT));

@@ -13,11 +13,10 @@ import utils.BrowserActions;
 import utils.ElementActions;
 import utils.ElementActions.SelectType;
 import utils.ExtentReport;
-import utils.PropertiesReader;
 
 public class SignupPage {
     private WebDriver driver;
-    private String signUpPageUrl = PropertiesReader.getProperty("automationPractice.properties", "phptravels.home.url")
+    private String signUpPageUrl = System.getProperty("phptravels.baseuri")
 	    + "/signup";
 
     // Elements Locators

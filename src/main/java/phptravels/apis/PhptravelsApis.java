@@ -10,11 +10,10 @@ import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import utils.ApiActions;
 import utils.ExtentReport;
-import utils.PropertiesReader;
 import utils.ApiActions.RequestType;
 
 public class PhptravelsApis {
-    String baseUrl = PropertiesReader.getProperty("environment.properties", "phptravels.baseurl");
+    String baseUrl = System.getProperty("phptravels.baseurl");
     ApiActions api = new ApiActions(baseUrl);
 
     // Expected status codes

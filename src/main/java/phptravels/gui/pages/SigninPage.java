@@ -13,11 +13,10 @@ import io.qameta.allure.Step;
 import utils.BrowserActions;
 import utils.ElementActions;
 import utils.ExtentReport;
-import utils.PropertiesReader;
 
 public class SigninPage {
     private WebDriver driver;
-    private String loginPageUrl = PropertiesReader.getProperty("automationPractice.properties", "phptravels.home.url")
+    private String loginPageUrl = System.getProperty("phptravels.baseuri")
 	    + "/login";
 
     // Elements Locators
