@@ -17,7 +17,7 @@ import utils.ExtentReport;
 public class SigninPage {
     private WebDriver driver;
     private String loginPageUrl = System.getProperty("phptravels.baseuri")
-	    + "/login";
+	    + "login";
 
     // Elements Locators
     private By email_textField = By.name("email");

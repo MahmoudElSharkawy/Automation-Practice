@@ -17,7 +17,7 @@ import utils.ExtentReport;
 public class SignupPage {
     private WebDriver driver;
     private String signUpPageUrl = System.getProperty("phptravels.baseuri")
-	    + "/signup";
+	    + "signup";
 
     // Elements Locators
     private By firstName_textField = By.name("first_name");
