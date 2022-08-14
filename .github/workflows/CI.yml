@@ -44,6 +44,14 @@ jobs:
       with:
         name: Extent Report
         path: "ExtentReports.html"
+        
+    - name: Test Report
+      uses: dorny/test-reporter@v1
+      if: success() || failure()
+      with:
+        name: Tests Summary
+        path: test-output/testng-results.xml
+        reporter: jest-junit
 
 #    - name: Get Allure history
 #      uses: actions/checkout@v3
