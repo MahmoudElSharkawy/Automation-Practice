@@ -50,7 +50,7 @@ jobs:
       if: success() || failure()
       with:
         name: Tests Summary
-        path: test-output/testng-results.xml
+        path: target/surefire-reports/TEST-TestSuite.xml
         reporter: jest-junit
 
 #    - name: Get Allure history
