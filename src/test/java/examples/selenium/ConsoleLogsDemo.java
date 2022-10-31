@@ -1,7 +1,7 @@
 package examples.selenium;
 
 import org.openqa.selenium.devtools.DevTools;
-import org.openqa.selenium.devtools.v102.log.Log;
+import org.openqa.selenium.devtools.v106.log.Log;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;

@@ -4,8 +4,8 @@ import java.util.Optional;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.DevTools;
-import org.openqa.selenium.devtools.v102.network.Network;
-import org.openqa.selenium.devtools.v102.network.model.ConnectionType;
+import org.openqa.selenium.devtools.v105.network.Network;
+import org.openqa.selenium.devtools.v105.network.model.ConnectionType;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
