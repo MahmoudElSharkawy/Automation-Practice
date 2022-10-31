@@ -99,5 +99,19 @@ public class BrowserActions {
 	    break;
 	}
     }
+    
+    //////////////// Getters ////////////////
+    
+    public static String getPageTitle(WebDriver driver) {
+	String title = "";
+	try {
+	    title = driver.getTitle();
+	    Logger.logStep("[Browser Action] Get page Title [" + title + "]");
+	} catch (Exception e) {
+	    Logger.logStep(e.getMessage());
+	    fail(e.getMessage());
+	}
+	return title;
+    }
 
 }
