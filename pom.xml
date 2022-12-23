@@ -16,7 +16,7 @@
 		<extentreports.version>5.0.9</extentreports.version>
 		<poi-ooxml.version>5.2.3</poi-ooxml.version>
 		<commons-io.version>2.11.0</commons-io.version>
-		<aspectj.version>1.9.9.1</aspectj.version>
+		<aspectj.version>1.9.19</aspectj.version>
 		<slf4j.version>2.0.3</slf4j.version>
 		<json-simple.version>1.1.1</json-simple.version>
 		<maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
