@@ -11,7 +11,7 @@
 		<rest-assured.version>5.2.0</rest-assured.version>
 		<json-path.version>2.7.0</json-path.version>
 		<allure-testng.version>2.19.0</allure-testng.version>
-		<allure-maven.version>2.11.2</allure-maven.version>
+		<allure-maven.version>2.12.0</allure-maven.version>
 		<allure-maven-report.version>2.10.0</allure-maven-report.version>
 		<extentreports.version>5.0.9</extentreports.version>
 		<poi-ooxml.version>5.2.3</poi-ooxml.version>
